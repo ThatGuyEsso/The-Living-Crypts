@@ -28,7 +28,7 @@ public class UIElementShake : MonoBehaviour
     private void Awake()
     {
         //caching component refs
-        ;
+    
 
 
         _currentVibrateTime = _vibrateTime;

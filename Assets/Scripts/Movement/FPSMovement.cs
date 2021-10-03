@@ -52,7 +52,7 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
     private void Update()
     {
         Vector2 dir = _input.Movement.Move.ReadValue<Vector2>();
-        _movementDir = new Vector3(0f,_rb.velocity.y,0f)+(dir.x * transform.right + transform.forward * dir.y).normalized;
+        _movementDir = new Vector3(0f,0f,0f)+(dir.x * transform.right + transform.forward * dir.y).normalized;
     }
     private void FixedUpdate()
     {
