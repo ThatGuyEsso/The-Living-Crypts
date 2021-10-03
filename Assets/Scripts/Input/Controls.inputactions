@@ -132,80 +132,17 @@
             "id": "1b1c4932-0a6e-49b7-b0b4-3e39a0cf1df1",
             "actions": [
                 {
-                    "name": "Aim",
+                    "name": "AimX",
                     "type": "Value",
                     "id": "78abb448-4de8-47b0-9582-ffc31cfa23ba",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "2D Vector",
-                    "id": "e6c50c6a-ef38-4390-bfeb-25219bcd7d02",
-                    "path": "2DVector(mode=2)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
-                    "isComposite": true,
-                    "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "a58d1e40-c4d3-4bdd-b8ef-43bd399716c7",
-                    "path": "<Gamepad>/rightStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "c9cf9a85-4d23-4288-b521-dd77f6f9c025",
-                    "path": "<Gamepad>/rightStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "6e65b765-8adc-439b-9309-9afb679ee968",
-                    "path": "<Gamepad>/rightStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "a7f7b17b-a1b6-477b-a4cc-4b41b624b1aa",
-                    "path": "<Gamepad>/rightStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "MouseActivity",
-            "id": "7a51f2c8-f61e-42c3-ae50-d75dd788a155",
-            "actions": [
-                {
-                    "name": "Move",
+                    "name": "AimY",
                     "type": "Value",
-                    "id": "96a7cfb5-35c3-469d-b912-1c16ed4e8bbe",
+                    "id": "1d9e1b7b-936f-448e-a116-0ea0d5e141f1",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
@@ -214,23 +151,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "7d84e053-3213-45b4-83b7-c465a40a7cbe",
+                    "id": "4d10599f-a47b-498e-b695-6d3c32307675",
                     "path": "<Mouse>/delta/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "Move",
+                    "action": "AimX",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "151665b7-14fd-43f1-8cba-12aa1e8ff0c8",
+                    "id": "fd3a95f7-dbad-48bf-b85f-1a26d1b30514",
                     "path": "<Mouse>/delta/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "Move",
+                    "action": "AimY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -646,6 +583,33 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "GoBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Dash",
+            "id": "19798cf4-2dc3-4ae1-96b0-1f2e53145b29",
+            "actions": [
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "bfd7d2e2-10a4-41ce-a3a6-8ded4dd798e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "92f4b30a-9bd7-41d3-94d3-e865c2c9c920",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

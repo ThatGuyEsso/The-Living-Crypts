@@ -145,80 +145,17 @@ public class @Controls : IInputActionCollection, IDisposable
             ""id"": ""1b1c4932-0a6e-49b7-b0b4-3e39a0cf1df1"",
             ""actions"": [
                 {
-                    ""name"": ""Aim"",
+                    ""name"": ""AimX"",
                     ""type"": ""Value"",
                     ""id"": ""78abb448-4de8-47b0-9582-ffc31cfa23ba"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""e6c50c6a-ef38-4390-bfeb-25219bcd7d02"",
-                    ""path"": ""2DVector(mode=2)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Aim"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""a58d1e40-c4d3-4bdd-b8ef-43bd399716c7"",
-                    ""path"": ""<Gamepad>/rightStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""c9cf9a85-4d23-4288-b521-dd77f6f9c025"",
-                    ""path"": ""<Gamepad>/rightStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""6e65b765-8adc-439b-9309-9afb679ee968"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""a7f7b17b-a1b6-477b-a4cc-4b41b624b1aa"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""MouseActivity"",
-            ""id"": ""7a51f2c8-f61e-42c3-ae50-d75dd788a155"",
-            ""actions"": [
-                {
-                    ""name"": ""Move"",
+                    ""name"": ""AimY"",
                     ""type"": ""Value"",
-                    ""id"": ""96a7cfb5-35c3-469d-b912-1c16ed4e8bbe"",
+                    ""id"": ""1d9e1b7b-936f-448e-a116-0ea0d5e141f1"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -227,23 +164,23 @@ public class @Controls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""7d84e053-3213-45b4-83b7-c465a40a7cbe"",
+                    ""id"": ""4d10599f-a47b-498e-b695-6d3c32307675"",
                     ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Move"",
+                    ""action"": ""AimX"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""151665b7-14fd-43f1-8cba-12aa1e8ff0c8"",
+                    ""id"": ""fd3a95f7-dbad-48bf-b85f-1a26d1b30514"",
                     ""path"": ""<Mouse>/delta/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Move"",
+                    ""action"": ""AimY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -663,6 +600,33 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Dash"",
+            ""id"": ""19798cf4-2dc3-4ae1-96b0-1f2e53145b29"",
+            ""actions"": [
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""bfd7d2e2-10a4-41ce-a3a6-8ded4dd798e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""92f4b30a-9bd7-41d3-94d3-e865c2c9c920"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -700,10 +664,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         // Aiming
         m_Aiming = asset.FindActionMap("Aiming", throwIfNotFound: true);
-        m_Aiming_Aim = m_Aiming.FindAction("Aim", throwIfNotFound: true);
-        // MouseActivity
-        m_MouseActivity = asset.FindActionMap("MouseActivity", throwIfNotFound: true);
-        m_MouseActivity_Move = m_MouseActivity.FindAction("Move", throwIfNotFound: true);
+        m_Aiming_AimX = m_Aiming.FindAction("AimX", throwIfNotFound: true);
+        m_Aiming_AimY = m_Aiming.FindAction("AimY", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -720,6 +682,9 @@ public class @Controls : IInputActionCollection, IDisposable
         // Back
         m_Back = asset.FindActionMap("Back", throwIfNotFound: true);
         m_Back_GoBack = m_Back.FindAction("GoBack", throwIfNotFound: true);
+        // Dash
+        m_Dash = asset.FindActionMap("Dash", throwIfNotFound: true);
+        m_Dash_Dash = m_Dash.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -802,12 +767,14 @@ public class @Controls : IInputActionCollection, IDisposable
     // Aiming
     private readonly InputActionMap m_Aiming;
     private IAimingActions m_AimingActionsCallbackInterface;
-    private readonly InputAction m_Aiming_Aim;
+    private readonly InputAction m_Aiming_AimX;
+    private readonly InputAction m_Aiming_AimY;
     public struct AimingActions
     {
         private @Controls m_Wrapper;
         public AimingActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Aim => m_Wrapper.m_Aiming_Aim;
+        public InputAction @AimX => m_Wrapper.m_Aiming_AimX;
+        public InputAction @AimY => m_Wrapper.m_Aiming_AimY;
         public InputActionMap Get() { return m_Wrapper.m_Aiming; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -817,53 +784,26 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_AimingActionsCallbackInterface != null)
             {
-                @Aim.started -= m_Wrapper.m_AimingActionsCallbackInterface.OnAim;
-                @Aim.performed -= m_Wrapper.m_AimingActionsCallbackInterface.OnAim;
-                @Aim.canceled -= m_Wrapper.m_AimingActionsCallbackInterface.OnAim;
+                @AimX.started -= m_Wrapper.m_AimingActionsCallbackInterface.OnAimX;
+                @AimX.performed -= m_Wrapper.m_AimingActionsCallbackInterface.OnAimX;
+                @AimX.canceled -= m_Wrapper.m_AimingActionsCallbackInterface.OnAimX;
+                @AimY.started -= m_Wrapper.m_AimingActionsCallbackInterface.OnAimY;
+                @AimY.performed -= m_Wrapper.m_AimingActionsCallbackInterface.OnAimY;
+                @AimY.canceled -= m_Wrapper.m_AimingActionsCallbackInterface.OnAimY;
             }
             m_Wrapper.m_AimingActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Aim.started += instance.OnAim;
-                @Aim.performed += instance.OnAim;
-                @Aim.canceled += instance.OnAim;
+                @AimX.started += instance.OnAimX;
+                @AimX.performed += instance.OnAimX;
+                @AimX.canceled += instance.OnAimX;
+                @AimY.started += instance.OnAimY;
+                @AimY.performed += instance.OnAimY;
+                @AimY.canceled += instance.OnAimY;
             }
         }
     }
     public AimingActions @Aiming => new AimingActions(this);
-
-    // MouseActivity
-    private readonly InputActionMap m_MouseActivity;
-    private IMouseActivityActions m_MouseActivityActionsCallbackInterface;
-    private readonly InputAction m_MouseActivity_Move;
-    public struct MouseActivityActions
-    {
-        private @Controls m_Wrapper;
-        public MouseActivityActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_MouseActivity_Move;
-        public InputActionMap Get() { return m_Wrapper.m_MouseActivity; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MouseActivityActions set) { return set.Get(); }
-        public void SetCallbacks(IMouseActivityActions instance)
-        {
-            if (m_Wrapper.m_MouseActivityActionsCallbackInterface != null)
-            {
-                @Move.started -= m_Wrapper.m_MouseActivityActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_MouseActivityActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_MouseActivityActionsCallbackInterface.OnMove;
-            }
-            m_Wrapper.m_MouseActivityActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-            }
-        }
-    }
-    public MouseActivityActions @MouseActivity => new MouseActivityActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1028,6 +968,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public BackActions @Back => new BackActions(this);
+
+    // Dash
+    private readonly InputActionMap m_Dash;
+    private IDashActions m_DashActionsCallbackInterface;
+    private readonly InputAction m_Dash_Dash;
+    public struct DashActions
+    {
+        private @Controls m_Wrapper;
+        public DashActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Dash => m_Wrapper.m_Dash_Dash;
+        public InputActionMap Get() { return m_Wrapper.m_Dash; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DashActions set) { return set.Get(); }
+        public void SetCallbacks(IDashActions instance)
+        {
+            if (m_Wrapper.m_DashActionsCallbackInterface != null)
+            {
+                @Dash.started -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_DashActionsCallbackInterface.OnDash;
+            }
+            m_Wrapper.m_DashActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+            }
+        }
+    }
+    public DashActions @Dash => new DashActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -1052,11 +1025,8 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public interface IAimingActions
     {
-        void OnAim(InputAction.CallbackContext context);
-    }
-    public interface IMouseActivityActions
-    {
-        void OnMove(InputAction.CallbackContext context);
+        void OnAimX(InputAction.CallbackContext context);
+        void OnAimY(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1077,5 +1047,9 @@ public class @Controls : IInputActionCollection, IDisposable
     public interface IBackActions
     {
         void OnGoBack(InputAction.CallbackContext context);
+    }
+    public interface IDashActions
+    {
+        void OnDash(InputAction.CallbackContext context);
     }
 }
