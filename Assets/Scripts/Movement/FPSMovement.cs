@@ -51,8 +51,12 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
 
     private void Update()
     {
-        Vector2 dir = _input.Movement.Move.ReadValue<Vector2>();
-        _movementDir = new Vector3(0f,0f,0f)+(dir.x * transform.right + transform.forward * dir.y).normalized;
+        if (_isMoving)
+        {
+            Vector2 dir = _input.Movement.Move.ReadValue<Vector2>();
+            _movementDir =(dir.x * transform.right + transform.forward * dir.y).normalized;
+        }
+
     }
     private void FixedUpdate()
     {
@@ -70,8 +74,8 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
             _currentMovementSpeed = Mathf.Lerp(_currentMovementSpeed, 0.0f, Time.fixedDeltaTime * _deceleration);
 
 
-            Vector3 direction = _movementDir * _currentMovementSpeed;
-            _rb.velocity = direction;
+            Vector3 direction = _movementDir * _currentMovementSpeed* Time.fixedDeltaTime;
+            _rb.velocity = new Vector3(direction.x, _rb.velocity.y, direction.z); 
             if (_currentMovementSpeed <= 0.01f)
             {
 
@@ -109,7 +113,7 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
         _isMoving = false;
         _currentMovementSpeed = 0.0f;
         _movementDir = Vector3.zero;
-        _rb.velocity = Vector3.zero;
+        _rb.velocity = new Vector3(0f, _rb.velocity.y, 0f);
 
     }
 
@@ -152,9 +156,9 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
     public void Move()
     {
 
-        Vector3 velocity = _movementDir * _currentMovementSpeed * _magnitude;
+        Vector3 velocity = _movementDir * _currentMovementSpeed * _magnitude* Time.fixedDeltaTime;
 
-        _rb.velocity = velocity;
+        _rb.velocity = new Vector3(velocity.x,_rb.velocity.y,velocity.z);
     }
 
 

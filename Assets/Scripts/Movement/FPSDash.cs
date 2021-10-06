@@ -9,12 +9,11 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
     [Header("Components")]
     [SerializeField] private FPSMovement _fpsMove;
     [SerializeField] private Rigidbody _rb;
-
+    [SerializeField] private EssoGravity _gravity;
 
     [Header("Dash Settings")]
     [SerializeField] private float _dashCoolDownTime;
     [SerializeField] private float _dashTime;
-    [SerializeField] private float _dashForce;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _deceleration;
     [SerializeField] private float _maxSpeed;
@@ -24,6 +23,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
     private float _endDashSpeed;
     private Vector3 _dashDirection;
     private float _currentSpeed;
+    private float _initGravScalar;
     Controls _input;
     //Event
     public System.Action OnDashEnd;
@@ -38,7 +38,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         _input = new Controls();
         _input.Dash.SetCallbacks(this);
         _input.Enable();
-      
+        if (_gravity) _initGravScalar = _gravity.GravityScale;
     }
 
     private void FixedUpdate()
@@ -56,9 +56,9 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
             _currentSpeed = Mathf.Lerp(_currentSpeed, 0.0f, Time.fixedDeltaTime * _deceleration);
 
 
-            Vector2 direction = _dashDirection * _currentSpeed;
+            Vector3 direction = _dashDirection * _currentSpeed* Time.deltaTime;
             if (_fpsMove.GetMoveDirection() == Vector3.zero)
-                _rb.velocity = direction;
+                _rb.velocity = new Vector3(direction.x, _rb.velocity.y, direction.z); ;
 
             if (_currentSpeed <= 0.01f)
             {
@@ -85,15 +85,17 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         _fpsMove.SetCanMove(false);
 
         if (_fpsMove.GetMoveDirection() != Vector3.zero) _dashDirection = _fpsMove.GetMoveDirection().normalized;
-        else _dashDirection = transform.forward;
+        else _dashDirection = transform.forward.normalized;
+        if(_gravity)
+            _gravity.GravityScale = 0f;
         _isDashing = true;
         StartCoroutine(dashTimer());
 
     }
     public void Dashing()
     {
-        Vector3 velocity = _dashDirection * _currentSpeed;
-        _rb.velocity = velocity;
+        Vector3 velocity = _dashDirection * _currentSpeed*Time.deltaTime;
+        _rb.velocity = new Vector3(velocity.x,_rb.velocity.y,velocity.z);
     }
 
     public void StopDash()
@@ -102,12 +104,13 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         OnDashEnd?.Invoke();
         _fpsMove.SetCanMove(true);
         if (!_fpsMove.IsCharacterMoving())
-            _rb.velocity = Vector3.zero;
+            _rb.velocity = new Vector3(0f, _rb.velocity.y, 0f);
 
     }
     public void EndDash()
     {
-
+        if (_gravity)
+            _gravity.GravityScale = _initGravScalar;
         _fpsMove.SetCurrentSpeed(_endDashSpeed);
         _isDashing = false;
         _isStopping = true;
