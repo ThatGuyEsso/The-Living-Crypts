@@ -27,6 +27,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
     Controls _input;
     //Event
     public System.Action OnDashEnd;
+    public System.Action OnBeginDash;
     private void Awake()
     {
         if (_inDebug) Init();
@@ -89,6 +90,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         if(_gravity)
             _gravity.GravityScale = 0f;
         _isDashing = true;
+        OnBeginDash?.Invoke();
         StartCoroutine(dashTimer());
 
     }
@@ -102,6 +104,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
     {
         _isStopping = false;
         OnDashEnd?.Invoke();
+        _dashDirection = Vector3.zero;
         _fpsMove.SetCanMove(true);
         if (!_fpsMove.IsCharacterMoving())
             _rb.velocity = new Vector3(0f, _rb.velocity.y, 0f);

@@ -124,9 +124,9 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
         {
             _magnitude = dir.magnitude;
  
-            OnNewMoveDirection?.Invoke(_movementDir);
+            OnNewMoveDirection?.Invoke(dir);
             OnWalk?.Invoke();
-            OnMoving?.Invoke(_movementDir);
+            OnMoving?.Invoke(dir);
             _isMoving = true;
 
         }
