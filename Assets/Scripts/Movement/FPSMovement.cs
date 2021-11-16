@@ -91,6 +91,7 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
         _magnitude = 0.0f;
         _isStopping = true;
         _isMoving = false;
+        _movementDir = Vector3.zero;
         OnStop?.Invoke();
      
 
