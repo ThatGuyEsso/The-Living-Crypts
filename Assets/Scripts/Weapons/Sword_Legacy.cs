@@ -4,14 +4,42 @@ using UnityEngine;
 
 public class Sword_Legacy : BaseWeapon
 {
+    public override void StopTryToPrimaryAttack()
+    {
+        _isPrimaryAttacking = false;
+    }
+
+    public override void StopTryToSecondaryAttack()
+    {
+        _isSecondaryAttacking = false;
+    }
+
+    public override void TryToPrimaryAttack()
+    {
+        _isPrimaryAttacking = true;
+        if (_canPrimaryAttack)
+        {
+            DoPrimaryAttack();
+        }
+    }
+
+    public override void TryToSecondaryyAttack()
+    {
+        _isSecondaryAttacking = true;
+        if (_canSecondaryAttack)
+        {
+            DoSecondaryAttack();
+        }
+    }
+
     protected override void DoPrimaryAttack()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Primary Attack");
     }
 
     protected override void DoSecondaryAttack()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Secondary Attack");
     }
 
   

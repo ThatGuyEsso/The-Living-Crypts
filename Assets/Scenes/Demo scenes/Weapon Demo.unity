@@ -261,6 +261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b920e8eb00ebb7b41b59fce9acb09416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &719506572 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2971435629315405120, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+  m_PrefabInstance: {fileID: 836753345634541451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1008881869
 Mesh:
   m_ObjectHideFlags: 0
@@ -1072,7 +1077,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh47126
+  m_Name: pb_Mesh40048
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1237,6 +1242,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 163429903, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: _equipOffset.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 163429903, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: _equipOffset.y
+      value: -0.202
+      objectReference: {fileID: 0}
+    - target: {fileID: 163429903, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: _equipOffset.z
+      value: 0.941
+      objectReference: {fileID: 0}
+    - target: {fileID: 163429903, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: _weaponEquipPoint
+      value: 
+      objectReference: {fileID: 719506572}
     - target: {fileID: 2691887569142288993, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
       propertyPath: _targetCamera
       value: 

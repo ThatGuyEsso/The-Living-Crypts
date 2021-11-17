@@ -10,8 +10,16 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField] protected float _primaryfireRate,_secondaryFire;
 
 
-    protected bool _canAttack;
+
+    protected bool _canPrimaryAttack,_canSecondaryAttack;
+    protected bool _isPrimaryAttacking, _isSecondaryAttacking;
+    protected Vector3 _equipOffset;
+    public abstract void TryToPrimaryAttack();
+    public abstract void TryToSecondaryyAttack();
+    public abstract void StopTryToPrimaryAttack();
+    public abstract void StopTryToSecondaryAttack();
     protected abstract void DoPrimaryAttack();
+
 
 
     protected abstract void DoSecondaryAttack();
@@ -19,12 +27,16 @@ public abstract class BaseWeapon : MonoBehaviour
 
     protected abstract void ResetPrimaryAttack();
     protected abstract void ResetSecondaryAttack();
-
+    public virtual void Init()
+    {
+        _canPrimaryAttack = true;
+        _canSecondaryAttack = true;
+    }
     protected virtual void FollowEquipPoint()
     {
         if (_equipTransform)
         {
-            transform.position = _equipTransform.position;
+            transform.position =  _equipTransform.position;
         }
     }
     protected virtual void MatchEquipPointRotation()
@@ -39,4 +51,5 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         _equipTransform = equipTransform;
     }
+
 }
