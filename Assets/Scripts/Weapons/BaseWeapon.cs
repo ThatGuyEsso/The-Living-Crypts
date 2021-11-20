@@ -9,10 +9,11 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField] protected Transform _equipTransform;
     [SerializeField] protected float _primaryfireRate,_secondaryFire;
 
+    [SerializeField] protected WeaponAnimController _animController;
 
-
-    protected bool _canPrimaryAttack,_canSecondaryAttack;
+    protected bool _canPrimaryAttack,_canSecondaryAttack,_canAttack;
     protected bool _isPrimaryAttacking, _isSecondaryAttacking;
+    protected float _primaryCurrentCooldownTime, _secondaryCurrentCooldownTime;
     protected Vector3 _equipOffset;
     public abstract void TryToPrimaryAttack();
     public abstract void TryToSecondaryyAttack();
@@ -31,6 +32,10 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         _canPrimaryAttack = true;
         _canSecondaryAttack = true;
+        _canAttack = true;
+        if (!_animController)
+            _animController = GetComponent<WeaponAnimController>();
+        _animController.Init();
     }
     protected virtual void FollowEquipPoint()
     {
