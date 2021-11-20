@@ -15,7 +15,7 @@ public class Sword_Legacy : BaseWeapon
 
     private float _primCurrTimeToIdle;
     private float _secCurrTimeToIdle;
-
+    private bool _isAttacking;
     public override void Init()
     {
         base.Init();
@@ -25,7 +25,7 @@ public class Sword_Legacy : BaseWeapon
         if (_animController)
         {
             _animController.OnAttackAnimBegin += ActivateAttackCollider;
-            _animController.OnAttackAnimEnd += ResetPrimaryAttack;
+         
         }
     }
     public override void StopTryToPrimaryAttack()
@@ -43,16 +43,16 @@ public class Sword_Legacy : BaseWeapon
         
         _isPrimaryAttacking = true;
   
-        if (_canPrimaryAttack&&_canAttack)
+        if (_canPrimaryAttack&&_canAttack&&!_isAttacking)
         {
             DoPrimaryAttack();
         }
     }
 
-    public override void TryToSecondaryyAttack()
+    public override void TryToSecondaryAttack()
     {
         _isSecondaryAttacking = true;
-        if (_canSecondaryAttack&& _canAttack)
+        if (_canSecondaryAttack&& _canAttack&&!_isAttacking)
         {
             DoSecondaryAttack();
         }
@@ -62,6 +62,13 @@ public class Sword_Legacy : BaseWeapon
     {
         if (_idleReset) _idleReset.Stop();
         _canPrimaryAttack = false;
+        _isAttacking = true;
+
+        if (_animController)
+        {
+            _animController.OnAttackAnimEnd += ResetPrimaryAttack;
+
+        }
         if (_isSwingingRight)
         {
             _animController.PlayPrimaryAttackAnimation(1);
@@ -73,52 +80,90 @@ public class Sword_Legacy : BaseWeapon
             _isSwingingRight = true;
         }
 
- 
+        ResetIdleTimers();
         Debug.Log("Primary Attack");
     }
 
     public void ActivateAttackCollider()
     {
         if (_attackCollider)
-            if (_attackCollider.enabled)
+            if (!_attackCollider.enabled)
                 _attackCollider.enabled = true;
     }
 
     protected override void DoSecondaryAttack()
     {
+        if (_animController)
+        {
+            _animController.OnAttackAnimEnd += OnSecondaryAttackEnd;
+
+        }
+        if (_idleReset) _idleReset.Stop();
+        _canSecondaryAttack = false;
+        _isAttacking = true;
+        _animController.PlaySecondaryAttackAnimation(0);
+        ResetIdleTimers();
+
         Debug.Log("Secondary Attack");
     }
 
-  
+    public void ResetIdleTimers()
+    {
+        _primCurrTimeToIdle = 0f;
+
+        _secCurrTimeToIdle = 0f;
+    }
     protected override void ResetPrimaryAttack()
     {
+        if (_animController)
+        {
+            _animController.OnAttackAnimEnd -= ResetPrimaryAttack;
+
+        }
         _canPrimaryAttack = true;
+        _isAttacking = false;
         _primCurrTimeToIdle = _primaryTimeToIdle;
         if (_attackCollider)
             if(_attackCollider.enabled)
                 _attackCollider.enabled = false;
     }
 
+
+    public void OnSecondaryAttackEnd()
+    {
+        if (_animController)
+        {
+            _animController.OnAttackAnimEnd -= OnSecondaryAttackEnd;
+
+        }
+        _secondaryCurrentCooldownTime = _secondaryFire;
+        _secCurrTimeToIdle = _secondaryTimeToIdle;
+        _isAttacking = false;
+        if (_attackCollider)
+            if (_attackCollider.enabled)
+                _attackCollider.enabled = false;
+    }
+
     protected override void ResetSecondaryAttack()
     {
-        throw new System.NotImplementedException();
+        _canSecondaryAttack = true;
+   
     }
 
     private void Update()
     {
-
+        if (!_isOwnerMoving)
+            LerpToEquipoint();
         //Secondary attack has cool down
-        if (!_canSecondaryAttack)
+        if (!_canSecondaryAttack&& _secondaryCurrentCooldownTime>0)
         {
-            if(_secondaryCurrentCooldownTime <= 0f)
+            _secondaryCurrentCooldownTime -= Time.deltaTime;
+            if (_secondaryCurrentCooldownTime <= 0f)
             {
-                _secondaryCurrentCooldownTime = _secondaryFire;
-                _canSecondaryAttack = true;
+                
+                ResetSecondaryAttack();
             }
-            else
-            {
-                _secondaryCurrentCooldownTime -= Time.deltaTime;
-            }
+         
         }
 
         if (_primCurrTimeToIdle > 0)
@@ -131,10 +176,21 @@ public class Sword_Legacy : BaseWeapon
                 if (_idleReset) _idleReset.ResetChild(5f);
             }
         }
+        if (_secCurrTimeToIdle > 0)
+        {
+            _secCurrTimeToIdle -= Time.deltaTime;
+            if (_secCurrTimeToIdle <= 0f)
+            {
+           
+                _animController.StopAnimating();
+                if (_idleReset) _idleReset.ResetChild(5f);
+            }
+        }
     }
     void FixedUpdate()
     {
-        FollowEquipPoint();
+        if(_isOwnerMoving)
+            FollowEquipPoint();
         MatchEquipPointRotation();
     }
 }

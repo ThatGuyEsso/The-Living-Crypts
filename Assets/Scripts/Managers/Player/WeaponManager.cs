@@ -10,7 +10,7 @@ public class WeaponManager : MonoBehaviour
     private bool _isWeaponEquipped;
 
     [SerializeField] private Transform _weaponEquipPoint;
-
+    [SerializeField] private FPSMovement _ownerMovement;
     private Controls _input;
     private void Awake()
     {
@@ -27,6 +27,10 @@ public class WeaponManager : MonoBehaviour
             _input.Attack.SecondaryAttack.started += _ => OnSecondaryAttack();
             _input.Attack.SecondaryAttack.canceled += _ => OnStopSecondaryAttack();
             _input.Enable();
+
+            _ownerMovement = GetComponentInParent<FPSMovement>();
+            _ownerMovement.OnWalk += OnOwnerMove;
+            _ownerMovement.OnStop += OnOwnerStop;
         }
         else
         {
@@ -34,6 +38,14 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    public void OnOwnerStop()
+    {
+        if (_equippedWeapon) _equippedWeapon.SetIsMoving(false);
+    }
+    public void OnOwnerMove()
+    {
+        if (_equippedWeapon) _equippedWeapon.SetIsMoving(true);
+    }
     public void SetEquippedWeaponEquipPoint(Transform equipPoint)
     {
         if (_equippedWeapon)
@@ -74,7 +86,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (_equippedWeapon)
         {
-            _equippedWeapon.TryToSecondaryyAttack();
+            _equippedWeapon.TryToSecondaryAttack();
         }
     }
 
