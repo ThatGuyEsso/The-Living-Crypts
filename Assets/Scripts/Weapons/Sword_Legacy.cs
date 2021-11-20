@@ -6,9 +6,13 @@ public class Sword_Legacy : BaseWeapon
 {
     //Collider
     [SerializeField] private Collider _attackCollider;
+
+    [Header("Animation Settings")]
     [SerializeField] private float _primaryTimeToIdle;
     [SerializeField] private float _secondaryTimeToIdle;
+    [SerializeField] private SmoothMatchParentRotLoc _idleReset;
     private bool _isSwingingRight = false;
+
     private float _primCurrTimeToIdle;
     private float _secCurrTimeToIdle;
 
@@ -56,6 +60,7 @@ public class Sword_Legacy : BaseWeapon
 
     protected override void DoPrimaryAttack()
     {
+        if (_idleReset) _idleReset.Stop();
         _canPrimaryAttack = false;
         if (_isSwingingRight)
         {
@@ -123,6 +128,7 @@ public class Sword_Legacy : BaseWeapon
             {
                 _isSwingingRight = false;
                 _animController.StopAnimating();
+                if (_idleReset) _idleReset.ResetChild(5f);
             }
         }
     }

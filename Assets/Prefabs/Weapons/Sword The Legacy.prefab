@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8667974833647369859}
   - component: {fileID: 8667974833647369884}
   - component: {fileID: 1296050697}
+  - component: {fileID: 2486976172112579727}
   m_Layer: 0
   m_Name: SwordMesh
   m_TagString: Untagged
@@ -883,6 +884,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.11, y: 2.22, z: 1.88}
   m_Center: {x: -0.47, y: 1.26, z: 0.49}
+--- !u!114 &2486976172112579727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8667974833647369887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaefc4babed527049aa9110053fce36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8667974834809108132
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +954,7 @@ MonoBehaviour:
   _attackCollider: {fileID: 1296050697}
   _primaryTimeToIdle: 1.5
   _secondaryTimeToIdle: 0.5
+  _idleReset: {fileID: 2486976172112579727}
 --- !u!54 &5183274557755777935
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -956,7 +970,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!95 &746865165
 Animator:
   serializedVersion: 3
