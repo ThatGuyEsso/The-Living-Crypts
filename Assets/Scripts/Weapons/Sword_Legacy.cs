@@ -81,7 +81,7 @@ public class Sword_Legacy : BaseWeapon
         }
 
         ResetIdleTimers();
-        Debug.Log("Primary Attack");
+ 
     }
 
     public void ActivateAttackCollider()
@@ -104,7 +104,7 @@ public class Sword_Legacy : BaseWeapon
         _animController.PlaySecondaryAttackAnimation(0);
         ResetIdleTimers();
 
-        Debug.Log("Secondary Attack");
+        
     }
 
     public void ResetIdleTimers()

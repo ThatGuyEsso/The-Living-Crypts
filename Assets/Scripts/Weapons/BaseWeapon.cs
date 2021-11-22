@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BaseWeapon : MonoBehaviour
 {
     [Header("Weapon Settings")]
+    [SerializeField] protected string _weaponName;
     [SerializeField] protected float _primaryMinDamage,  _primaryMaxDamage, _secondaryMinDamage, _secondaryMaxDamage;
     [SerializeField] protected Transform _equipTransform;
     [SerializeField] protected float _primaryfireRate,_secondaryFire;
