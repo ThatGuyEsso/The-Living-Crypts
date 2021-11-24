@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ShotGun : BaseWeapon
 {
+
+    [SerializeField] private Transform _fp;
+    [SerializeField] private Camera _fovCam;
     public override void StopTryToPrimaryAttack()
     {
         throw new System.NotImplementedException();
