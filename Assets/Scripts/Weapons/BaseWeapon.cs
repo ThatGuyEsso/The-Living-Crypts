@@ -49,7 +49,7 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         if (_equipTransform)
         {
-            transform.position =Vector3.Lerp(transform.position, _equipTransform.position,Time.deltaTime*5f);
+            transform.position =Vector3.MoveTowards(transform.position, _equipTransform.position,Time.deltaTime*5f);
         }
     }
     protected virtual void MatchEquipPointRotation()

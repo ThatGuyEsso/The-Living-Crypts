@@ -82,7 +82,19 @@ public class EssoUtility : MonoBehaviour
         return vectors;
     }
 
+    public static Vector3 GetCameraLookAtPoint(Camera cam, float raycastDist,LayerMask  targetLayers)
+    {
+        Vector3 centrePoint = cam.ScreenToViewportPoint(new Vector3(Screen.width / 2, Screen.height / 2, cam.nearClipPlane));
+        RaycastHit hitInfo;
+        Vector3 lookAtPoint = centrePoint + cam.transform.forward*raycastDist;
+       
 
+        if (Physics.Raycast(centrePoint, cam.transform.forward, out hitInfo, raycastDist, targetLayers))
+        {
+            lookAtPoint = hitInfo.point;
+        }
+        return lookAtPoint;
+    }
     public static float GetAspectRatio()
     {
         float aspectRatio = Screen.width / Screen.height;

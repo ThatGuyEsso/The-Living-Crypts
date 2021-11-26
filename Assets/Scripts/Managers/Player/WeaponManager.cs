@@ -126,4 +126,9 @@ public class WeaponManager : MonoBehaviour
 
 
     public bool IsWeaponEquipped { get { return _isWeaponEquipped; } }
+
+    public GameObject Getowner()
+    {
+        return _ownerMovement.gameObject;
+    }
 }
