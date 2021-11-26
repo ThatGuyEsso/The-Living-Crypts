@@ -85,15 +85,37 @@ MonoBehaviour:
   _primaryfireRate: 1
   _secondaryFire: 2.5
   _animController: {fileID: 0}
-  _maxRecoilOffset: 1
-  _primaryRecoilAmount: 0.5
-  _fp: {fileID: 370482370}
+  _primaryRecoilAmount: 0.2
+  _secondaryRecoilAmount: 0.75
+  _secondaryAttackExplosion: {fileID: 0}
   _gunShotData:
     nShots: 6
     _bulletSpread: 0.1
     _bulletSpeed: 8000
     _bulletLifeTime: 1
     _bulletPrefab: {fileID: 2786322439654314940, guid: 4e1fb3f759ca4f745a674c4a9dfb467c, type: 3}
+  _explosionAttackData:
+    _owner: {fileID: 0}
+    _size: 5
+    _duration: 0.5
+    _minDamage: 40
+    _maxDamage: 60
+    _knockBack: 10
+  _explosionPrefab: {fileID: 5704790286927349349, guid: b0f05e71b404f4f4c84cbee5d31048eb, type: 3}
+  _maxRecoilOffset: 1
+  _fp: {fileID: 370482370}
+  _primaryShotScreenShake:
+    _duration: 0.25
+    _magnitude: 1
+    _timeSmoothIn: 0.1
+    _timeSmoothOut: 0.2
+    _frequency: 0.8
+  _secondaryShotScreenShake:
+    _duration: 0.45
+    _magnitude: 2
+    _timeSmoothIn: 0.05
+    _timeSmoothOut: 0.2
+    _frequency: 1
   _aimingDistance: 5
   _aimSpeed: 10
   _aimableLayers:

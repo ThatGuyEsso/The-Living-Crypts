@@ -17,19 +17,27 @@ public class ShotGun : BaseWeapon
 {
 
 
-
+    [Header("Attack Settings")]
+    [SerializeField] private float _primaryRecoilAmount;
+    [SerializeField] private float _secondaryRecoilAmount;
+    [SerializeField] private GameObject _secondaryAttackExplosion;
+    [SerializeField] private GunShotData _gunShotData;
+    [SerializeField] private ExplosionData _explosionAttackData;
+    [SerializeField] private GameObject _explosionPrefab;
     [Header("Gun Settings")]
     [SerializeField] private float _maxRecoilOffset;
-    [SerializeField] private float _primaryRecoilAmount;
-
     [SerializeField] private Transform _fp;
-    [SerializeField] private GunShotData _gunShotData;
+
+    [Header("VFX Settings")]
+    [SerializeField] private CamShakeSetting _primaryShotScreenShake;
+    [SerializeField] private CamShakeSetting _secondaryShotScreenShake;
     [Tooltip("How far the gun raycast to set current aim target")]
     [SerializeField] private float _aimingDistance;
     [SerializeField] private float _aimSpeed;
     [SerializeField] private LayerMask _aimableLayers;
     [SerializeField] private float _timeBeforeRecoilRecovery;
     [SerializeField] private float _recoilRecoveryRate;
+
 
     private Camera _fovCam;
     private bool _canRecover;
@@ -66,7 +74,22 @@ public class ShotGun : BaseWeapon
             }
 
         }
+
+
+
+        if (!_canSecondaryAttack && _secondaryCurrentCooldownTime > 0)
+        {
+            _secondaryCurrentCooldownTime -= Time.deltaTime;
+            if (_secondaryCurrentCooldownTime <= 0f)
+            {
+
+                ResetSecondaryAttack();
+            }
+
+        }
+
         if (_isPrimaryAttacking) ValidatePrimaryAttack();
+        if (_isSecondaryAttacking) ValidateSecondaryAttack();
     }
     void FixedUpdate()
     {
@@ -80,6 +103,7 @@ public class ShotGun : BaseWeapon
         _canSecondaryAttack = true;
         _canAttack = true;
         _fovCam= FindObjectOfType<CinemachineBrain>().GetComponent<Camera>();
+        _explosionAttackData._owner = WeaponManager._instance.Getowner();
     
     }
     public override void StopTryToPrimaryAttack()
@@ -103,7 +127,7 @@ public class ShotGun : BaseWeapon
 
     public void ValidatePrimaryAttack()
     {
-        if (_canPrimaryAttack && _canAttack)
+        if (_canPrimaryAttack && _canAttack &&!_isSecondaryAttacking)
         {
             DoPrimaryAttack();
         }
@@ -111,12 +135,15 @@ public class ShotGun : BaseWeapon
     public override void TryToSecondaryAttack()
     {
         _isSecondaryAttacking = true;
-        if (_canSecondaryAttack && _canAttack )
+       
+    }
+    public void ValidateSecondaryAttack()
+    {
+        if (_canSecondaryAttack && _canAttack&&!_isPrimaryAttacking)
         {
             DoSecondaryAttack();
         }
     }
-
 
     protected override void DoPrimaryAttack()
     {
@@ -131,7 +158,8 @@ public class ShotGun : BaseWeapon
 
     protected override void DoSecondaryAttack()
     {
-       
+        _canSecondaryAttack = false;
+        SecondaryShot();
     }
 
     protected override void ResetPrimaryAttack()
@@ -141,22 +169,32 @@ public class ShotGun : BaseWeapon
 
     protected override void ResetSecondaryAttack()
     {
-        
+        _canSecondaryAttack = true;
     }
     private void PrimaryShot()
     {
         FirePrimaryRound();
         AddRecoil(_primaryRecoilAmount);
         _primaryCurrentCooldownTime = _primaryfireRate;
+        if (CamShake.instance)
+            CamShake.instance.DoScreenShake(_primaryShotScreenShake);
     }
+    private void SecondaryShot()
+    {
+        FireSecondaryExplosion();
+        AddRecoil(_secondaryRecoilAmount);
+        _secondaryCurrentCooldownTime = _secondaryFire;
+        if (CamShake.instance)
+            CamShake.instance.DoScreenShake(_secondaryShotScreenShake);
+    }
+
 
     public void FirePrimaryRound()
     {
-       
 
         for (int i=0; i< _gunShotData.nShots; i++)
         {
-            Vector3 targetDir = _fp.forward.normalized +new Vector3( Random.Range(-_gunShotData._bulletSpread, _gunShotData._bulletSpread),
+            Vector3 targetDir =_fp.forward + new Vector3( Random.Range(-_gunShotData._bulletSpread, _gunShotData._bulletSpread),
                 Random.Range(-_gunShotData._bulletSpread, _gunShotData._bulletSpread), Random.Range(-_gunShotData._bulletSpread, _gunShotData._bulletSpread)) ;
 
 
@@ -173,10 +211,26 @@ public class ShotGun : BaseWeapon
                 bullet.ShootProjectile();
             }
 
-            Debug.DrawRay(_fp.position, targetDir, Color.green, 10f);
+            Debug.DrawRay(_fp.position, targetDir.normalized, Color.green, 10f);
         }
     }
+    public void FireSecondaryExplosion()
+    {
+        RaycastHit hitInfo;
+        Vector3 targetpoint = _fp.position + _fp.forward *( (_explosionAttackData._size / 2.0f) - 1f);
 
+
+        if (Physics.Raycast(_fp.position, _fp.forward, out hitInfo, (_explosionAttackData._size / 2.0f)-1f, _aimableLayers))
+        {
+            targetpoint = hitInfo.point;
+        }
+
+        IExplosion explosion = Instantiate(_explosionPrefab, targetpoint, Quaternion.identity).GetComponent<IExplosion>();
+        if(explosion != null)
+        {
+            explosion.InitExplosion(_explosionAttackData);
+        }
+    }
     public void AddRecoil(float recoilAmount)
     {
         _currentRecoilOffset += new Vector3(0f, recoilAmount, 0f);
@@ -191,8 +245,10 @@ public class ShotGun : BaseWeapon
     public void UpdateWeaponAim()
     {
         if (!_fovCam) return;
-        Vector3 aimPoint = EssoUtility.GetCameraLookAtPoint(_fovCam,_aimingDistance,_aimableLayers);
-        Quaternion q=  Quaternion.LookRotation(aimPoint+ _currentRecoilOffset);
+        Vector3 aimDir = EssoUtility.GetCameraLookAtPoint(_fovCam,_aimingDistance,_aimableLayers)- _fp.position;
+
+        Debug.DrawRay(_fp.position, aimDir, Color.yellow);
+        Quaternion q=  Quaternion.LookRotation(aimDir + _currentRecoilOffset);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * _aimSpeed);
     }
     private void RecoverFromOverTimeRecoil()
