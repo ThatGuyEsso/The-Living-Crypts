@@ -7,6 +7,7 @@ public abstract class BaseWeapon : MonoBehaviour
     [Header("Weapon Settings")]
     [SerializeField] protected string _weaponName;
     [SerializeField] protected float _primaryMinDamage,  _primaryMaxDamage, _secondaryMinDamage, _secondaryMaxDamage;
+    [SerializeField] protected float _primaryMinKnockback, _primaryMaxKnockback, _secondaryMinKnockback, _secondaryMaxKnockback;
     [SerializeField] protected Transform _equipTransform;
     [SerializeField] protected float _primaryfireRate,_secondaryFire;
 

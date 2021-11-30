@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8667974833647369884}
   - component: {fileID: 1296050697}
   - component: {fileID: 2486976172112579727}
+  - component: {fileID: 6756061220747736393}
   m_Layer: 0
   m_Name: SwordMesh
   m_TagString: Untagged
@@ -879,7 +880,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8667974833647369887}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.11, y: 2.22, z: 1.88}
@@ -894,6 +895,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaefc4babed527049aa9110053fce36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6756061220747736393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8667974833647369887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96acd5858340e04fb3e2d6c7630e866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8667974834809108132
@@ -948,6 +961,10 @@ MonoBehaviour:
   _primaryMaxDamage: 20
   _secondaryMinDamage: 25
   _secondaryMaxDamage: 35
+  _primaryMinKnockback: 4
+  _primaryMaxKnockback: 6
+  _secondaryMinKnockback: 9
+  _secondaryMaxKnockback: 12
   _equipTransform: {fileID: 0}
   _primaryfireRate: 0.25
   _secondaryFire: 1

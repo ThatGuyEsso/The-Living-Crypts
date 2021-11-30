@@ -91,15 +91,16 @@ MonoBehaviour:
   _gunShotData:
     nShots: 6
     _bulletSpread: 0.1
-    _bulletSpeed: 8000
+    _bulletSpeed: 20000
     _bulletLifeTime: 1
+    _knockBack: 5
     _bulletPrefab: {fileID: 2786322439654314940, guid: 4e1fb3f759ca4f745a674c4a9dfb467c, type: 3}
   _explosionAttackData:
     _owner: {fileID: 0}
     _size: 5
     _duration: 0.5
-    _minDamage: 40
-    _maxDamage: 60
+    _minDamage: 60
+    _maxDamage: 80
     _knockBack: 10
   _explosionPrefab: {fileID: 5704790286927349349, guid: b0f05e71b404f4f4c84cbee5d31048eb, type: 3}
   _maxRecoilOffset: 1
@@ -116,7 +117,7 @@ MonoBehaviour:
     _timeSmoothIn: 0.05
     _timeSmoothOut: 0.2
     _frequency: 1
-  _aimingDistance: 5
+  _aimingDistance: 15
   _aimSpeed: 10
   _aimableLayers:
     serializedVersion: 2

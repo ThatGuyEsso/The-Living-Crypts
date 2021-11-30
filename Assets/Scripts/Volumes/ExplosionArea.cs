@@ -19,7 +19,7 @@ public class ExplosionArea : MonoBehaviour, IExplosion
 {
     private float _timeLeft;
     private ExplosionData _explosionData;
-
+    [SerializeField] private LayerMask _damageLayers;
     public GameObject GetOwner()
     {
         return _explosionData._owner;
@@ -46,5 +46,37 @@ public class ExplosionArea : MonoBehaviour, IExplosion
     {
         Destroy(gameObject);
     }
+    virtual protected void OnTriggerEnter(Collider other)
+    {
+       
+        if (_damageLayers == (_damageLayers | (1 << other.gameObject.layer)))
+        {
+            if (other.transform.parent != _explosionData._owner)
+            {
+                IProjectile proj = other.gameObject.GetComponent<IProjectile>();
+                if (proj != null)
+                {
+                    GameObject otherOwner = proj.GetOwner();
+                    if (otherOwner != _explosionData._owner)
+                    {
+                        proj.BreakProjectile();
+                    }
+                }
 
+                
+                IDamage damage = other.GetComponent<IDamage>();
+
+                if (damage != null)
+                {
+                    float dmg = Random.Range(_explosionData._minDamage, _explosionData._maxDamage);
+                    Vector3 kBackDir = other.transform.position - transform.position;
+                    damage.OnDamage(dmg, kBackDir.normalized, _explosionData._knockBack, _explosionData._owner);
+                }
+
+                    
+             
+            }
+        }
+
+    }
 }

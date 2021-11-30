@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword_Legacy : BaseWeapon
+public class Sword_Legacy : BaseWeapon, IWeapon
 {
     //Collider
     [SerializeField] private Collider _attackCollider;
@@ -192,5 +192,31 @@ public class Sword_Legacy : BaseWeapon
         if(_isOwnerMoving)
             FollowEquipPoint();
         MatchEquipPointRotation();
+    }
+
+    public void ApplyDamageToTarget(GameObject target)
+    {
+        if (target.transform.parent != WeaponManager._instance.Getowner())
+        {
+            IDamage damage = target.GetComponent<IDamage>();
+
+            if (damage != null)
+            {
+                if (_animController.IsPlayingPrimaryAttack())
+                {
+                    float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
+                    float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
+                    damage.OnDamage(dmg, WeaponManager._instance.Getowner().transform.forward, kBack, WeaponManager._instance.Getowner());
+                }
+                else if (_animController.IsPlayingSecondaryAttack())
+                {
+                    float dmg = Random.Range(_secondaryMinDamage, _secondaryMaxDamage);
+                    float kBack = Random.Range(_secondaryMinKnockback, _secondaryMaxKnockback);
+                    damage.OnDamage(dmg, WeaponManager._instance.Getowner().transform.forward, kBack, WeaponManager._instance.Getowner());
+                }
+               
+            }
+
+        }
     }
 }

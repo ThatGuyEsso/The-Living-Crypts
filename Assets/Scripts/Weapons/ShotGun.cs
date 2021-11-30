@@ -11,6 +11,7 @@ public struct GunShotData
     public float _bulletSpread;
     public float _bulletSpeed;
     public float _bulletLifeTime;
+    public float _knockBack;
     public GameObject _bulletPrefab;
 } 
 public class ShotGun : BaseWeapon
@@ -204,7 +205,7 @@ public class ShotGun : BaseWeapon
             if (bullet != null)
             {
                 ProjectileData bulletData = new ProjectileData(Random.Range(_primaryMinDamage, _primaryMaxDamage), targetDir.normalized
-                    , _gunShotData._bulletSpeed, _gunShotData._bulletLifeTime, WeaponManager._instance.Getowner());
+                    , _gunShotData._bulletSpeed, _gunShotData._bulletLifeTime, _gunShotData._knockBack, WeaponManager._instance.Getowner());
                 bullet.SetUpProjectile(bulletData);
 
 

@@ -23,6 +23,26 @@ public class WeaponAnimController : MonoBehaviour
         if (!_animator) Debug.LogError("Weapon has no animator: Check Parent/Root Gameobject");
     }
 
+    public bool IsPlayingPrimaryAttack()
+    {
+        if (!_animator.enabled) return false;
+
+        for(int i= 0; i<_primaryAttackAnimations.Length; i++)
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName(_primaryAttackAnimations[i])) return true;
+        }
+        return false;
+    }
+    public bool IsPlayingSecondaryAttack()
+    {
+        if (!_animator.enabled) return false;
+
+        for (int i = 0; i < _secondaryAttackAnimations.Length; i++)
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName(_secondaryAttackAnimations[i])) return true;
+        }
+        return false;
+    }
     public void BeginAttack()
     {
         OnAttackAnimBegin?.Invoke();

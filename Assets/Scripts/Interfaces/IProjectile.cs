@@ -9,16 +9,17 @@ public struct ProjectileData
     public Vector3 _direction;
     public float _speed;
     public float _lifeTime;
+    public float _knockback;
     public GameObject _owner;
 
-    public ProjectileData(float dmg, Vector3 direction, float speed, float lifeTime, GameObject owner)
+    public ProjectileData(float dmg, Vector3 direction, float speed, float lifeTime,float knockBack, GameObject owner)
     {
         _damage = dmg;
         _direction = direction;
         _speed = speed;
         _lifeTime = lifeTime;
-       
-        _owner = owner;
+        _knockback = knockBack;
+         _owner = owner;
     }
 }
 public interface IProjectile 
