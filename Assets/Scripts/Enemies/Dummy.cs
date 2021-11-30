@@ -14,7 +14,9 @@ public struct HealthData
 public class Dummy : MonoBehaviour, IDamage
 {
     [SerializeField] private HealthData _healthData;
+    [SerializeField] private GameObject _damageVFX;
     private Rigidbody _rb;
+    private MaterialFlash _hurtFlashVFX;
     private float _maxHealth;
     private float _currentHealth;
     private float _currentHurtTime;
@@ -30,6 +32,9 @@ public class Dummy : MonoBehaviour, IDamage
         _maxHealth = Random.Range(_healthData._minDefaultHealth, _healthData._maxDefaultHealth);
         _currentHealth = _maxHealth;
         _rb = GetComponent<Rigidbody>();
+        _hurtFlashVFX = GetComponent<MaterialFlash>();
+        if (_hurtFlashVFX)
+            _hurtFlashVFX.Init();
     }
     private void OnKillDummy()
     {
@@ -48,8 +53,16 @@ public class Dummy : MonoBehaviour, IDamage
             }
             else
             {
+                if (_hurtFlashVFX)
+                    _hurtFlashVFX.BeginFlash();
                 if (_rb)
                     _rb.AddForce(kBackDir * kBackMag, ForceMode.Impulse);
+
+                IDamagePopUp popUp = Instantiate(_damageVFX, transform.position, Quaternion.identity).GetComponent<IDamagePopUp>();
+                if (popUp != null)
+                {
+                    popUp.InitDamageNumber(_maxHealth, dmg, kBackDir);
+                }
             }
          
 
@@ -63,6 +76,8 @@ public class Dummy : MonoBehaviour, IDamage
             if(_currentHurtTime <= 0f)
             {
                 _canBeHurt = true;
+                if(_hurtFlashVFX)
+                    _hurtFlashVFX.EndFlash();
             }
             else
             {
