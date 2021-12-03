@@ -31,6 +31,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         {
             Init();
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
     public void Init()

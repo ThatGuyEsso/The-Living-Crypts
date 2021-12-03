@@ -9,17 +9,39 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField] protected float _primaryMinDamage,  _primaryMaxDamage, _secondaryMinDamage, _secondaryMaxDamage;
     [SerializeField] protected float _primaryMinKnockback, _primaryMaxKnockback, _secondaryMinKnockback, _secondaryMaxKnockback;
     [SerializeField] protected Transform _equipTransform;
-    [SerializeField] protected float _primaryfireRate,_secondaryFire;
+    [SerializeField] protected float _primaryFireRate,_secondaryFireRate;
 
     [SerializeField] protected WeaponAnimController _animController;
     protected bool _canPrimaryAttack,_canSecondaryAttack,_canAttack;
     protected bool _isPrimaryAttacking, _isSecondaryAttacking;
     protected float _primaryCurrentCooldownTime, _secondaryCurrentCooldownTime;
     protected Vector3 _equipOffset;
-    public abstract void TryToPrimaryAttack();
-    public abstract void TryToSecondaryAttack();
-    public abstract void StopTryToPrimaryAttack();
-    public abstract void StopTryToSecondaryAttack();
+    public virtual void StopTryToPrimaryAttack()
+    {
+        _isPrimaryAttacking = false;
+    }
+
+    public virtual void StopTryToSecondaryAttack()
+    {
+        _isSecondaryAttacking = false;
+    }
+
+
+    public virtual void TryToPrimaryAttack()
+    {
+
+        _isPrimaryAttacking = true;
+
+        ValidatePrimaryAttack();
+    }
+
+
+    public virtual void TryToSecondaryAttack()
+    {
+        _isSecondaryAttacking = true;
+
+    }
+
     protected abstract void DoPrimaryAttack();
 
 
@@ -60,7 +82,21 @@ public abstract class BaseWeapon : MonoBehaviour
             transform.rotation = _equipTransform.rotation;
         }
     }
+    virtual public void ValidatePrimaryAttack()
+    {
+        if (_canPrimaryAttack && _canAttack && !_isSecondaryAttacking)
+        {
+            DoPrimaryAttack();
+        }
+    }
 
+    virtual public void ValidateSecondaryAttack()
+    {
+        if (_canSecondaryAttack && _canAttack && !_isPrimaryAttacking)
+        {
+            DoSecondaryAttack();
+        }
+    }
     public virtual void SetEquipPoint(Transform equipTransform)
     {
         _equipTransform = equipTransform;

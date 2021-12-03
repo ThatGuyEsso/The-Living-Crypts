@@ -107,7 +107,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon
         
     }
 
-    public void ResetIdleTimers()
+    private void ResetIdleTimers()
     {
         _primCurrTimeToIdle = 0f;
 
@@ -136,7 +136,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon
             _animController.OnAttackAnimEnd -= OnSecondaryAttackEnd;
 
         }
-        _secondaryCurrentCooldownTime = _secondaryFire;
+        _secondaryCurrentCooldownTime = _secondaryFireRate;
         _secCurrTimeToIdle = _secondaryTimeToIdle;
         _isAttacking = false;
         if (_attackCollider)

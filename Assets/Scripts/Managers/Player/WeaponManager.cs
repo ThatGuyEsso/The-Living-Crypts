@@ -62,6 +62,7 @@ public class WeaponManager : MonoBehaviour
         {
             _equippedWeapon = weapon;
             _isWeaponEquipped = true;
+            _equippedWeapon.transform.position = _weaponEquipPoint.position;
             _equippedWeapon.SetEquipPoint(_weaponEquipPoint);
             _equippedWeapon.Init();
         }

@@ -107,44 +107,7 @@ public class ShotGun : BaseWeapon
         _explosionAttackData._owner = WeaponManager._instance.Getowner();
     
     }
-    public override void StopTryToPrimaryAttack()
-    {
-        _isPrimaryAttacking = false;
-    }
-
-    public override void StopTryToSecondaryAttack()
-    {
-        _isSecondaryAttacking = false;
-    }
-
-
-    public override void TryToPrimaryAttack()
-    {
-
-        _isPrimaryAttacking = true;
-
-        ValidatePrimaryAttack();
-    }
-
-    public void ValidatePrimaryAttack()
-    {
-        if (_canPrimaryAttack && _canAttack &&!_isSecondaryAttacking)
-        {
-            DoPrimaryAttack();
-        }
-    }
-    public override void TryToSecondaryAttack()
-    {
-        _isSecondaryAttacking = true;
-       
-    }
-    public void ValidateSecondaryAttack()
-    {
-        if (_canSecondaryAttack && _canAttack&&!_isPrimaryAttacking)
-        {
-            DoSecondaryAttack();
-        }
-    }
+ 
 
     protected override void DoPrimaryAttack()
     {
@@ -176,7 +139,7 @@ public class ShotGun : BaseWeapon
     {
         FirePrimaryRound();
         AddRecoil(_primaryRecoilAmount);
-        _primaryCurrentCooldownTime = _primaryfireRate;
+        _primaryCurrentCooldownTime = _primaryFireRate;
         if (CamShake.instance)
             CamShake.instance.DoScreenShake(_primaryShotScreenShake);
     }
@@ -184,7 +147,7 @@ public class ShotGun : BaseWeapon
     {
         FireSecondaryExplosion();
         AddRecoil(_secondaryRecoilAmount);
-        _secondaryCurrentCooldownTime = _secondaryFire;
+        _secondaryCurrentCooldownTime = _secondaryFireRate;
         if (CamShake.instance)
             CamShake.instance.DoScreenShake(_secondaryShotScreenShake);
     }
