@@ -430,7 +430,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3021
+  m_VersionIndex: 3024
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -604,6 +604,7 @@ MonoBehaviour:
   _secondaryTimeToIdle: 1
   _meshTranform: {fileID: 1202694935813484719}
   _idleReset: {fileID: 8453889315051928638}
+  _shaker: {fileID: 7532549672952636940}
 --- !u!54 &1202694935927088201
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -669,11 +670,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bobFreq: 3
-  _bobHorizAmp: 0.1
-  _bobForwardAmp: 0.15
-  _bobVertAmp: 0.2
+  _bobHorizAmp: 0.02
+  _bobForwardAmp: 0.1
+  _bobVertAmp: 0.04
   _vertOffsetScalar: 1.2
-  _bobSmoothing: 0.1
+  _bobSmoothing: 0.75
+  _interpSpeed: 40.4
   _shouldBob: 0
 --- !u!1 &1202694937574344962
 GameObject:

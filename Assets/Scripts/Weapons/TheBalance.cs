@@ -52,13 +52,13 @@ public class TheBalance : BaseWeapon
 
     private float _primCurrTimeToIdle;
     private float _secCurrTimeToIdle;
-
+    private bool _isCastingBeam;
     //states
     private bool _isAttacking;
     public override void SetEquipPoint(Transform equipTransform)
     {
         base.SetEquipPoint(equipTransform);
-        if (_shaker) SetEquipPoint(equipTransform);
+        if (_shaker) _shaker.SetAnchor(equipTransform);
     }
     protected override void DoPrimaryAttack()
     {
@@ -73,7 +73,7 @@ public class TheBalance : BaseWeapon
     public void BeginBeam()
     {
         _animController.OnAttackAnimEnd -= BeginBeam;
-        if (_shaker) _shaker.BeginShake();
+        _isCastingBeam = true;
 
 
     }
@@ -111,14 +111,27 @@ public class TheBalance : BaseWeapon
     }
     private void Update()
     {
-        if (!_isOwnerMoving)
-            LerpToEquipoint();
+       
+        if (_isCastingBeam)
+        {
+            if (_shaker) _shaker.Shake();
+        }
+        else
+        {
+            if (!_isOwnerMoving)
+                LerpToEquipoint();
+        }
     }
     private void FixedUpdate()
     {
-        if (_isOwnerMoving)
-            FollowEquipPoint();
-        MatchEquipPointRotation();
+    
+        if (!_isCastingBeam)
+        {
+            MatchEquipPointRotation();
+            if (_isOwnerMoving)
+                FollowEquipPoint();
+        }
+   
     }
 
     private void ResetIdleTimers()

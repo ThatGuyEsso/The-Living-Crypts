@@ -39,7 +39,7 @@ public abstract class BaseWeapon : MonoBehaviour
     public virtual void TryToSecondaryAttack()
     {
         _isSecondaryAttacking = true;
-
+        ValidateSecondaryAttack();
     }
 
     protected abstract void DoPrimaryAttack();
