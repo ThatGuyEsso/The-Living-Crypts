@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 [System.Serializable]
 public struct BeamSettings
 {
@@ -37,6 +37,10 @@ public class TheBalance : BaseWeapon
     [Header("Beam Settings")]
     [SerializeField] private BeamSettings _beamSettings;
     [SerializeField] private float _primaryAttackCooldown;
+    [SerializeField] private LineManager _beamLineManager;
+    [SerializeField] private GameObject _beamOriginVFXPrefab;
+    [SerializeField] private GameObject _beamHitVFXPrefab;
+    private GameObject _beamOriginVFX;
 
     [Header("Shield Settings")]
     [SerializeField] private ShieldSettings _shieldSettings;
@@ -50,11 +54,21 @@ public class TheBalance : BaseWeapon
     [SerializeField] private SmoothMatchParentRotLoc _idleReset;
     [SerializeField] private GameObjectShake _shaker;
 
+
+    private float _primCurrentTickRate;
     private float _primCurrTimeToIdle;
     private float _secCurrTimeToIdle;
     private bool _isCastingBeam;
     //states
     private bool _isAttacking;
+    private Camera _fovCam;
+    public override void Init()
+    {
+        base.Init();
+        if (_beamLineManager) _beamLineManager.Init();
+        _beamLineManager.SetOrigin(_beamSettings._firePoint);
+        _fovCam = FindObjectOfType<CinemachineBrain>().GetComponent<Camera>();
+    }
     public override void SetEquipPoint(Transform equipTransform)
     {
         base.SetEquipPoint(equipTransform);
@@ -75,9 +89,54 @@ public class TheBalance : BaseWeapon
         _animController.OnAttackAnimEnd -= BeginBeam;
         _isCastingBeam = true;
 
+        _primCurrentTickRate = 0f;
+    }
+
+    public void DrawBeam()
+    {
+        if (!_beamOriginVFX&&_beamOriginVFXPrefab) _beamOriginVFX = Instantiate(_beamOriginVFXPrefab, Vector3.zero, _beamSettings._firePoint.rotation);
+        if (_beamOriginVFX) _beamOriginVFX.transform.position = _beamSettings._firePoint.position;
+
+        Vector3 aimPoint = EssoUtility.GetCameraLookAtPoint(_fovCam, _beamSettings._distance, _beamSettings._targetLayers);
+        
+        List<Vector3> points = new List<Vector3>();
+        points.Add(aimPoint);
+
+        _beamLineManager.DrawLinePositions(points);
+   
+    }
+    public void DoBeamAttack()
+    {
+        RaycastHit hitInfo;
+        Vector3 dir = EssoUtility.GetCameraLookAtPoint(_fovCam, _beamSettings._distance, _beamSettings._targetLayers)- _beamSettings._firePoint.position;
+
+
+        if (Physics.Raycast(_beamSettings._firePoint.position, dir.normalized, out hitInfo, _beamSettings._distance, _beamSettings._targetLayers))
+        {
+            if (WeaponManager._instance.Getowner() != hitInfo.collider.gameObject)
+            {
+                IDamage damage = hitInfo.collider.gameObject.GetComponent<IDamage>();
+                if (damage != null)
+                {
+                    float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
+                    float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
+                    damage.OnDamage(dmg, dir.normalized, kBack, WeaponManager._instance.Getowner());
+
+                    SpawnHitVFX(hitInfo.point);
+                }
+
+            }
+        }
+        _primCurrentTickRate = _primaryFireRate;
+
 
     }
 
+    public void SpawnHitVFX(Vector3 point)
+    {
+        if (_beamHitVFXPrefab)
+            Instantiate(_beamHitVFXPrefab, point, Quaternion.identity);
+    }
 
     protected override void DoSecondaryAttack()
     {
@@ -111,29 +170,45 @@ public class TheBalance : BaseWeapon
     }
     private void Update()
     {
-       
+    
         if (_isCastingBeam)
         {
-            if (_shaker) _shaker.Shake();
+            Vector3 offset =Vector3.zero;
+            if (_shaker) offset= _shaker.GetShakeOffset();
+
+            FollowEquipPoint(offset);
+
+            DrawBeam();
+            if(_primCurrentTickRate < 0f)
+            {
+                DoBeamAttack();
+            }
+            else
+            {
+                _primCurrentTickRate -= Time.deltaTime;
+            }
+
+            
+
+
         }
         else
         {
-            if (!_isOwnerMoving)
-                LerpToEquipoint();
-        }
-    }
-    private void FixedUpdate()
-    {
-    
-        if (!_isCastingBeam)
-        {
-            MatchEquipPointRotation();
-            if (_isOwnerMoving)
+            //if (_isOwnerMoving)
                 FollowEquipPoint();
+           //else
+           //     LerpToEquipoint();
+        
         }
-   
-    }
 
+
+    
+       
+    }
+    private void LateUpdate()
+    {
+        MatchEquipPointRotation();
+    }
     private void ResetIdleTimers()
     {
         _primCurrTimeToIdle = 0f;

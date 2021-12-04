@@ -46,8 +46,10 @@ public class ShotGun : BaseWeapon
     private Vector3 _currentRecoilOffset = Vector3.zero;
     private void Update()
     {
-        if (!_isOwnerMoving)
-            LerpToEquipoint();
+        //if (!_isOwnerMoving)
+        //    LerpToEquipoint();
+        //else
+         FollowEquipPoint();
         UpdateWeaponAim();
         if(_currentRecoilOffset != Vector3.zero&& _canRecover)
         {
@@ -92,12 +94,7 @@ public class ShotGun : BaseWeapon
         if (_isPrimaryAttacking) ValidatePrimaryAttack();
         if (_isSecondaryAttacking) ValidateSecondaryAttack();
     }
-    void FixedUpdate()
-    {
-        if (_isOwnerMoving)
-            FollowEquipPoint();
-
-    }
+  
     public override void Init()
     {
         _canPrimaryAttack = true;

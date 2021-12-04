@@ -18,7 +18,7 @@ public class GameObjectShake : MonoBehaviour
     [SerializeField] private float _vertOffsetScalar = 2.0f;
 
     [SerializeField] [Range(0f, 1f)] private float _bobSmoothing = 0.1f;
-    [SerializeField] [Range(0f, 50f)] private float _interpSpeed = 20f;
+    [SerializeField] [Range(0f, 1000f)] private float _interpSpeed = 80f;
 
 
     //State
@@ -88,6 +88,28 @@ public class GameObjectShake : MonoBehaviour
       
   
     }
+    public Vector3 GetShakeOffset()
+    {
+        Vector3 offset;
+        if (Time.timeScale == 0f) return transform.position;
+        //bobbing time counter
+
+        _bobTime += Time.deltaTime;
+        ///Get new targetoffset
+        _targetOffset = _anchorTransform.position + CalculateNewShakeOffset(_bobTime);
+
+        //Lerp to target offset
+        Vector3 targetPoint = Vector3.Lerp(transform.position, _targetOffset, Time.deltaTime * _bobSmoothing * _interpSpeed);
+
+        //Snap when too close to tell
+        if ((targetPoint - _targetOffset).magnitude <= 0.001f) offset = _targetOffset;
+        offset = targetPoint - transform.position;
+        return offset;
+
+
+
+
+    }
 
 
     private Vector3 CalculateNewShakeOffset(float tBob)
@@ -100,7 +122,7 @@ public class GameObjectShake : MonoBehaviour
         if (tBob > 0)
         {
             horizOffset = Mathf.Cos(tBob * _bobFreq) * _bobHorizAmp;
-            forwardOffset = Random.Range(_bobTime * _bobForwardAmp * -1f, _bobTime * _bobForwardAmp);
+            forwardOffset = Mathf.Cos(tBob * _bobFreq) * _bobForwardAmp;
             vertOffset = Mathf.Sin(tBob * _bobFreq * _vertOffsetScalar) * _bobVertAmp;
 
             //Calculate new offset in XYZ plane

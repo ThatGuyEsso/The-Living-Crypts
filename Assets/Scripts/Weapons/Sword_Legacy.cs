@@ -152,8 +152,12 @@ public class Sword_Legacy : BaseWeapon, IWeapon
 
     private void Update()
     {
-        if (!_isOwnerMoving)
-            LerpToEquipoint();
+        //if (_isOwnerMoving)
+        //    LerpToEquipoint();
+        //else
+        FollowEquipPoint();
+
+        MatchEquipPointRotation();
         //Secondary attack has cool down
         if (!_canSecondaryAttack&& _secondaryCurrentCooldownTime>0)
         {
@@ -187,12 +191,8 @@ public class Sword_Legacy : BaseWeapon, IWeapon
             }
         }
     }
-    void FixedUpdate()
-    {
-        if(_isOwnerMoving)
-            FollowEquipPoint();
-        MatchEquipPointRotation();
-    }
+  
+
 
     public void ApplyDamageToTarget(GameObject target)
     {
