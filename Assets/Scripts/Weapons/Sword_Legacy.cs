@@ -11,6 +11,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon
     [SerializeField] private float _primaryTimeToIdle;
     [SerializeField] private float _secondaryTimeToIdle;
     [SerializeField] private SmoothMatchParentRotLoc _idleReset;
+    [SerializeField] private float _idleResetRate = 5f;
     private bool _isSwingingRight = false;
 
     private float _primCurrTimeToIdle;
@@ -177,7 +178,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon
             {
                 _isSwingingRight = false;
                 _animController.StopAnimating();
-                if (_idleReset) _idleReset.ResetChild(5f);
+                if (_idleReset) _idleReset.ResetChild(_idleResetRate);
             }
         }
         if (_secCurrTimeToIdle > 0)
@@ -187,9 +188,11 @@ public class Sword_Legacy : BaseWeapon, IWeapon
             {
            
                 _animController.StopAnimating();
-                if (_idleReset) _idleReset.ResetChild(5f);
+                if (_idleReset) _idleReset.ResetChild(_idleResetRate);
             }
         }
+        if (_isPrimaryAttacking) ValidatePrimaryAttack();
+        if (_isSecondaryAttacking) ValidateSecondaryAttack();
     }
   
 

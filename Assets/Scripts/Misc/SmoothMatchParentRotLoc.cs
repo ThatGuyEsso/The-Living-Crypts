@@ -6,13 +6,17 @@ public class SmoothMatchParentRotLoc : MonoBehaviour
 {
     private float _speed;
     private bool isActive;
+    [SerializeField] private Vector3 _offset;
 
-    
+    private void Awake()
+    {
+        _offset = transform.localPosition;
+    }
     private void Update()
     {
         if (isActive&&transform.parent)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, Time.deltaTime * _speed);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero+_offset, Time.deltaTime * _speed);
 
             transform.localRotation = Quaternion.Slerp(transform.localRotation,Quaternion.identity,_speed*Time.deltaTime);
 

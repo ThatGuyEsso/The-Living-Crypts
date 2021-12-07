@@ -12,26 +12,7 @@ public struct BeamSettings
 
 }
 
-[System.Serializable]
-public struct ShieldSettings
-{
-    public GameObject _owner;
-    public float _lifeTime;
-    public float _minDamage;
-    public float _maxDamage;
-    public float _minKnockBack;
-    public float _maxKnockBack;
-    public ShieldSettings(GameObject owner, float lifeTime,float minDmg,float maxDmg, float minKnockBack, float maxKnockBack)
-    {
-        _owner = owner;
-        _lifeTime = lifeTime;
-        _minDamage = minDmg;
-        _maxDamage = maxDmg;
-        _minKnockBack = minKnockBack;
-        _maxKnockBack = maxKnockBack;
-    }
 
-}
 public class TheBalance : BaseWeapon
 {
     [Header("Beam Settings")]
@@ -45,16 +26,20 @@ public class TheBalance : BaseWeapon
     [Header("Shield Settings")]
     [SerializeField] private ShieldSettings _shieldSettings;
     [SerializeField] private GameObject _shieldPrefab;
-
+    [SerializeField] private Vector3 _shieldSpwnOffset;
     [Header("Animation Settings")]
     [SerializeField] private float _primaryTimeToIdle;
     [SerializeField] private float _secondaryTimeToIdle;
-
+    [SerializeField] private float _aimSpeed;
+    [SerializeField] private Vector3 _aimOffset;
     [SerializeField] private Transform _meshTranform;
     [SerializeField] private SmoothMatchParentRotLoc _idleReset;
+    [SerializeField] private float _idleResetRate = 5f;
     [SerializeField] private GameObjectShake _shaker;
 
 
+    private float _currentBeamDuration;
+    private float _currentBeamCooldown;
     private float _primCurrentTickRate;
     private float _primCurrTimeToIdle;
     private float _secCurrTimeToIdle;
@@ -68,6 +53,18 @@ public class TheBalance : BaseWeapon
         if (_beamLineManager) _beamLineManager.Init();
         _beamLineManager.SetOrigin(_beamSettings._firePoint);
         _fovCam = FindObjectOfType<CinemachineBrain>().GetComponent<Camera>();
+
+        //populating shield data
+        _shieldSettings._minDamage = _secondaryMinDamage;
+        _shieldSettings._maxDamage = _secondaryMaxDamage;
+        _shieldSettings._minKnockBack = _secondaryMinKnockback;
+        _shieldSettings._maxKnockBack = _secondaryMaxKnockback;
+        _shieldSettings._owner =WeaponManager._instance.Getowner();
+    }
+    public override void StopTryToPrimaryAttack()
+    {
+        base.StopTryToPrimaryAttack();
+        if (_isCastingBeam) StopBeam();
     }
     public override void SetEquipPoint(Transform equipTransform)
     {
@@ -88,18 +85,43 @@ public class TheBalance : BaseWeapon
     {
         _animController.OnAttackAnimEnd -= BeginBeam;
         _isCastingBeam = true;
+        Transform currentMeshTransform = _meshTranform;
+        _animController.StopAnimating();
+        _meshTranform.rotation = _meshTranform.rotation;
 
+
+        _currentBeamDuration = _beamSettings._maxDuration;
         _primCurrentTickRate = 0f;
     }
+    public void RotateInAimDirectionOverTime()
+    {
+        if (!_fovCam) return;
+        Vector3 aimDir = EssoUtility.GetCameraLookAtPoint(_fovCam, _beamSettings._distance, _beamSettings._targetLayers) - _beamSettings._firePoint.position;
 
+        Debug.DrawRay(_beamSettings._firePoint.position, aimDir, Color.yellow);
+        Quaternion q = Quaternion.LookRotation(aimDir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * _aimSpeed);
+    }
+  
     public void DrawBeam()
     {
         if (!_beamOriginVFX&&_beamOriginVFXPrefab) _beamOriginVFX = Instantiate(_beamOriginVFXPrefab, Vector3.zero, _beamSettings._firePoint.rotation);
         if (_beamOriginVFX) _beamOriginVFX.transform.position = _beamSettings._firePoint.position;
 
-        Vector3 aimPoint = EssoUtility.GetCameraLookAtPoint(_fovCam, _beamSettings._distance, _beamSettings._targetLayers);
-        
         List<Vector3> points = new List<Vector3>();
+        Vector3 aimPoint = _beamSettings._firePoint.position + _beamSettings._firePoint.forward * _beamSettings._distance;
+        RaycastHit hitInfo;
+  
+
+
+        if (Physics.Raycast(_beamSettings._firePoint.position, _beamSettings._firePoint.forward, out hitInfo, _beamSettings._distance,
+            _beamSettings._targetLayers))
+        {
+            aimPoint = hitInfo.point;
+            IDamage damage = hitInfo.collider.gameObject.GetComponent<IDamage>();
+            if(damage==null)
+                SpawnHitVFX(hitInfo.point);
+        }
         points.Add(aimPoint);
 
         _beamLineManager.DrawLinePositions(points);
@@ -132,6 +154,15 @@ public class TheBalance : BaseWeapon
 
     }
 
+    public void StopBeam()
+    {
+        _beamLineManager.ClearLine();
+        _isCastingBeam = false;
+        if (_beamOriginVFX) Destroy(_beamOriginVFX);
+        _currentBeamCooldown = _primaryAttackCooldown;
+        _primCurrTimeToIdle = _primaryTimeToIdle;
+        _isAttacking = false;
+    }
     public void SpawnHitVFX(Vector3 point)
     {
         if (_beamHitVFXPrefab)
@@ -152,21 +183,45 @@ public class TheBalance : BaseWeapon
     public void SummonShield()
     {
         _animController.OnAttackAnimEnd -= SummonShield;
+
+        AttackBubbleShield shield = Instantiate(_shieldPrefab,
+            WeaponManager._instance.Getowner().transform.position + _shieldSettings._followOffset,
+            Quaternion.identity).GetComponent<AttackBubbleShield>();
+        if (shield)
+        {
+            shield.Init(_shieldSettings, WeaponManager._instance.Getowner().transform);
+        }
+
+        _secondaryCurrentCooldownTime = _secondaryFireRate;
+        _secCurrTimeToIdle = _secondaryTimeToIdle;
+        _isAttacking = false;
     }
 
+    public override void ValidatePrimaryAttack()
+    {
+        if (_canPrimaryAttack && _canAttack && !_isAttacking)
+        {
+            DoPrimaryAttack();
+        }
+    }
+
+    public override void ValidateSecondaryAttack()
+    {
+        if (_canSecondaryAttack && _canAttack && !_isAttacking)
+        {
+            DoSecondaryAttack();
+        }
+    }
     protected override void ResetPrimaryAttack()
     {
-        _isAttacking = false;
-        _primaryCurrentCooldownTime = _primaryAttackCooldown;
-        _primCurrTimeToIdle = _primaryTimeToIdle;
+
+        _canPrimaryAttack = true;
 
 
     }
     protected override void ResetSecondaryAttack()
     {
-        _isAttacking = false;
-        _secondaryCurrentCooldownTime = _secondaryFireRate;
-        _secCurrTimeToIdle = _secondaryTimeToIdle;
+        _canSecondaryAttack = true;
     }
     private void Update()
     {
@@ -187,27 +242,80 @@ public class TheBalance : BaseWeapon
             {
                 _primCurrentTickRate -= Time.deltaTime;
             }
-
+            
+            if (_currentBeamDuration <= 0)
+            {
+                StopBeam();
+            }
+            else
+            {
+                _currentBeamDuration -= Time.deltaTime;
+            }
             
 
 
         }
         else
         {
-            //if (_isOwnerMoving)
-                FollowEquipPoint();
-           //else
-           //     LerpToEquipoint();
+          
+            FollowEquipPoint();
+         
         
         }
 
 
-    
-       
+        if (!_canPrimaryAttack && _currentBeamCooldown > 0)
+        {
+            _currentBeamCooldown -= Time.deltaTime;
+            if (_currentBeamCooldown <= 0f)
+            {
+
+                ResetPrimaryAttack();
+            }
+
+        }
+        if (!_canSecondaryAttack && _secondaryCurrentCooldownTime > 0)
+        {
+            _secondaryCurrentCooldownTime -= Time.deltaTime;
+            if (_secondaryCurrentCooldownTime <= 0f)
+            {
+
+                ResetSecondaryAttack();
+            }
+
+        }
+        if (_primCurrTimeToIdle > 0)
+        {
+            _primCurrTimeToIdle -= Time.deltaTime;
+            if (_primCurrTimeToIdle <= 0f)
+            {
+            
+                _animController.StopAnimating();
+                if (_idleReset) _idleReset.ResetChild(_idleResetRate);
+            }
+        }
+        if (_secCurrTimeToIdle > 0)
+        {
+            _secCurrTimeToIdle -= Time.deltaTime;
+            if (_secCurrTimeToIdle <= 0f)
+            {
+
+                _animController.StopAnimating();
+                if (_idleReset) _idleReset.ResetChild(_idleResetRate);
+            }
+        }
+
+        if (_isPrimaryAttacking) ValidatePrimaryAttack();
+        if (_isSecondaryAttacking) ValidateSecondaryAttack();
     }
     private void LateUpdate()
     {
-        MatchEquipPointRotation();
+        if(!_isCastingBeam)
+            MatchEquipPointRotation();
+        else if(_isCastingBeam&&!_animController.IsPlayingPrimaryAttack())
+        {
+            RotateInAimDirectionOverTime();
+        }
     }
     private void ResetIdleTimers()
     {
