@@ -10,11 +10,17 @@ public class EssoUtility : MonoBehaviour
     public static float GetAngleFromVector(Vector3 vector)
     {
         vector = vector.normalized;
-        float n = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+        float n = Mathf.Atan2(vector.x, vector.z) * Mathf.Rad2Deg;
         if (n < 0) n += 360f;
         return n;
     }
-
+    public static bool InSameDirection(Vector3 a,Vector3 b, float errorMargin)
+    {
+        float dot = Vector2.Dot(new Vector2(a.x, a.z), new Vector2(b.x, b.z));
+        if (Mathf.Abs(dot + errorMargin)>1) dot = 1;
+        return dot >= 1;
+  
+    }
     //returns angle from vector direction
 
     public static Vector3 GetVectorFromAngle(float angle)
