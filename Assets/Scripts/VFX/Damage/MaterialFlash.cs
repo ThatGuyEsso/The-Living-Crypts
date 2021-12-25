@@ -49,6 +49,7 @@ public class MaterialFlash : MonoBehaviour, IInitialisable
     {
         for (int i = 0; i < _meshRenderers.Length; i++)
         {
+            if (i >= _meshRenderers.Length) return;
             _meshRenderers[i].material = _defaultMaterials[i];
         }
         _isFlashing = false;

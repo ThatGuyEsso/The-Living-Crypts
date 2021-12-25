@@ -57,6 +57,7 @@ public class DamageNumber : MonoBehaviour, IDamagePopUp
         transform.localScale = Vector3.one *0.1f;
         _currentSpeed = 0f;
         _moveDirection = (new Vector3(damageDirection.x * 0.75f, 0f, damageDirection.z * 0.75f) + Vector3.up +Random.insideUnitSphere).normalized;
+
         _playerCamera = CamShake.instance.gameObject;
         _isActive = true;
     }

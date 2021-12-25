@@ -8,24 +8,32 @@ public enum EnemyState
     Idle,
     Chase,
     Attack,
-    Flee
+    Flee,
+    
 };
 
 [System.Serializable]
 public struct EnemySettings
 {
-    [Header("Power Scale Settings")]
-    public float MaxHealth;
-    public float MaxMovementSpeed;
 
     [Header("Attack Settings")]
     public float AttackRange;
     public float AttackRate;
     public float MaxDamage;
     public float MinDamage;
+    public float MaxKnockBack;
+    public float MinKnockBack;
 
+    public float GetRandomDamage()
+    {
+        return Random.Range(MinDamage, MaxDamage);
+    }
+    public float GetRandomKnockBack()
+    {
+        return Random.Range(MinKnockBack, MaxKnockBack);
+    }
 }
-[RequireComponent(typeof(PathFinder))]
+    [RequireComponent(typeof(PathFinder))]
 public abstract class BaseEnemy : MonoBehaviour
 {
     [Header("Debug Settings")]
@@ -46,13 +54,16 @@ public abstract class BaseEnemy : MonoBehaviour
 
     [Header("Pathfinding")]
     [SerializeField] protected PathFinder PathFinder;
-
+    [SerializeField] protected PathFollower PathFollower;
+    protected NavMeshPath _currentPath;
     [Header("UX")]
     [SerializeField] protected FaceDirection FaceDirection;
 
     //Variables that are set and updated at run time
-    protected float _currentHealth;
-    protected float _currentSpeed;
+
+    protected float _currentTimeBtwnAttacks;
+
+    protected bool _canAttack;
     protected virtual void Awake()
     {
         if (InDebug) Init();
@@ -62,7 +73,8 @@ public abstract class BaseEnemy : MonoBehaviour
         float randValue = Random.Range(0f, MaxTickOffset);
    
         if (!PathFinder) PathFinder = GetComponent<PathFinder>();
-
+        if (!PathFollower) PathFollower = GetComponent<PathFollower>();
+        _currentPath = new NavMeshPath();
         InvokeRepeating("ProcessAI", randValue, TickRate);
     }
 
@@ -74,7 +86,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void DrawPathToTarget()
     {
         if (!CurrentTarget || !PathFinder) return;
-        PathFinder.GetPathToTarget(transform.position, CurrentTarget.position, NavMesh.AllAreas);
+        _currentPath = PathFinder.GetPathToTarget(transform.position, CurrentTarget.position, NavMesh.AllAreas);
     }
 
     public virtual bool InRange()
@@ -88,14 +100,25 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void FaceCurrentTarget()
     {
         if (!FaceDirection || !CurrentTarget) return;
-        FaceDirection.SmoothRotDirection(CurrentTarget.position);
+        FaceDirection.SmoothRotDirection(CurrentTarget.position- transform.position);
     }
 
     protected virtual void FaceCurrentPathPoint()
     {
-        if (!PathFinder || !FaceDirection) return;
-        if (PathFinder.Path.corners.Length <= 0) return;
+        if ( !FaceDirection) return;
+        if (_currentPath.corners.Length <= 0) return;
+
         //transform.LookAt(PathFinder.Path.corners[1]);
-        FaceDirection.SmoothRotDirection((PathFinder.Path.corners[1] - transform.position).normalized);
+        FaceDirection.SmoothRotDirection((PathFollower.GetCurrentPathPoint() - transform.position).normalized);
     }
+
+    public virtual void OnEnemyStateChange(EnemyState newState)
+    {
+        CurrentState = newState;
+    }
+
+
+    protected abstract void DoAttack(GameObject target);
+
+    protected abstract void KillEnemy();
 }

@@ -17,10 +17,10 @@ public class JumpMovement : MonoBehaviour,IInitialisable
     [Header("Jump Settings")]
     [SerializeField] private JumpData JumpSettings;
 
- 
-    private bool _isGrounded;
-    private bool _canJump;
 
+    [SerializeField] private bool _isGrounded;
+    private bool _canJump;
+    private bool _isResetting;
   
     private Rigidbody _rb;
     private void Awake()
@@ -37,24 +37,37 @@ public class JumpMovement : MonoBehaviour,IInitialisable
     {
         if(_rb && _isGrounded && _canJump)
         {
-            Debug.Log("Jumping!");
+            //Debug.Log("Jumping!");
             _canJump = false;
             //Jump consistency.
-            //_rb.velocity = Vector3.zero;
+            _rb.velocity = Vector3.zero;
             _rb.AddForce(jumpDirection * JumpSettings.JumpForce + Vector3.up * JumpSettings.JumpHeightMultiplier, ForceMode.Impulse);
             
+        }
+    }
+    public void DoJump(Vector3 jumpDirection, JumpData newSettings)
+    {
+        if (_rb && _isGrounded && _canJump)
+        {
+            //Debug.Log("Jumping!");
+            _canJump = false;
+            //Jump consistency.
+            _rb.velocity = Vector3.zero;
+            _rb.AddForce(jumpDirection * newSettings.JumpForce + Vector3.up * newSettings.JumpHeightMultiplier, ForceMode.Impulse);
+
         }
     }
 
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (_isGrounded) return;
+        
         if (JumpSettings.GroundedLayers == (JumpSettings.GroundedLayers | (1 << collision.gameObject.layer)))
         {
             _isGrounded = true;
             if (JumpSettings.MaxJumpCooldown <= 0f) _canJump = true;
             else {
+                if (_isResetting) return;
                 StopAllCoroutines();
                 StartCoroutine(ResetJumpTimer());
             }
@@ -64,16 +77,19 @@ public class JumpMovement : MonoBehaviour,IInitialisable
 
     private IEnumerator ResetJumpTimer()
     {
+        _isResetting = true;
         yield return new WaitForSeconds(JumpSettings.MaxJumpCooldown);
+     
         ResetJump();
     }
     public void ResetJump()
     {
+        _isResetting=false;
         _canJump = true;
     }
     public void OnCollisionExit(Collision collision)
     {
-        if (!_isGrounded) return;
+       
         if (JumpSettings.GroundedLayers == (JumpSettings.GroundedLayers | (1 << collision.gameObject.layer)))
         {
             _isGrounded = false;

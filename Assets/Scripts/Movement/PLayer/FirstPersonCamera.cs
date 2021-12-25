@@ -60,7 +60,8 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         _yRot = rot.y + mousePosX;
 
         transform.localRotation = Quaternion.Euler(_xRot, _yRot, 0f);
-        _characterTransform.localRotation = Quaternion.Euler(0f, _yRot, 0f);
+        if(_characterTransform)
+            _characterTransform.localRotation = Quaternion.Euler(0f, _yRot, 0f);
 
 
     }

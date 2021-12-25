@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class PathFinder : MonoBehaviour, IInitialisable
 {
-    [SerializeField] public bool InDebug;
+    [SerializeField] private bool InDebug;
     private NavMeshPath _path;
 
     private bool _isInitialised;
@@ -37,7 +37,23 @@ public class PathFinder : MonoBehaviour, IInitialisable
                 Debug.DrawLine(_path.corners[i], _path.corners[i + 1], Color.red);
         }
     }
+    public bool IsPathValid()
+    {
+        if (_path.status == NavMeshPathStatus.PathComplete) return true;
+        else return false;
+       
+    }
 
+    public bool IsInNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(position, out hit, 1.0f, NavMesh.AllAreas))
+        {
+         
+            return true;
+        }
+        return false;
+    }
     private void Update()
     {
         if (!_isInitialised || _path.corners.Length <= 0) return;

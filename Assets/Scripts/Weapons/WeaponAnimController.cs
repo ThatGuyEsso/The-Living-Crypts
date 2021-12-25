@@ -96,6 +96,6 @@ public class WeaponAnimController : MonoBehaviour
     public void StopAnimating()
     {
         if (_animator.enabled) _animator.enabled = false;
-        Debug.Log("Stop animating");
+        //Debug.Log("Stop animating");
     }
 }
