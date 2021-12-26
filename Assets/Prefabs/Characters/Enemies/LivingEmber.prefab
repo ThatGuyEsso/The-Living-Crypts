@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951077903895921038}
   - component: {fileID: 951077903895921033}
+  - component: {fileID: 7935081028460219392}
   - component: {fileID: 951077903895921032}
   - component: {fileID: 951077903895921035}
   - component: {fileID: 951077903895921034}
@@ -21,6 +22,7 @@ GameObject:
   - component: {fileID: 951077903895921030}
   - component: {fileID: 951077903895921026}
   - component: {fileID: 951077903895921027}
+  - component: {fileID: 1924905420}
   m_Layer: 10
   m_Name: LivingEmber
   m_TagString: Enemy
@@ -56,6 +58,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7935081028460219392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951077903895921039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2a16d13360a514499a1e88a6a751e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &951077903895921032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1438d20a78eb6084fb6bd4aa6fa3d5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InDebug: 1
+  InDebug: 0
   TickRate: 0.25
   MaxTickOffset: 0.5
   CurrentTarget: {fileID: 0}
@@ -90,6 +104,9 @@ MonoBehaviour:
     JumpForce: 10
     JumpHeightMultiplier: 4
     MaxJumpCooldown: 0.5
+  MinimumSplitSize: 0.5
+  MaxSplitCount: 4
+  LivingEmberPrefab: {fileID: 0}
 --- !u!114 &951077903895921035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,10 +209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3de057180189f4eaa80eb9103d7a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inDebug: 1
   _healthData:
-    _maxDefaultHealth: 80
+    _maxDefaultHealth: 40
     _minDefaultHealth: 60
-    _maxHurtTime: 0.25
+    _maxHurtTime: 0.5
 --- !u!114 &951077903895921030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +256,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flashMat: {fileID: 2100000, guid: 9b05cca13e47e674d8e72a8438b96cc8, type: 2}
   _flashRate: 0.2
+--- !u!114 &1924905420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951077903895921039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff5ff2998048b34ca6fd86ec5956624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 1
+  MaxSize: 3
+  ResizeOnAwake: 0
 --- !u!1 &951077905219355479
 GameObject:
   m_ObjectHideFlags: 0

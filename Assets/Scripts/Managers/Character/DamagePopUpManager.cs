@@ -20,7 +20,7 @@ public class DamagePopUpManager : MonoBehaviour
             _hManager.OnDamageReceived += SpawnDamagePopUp;
         }
     }
-    private void SpawnDamagePopUp(float maxHealth, float dmg, Vector3 kBackDir)
+    private void SpawnDamagePopUp(float maxHealth, float dmg,float knockBackMag, Vector3 kBackDir)
     {
         IDamagePopUp popUp = Instantiate(DamageVFX, transform.position, Quaternion.identity).GetComponent<IDamagePopUp>();
         if (popUp != null)

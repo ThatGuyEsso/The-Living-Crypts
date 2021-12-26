@@ -95,4 +95,6 @@ public class JumpMovement : MonoBehaviour,IInitialisable
             _isGrounded = false;
         }
     }
+
+    public JumpData JumpData { get { return JumpSettings; } set { { JumpSettings = value; } } }
 }

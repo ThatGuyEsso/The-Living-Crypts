@@ -63,7 +63,10 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected float _currentTimeBtwnAttacks;
 
+    
     protected bool _canAttack;
+
+    public System.Action OnInit;
     protected virtual void Awake()
     {
         if (InDebug) Init();
@@ -76,6 +79,8 @@ public abstract class BaseEnemy : MonoBehaviour
         if (!PathFollower) PathFollower = GetComponent<PathFollower>();
         _currentPath = new NavMeshPath();
         InvokeRepeating("ProcessAI", randValue, TickRate);
+
+        OnInit?.Invoke();
     }
 
 
@@ -117,7 +122,10 @@ public abstract class BaseEnemy : MonoBehaviour
         CurrentState = newState;
     }
 
-
+    public void SetTarget(Transform target)
+    {
+        CurrentTarget = target;
+    }
     protected abstract void DoAttack(GameObject target);
 
     protected abstract void KillEnemy();

@@ -14,16 +14,13 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
     private bool _canBeHurt;
     private bool _isAlive;
 
-    public System.Action<float ,float ,Vector3 > OnDamageReceived;
+    public System.Action<float ,float , float , Vector3 > OnDamageReceived;
     public System.Action OnHurt;
     public System.Action OnNotHurt;
     public System.Action OnDie;
 
 
-    private void Awake()
-    {
-        if (_inDebug) Init();
-    }
+   
     public void Init()
     {
         _maxHealth = Random.Range(_healthData._minDefaultHealth, _healthData._maxDefaultHealth);
@@ -46,7 +43,7 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
             else
             {
 
-                OnDamageReceived?.Invoke(_maxHealth,dmg,kBackDir);
+                OnDamageReceived?.Invoke(_maxHealth,dmg,kBackMag,kBackDir);
                 OnHurt?.Invoke();
             }
 
@@ -71,4 +68,6 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
     }
 
     public bool IsHurt { get { return !_canBeHurt; } }
+
+    public HealthData HealthData { set { _healthData = value; } get { return _healthData; } }
 }

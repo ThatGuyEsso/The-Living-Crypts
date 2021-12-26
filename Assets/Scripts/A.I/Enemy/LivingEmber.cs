@@ -7,22 +7,31 @@ public class LivingEmber : BaseEnemy
 {
     [Header("Enemy Character Settings")]
     [SerializeField] private JumpData AttackJumpSettings;
+    [Tooltip("If scale <MinimumSplitsSize don't split")]
+    [SerializeField] private float MinimumSplitSize;
+    [SerializeField] private int MaxSplitCount;
+    [SerializeField] private GameObject LivingEmberPrefab;
     private JumpMovement _jumpMovement;
     private CharacterHealthManager _hManager;
-    
+    private RandomSizeInRange _randomSize;
     public override void Init()
     {
         base.Init();
+        _randomSize = GetComponent<RandomSizeInRange>();
+        if (_randomSize) _randomSize.SetRandomSize();
         if (!_jumpMovement) _jumpMovement = GetComponent<JumpMovement>();
         _hManager = GetComponent<CharacterHealthManager>();
+        BoostStatsWithSize();
         if (!_hManager) Destroy(this);
         else
         {
+
+            _hManager.Init();
             _hManager.OnHurt += OnHurt;
             _hManager.OnNotHurt += OnNotHurt;
             _hManager.OnDie += KillEnemy;
         }
- 
+
     }
 
     protected override void DoAttack(GameObject target)
@@ -61,7 +70,7 @@ public class LivingEmber : BaseEnemy
                 if (!CurrentTarget) OnEnemyStateChange(EnemyState.Idle);
                 if (!InRange())
                 {
-                    if (!CurrentTarget) OnEnemyStateChange(EnemyState.Chase);
+                     OnEnemyStateChange(EnemyState.Chase);
                 }
                 break;
             case EnemyState.Flee:
@@ -156,6 +165,82 @@ public class LivingEmber : BaseEnemy
 
     protected override void KillEnemy()
     {
+        if (transform.localScale.x > MinimumSplitSize)
+            Split();
+        else
+            Destroy(gameObject);
+    }
+
+
+    public void Split()
+    {
+        int splitCount = Random.Range(2, MaxSplitCount + 1);
+
+        float splitSize = transform.localScale.x/ splitCount;
+        if(splitSize < MinimumSplitSize)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            HealthData healthData = GetComponent<CharacterHealthManager>().HealthData;
+            healthData._maxDefaultHealth = healthData._maxDefaultHealth / splitCount;
+
+            for (int i = 0; i < splitCount; i++)
+            {
+                LivingEmber newEmber = Instantiate(LivingEmberPrefab, transform.position, Quaternion.identity).GetComponent<LivingEmber>();
+
+                if (newEmber)
+                {
+                    RandomSizeInRange size = newEmber.gameObject.GetComponent<RandomSizeInRange>();
+                    if (size) size.SetRandomSize(splitSize, splitSize, false);
+
+                    CharacterHealthManager healthManager = newEmber.gameObject.GetComponent<CharacterHealthManager>();
+                    healthManager.HealthData = healthData;
+                    newEmber.SetTarget(CurrentTarget);
+                    newEmber.OnEnemyStateChange(EnemyState.Chase);
+                    newEmber.Init();
+
+                }
+            }
+        }
+     
         Destroy(gameObject);
+    }
+
+
+    public void BoostStatsWithSize()
+    {
+        //Boost health
+        if (_hManager)
+        {
+            HealthData hData = _hManager.HealthData;
+            hData._maxDefaultHealth = _hManager.HealthData._maxDefaultHealth * transform.localScale.x;
+            _hManager.HealthData = hData;
+        }
+
+
+        //Boost Attack range
+        CharacterSettings.AttackRange+= transform.localScale.x / 2f;
+        CharacterSettings.MaxDamage += CharacterSettings.MaxDamage * transform.localScale.x/2;
+        CharacterSettings.MinDamage += CharacterSettings.MinDamage * transform.localScale.x / 2;
+
+        CharacterSettings.MaxKnockBack += CharacterSettings.MaxKnockBack * transform.localScale.x / 4;
+        CharacterSettings.MinKnockBack += CharacterSettings.MinKnockBack * transform.localScale.x / 4;
+        if (_jumpMovement)
+        {
+            //Movement
+            if (transform.localScale.x >= 1)
+            {
+                JumpData data = _jumpMovement.JumpData;
+                data.JumpHeightMultiplier = data.JumpHeightMultiplier + transform.localScale.x / 2f;
+                data.JumpForce = data.JumpForce + transform.localScale.x / 2f;
+                _jumpMovement.JumpData = data;
+            }
+      
+        }
+        
+   
+
     }
 }
