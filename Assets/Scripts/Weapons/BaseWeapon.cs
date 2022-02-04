@@ -11,11 +11,13 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField] protected Transform _equipTransform;
     [SerializeField] protected float _primaryFireRate,_secondaryFireRate;
     [SerializeField] protected float _followEquipSpeed = 20f;
-    [SerializeField] protected WeaponAnimController _animController;
     protected bool _canPrimaryAttack,_canSecondaryAttack,_canAttack;
     protected bool _isPrimaryAttacking, _isSecondaryAttacking;
     protected float _primaryCurrentCooldownTime, _secondaryCurrentCooldownTime;
     protected Vector3 _equipOffset;
+
+    [Header("Weapon Animation")]
+    [SerializeField] protected WeaponAnimController _animController;
     public virtual void StopTryToPrimaryAttack()
     {
         _isPrimaryAttacking = false;
@@ -70,9 +72,14 @@ public abstract class BaseWeapon : MonoBehaviour
     }
     protected virtual void FollowEquipPoint(Vector3 offset)
     {
-        if (_equipTransform)
+        if (_equipTransform && offset == Vector3.zero) 
         {
-            transform.position = _equipTransform.position + offset;
+            transform.position = _equipTransform.position ;
+        }
+        else if(_equipTransform && offset != Vector3.zero)
+        {
+            transform.position = _equipTransform.position;
+            transform.position =Vector3.Lerp(transform.position, transform.position +offset,Time.deltaTime*_followEquipSpeed*2f);
         }
     }
     protected virtual void LerpToEquipoint()

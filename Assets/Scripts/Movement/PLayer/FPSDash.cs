@@ -42,19 +42,19 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         if (_gravity) _initGravScalar = _gravity.GravityScale;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         if (_isDashing)
         {
-            _currentSpeed = Mathf.Lerp(_currentSpeed, _maxSpeed, Time.fixedDeltaTime * _acceleration);
+            _currentSpeed = Mathf.Lerp(_currentSpeed, _maxSpeed, Time.deltaTime * _acceleration);
             if (Mathf.Abs(_maxSpeed - _currentSpeed) <= 0.01f) _currentSpeed = _maxSpeed;
 
             Dashing();
         }
         else if (_isStopping)
         {
-            _currentSpeed = Mathf.Lerp(_currentSpeed, 0.0f, Time.fixedDeltaTime * _deceleration);
+            _currentSpeed = Mathf.Lerp(_currentSpeed, 0.0f, Time.deltaTime * _deceleration);
 
 
             Vector3 direction = _dashDirection * _currentSpeed* Time.deltaTime;
@@ -96,7 +96,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
     }
     public void Dashing()
     {
-        Vector3 velocity = _dashDirection * _currentSpeed*Time.deltaTime;
+        Vector3 velocity = _dashDirection * _currentSpeed;
         _rb.velocity = new Vector3(velocity.x,_rb.velocity.y,velocity.z);
     }
 

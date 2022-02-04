@@ -228,13 +228,15 @@ public class TheBalance : BaseWeapon
     
         if (_isCastingBeam)
         {
-            Vector3 offset =Vector3.zero;
-            if (_shaker) offset= _shaker.GetShakeOffset();
+
+            Vector3 offset = Vector3.zero;
+            if (_shaker) offset = _shaker.GetShakeOffset();
 
             FollowEquipPoint(offset);
 
             DrawBeam();
-            if(_primCurrentTickRate < 0f)
+
+            if (_primCurrentTickRate < 0f)
             {
                 DoBeamAttack();
             }
@@ -312,10 +314,15 @@ public class TheBalance : BaseWeapon
     {
         if(!_isCastingBeam)
             MatchEquipPointRotation();
+       
         else if(_isCastingBeam&&!_animController.IsPlayingPrimaryAttack())
         {
+          
+            
             RotateInAimDirectionOverTime();
         }
+        
+      
     }
     private void ResetIdleTimers()
     {

@@ -15,6 +15,11 @@ public class LineManager : MonoBehaviour
             _line.positionCount = 0;
             _line.enabled = false;
         }
+        else
+        {
+            _line.positionCount = 0;
+            _line.enabled = false;
+        }
     }
 
 
