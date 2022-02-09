@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponEquipPoint: {fileID: 2971435629315405120}
+  _ownerMovement: {fileID: 0}
 --- !u!1 &5912507183926925923
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +84,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3370732970680565395, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_Name
-      value: PlayerCharacter
+      value: FPSCombatCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565395, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_TagString
@@ -95,15 +96,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565396, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.25
+      value: 9.013495
       objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565396, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.25
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565396, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.25
+      value: -6.9937005
       objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565396, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -132,6 +133,30 @@ PrefabInstance:
     - target: {fileID: 3370732970680565396, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732970680565397, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: _maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732970680565397, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: _acceleration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732970680565397, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: _deceleration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732970680565399, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: _maxSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732970680565399, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: _acceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732970680565399, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: _deceleration
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565401, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: _zoomInRate
