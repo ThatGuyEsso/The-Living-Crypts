@@ -7,8 +7,12 @@ public class ForgeGolem : BaseBoss
     public override void Init()
     {
         base.Init();
-        BeginNewStage(BossStage.First);
+        if(_hManager) _hManager.IsAlive = false;
+
     }
+
+  
+
     protected override void DoAttack(GameObject target)
     {
     
@@ -19,6 +23,33 @@ public class ForgeGolem : BaseBoss
         
     }
 
+
+    protected override void BeginNewStage(BossStage newStage)
+    {
+        base.BeginNewStage(newStage);
+        switch (newStage)
+        {
+            case BossStage.First:
+                _hManager.IsAlive = true;
+                Debug.Log("First Stage");
+                break;
+            case BossStage.Second:
+                _hManager.IsAlive = true;
+                Debug.Log("Second Stage");
+                break;
+            case BossStage.Final:
+                _hManager.IsAlive = true;
+                Debug.Log("Final Stage");
+                break;
+            case BossStage.Transition:
+
+                _hManager.IsAlive = false;
+                Debug.Log("Transition Stage");
+                Invoke("EndTransitionStage", 4f);
+                break;
+        }
+
+    }
     protected override void ProcessAI()
     {
         switch (CurrentState)

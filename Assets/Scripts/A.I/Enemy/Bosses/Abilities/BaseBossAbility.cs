@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class BaseBossAbility : MonoBehaviour
 {
+    [SerializeField]
     protected BossAbilityData _abilityData;
     protected BaseBoss _owner;
 

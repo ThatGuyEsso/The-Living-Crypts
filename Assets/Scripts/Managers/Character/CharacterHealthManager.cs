@@ -70,4 +70,9 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
     public bool IsHurt { get { return !_canBeHurt; } }
 
     public HealthData HealthData { set { _healthData = value; } get { return _healthData; } }
+    public float CurrentHealth { set { _currentHealth = value; } get { return _currentHealth; } }
+    public float GetMaxHealth() { return _maxHealth; }
+    public bool IsAlive { set { _isAlive = value; } get { return _isAlive; } }
+
+
 }

@@ -5,7 +5,7 @@ using TMPro;
 using System;
 public class BossUI : MonoBehaviour
 { 
-    public static BossUI instance;
+  
     public ScalingProgressBar progressBar;
     [SerializeField] private TextMeshProUGUI bossNameDisplay;
     [SerializeField] private Animator animator;
@@ -13,8 +13,9 @@ public class BossUI : MonoBehaviour
     [SerializeField] private ResizeToFitText displayRefit;
 
     public Action OnUISpawned;
-    public void InitialiseUI(string bossName)
+    public void InitialiseUI(string bossName,float maxHealth)
     {
+        progressBar.SetMaxValue(maxHealth);
         bossNameDisplay.text = bossName;
         displayRefit.FitText();
         animator.Play("InitHealth");

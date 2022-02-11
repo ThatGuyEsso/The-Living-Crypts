@@ -12,7 +12,7 @@ public class LivingEmber : BaseEnemy
     [SerializeField] private int MaxSplitCount;
     [SerializeField] private GameObject LivingEmberPrefab;
     private JumpMovement _jumpMovement;
-    private CharacterHealthManager _hManager;
+  
     private RandomSizeInRange _randomSize;
     public override void Init()
     {
@@ -20,7 +20,7 @@ public class LivingEmber : BaseEnemy
         _randomSize = GetComponent<RandomSizeInRange>();
         if (_randomSize) _randomSize.SetRandomSize();
         if (!_jumpMovement) _jumpMovement = GetComponent<JumpMovement>();
-        _hManager = GetComponent<CharacterHealthManager>();
+
         BoostStatsWithSize();
         if (!_hManager) Destroy(this);
         else

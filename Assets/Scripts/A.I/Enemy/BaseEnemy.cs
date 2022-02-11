@@ -58,7 +58,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected NavMeshPath _currentPath;
     [Header("UX")]
     [SerializeField] protected FaceDirection FaceDirection;
-
+    protected CharacterHealthManager _hManager;
     //Variables that are set and updated at run time
 
     protected float _currentTimeBtwnAttacks;
@@ -78,6 +78,7 @@ public abstract class BaseEnemy : MonoBehaviour
         if (!PathFinder) PathFinder = GetComponent<PathFinder>();
         if (!PathFollower) PathFollower = GetComponent<PathFollower>();
         _currentPath = new NavMeshPath();
+        _hManager = GetComponent<CharacterHealthManager>();
         InvokeRepeating("ProcessAI", randValue, TickRate);
 
         OnInit?.Invoke();

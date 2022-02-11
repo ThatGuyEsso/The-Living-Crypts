@@ -21,9 +21,19 @@ public class ScalingProgressBar : MonoBehaviour
     public void UpdateValue(float newVal)
     {
         SetValue(newVal);
-        targetPercent= value / maxValue;
-        UpdateFill();
-        ScalingBegun?.Invoke();
+        if(value <=0)
+        {
+
+            fill.enabled = false;
+        }
+        else
+        {
+            fill.enabled = true;
+            targetPercent = value / maxValue;
+            UpdateFill();
+            ScalingBegun?.Invoke();
+        }
+
        
     }
 
