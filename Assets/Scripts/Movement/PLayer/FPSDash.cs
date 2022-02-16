@@ -42,22 +42,22 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         if (_gravity) _initGravScalar = _gravity.GravityScale;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
         if (_isDashing)
         {
-            _currentSpeed = Mathf.Lerp(_currentSpeed, _maxSpeed, Time.deltaTime * _acceleration);
+            _currentSpeed = Mathf.Lerp(_currentSpeed, _maxSpeed, Time.fixedDeltaTime * _acceleration);
             if (Mathf.Abs(_maxSpeed - _currentSpeed) <= 0.01f) _currentSpeed = _maxSpeed;
 
             Dashing();
         }
         else if (_isStopping)
         {
-            _currentSpeed = Mathf.Lerp(_currentSpeed, 0.0f, Time.deltaTime * _deceleration);
+            _currentSpeed = Mathf.Lerp(_currentSpeed, 0.0f, Time.fixedDeltaTime * _deceleration);
 
 
-            Vector3 direction = _dashDirection * _currentSpeed* Time.deltaTime;
+            Vector3 direction = _dashDirection * _currentSpeed* Time.fixedDeltaTime;
             if (_fpsMove.GetMoveDirection() == Vector3.zero)
                 _rb.velocity = new Vector3(direction.x, _rb.velocity.y, direction.z); ;
 

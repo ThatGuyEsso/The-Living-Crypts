@@ -6,17 +6,15 @@ public class ViewBob : MonoBehaviour, IInitialisable
 {
     [SerializeField] private bool inDebug;
     //component references and values
-    private CinemachineVirtualCamera _vCam;//actual camera position
-    private CinemachineTransposer _body;//Cinemachine trasposer body ( where values I need to update are stored)
-    private Vector3 _initialOffset;//orignal offset
+    [SerializeField] private Transform targetPoint;//TargetCameraPoint
     [SerializeField] private FPSMovement moveController;
-
+    [SerializeField] private FirstPersonCamera _camera;
     [Header("View Bob Settings")]
     [SerializeField] private float _bobFreq;
     [SerializeField] private float _bobHorizAmp;
     [SerializeField] private float _bobVertAmp;
     [SerializeField] private float _vertOffsetScalar = 2.0f;
-    [SerializeField] [Range(0f, 1f)] private float _bobSmoothing = 0.1f;
+    [SerializeField] [Range(0f, 1000f)] private float _bobSmoothing = 250f;
 
 
     //State
@@ -24,6 +22,7 @@ public class ViewBob : MonoBehaviour, IInitialisable
     private bool _isInitialised;
     private float _bobTime;
     private Vector3 _targetOffset;
+    private Vector3 _currentOffset;
     private void Awake()
     {
         if (inDebug) Init();
@@ -58,14 +57,17 @@ public class ViewBob : MonoBehaviour, IInitialisable
 
             _bobTime += Time.deltaTime;
             ///Get new targetoffset
-            _targetOffset = _initialOffset + CalculateNewBobOffset(_bobTime);
+            _targetOffset = CalculateNewBobOffset(_bobTime);
 
 
             //Lerp to target offset
-            _body.m_FollowOffset = Vector3.Lerp(_body.m_FollowOffset, _targetOffset, _bobSmoothing);
+            _currentOffset = Vector3.Lerp(_currentOffset, _targetOffset, _bobSmoothing*Time.deltaTime);
 
             //Snap when too close to tell
-            if ((_body.m_FollowOffset - _targetOffset).magnitude <= 0.001f) _body.m_FollowOffset = _targetOffset;
+            if ((_currentOffset - _targetOffset).magnitude <= 0.001f)
+            {
+                if (_camera) _camera.SetCurrentOffset(_currentOffset);
+            }
         }
 
      
@@ -93,19 +95,13 @@ public class ViewBob : MonoBehaviour, IInitialisable
     public void Init()
     {
         //caching component refs
-        _vCam = gameObject.GetComponent<CinemachineVirtualCamera>();
-
-        //Setting initial offsets
-        _body = _vCam.GetCinemachineComponent<CinemachineTransposer>();
-
-        _initialOffset = _body.m_FollowOffset;
-
         if (moveController)
         {
             moveController.OnWalk += BeginViewBob;
             moveController.OnStop += EndViewBob;
             _isInitialised = true;
         }
+        _camera = GetComponent<FirstPersonCamera>();
     }
 
     private void OnDisable()

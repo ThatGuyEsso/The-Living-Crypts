@@ -43,7 +43,7 @@ public class StrafeTilt : MonoBehaviour,IInitialisable
         if (_targetCamera.m_Lens.Dutch !=- _maxTilt)
         {
         
-            _targetCamera.m_Lens.Dutch = Mathf.Lerp(_targetCamera.m_Lens.Dutch, -_maxTilt, _tiltRate * Time.fixedDeltaTime);
+            _targetCamera.m_Lens.Dutch = Mathf.Lerp(_targetCamera.m_Lens.Dutch, -_maxTilt, _tiltRate * Time.deltaTime);
             if (Mathf.Abs(Mathf.Abs(_targetCamera.m_Lens.Dutch) - Mathf.Abs(_maxTilt)) <= 0.01f)
             {
                 _targetCamera.m_Lens.Dutch = -_maxTilt;
@@ -58,7 +58,7 @@ public class StrafeTilt : MonoBehaviour,IInitialisable
         if (_targetCamera.m_Lens.Dutch != _maxTilt)
         {
       
-            _targetCamera.m_Lens.Dutch = Mathf.Lerp(_targetCamera.m_Lens.Dutch, _maxTilt, _tiltRate * Time.fixedDeltaTime);
+            _targetCamera.m_Lens.Dutch = Mathf.Lerp(_targetCamera.m_Lens.Dutch, _maxTilt, _tiltRate * Time.deltaTime);
             if (Mathf.Abs(Mathf.Abs(_targetCamera.m_Lens.Dutch) - Mathf.Abs(_maxTilt)) <= 0.01f)
             {
                 _targetCamera.m_Lens.Dutch = _maxTilt;
@@ -70,7 +70,7 @@ public class StrafeTilt : MonoBehaviour,IInitialisable
         if (_targetCamera.m_Lens.Dutch != _defaultTilt)
         {
         
-            _targetCamera.m_Lens.Dutch = Mathf.Lerp(_targetCamera.m_Lens.Dutch, _defaultTilt, _returnToNormalRate * Time.fixedDeltaTime);
+            _targetCamera.m_Lens.Dutch = Mathf.Lerp(_targetCamera.m_Lens.Dutch, _defaultTilt, _returnToNormalRate * Time.deltaTime);
             if (Mathf.Abs(_targetCamera.m_Lens.Dutch) - Mathf.Abs(_defaultTilt) <= 0.01f)
             {
                 _targetCamera.m_Lens.Dutch = _defaultTilt;

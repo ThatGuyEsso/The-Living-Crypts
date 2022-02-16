@@ -11,7 +11,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     [SerializeField] private Transform _characterTransform;
 
     [Header("Camera Settings")]
-     [Range(1f,25f)]
+     [Range(1f,60f)]
     [SerializeField] private float _sensitivity;
    
     //State variables
@@ -25,6 +25,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     private float _yMove = 0f;
     //Class instances
     private Controls _input;
+    private Vector3 _currentOffset;
     private void Awake()
     {
         if (_inDebug)
@@ -48,28 +49,29 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     }
 
 
+
     private void Update()
     {
-        float mousePosX = _sensitivity * Time.fixedDeltaTime * _xMove;
-        float mousePosY = _sensitivity * Time.fixedDeltaTime * _yMove;
+
+        float mousePosX = _sensitivity * Time.deltaTime * _xMove;
+        float mousePosY = _sensitivity * Time.deltaTime * _yMove;
 
         _xRot -= mousePosY;
         _xRot = Mathf.Clamp(_xRot, -45f, 45f);
 
         Vector3 rot = transform.localRotation.eulerAngles;
         _yRot = rot.y + mousePosX;
-
         transform.localRotation = Quaternion.Euler(_xRot, _yRot, 0f);
-        if(_characterTransform)
+        if (_characterTransform)
             _characterTransform.localRotation = Quaternion.Euler(0f, _yRot, 0f);
+
 
 
     }
 
     private void LateUpdate()
     {
-
-        if (_isFollowing) transform.position = _targetPosition.position;
+        if (_isFollowing) transform.position = _targetPosition.position + _currentOffset;
     }
 
     public void OnAimX(InputAction.CallbackContext context)
@@ -90,6 +92,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
 
     }
 
+    public void SetCurrentOffset(Vector3 offset) { _currentOffset = offset; }
     private void OnDisable()
     {
         if (_isInitialised)

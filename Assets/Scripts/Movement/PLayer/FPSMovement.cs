@@ -51,25 +51,31 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
 
     private void Update()
     {
-        if (!_canMove) return;
+     
         if (_isMoving)
         {
             Vector2 dir = _input.Movement.Move.ReadValue<Vector2>();
             _movementDir =(dir.x * transform.right + transform.forward * dir.y).normalized;
       
-        
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (!_canMove) return;
+        if (_isMoving)
+        {
 
-            _currentMovementSpeed = Mathf.Lerp(_currentMovementSpeed, _maxSpeed, Time.deltaTime * _acceleration);
+            _currentMovementSpeed = Mathf.Lerp(_currentMovementSpeed, _maxSpeed, Time.fixedDeltaTime * _acceleration);
             if (Mathf.Abs(_maxSpeed - _currentMovementSpeed) <= 0.01f) _currentMovementSpeed = _maxSpeed;
 
             Move();
         }
         else if (_isStopping)
         {
-            _currentMovementSpeed = Mathf.Lerp(_currentMovementSpeed, 0.0f, Time.deltaTime * _deceleration);
+            _currentMovementSpeed = Mathf.Lerp(_currentMovementSpeed, 0.0f, Time.fixedDeltaTime * _deceleration);
 
 
-            Vector3 direction = _movementDir * _currentMovementSpeed * Time.deltaTime;
+            Vector3 direction = _movementDir * _currentMovementSpeed * Time.fixedDeltaTime;
             _rb.velocity = new Vector3(direction.x, _rb.velocity.y, direction.z);
             if (_currentMovementSpeed <= 0.01f)
             {
@@ -77,10 +83,6 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
                 Stop();
             }
         }
-    }
-    private void FixedUpdate()
-    {
-   
     }
 
 
