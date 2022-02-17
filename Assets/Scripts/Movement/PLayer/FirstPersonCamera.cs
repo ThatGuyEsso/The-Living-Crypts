@@ -26,6 +26,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     //Class instances
     private Controls _input;
     private Vector3 _currentOffset;
+    private Rigidbody _playerRB;
     private void Awake()
     {
         if (_inDebug)
@@ -42,7 +43,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         _input = new Controls();
         _input.Aiming.SetCallbacks(this);
         _input.Enable();
-
+        _playerRB = _characterTransform.GetComponent<Rigidbody>();
         _isInitialised = true;
         //_xRot = transform.localRotation..x;
         //_yRot = transform.localRotation.eulerAngles.y;
