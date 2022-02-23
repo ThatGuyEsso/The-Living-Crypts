@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ForgeGolem : BaseBoss
 {
+    private WalkMovement walkMovement;
     public override void Init()
     {
         base.Init();
         if(_hManager) _hManager.IsAlive = false;
-
+        walkMovement = GetComponent<WalkMovement>();
     }
 
   
@@ -26,6 +27,7 @@ public class ForgeGolem : BaseBoss
 
     protected override void BeginNewStage(BossStage newStage)
     {
+        if (!_bossFightRunning) return;
         base.BeginNewStage(newStage);
         switch (newStage)
         {
@@ -50,8 +52,14 @@ public class ForgeGolem : BaseBoss
         }
 
     }
+    public override void StartBossFight()
+    {
+        base.StartBossFight();
+        walkMovement.Init();
+    }
     protected override void ProcessAI()
     {
+        if (!_bossFightRunning) return;
         switch (CurrentState)
         {
             case EnemyState.Idle:
@@ -81,4 +89,53 @@ public class ForgeGolem : BaseBoss
                 break;
         }
     }
+
+
+    private void Update()
+    {
+        if (!_bossFightRunning) return;
+        switch (CurrentState)
+        {
+            case EnemyState.Idle:
+                break;
+            case EnemyState.Chase:
+                //Abort cases
+                if (!CurrentTarget || !PathFinder) return;
+                if (_currentPath.corners.Length <= 0) return;
+                //evaluate path
+                if (!PathFollower.EvaluatePath(_currentPath, transform.position)) return;
+                FaceCurrentPathPoint();
+                if (EssoUtility.InSameDirection(transform.forward, (PathFollower.GetCurrentPathPoint() - transform.position).normalized, 0.1f))
+                {
+                    walkMovement.MoveToPoint(PathFollower.GetCurrentPathPoint());
+                }
+
+                break;
+            case EnemyState.Attack:
+                FaceCurrentTarget();
+
+
+              
+
+                break;
+            case EnemyState.Flee:
+                break;
+        }
+
+        if (!_canAttack)
+        {
+            if (_currentTimeBtwnAttacks <= 0f)
+            {
+                _canAttack = true;
+            }
+            else
+            {
+                _currentTimeBtwnAttacks -= Time.deltaTime;
+            }
+        }
+
+        
+    }
+
 }
+

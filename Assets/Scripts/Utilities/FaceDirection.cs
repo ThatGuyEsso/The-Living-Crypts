@@ -30,7 +30,7 @@ public class FaceDirection : MonoBehaviour
         float targetAngle = EssoUtility.GetAngleFromVector((direction.normalized));
         /// turn offset -Due to converting between forward vector and up vector
         if (targetAngle < 0) targetAngle += 360f;
-        float angle = Mathf.Lerp(transform.eulerAngles.y, targetAngle,  Time.deltaTime* RotationRate);//rotate player smoothly to target angle
+        float angle = Mathf.MoveTowards(transform.eulerAngles.y, targetAngle,  Time.deltaTime* RotationRate);//rotate player smoothly to target angle
         transform.rotation = Quaternion.Euler(0f, angle, 0f);//update angle
 
 

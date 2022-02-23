@@ -24,7 +24,7 @@ public abstract class BaseBoss : BaseEnemy
     protected BossStage _previousStage;
     [Header("Boss Components")]
     protected BossUI _bossUI;
-
+    protected bool _bossFightRunning;
     public System.Action<BossStage> OnNewBossStage;
     public System.Action OnBossDefeated;
 
@@ -56,7 +56,11 @@ public abstract class BaseBoss : BaseEnemy
     }
     virtual public void StartBossFight()
     {
+        PathFinder.Init();
+        _bossFightRunning = true;
+        
         BeginNewStage(BossStage.First);
+
     }
 
     virtual public void EndBossFight()

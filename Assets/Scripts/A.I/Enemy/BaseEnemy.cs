@@ -77,6 +77,7 @@ public abstract class BaseEnemy : MonoBehaviour
    
         if (!PathFinder) PathFinder = GetComponent<PathFinder>();
         if (!PathFollower) PathFollower = GetComponent<PathFollower>();
+        if (!FaceDirection) FaceDirection = GetComponent<FaceDirection>();
         _currentPath = new NavMeshPath();
         _hManager = GetComponent<CharacterHealthManager>();
         InvokeRepeating("ProcessAI", randValue, TickRate);

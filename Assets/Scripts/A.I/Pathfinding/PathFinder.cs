@@ -13,7 +13,7 @@ public class PathFinder : MonoBehaviour, IInitialisable
 
     private void Awake()
     {
-        Init();
+        if(InDebug)Init();
     }
     public void Init()
     {

@@ -10,6 +10,7 @@ public class BipedalProcAnim : MonoBehaviour
     [SerializeField] private float MaxStrideDistance;
     [SerializeField] private float AnimRate=3f;
     [SerializeField] private bool InDebug;
+    [SerializeField] private float MaxGroundedDistance = 0.1f;
     [SerializeField] private float MaxTimeBetweenStrides=0.5f;
     private Transform _currentRightTarget, _currentLeftTarget;
 
@@ -62,18 +63,21 @@ public class BipedalProcAnim : MonoBehaviour
     {
         if (!_canTakeStep)
         {
+            if (_useRightLeg && !IsLeftFootGrounded()) return;
+            else if (!IsRightFootGrounded()) return;
             if ((_currTimeBetweenStrides <= 0f))
             {
                 if (_useRightLeg)
                 {
+                    //if (!IsLeftFootGrounded())return;
                     if (ShouldTakeStep(RightTarget.position, _currentRightTarget.position))
                     {
-
                         _canTakeStep = true;
                     }
                 }
                 else
                 {
+                    ////if (!IsRightFootGrounded())return ;
                     if (ShouldTakeStep(LeftTarget.position, _currentLeftTarget.position))
                     {
                         _canTakeStep = true;
@@ -85,7 +89,7 @@ public class BipedalProcAnim : MonoBehaviour
             {
                 _currTimeBetweenStrides -= Time.deltaTime;
             }
-       
+
         }
         else
         {
@@ -124,4 +128,18 @@ public class BipedalProcAnim : MonoBehaviour
         return Vector3.Distance(currentPosition, targetposition) >= MaxStrideDistance;
     }
 
+    private bool IsRightFootGrounded()
+    {
+      
+        return Vector2.Distance(_currentRightTarget.position, RightTarget.position) <=MaxGroundedDistance;
+        
+
+    }
+    private bool IsLeftFootGrounded()
+    {
+
+        return Vector2.Distance(_currentLeftTarget .position, LeftTarget.position) <= MaxGroundedDistance;
+
+
+    }
 }
