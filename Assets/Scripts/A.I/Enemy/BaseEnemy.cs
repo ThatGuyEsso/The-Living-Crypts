@@ -128,7 +128,7 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         CurrentTarget = target;
     }
-    protected abstract void DoAttack(GameObject target);
+    protected abstract void DoAttack(GameObject target, Vector3 point);
 
     protected abstract void KillEnemy();
 }

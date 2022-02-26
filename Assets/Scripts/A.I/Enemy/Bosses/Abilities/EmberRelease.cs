@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityMagmaRelease : BaseBossAbility
+public class EmberRelease : BaseBossAbility
 {
     public override void Execute()
     {

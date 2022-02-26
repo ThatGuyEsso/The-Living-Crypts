@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ForgeGolem : BaseBoss
 {
-    private WalkMovement walkMovement;
+    private WalkMovement _walkMovement;
     public override void Init()
     {
         base.Init();
         if(_hManager) _hManager.IsAlive = false;
-        walkMovement = GetComponent<WalkMovement>();
+        _walkMovement = GetComponent<WalkMovement>();
     }
 
   
 
-    protected override void DoAttack(GameObject target)
+    protected override void DoAttack(GameObject target, Vector3 point)
     {
     
     }
@@ -33,14 +33,17 @@ public class ForgeGolem : BaseBoss
         {
             case BossStage.First:
                 _hManager.IsAlive = true;
+                SetUpNewAbilities();
                 Debug.Log("First Stage");
                 break;
             case BossStage.Second:
                 _hManager.IsAlive = true;
+                SetUpNewAbilities();
                 Debug.Log("Second Stage");
                 break;
             case BossStage.Final:
                 _hManager.IsAlive = true;
+                SetUpNewAbilities();
                 Debug.Log("Final Stage");
                 break;
             case BossStage.Transition:
@@ -55,7 +58,7 @@ public class ForgeGolem : BaseBoss
     public override void StartBossFight()
     {
         base.StartBossFight();
-        walkMovement.Init();
+        _walkMovement.Init();
     }
     protected override void ProcessAI()
     {
@@ -67,7 +70,8 @@ public class ForgeGolem : BaseBoss
             case EnemyState.Chase:
 
                 if (!CurrentTarget) OnEnemyStateChange(EnemyState.Idle);
-                if (!InRange())
+                if (_isUsingAttack) return;
+                if (!InAbilityRange())
                 {
                     DrawPathToTarget();
                     PathFollower.EvaluatePath(_currentPath, transform.position);
@@ -80,17 +84,21 @@ public class ForgeGolem : BaseBoss
                 break;
             case EnemyState.Attack:
                 if (!CurrentTarget) OnEnemyStateChange(EnemyState.Idle);
-                if (!InRange())
+                if (_isUsingAttack) return;
+                if (!InAbilityRange())
                 {
                     OnEnemyStateChange(EnemyState.Chase);
+                }
+                else 
+                {
+                    _walkMovement.BeginStop();
+                    ExecuteAbility();
                 }
                 break;
             case EnemyState.Flee:
                 break;
         }
     }
-
-
     private void Update()
     {
         if (!_bossFightRunning) return;
@@ -107,15 +115,13 @@ public class ForgeGolem : BaseBoss
                 FaceCurrentPathPoint();
                 if (EssoUtility.InSameDirection(transform.forward, (PathFollower.GetCurrentPathPoint() - transform.position).normalized, 0.1f))
                 {
-                    walkMovement.MoveToPoint(PathFollower.GetCurrentPathPoint());
+                    _walkMovement.MoveToPoint(PathFollower.GetCurrentPathPoint());
                 }
 
                 break;
             case EnemyState.Attack:
+                if (_isUsingAttack) return;
                 FaceCurrentTarget();
-
-
-              
 
                 break;
             case EnemyState.Flee:

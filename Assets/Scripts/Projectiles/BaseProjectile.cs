@@ -121,7 +121,8 @@ public class BaseProjectile : MonoBehaviour, IProjectile
                     IDamage damage = other.GetComponent<IDamage>();
 
                     if(damage != null){
-                        damage.OnDamage(_projectileData._damage, _rb.velocity.normalized, _projectileData._knockback, _projectileData._owner);
+                        damage.OnDamage(_projectileData._damage, _rb.velocity.normalized, 
+                            _projectileData._knockback, _projectileData._owner,other.ClosestPoint(transform.position));
                     }
 
                     BreakProjectile();

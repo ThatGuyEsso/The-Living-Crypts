@@ -20,7 +20,6 @@ public class WalkMovement : MonoBehaviour
     Vector3 _targetPoint;
     //States
     private bool _isMoving;
-    private bool _isInitialised;
     private bool _isStopping;
     private bool _canMove;
 

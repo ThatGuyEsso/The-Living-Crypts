@@ -197,7 +197,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon
   
 
 
-    public void ApplyDamageToTarget(GameObject target)
+    public void ApplyDamageToTarget(GameObject target,Vector3 point)
     {
         if (target.transform.parent != WeaponManager._instance.Getowner())
         {
@@ -209,13 +209,15 @@ public class Sword_Legacy : BaseWeapon, IWeapon
                 {
                     float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                     float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
-                    damage.OnDamage(dmg, WeaponManager._instance.Getowner().transform.forward, kBack, WeaponManager._instance.Getowner());
+                    damage.OnDamage(dmg, WeaponManager._instance.Getowner().transform.forward,
+                        kBack, WeaponManager._instance.Getowner(), point);
                 }
                 else if (_animController.IsPlayingSecondaryAttack())
                 {
                     float dmg = Random.Range(_secondaryMinDamage, _secondaryMaxDamage);
                     float kBack = Random.Range(_secondaryMinKnockback, _secondaryMaxKnockback);
-                    damage.OnDamage(dmg, WeaponManager._instance.Getowner().transform.forward, kBack, WeaponManager._instance.Getowner());
+                    damage.OnDamage(dmg, WeaponManager._instance.Getowner().transform.forward, 
+                        kBack, WeaponManager._instance.Getowner(), point);
                 }
                
             }

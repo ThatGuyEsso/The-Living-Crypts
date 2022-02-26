@@ -13,7 +13,7 @@ public abstract class BaseBossAbility : MonoBehaviour
 
     public System.Action OnAbilityStarted;
     public System.Action OnAbilityPerformed;
-
+    public System.Action OnAbilityFinished;
 
 
     virtual public void SetUpAbility(BossAbilityData data,BaseBoss owner)
@@ -22,7 +22,15 @@ public abstract class BaseBossAbility : MonoBehaviour
         _owner = owner;
     }
 
-    protected abstract void Execute();
-    protected abstract void Terminate();
+    public abstract void Execute();
+    public abstract void Terminate();
 
+    public bool CanAttack()
+    {
+        return _canAttack;
+    }
+    public bool InAttackRange(Vector3 targetPoint)
+    {
+        return Vector3.Distance(targetPoint, _owner.transform.position) <= _abilityData.AttackRange || _abilityData.AttackRange < 0;
+    }
 }

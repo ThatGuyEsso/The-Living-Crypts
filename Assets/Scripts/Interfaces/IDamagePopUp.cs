@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamagePopUp 
 {
-    void InitDamageNumber(float thisMaxHealth, float damage, Vector3 damageDirection);
+    void InitDamageNumber(float thisMaxHealth, float damage, Vector3 damageDirection,Vector3 point);
 }

@@ -36,7 +36,7 @@ public class DamageNumber : MonoBehaviour, IDamagePopUp
     private float _scaleSpeed;
     private Vector3 _moveDirection;
     bool _isActive;
-    public void InitDamageNumber(float thisMaxHealth, float damage, Vector3 damageDirection)
+    public void InitDamageNumber(float thisMaxHealth, float damage, Vector3 damageDirection,Vector3 point)
     {
         _text.text = Mathf.FloorToInt(damage).ToString();
         _text.color = _damageGradient.Evaluate(damage / thisMaxHealth);

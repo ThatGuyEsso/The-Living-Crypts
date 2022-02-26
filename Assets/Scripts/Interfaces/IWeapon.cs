@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IWeapon 
 {
-    public void  ApplyDamageToTarget(GameObject target);
+    public void  ApplyDamageToTarget(GameObject target, Vector3 point);
 }

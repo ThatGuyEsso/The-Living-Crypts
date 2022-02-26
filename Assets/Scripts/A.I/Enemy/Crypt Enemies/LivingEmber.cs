@@ -34,12 +34,12 @@ public class LivingEmber : BaseEnemy
 
     }
 
-    protected override void DoAttack(GameObject target)
+    protected override void DoAttack(GameObject target, Vector3 point)
     {
         IDamage damagable = target.GetComponent<IDamage>();
         if(damagable != null)
         {
-            damagable.OnDamage(CharacterSettings.GetRandomDamage(),transform.forward, CharacterSettings.GetRandomKnockBack(), gameObject);
+            damagable.OnDamage(CharacterSettings.GetRandomDamage(),transform.forward, CharacterSettings.GetRandomKnockBack(), gameObject,point);
             _canAttack = false;
             _currentTimeBtwnAttacks = CharacterSettings.AttackRate;
         }
@@ -129,7 +129,7 @@ public class LivingEmber : BaseEnemy
         if (other.gameObject.CompareTag("Player")){
             if (_canAttack && !_hManager.IsHurt)
             {
-                DoAttack(other.gameObject);
+                DoAttack(other.gameObject,other.collider.ClosestPoint(transform.position));
             }
         }
     }

@@ -15,11 +15,14 @@ public abstract class BaseBoss : BaseEnemy
     [Header("Boss Settings")]
     [SerializeField] protected string BossName;
     [SerializeField] protected float PercentageStageTrigger =0.3f;
-    [SerializeField] protected List<BaseBossAbility> _currentStageAbility = new List<BaseBossAbility>();
-    [SerializeField] protected List<BossAttackPattern> FirstStageAttackPattern = new List<BossAttackPattern>();
-    [SerializeField] protected List<BossAttackPattern> SecondStageAttackPattern = new List<BossAttackPattern>();
-    [SerializeField] protected List<BossAttackPattern> FinalStageAttackPattern = new List<BossAttackPattern>();
-
+    [Header("Boss Abillities")]
+    [SerializeField] protected List<BaseBossAbility> CurrentStageAbility = new List<BaseBossAbility>();
+    [SerializeField] protected BossAbilityData TransitionAbilityData;
+    [SerializeField] protected BaseBossAbility TransitionAbility;
+    [Header("Boss AttackPatterns")]
+    [SerializeField] protected BossAttackPattern FirstStageAttackPattern;
+    [SerializeField] protected BossAttackPattern SecondStageAttackPattern;
+    [SerializeField] protected BossAttackPattern FinalStageAttackPattern;
     protected BossStage _currentStage;
     protected BossStage _previousStage;
     [Header("Boss Components")]
@@ -28,7 +31,11 @@ public abstract class BaseBoss : BaseEnemy
     public System.Action<BossStage> OnNewBossStage;
     public System.Action OnBossDefeated;
 
-    
+    protected int _curentAttackIndex;
+
+    protected bool _isUsingAttack;
+    protected bool _canUseAttack;
+    protected bool _timeBetweenAttack;
     virtual public void InitBossUI(BossUI UI)
     {
         _bossUI = UI;
@@ -40,7 +47,100 @@ public abstract class BaseBoss : BaseEnemy
             _hManager.OnDie += EndBossFight;
         }
     }
+    virtual protected void SetUpNewAbilities()
+    {     
+            ClearEquippedAbilities();
+        
+            switch (_currentStage)
+            {
+                case BossStage.First:
+                    //validation
+                    if (FirstStageAttackPattern == null) return;
+                    if (FirstStageAttackPattern.AbilityData.Count == 0) return;
 
+                    //spawning
+                    for (int i = 0; i < FirstStageAttackPattern.AbilityData.Count; i++)
+                    {
+                        
+                            CurrentStageAbility.Add(FirstStageAttackPattern.CreateNewAbility(this, i));
+                            if (FirstStageAttackPattern.AbilityData[i].IsTransitionAbility)
+                            {
+                                TransitionAbility = CurrentStageAbility[CurrentStageAbility.Count - 1];
+                            }
+                      
+                 
+                    }
+                    break;
+                case BossStage.Second:
+                    //validation
+                    if (SecondStageAttackPattern == null) return;
+                    if (SecondStageAttackPattern.AbilityData.Count == 0) return;
+
+                     //spawning
+                    for (int i = 0; i < SecondStageAttackPattern.AbilityData.Count; i++)
+                    {
+                        CurrentStageAbility.Add(SecondStageAttackPattern.CreateNewAbility(this, i));
+                        if (SecondStageAttackPattern.AbilityData[i].IsTransitionAbility)
+                        {
+                            TransitionAbility = CurrentStageAbility[CurrentStageAbility.Count - 1];
+                        }
+                    }
+                    break;
+                case BossStage.Final:
+                    //validation
+                    if (FinalStageAttackPattern == null) return;
+                    if (FinalStageAttackPattern.AbilityData.Count == 0) return;
+
+                    //spawning
+                    for (int i = 0; i < FinalStageAttackPattern.AbilityData.Count; i++)
+                    {
+                        CurrentStageAbility.Add(FinalStageAttackPattern.CreateNewAbility(this, i));
+                        if (FinalStageAttackPattern.AbilityData[i].IsTransitionAbility)
+                        {
+                            TransitionAbility = CurrentStageAbility[CurrentStageAbility.Count - 1];
+                        }
+                    }
+                    break;
+            }
+        if (!TransitionAbility)
+        {
+            TransitionAbility = BossAttackPattern.CreateNewAbility(this, TransitionAbilityData);
+        }
+        
+    }
+
+    public void ClearEquippedAbilities()
+    {
+        if (CurrentStageAbility.Count == 0) return;
+        foreach(BaseBossAbility ability in CurrentStageAbility)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                if(ability.gameObject)
+                    ObjectPoolManager.Recycle(ability.gameObject);
+            }
+            else
+            {
+                if (ability.gameObject)
+                    Destroy(ability.gameObject);
+            }
+        }
+        if (TransitionAbility.gameObject.activeInHierarchy)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                if (TransitionAbility.gameObject)
+                    ObjectPoolManager.Recycle(TransitionAbility.gameObject);
+            }
+            else
+            {
+                if (TransitionAbility.gameObject)
+                    Destroy(TransitionAbility.gameObject);
+            }
+        }
+        TransitionAbility = null;
+        CurrentStageAbility.Clear();
+    }
     virtual protected void OnHurt()
     {
         if (_bossUI&& _hManager)
@@ -99,6 +199,42 @@ public abstract class BaseBoss : BaseEnemy
         }
     }
 
+    virtual protected void NextAttack()
+    {
+        if (CurrentStageAbility.Count == 0) return;
+        _curentAttackIndex++;
+        if(_curentAttackIndex >= CurrentStageAbility.Count)
+        {
+            _curentAttackIndex = 0;
+        }
+        CurrentStageAbility[_curentAttackIndex].OnAbilityStarted += OnAttackStarted;
+        CurrentStageAbility[_curentAttackIndex].OnAbilityFinished += OnAttackComplete;
+    }
+
+    virtual protected void ExecuteAbility()
+    {
+        CurrentStageAbility[_curentAttackIndex].Execute();
+        Debug.Log("Use Ability");
+    }
+
+    virtual protected void OnAttackStarted()
+    {
+        _isUsingAttack = true;
+        CurrentStageAbility[_curentAttackIndex].OnAbilityStarted -= OnAttackStarted;
+    }
+    virtual protected void OnAttackComplete()
+    {
+        _isUsingAttack = false;
+        CurrentStageAbility[_curentAttackIndex].OnAbilityFinished -= OnAttackComplete;
+    }
+    virtual protected bool InAbilityRange()
+    {
+        return (CurrentStageAbility[_curentAttackIndex].InAttackRange(CurrentTarget.position));
+    }
+    virtual protected bool CanUseAbility()
+    {
+        return (CurrentStageAbility[_curentAttackIndex].CanAttack());
+    }
     public void EndTransitionStage()
     {
         if (_previousStage != BossStage.Transition)

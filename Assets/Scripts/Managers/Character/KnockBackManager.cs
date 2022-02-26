@@ -25,7 +25,7 @@ public class KnockBackManager : MonoBehaviour
     }
 
 
-    private void ApplyKnockBack(float maxHealth, float dmg, float knockBackMag, Vector3 kBackDir)
+    private void ApplyKnockBack(float maxHealth, float dmg, float knockBackMag, Vector3 kBackDir, Vector3 point)
     {
         if (_rb)
             _rb.AddForce(kBackDir * knockBackMag, ForceMode.Impulse);

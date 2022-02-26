@@ -48,7 +48,7 @@ public abstract class BaseShield : MonoBehaviour
     }
 
 
-    protected abstract void DoShieldInteraction(GameObject other);
+    protected abstract void DoShieldInteraction(GameObject other, Vector3 point);
 
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -57,7 +57,7 @@ public abstract class BaseShield : MonoBehaviour
         {
             if (other.transform.parent != _settings._owner)
             {
-                DoShieldInteraction(other.gameObject);
+                DoShieldInteraction(other.gameObject,other.transform.position);
             }
         }
     }

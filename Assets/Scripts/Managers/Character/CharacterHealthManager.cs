@@ -14,7 +14,7 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
     private bool _canBeHurt;
     private bool _isAlive;
 
-    public System.Action<float ,float , float , Vector3 > OnDamageReceived;
+    public System.Action<float ,float , float , Vector3,Vector3 > OnDamageReceived;
     public System.Action OnHurt;
     public System.Action OnNotHurt;
     public System.Action OnDie;
@@ -28,7 +28,7 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
         _canBeHurt = true;
         _isAlive = true;
     }
-    public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker)
+    public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker, Vector3 point)
     {
         if (_isAlive&&_canBeHurt && attacker != gameObject)
         {
@@ -43,7 +43,7 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
             else
             {
 
-                OnDamageReceived?.Invoke(_maxHealth,dmg,kBackMag,kBackDir);
+                OnDamageReceived?.Invoke(_maxHealth,dmg,kBackMag,kBackDir,point);
                 OnHurt?.Invoke();
             }
 

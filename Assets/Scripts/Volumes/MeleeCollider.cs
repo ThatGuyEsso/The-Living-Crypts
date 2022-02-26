@@ -19,7 +19,7 @@ public class MeleeCollider : MonoBehaviour
     {
         if (parentWeapon!=null)
         {
-            parentWeapon.ApplyDamageToTarget(other.gameObject);
+            parentWeapon.ApplyDamageToTarget(other.gameObject,other.ClosestPoint(transform.position));
         }
     }
 }

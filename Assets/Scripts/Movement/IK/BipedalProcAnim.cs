@@ -6,7 +6,8 @@ public class BipedalProcAnim : MonoBehaviour
 {
     [SerializeField] private LayerMask GroundLayers;
     [SerializeField] private FastIKFabric RightLeg, LeftLeg;
-    [SerializeField] private Transform RightTarget, LeftTarget;
+    [SerializeField] private Transform RightTarget, LeftTarget,TargetBody;
+    [SerializeField] private float MaxInitialStrideDistance;
     [SerializeField] private float MaxStrideDistance;
     [SerializeField] private float AnimRate=3f;
     [SerializeField] private bool InDebug;
@@ -63,38 +64,30 @@ public class BipedalProcAnim : MonoBehaviour
     {
         if (!_canTakeStep)
         {
-            if (_useRightLeg && !IsLeftFootGrounded()) return;
-            else if (!IsRightFootGrounded()) return;
-            if ((_currTimeBetweenStrides <= 0f))
+
+            if (_useRightLeg)
             {
-                if (_useRightLeg)
+                //if (!IsLeftFootGrounded()) return;
+                if (ShouldTakeStep(RightLeg.transform.localPosition* 1000000f, LeftLeg.transform.localPosition * 1000000f))
                 {
-                    //if (!IsLeftFootGrounded())return;
-                    if (ShouldTakeStep(RightTarget.position, _currentRightTarget.position))
-                    {
-                        _canTakeStep = true;
-                    }
+                    _canTakeStep = true;
                 }
-                else
-                {
-                    ////if (!IsRightFootGrounded())return ;
-                    if (ShouldTakeStep(LeftTarget.position, _currentLeftTarget.position))
-                    {
-                        _canTakeStep = true;
-                    }
-                }
-                _currTimeBetweenStrides = MaxTimeBetweenStrides;
+
             }
             else
             {
-                _currTimeBetweenStrides -= Time.deltaTime;
+                //if (!IsRightFootGrounded()) return;
+                if (ShouldTakeStep(LeftLeg.transform.localPosition * 1000000f, RightLeg.transform.localPosition * 1000000f))
+                {
+                    _canTakeStep = true;
+                }
             }
-
+            
+ 
+           
         }
         else
         {
-            
-         
             if (_useRightLeg)
             {
                 _currentRightTarget.position =Vector3.MoveTowards(_currentRightTarget.position, RightTarget.position,Time.deltaTime* AnimRate);
@@ -115,30 +108,41 @@ public class BipedalProcAnim : MonoBehaviour
                     _canTakeStep = false;
                 }
             }
-           
-
         }
      
       
     }
 
 
-    public bool ShouldTakeStep(Vector3 targetposition, Vector3 currentPosition)
+    public bool ShouldInitialTakeStep(Vector3 targetposition, Vector3 currentPosition)
     {
-        return Vector3.Distance(currentPosition, targetposition) >= MaxStrideDistance;
+        return Vector3.Distance(currentPosition, targetposition) >= MaxInitialStrideDistance;
     }
+    public bool ShouldTakeStep(Vector3 CurrentLeg, Vector3 otherLeg)
+    {
+        float distance = Mathf.Abs(CurrentLeg.z - otherLeg.z);
 
+        //Debug.Log("Current leg z position: " + CurrentLeg.z);
+        //Debug.Log("Other leg z position: " + otherLeg.z);
+        //Debug.Log("Distance between leg: " + distance);
+        return distance >= MaxStrideDistance;
+    }
     private bool IsRightFootGrounded()
     {
-      
-        return Vector2.Distance(_currentRightTarget.position, RightTarget.position) <=MaxGroundedDistance;
-        
+
+        float distance = Vector3.Distance(_currentRightTarget.position, RightTarget.position);
+        Debug.Log("Distance from ground: " + distance);
+        return distance <= MaxGroundedDistance;
 
     }
     private bool IsLeftFootGrounded()
     {
-
-        return Vector2.Distance(_currentLeftTarget .position, LeftTarget.position) <= MaxGroundedDistance;
+      
+            float distance = Vector3.Distance(_currentLeftTarget.position, LeftTarget.position);
+            Debug.Log("Distance from ground: " + distance);
+            return distance <= MaxGroundedDistance;
+   
+      
 
 
     }

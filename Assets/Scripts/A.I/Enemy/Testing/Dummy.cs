@@ -40,7 +40,7 @@ public class Dummy : MonoBehaviour, IDamage
     {
         Destroy(gameObject);
     }
-    public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker)
+    public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker,Vector3 point)
     {
         if (_canBeHurt&& attacker != gameObject)
         {
@@ -61,7 +61,7 @@ public class Dummy : MonoBehaviour, IDamage
                 IDamagePopUp popUp = Instantiate(_damageVFX, transform.position, Quaternion.identity).GetComponent<IDamagePopUp>();
                 if (popUp != null)
                 {
-                    popUp.InitDamageNumber(_maxHealth, dmg, kBackDir);
+                    popUp.InitDamageNumber(_maxHealth, dmg, kBackDir,transform.position);
                 }
             }
          

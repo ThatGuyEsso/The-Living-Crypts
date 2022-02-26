@@ -70,7 +70,7 @@ public class ExplosionArea : MonoBehaviour, IExplosion
                 {
                     float dmg = Random.Range(_explosionData._minDamage, _explosionData._maxDamage);
                     Vector3 kBackDir = other.transform.position - transform.position;
-                    damage.OnDamage(dmg, kBackDir.normalized, _explosionData._knockBack, _explosionData._owner);
+                    damage.OnDamage(dmg, kBackDir.normalized, _explosionData._knockBack, _explosionData._owner,other.transform.position);
                 }
 
                     

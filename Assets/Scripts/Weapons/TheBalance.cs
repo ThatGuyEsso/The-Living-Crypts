@@ -142,7 +142,7 @@ public class TheBalance : BaseWeapon
                 {
                     float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                     float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
-                    damage.OnDamage(dmg, dir.normalized, kBack, WeaponManager._instance.Getowner());
+                    damage.OnDamage(dmg, dir.normalized, kBack, WeaponManager._instance.Getowner(),hitInfo.point);
 
                     SpawnHitVFX(hitInfo.point);
                 }

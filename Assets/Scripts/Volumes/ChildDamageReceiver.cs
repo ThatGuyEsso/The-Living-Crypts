@@ -6,9 +6,9 @@ public class ChildDamageReceiver : MonoBehaviour,IDamage
 {
     private CharacterHealthManager _healthManager;
 
-    public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker)
+    public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker,Vector3 point)
     {
-        if (_healthManager) _healthManager.OnDamage(dmg, kBackDir, kBackMag, attacker);
+        if (_healthManager) _healthManager.OnDamage(dmg, kBackDir, kBackMag, attacker,point);
     }
 
     private void Awake()
