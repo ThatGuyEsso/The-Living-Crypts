@@ -250,7 +250,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4800
+  m_VersionIndex: 4821
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -378,6 +378,9 @@ GameObject:
   - component: {fileID: 832732370}
   - component: {fileID: 8525957981387217722}
   - component: {fileID: 8525957981387217734}
+  - component: {fileID: 9019944145707983857}
+  - component: {fileID: 261298328}
+  - component: {fileID: 261298315}
   m_Layer: 10
   m_Name: ForgeGolem
   m_TagString: Enemy
@@ -429,20 +432,59 @@ MonoBehaviour:
   FaceDirection: {fileID: 1324875524479983776}
   BossName: Forge Golem
   PercentageStageTrigger: 0.3
-  _currentStageAbility: []
+  CurrentStageAbility: []
+  TransitionAbilityData:
+    AbilityPrefab: {fileID: 3458344617166832357, guid: 31473553f10a3d54e88d30f095021184, type: 3}
+    attackAnimationName: 
+    IsPriority: 1
+    IsTransitionAbility: 1
+    IsCloseRange: 0
+    AttackRange: -1
+    MaxAttackDamage: 0
+    MinAttackDamage: 0
+    MaxTimeToAttempt: 0
+    AttackCooldown: 0
+    AbilityCooldown: 0
+  TransitionAbility: {fileID: 0}
   FirstStageAttackPattern:
-  - Abillities:
-    - AbilityPrefab: {fileID: 0}
+    Abillities:
+    - AbilityPrefab: {fileID: 2962948923133960699, guid: d08e91ea401f3914d8d3b63b583ad4a7, type: 3}
       attackAnimationName: 
-      IsPriority: 0
+      IsPriority: 1
+      IsTransitionAbility: 0
       IsCloseRange: 0
-      AttackRange: 0
-      MaxAttackDamage: 0
-      MinAttackDamage: 0
-      AttackCooldown: 0
-      AbilityCooldown: 0
-  SecondStageAttackPattern: []
-  FinalStageAttackPattern: []
+      AttackRange: 3
+      MaxAttackDamage: 20
+      MinAttackDamage: 20
+      MaxTimeToAttempt: 5
+      AttackCooldown: 5
+      AbilityCooldown: 3
+    - AbilityPrefab: {fileID: 6314538820140613839, guid: 06ee4d638e8099f4aa82e6fa9bd6db5a, type: 3}
+      attackAnimationName: 
+      IsPriority: 1
+      IsTransitionAbility: 0
+      IsCloseRange: 0
+      AttackRange: -1
+      MaxAttackDamage: 20
+      MinAttackDamage: 10
+      MaxTimeToAttempt: 0
+      AttackCooldown: 5
+      AbilityCooldown: 3
+    - AbilityPrefab: {fileID: 2962948923133960699, guid: d08e91ea401f3914d8d3b63b583ad4a7, type: 3}
+      attackAnimationName: 
+      IsPriority: 1
+      IsTransitionAbility: 0
+      IsCloseRange: 0
+      AttackRange: 3
+      MaxAttackDamage: 20
+      MinAttackDamage: 20
+      MaxTimeToAttempt: 5
+      AttackCooldown: 5
+      AbilityCooldown: 3
+  SecondStageAttackPattern:
+    Abillities: []
+  FinalStageAttackPattern:
+    Abillities: []
 --- !u!114 &5450122112803388733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +675,49 @@ MonoBehaviour:
   MinDistanceToGround: 0
   MaxDistanceToGround: 1.5
   IsInitialMaxDistance: 1
+--- !u!114 &9019944145707983857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525957981912184356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a315400059b404bacc919fc5444184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &261298328
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525957981912184356}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3addebc4765c82a4fa4d2eed39981ad8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &261298315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525957981912184356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3df4a8d6e613449810e231834e8836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8525957982415182589
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +1083,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 6928
+  m_VersionIndex: 6949
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1169,7 +1254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4327236454759493542, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
       propertyPath: m_VersionIndex
-      value: 2843
+      value: 2864
       objectReference: {fileID: 0}
     - target: {fileID: 5052830802421060527, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
       propertyPath: m_Mesh
@@ -1185,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9167751399617684516, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
       propertyPath: m_VersionIndex
-      value: 2846
+      value: 2867
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
@@ -1259,7 +1344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1708390424709271850, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_VersionIndex
-      value: 2726
+      value: 2747
       objectReference: {fileID: 0}
     - target: {fileID: 6089543961146006184, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_Mesh
@@ -1267,7 +1352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089543961146006184, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_VersionIndex
-      value: 2729
+      value: 2750
       objectReference: {fileID: 0}
     - target: {fileID: 7800283234844518494, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1482,6 +1567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2507912815061330452, guid: 6e5a1b573f9c20246981cf7dbe1b1af2, type: 3}
+      propertyPath: TargetBody
+      value: 
+      objectReference: {fileID: 8525957981369343249}
     - target: {fileID: 6496967860301099837, guid: 6e5a1b573f9c20246981cf7dbe1b1af2, type: 3}
       propertyPath: TargetBody
       value: 
@@ -1562,7 +1651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4327236454759493542, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
       propertyPath: m_VersionIndex
-      value: 2753
+      value: 2774
       objectReference: {fileID: 0}
     - target: {fileID: 5052830802421060527, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
       propertyPath: m_Mesh
@@ -1578,7 +1667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9167751399617684516, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
       propertyPath: m_VersionIndex
-      value: 2756
+      value: 2777
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42ed1ce964a640b45b163d4c254bfb04, type: 3}
@@ -1656,7 +1745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1708390424709271850, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_VersionIndex
-      value: 2651
+      value: 2672
       objectReference: {fileID: 0}
     - target: {fileID: 1708390424709271850, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -1676,7 +1765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6089543961146006184, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_VersionIndex
-      value: 2654
+      value: 2675
       objectReference: {fileID: 0}
     - target: {fileID: 7901354934766103843, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
       propertyPath: m_Mesh
@@ -1688,6 +1777,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
+--- !u!4 &5764470617112315757 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 509448781702541507, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
+  m_PrefabInstance: {fileID: 5255260461662386094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6363535967784603383 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1198447559076723033, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
@@ -1699,11 +1793,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca45bb53dc94f478358a1b6475653d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5764470617112315757 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 509448781702541507, guid: a74deca398a1747478c9d9a6f2a3025c, type: 3}
-  m_PrefabInstance: {fileID: 5255260461662386094}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7343992761216370052
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -27,15 +27,16 @@ public abstract class BaseBoss : BaseEnemy
     protected BossStage _previousStage;
     [Header("Boss Components")]
     protected BossUI _bossUI;
-    protected bool _bossFightRunning;
     public System.Action<BossStage> OnNewBossStage;
     public System.Action OnBossDefeated;
-
+    //Indices
     protected int _curentAttackIndex;
-
+    //Counters
+    protected float _timeBetweenAttack;
+    //States
     protected bool _isUsingAttack;
     protected bool _canUseAttack;
-    protected bool _timeBetweenAttack;
+    protected bool _bossFightRunning;
     virtual public void InitBossUI(BossUI UI)
     {
         _bossUI = UI;
@@ -158,7 +159,7 @@ public abstract class BaseBoss : BaseEnemy
     {
         PathFinder.Init();
         _bossFightRunning = true;
-        
+        _canUseAttack = true;
         BeginNewStage(BossStage.First);
 
     }
@@ -199,10 +200,11 @@ public abstract class BaseBoss : BaseEnemy
         }
     }
 
-    virtual protected void NextAttack()
+    virtual public void NextAttack()
     {
         if (CurrentStageAbility.Count == 0) return;
         _curentAttackIndex++;
+
         if(_curentAttackIndex >= CurrentStageAbility.Count)
         {
             _curentAttackIndex = 0;
@@ -210,11 +212,21 @@ public abstract class BaseBoss : BaseEnemy
         CurrentStageAbility[_curentAttackIndex].OnAbilityStarted += OnAttackStarted;
         CurrentStageAbility[_curentAttackIndex].OnAbilityFinished += OnAttackComplete;
     }
-
+    virtual public void SkipAttack()
+    {
+        if (CurrentStageAbility.Count == 0) return;
+        CurrentStageAbility[_curentAttackIndex].OnAbilityStarted -= OnAttackStarted;
+        CurrentStageAbility[_curentAttackIndex].OnAbilityFinished -= OnAttackComplete;
+        NextAttack();
+    }
     virtual protected void ExecuteAbility()
     {
-        CurrentStageAbility[_curentAttackIndex].Execute();
-        Debug.Log("Use Ability");
+        if (CanUseAbility())
+        {
+            CurrentStageAbility[_curentAttackIndex].Execute();
+            Debug.Log("Use Ability");
+        }
+  
     }
 
     virtual protected void OnAttackStarted()
@@ -225,7 +237,9 @@ public abstract class BaseBoss : BaseEnemy
     virtual protected void OnAttackComplete()
     {
         _isUsingAttack = false;
+        _canUseAttack = false;
         CurrentStageAbility[_curentAttackIndex].OnAbilityFinished -= OnAttackComplete;
+        _timeBetweenAttack = CurrentStageAbility[_curentAttackIndex].GetTimeBetweenAbilities();
     }
     virtual protected bool InAbilityRange()
     {
@@ -241,6 +255,19 @@ public abstract class BaseBoss : BaseEnemy
         {
             _previousStage++;
             BeginNewStage(_previousStage);
+        }
+    }
+
+    virtual protected void Update()
+    {
+        if (!_bossFightRunning) return;
+        if(!_canUseAttack && _currentTimeBtwnAttacks > 0)
+        {
+            _currentTimeBtwnAttacks -= Time.deltaTime;
+            if (_currentTimeBtwnAttacks <= 0)
+            {
+                _canUseAttack = true;
+            }
         }
     }
 

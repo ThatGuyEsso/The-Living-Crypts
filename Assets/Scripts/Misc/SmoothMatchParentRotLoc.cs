@@ -32,6 +32,11 @@ public class SmoothMatchParentRotLoc : MonoBehaviour
         _speed = speed;
         isActive = true;
     }
+    public void ResetChild()
+    {
+    
+        isActive = true;
+    }
 
     public void Stop()
     {

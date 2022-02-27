@@ -92,16 +92,20 @@ public class ForgeGolem : BaseBoss
                 else 
                 {
                     _walkMovement.BeginStop();
-                    ExecuteAbility();
+                    if (_canUseAttack)
+                    {
+                        Debug.Log("Golem is calling attack");
+                        ExecuteAbility();
+                    }
                 }
                 break;
             case EnemyState.Flee:
                 break;
         }
     }
-    private void Update()
+    override protected void Update()
     {
-        if (!_bossFightRunning) return;
+        base.Update();
         switch (CurrentState)
         {
             case EnemyState.Idle:
