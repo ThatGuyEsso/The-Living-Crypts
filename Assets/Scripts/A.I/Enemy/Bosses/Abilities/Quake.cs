@@ -12,7 +12,7 @@ public class Quake : BaseBossAbility
    
     private LimbTargetManager _limbTargetManager;
     private AttackAnimManager _attackAnimManager;
-    private SmoothMatchParentRotLoc _smoothMatchParentRot;
+    private SmoothMatchParentRotLoc[] _smoothMatchParentRots;
     private float currentCoolDown = 0;
 
 
@@ -34,9 +34,9 @@ public class Quake : BaseBossAbility
 
 
         }
-        if (!_smoothMatchParentRot)
+        if (_smoothMatchParentRots ==null)
         {
-            _smoothMatchParentRot = _owner.GetComponentInChildren<SmoothMatchParentRotLoc>();
+            _smoothMatchParentRots = _owner.GetComponentsInChildren<SmoothMatchParentRotLoc>();
         }
     }
 
@@ -119,7 +119,11 @@ public class Quake : BaseBossAbility
     {
         _animator.enabled = false;
         _limbTargetManager.UseInitialTarget();
-        _smoothMatchParentRot.ResetChild(5f);
+        foreach(SmoothMatchParentRotLoc rotloc in _smoothMatchParentRots)
+        {
+            rotloc.ResetChild(5f);
+        }
+     
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();
 
