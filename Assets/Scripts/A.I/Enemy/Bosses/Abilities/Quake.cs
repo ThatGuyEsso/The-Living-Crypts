@@ -6,14 +6,14 @@ public class Quake : BaseBossAbility
 {
     [SerializeField] private string ReadyUpAnim;
     [SerializeField] private string AttackAnim;
-    [Tooltip("How long the ready up pose is held before attack is executed")]
-    [SerializeField] private float MaxPoseTime;
+
+
     private Animator _animator;
    
     private LimbTargetManager _limbTargetManager;
     private AttackAnimManager _attackAnimManager;
     private SmoothMatchParentRotLoc[] _smoothMatchParentRots;
-    private float currentCoolDown = 0;
+
 
 
     public override void Init()
@@ -81,7 +81,7 @@ public class Quake : BaseBossAbility
 
     }
 
-    public void OnReadyUpBegin()
+    override protected void OnReadyUpBegin()
     {
         if (_attackAnimManager)
         {
@@ -90,7 +90,7 @@ public class Quake : BaseBossAbility
         OnAbilityStarted?.Invoke();
 
     }
-    public void OnReadyUpComplete()
+    override protected void OnReadyUpComplete()
     {
         if (_attackAnimManager)
         {
@@ -106,12 +106,14 @@ public class Quake : BaseBossAbility
             _attackAnimManager.OnAttackEnd += OnAttackEnd;
         }
         _animator.Play(AttackAnim, 0, 0f);
+        _owner.ToggleLimbAttackColliders(true);
         OnAbilityPerformed?.Invoke();
     }
 
-    public void OnAttackEnd()
+    override protected void OnAttackEnd()
     {
         _attackAnimManager.OnAttackEnd -= OnAttackEnd;
+        _owner.ToggleLimbAttackColliders(false);
         StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
     }
   

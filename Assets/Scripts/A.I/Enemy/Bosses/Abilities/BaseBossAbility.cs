@@ -8,6 +8,8 @@ public abstract class BaseBossAbility : MonoBehaviour
     protected BossAbilityData _abilityData;
     protected BaseBoss _owner;
     [SerializeField] protected float HoldFinalPoseTime;
+    [Tooltip("How long the ready up pose is held before attack is executed")]
+    [SerializeField] protected float MaxPoseTime;
     protected bool _canAttack = true;
     protected float _currentCooldown;
 
@@ -15,7 +17,7 @@ public abstract class BaseBossAbility : MonoBehaviour
     public System.Action OnAbilityPerformed;
     public System.Action OnAbilityFinished;
     protected bool _isInitialised;
-
+    protected float currentCoolDown = 0;
     virtual  public void Init()
     {
         _isInitialised = true;
@@ -47,9 +49,32 @@ public abstract class BaseBossAbility : MonoBehaviour
         yield return new WaitForSeconds(time);
         Terminate();
     }
+
+    virtual protected void OnReadyUpBegin()
+    {
+        
+
+    }
+    virtual protected void OnReadyUpComplete()
+    {
+      
+
+    }
+
+
+    virtual protected void OnAttackEnd()
+    {
+      
+    }
+
     public float GetTimeBetweenAbilities()
     {
         return _abilityData.AttackCooldown;
+    }
+
+    public BossAbilityData GetAbilityData()
+    {
+        return _abilityData;
     }
     virtual public void PerformAttack()
     {

@@ -114,6 +114,23 @@ public class WalkMovement : MonoBehaviour
 
     }
 
+    public void SetMaxSpeed(float speed)
+    {
+        _maxSpeed = speed;
+    }
+    public void SetStoppingDistance(float distance)
+    {
+        StoppingDistance = distance;
+    }
+
+    public float GetMaxSpeed()
+    {
+        return _maxSpeed;
+    }
+    public float GetStoppingDistance()
+    {
+        return StoppingDistance;
+    }
     public void Move()
     {
 

@@ -10,11 +10,13 @@ public enum BossStage
     Final,
     Transition
 };
-public abstract class BaseBoss : BaseEnemy
+public abstract class BaseBoss : BaseEnemy, IAttacker
 {
     [Header("Boss Settings")]
     [SerializeField] protected string BossName;
     [SerializeField] protected float PercentageStageTrigger =0.3f;
+    [SerializeField] protected AttackCollider[] BodyAttackCollider;
+    [SerializeField] protected AttackCollider[] LimbAttackColliders;
     [Header("Boss Abillities")]
     [SerializeField] protected List<BaseBossAbility> CurrentStageAbility = new List<BaseBossAbility>();
     [SerializeField] protected BossAbilityData TransitionAbilityData;
@@ -37,6 +39,8 @@ public abstract class BaseBoss : BaseEnemy
     protected bool _isUsingAttack;
     protected bool _canUseAttack;
     protected bool _bossFightRunning;
+
+    
     virtual public void InitBossUI(BossUI UI)
     {
         _bossUI = UI;
@@ -243,10 +247,12 @@ public abstract class BaseBoss : BaseEnemy
     }
     virtual protected bool InAbilityRange()
     {
+        if (!CurrentTarget) return false;
         return (CurrentStageAbility[_curentAttackIndex].InAttackRange(CurrentTarget.position));
     }
     virtual protected bool CanUseAbility()
     {
+        if (!CurrentTarget) return false;
         return (CurrentStageAbility[_curentAttackIndex].CanAttack());
     }
     public void EndTransitionStage()
@@ -278,5 +284,32 @@ public abstract class BaseBoss : BaseEnemy
             
             _hManager.OnHurt -= OnHurt;
         }
+    }
+
+    public void ToggleLimbAttackColliders(bool isEnabled)
+    {
+        if (LimbAttackColliders == null) return;
+        if (LimbAttackColliders.Length == 0) return;
+
+        for (int i = 0; i < LimbAttackColliders.Length; i++)
+        {
+            LimbAttackColliders[i].ToggleColiider(isEnabled);
+        }
+    }
+    public void ToggleBodyAttackColliders(bool isEnabled)
+    {
+        if (BodyAttackCollider == null) return;
+        if (BodyAttackCollider.Length == 0) return;
+
+        for (int i = 0; i < BodyAttackCollider.Length; i++)
+        {
+            BodyAttackCollider[i].ToggleColiider(isEnabled);
+        }
+    }
+
+    public AttackData GetAttackData()
+    {
+        BossAbilityData data = CurrentStageAbility[_curentAttackIndex].GetAbilityData();
+        return new AttackData(data.MinAttackDamage, data.MaxAttackDamage, data.MinKnockBack, data.MaxKnockBack);
     }
 }

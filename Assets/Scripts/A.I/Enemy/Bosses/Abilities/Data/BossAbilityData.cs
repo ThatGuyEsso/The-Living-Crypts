@@ -20,6 +20,8 @@ public struct BossAbilityData
     public float AttackRange;
     public float MaxAttackDamage;
     public float MinAttackDamage;
+    public float MaxKnockBack;
+    public float MinKnockBack;
     public float MaxTimeToAttempt;
     [Tooltip("Cooldown before boss can execute next attack")]
     public float AttackCooldown;

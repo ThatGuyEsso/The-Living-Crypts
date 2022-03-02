@@ -4,13 +4,16 @@ using UnityEngine;
 
 public struct AttackData
 {
-    float Damage;
-    float KnockBackMagnitude;
-
-    public AttackData(float dmg, float kBackMag)
+    public float MinDamage;
+    public float MaxDamage;
+    public float MinKnockBack;
+    public float MaxKnockBack;
+    public AttackData(float minDMG, float maxDMG, float minKnockback,float maxKnockback)
     {
-        Damage = dmg;
-        KnockBackMagnitude = kBackMag;
+        MinDamage = minDMG;
+        MaxDamage = maxDMG;
+        MinKnockBack = minKnockback;
+        MaxKnockBack = maxKnockback;
     }
 };
 public interface IAttacker

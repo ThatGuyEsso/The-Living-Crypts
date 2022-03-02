@@ -52,8 +52,19 @@ MonoBehaviour:
     AttackRange: 0
     MaxAttackDamage: 0
     MinAttackDamage: 0
+    MaxKnockBack: 0
+    MinKnockBack: 0
+    MaxTimeToAttempt: 0
     AttackCooldown: 0
     AbilityCooldown: 0
-  ReadyUpAnimation: 
-  ChargeAnimation: 
-  EndAnimation: 
+  HoldFinalPoseTime: 1
+  MaxPoseTime: 0.5
+  ReadyUpAnim: ChargeReadyUp
+  AttackAnim: Charge
+  MaxChargeDistance: 20
+  ChargeColliderPrefab: {fileID: 9079376802994209920, guid: 8d5d27f6c0f0adc4aa466a5703ec7019, type: 3}
+  StopChargeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  ChargeColliderOffset: {x: 0, y: 0, z: 1.5}
+  ChargeSpeed: 20

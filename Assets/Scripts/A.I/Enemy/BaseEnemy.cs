@@ -104,7 +104,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     }
 
-    protected virtual void FaceCurrentTarget()
+    public virtual void FaceCurrentTarget()
     {
         if (!FaceDirection || !CurrentTarget) return;
         FaceDirection.SmoothRotDirection(CurrentTarget.position- transform.position);
