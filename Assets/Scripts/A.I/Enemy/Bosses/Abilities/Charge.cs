@@ -7,9 +7,8 @@ public class Charge : BaseBossAbility
     [SerializeField] private string ReadyUpAnim;
     [SerializeField] private string AttackAnim;
     [SerializeField] private float MaxChargeDistance;
-    [SerializeField] private GameObject ChargeColliderPrefab;
+    [SerializeField] private float ChargeAcceleration=10f;
     [SerializeField] private LayerMask StopChargeLayers;
-    [SerializeField] private Vector3 ChargeColliderOffset;
     [SerializeField] private float ChargeSpeed;
     private Animator _animator;
 
@@ -18,10 +17,10 @@ public class Charge : BaseBossAbility
     private AttackAnimManager _attackAnimManager;
     private SmoothMatchParentRotLoc[] _smoothMatchParentRots;
     private FaceDirection _faceDirection;
-    private AttackCollider _chargeCollider;
     private Vector3 ChargePoint;
     private float _defaultSpeed;
     private float _defaultStoppingDistance;
+    private float _defaultAcceleration;
     private bool _canRotate;
     public override void Init()
     {
@@ -51,8 +50,6 @@ public class Charge : BaseBossAbility
         }
 
 
-
-
     }
 
     
@@ -71,30 +68,26 @@ public class Charge : BaseBossAbility
             ChargePoint = _owner.transform.forward * MaxChargeDistance;
         }
 
+        Debug.DrawLine(_owner.transform.position, ChargePoint, Color.yellow, 10f);
     }
     private void SetupAttackCollider()
     {
-        if (!ChargeColliderPrefab)
+        AttackCollider[] colliders = _owner.GetBodyAttackColliders();
+
+        if (colliders.Length == 0)
         {
-            Debug.LogError("Missing charge collider prefab");
+            Debug.LogError("No Colliders");
             return;
         }
-        if (!_chargeCollider)
+          
+        foreach(AttackCollider collider in colliders)
         {
-            if (ObjectPoolManager.instance)
-            {
-                _chargeCollider = ObjectPoolManager.Spawn(ChargeColliderPrefab, transform, transform.position + ChargeColliderOffset).GetComponent<AttackCollider>();
-
-            }
-            else
-            {
-                _chargeCollider = Instantiate(ChargeColliderPrefab, transform.position + ChargeColliderOffset, Quaternion.identity).GetComponent<AttackCollider>();
-                _chargeCollider.transform.SetParent(transform);
-            }
-            _chargeCollider.SetOwner(_owner.gameObject);
-            _chargeCollider.OnObjectHit += EvaluateObjectHit;
-            _chargeCollider.OnAttackPerfomed += OnAttackEnd;
+      
+            collider.OnObjectHit += EvaluateObjectHit;
+            collider.OnAttackPerfomed += OnAttackEnd;
         }
+        _owner.ToggleBodyAttackColliders(true);
+        
     }
 
     private void EvaluateObjectHit(GameObject other)
@@ -134,7 +127,7 @@ public class Charge : BaseBossAbility
     {
         if (_attackAnimManager)
         {
-            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
         }
         _canRotate = false;
         GetChargePoint();
@@ -144,11 +137,14 @@ public class Charge : BaseBossAbility
     public override void PerformAttack()
     {
 
-        //SetupAttackCollider();
+        SetupAttackCollider();
         _defaultSpeed = _movement.GetMaxSpeed();
         _defaultStoppingDistance = _movement.GetStoppingDistance();
+        _defaultAcceleration = _movement.GetAcceleration();
+
         _movement.SetMaxSpeed(ChargeSpeed);
         _movement.SetStoppingDistance(0f);
+        _movement.SetAcceleration(ChargeAcceleration);
 
         _movement.MoveToPoint(ChargePoint);
         _animator.Play(AttackAnim, 0, 0f);
@@ -157,21 +153,21 @@ public class Charge : BaseBossAbility
 
     override protected void OnAttackEnd()
     {
-        _chargeCollider.OnObjectHit -= EvaluateObjectHit;
-        _chargeCollider.OnAttackPerfomed -= OnAttackEnd;
+        AttackCollider[] colliders = _owner.GetBodyAttackColliders();
+        _owner.ToggleBodyAttackColliders(false);
+        if (colliders.Length > 0)
+        {
+            foreach (AttackCollider collider in colliders)
+            {
 
-        if (ObjectPoolManager.instance)
-        {
-            ObjectPoolManager.Recycle(_chargeCollider.gameObject);
+                collider.OnObjectHit -= EvaluateObjectHit;
+                collider.OnAttackPerfomed -= OnAttackEnd;
+            }
+
         }
-        else
-        {
-            Destroy(_chargeCollider.gameObject);
-        }
-        _chargeCollider = null;
         _movement.SetMaxSpeed(_defaultSpeed);
         _movement.SetStoppingDistance(_defaultStoppingDistance);
-
+        _movement.SetAcceleration(_defaultAcceleration);
         _movement.BeginStop();
         StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
     }

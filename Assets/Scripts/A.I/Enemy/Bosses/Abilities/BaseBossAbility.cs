@@ -18,6 +18,7 @@ public abstract class BaseBossAbility : MonoBehaviour
     public System.Action OnAbilityFinished;
     protected bool _isInitialised;
     protected float currentCoolDown = 0;
+    protected bool IsActive;
     virtual  public void Init()
     {
         _isInitialised = true;

@@ -48,7 +48,7 @@ public class WalkMovement : MonoBehaviour
         if (!_canMove) return;
         if (_isMoving)
         {
-
+            Debug.Log("Movong");
             _currentMovementSpeed = Mathf.Lerp(_currentMovementSpeed, _maxSpeed, Time.fixedDeltaTime * _acceleration);
             if (Mathf.Abs(_maxSpeed - _currentMovementSpeed) <= 0.01f) _currentMovementSpeed = _maxSpeed;
 
@@ -56,6 +56,7 @@ public class WalkMovement : MonoBehaviour
         }
         else if (_isStopping)
         {
+            Debug.Log("Stopping");
             _currentMovementSpeed = Mathf.Lerp(_currentMovementSpeed, 0.0f, Time.fixedDeltaTime * _deceleration);
 
 
@@ -79,6 +80,7 @@ public class WalkMovement : MonoBehaviour
 
     public void BeginStop()
     {
+        Debug.Log("Trying to stop");
         if (!_canMove)
         {
             Stop();
@@ -122,7 +124,15 @@ public class WalkMovement : MonoBehaviour
     {
         StoppingDistance = distance;
     }
+    public void SetAcceleration(float acceleration)
+    {
+        _acceleration = acceleration;
+    }
 
+    public float GetAcceleration()
+    {
+        return _acceleration;
+    }
     public float GetMaxSpeed()
     {
         return _maxSpeed;

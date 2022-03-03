@@ -33,8 +33,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     public System.Action OnBossDefeated;
     //Indices
     protected int _curentAttackIndex;
-    //Counters
-    protected float _timeBetweenAttack;
+
     //States
     protected bool _isUsingAttack;
     protected bool _canUseAttack;
@@ -111,7 +110,9 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         {
             TransitionAbility = BossAttackPattern.CreateNewAbility(this, TransitionAbilityData);
         }
-        
+        _curentAttackIndex = 0;
+        InitCurrentAttack();
+
     }
 
     public void ClearEquippedAbilities()
@@ -166,6 +167,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         _canUseAttack = true;
         BeginNewStage(BossStage.First);
 
+
     }
 
     virtual public void EndBossFight()
@@ -204,7 +206,12 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         }
     }
 
-    virtual public void NextAttack()
+    virtual protected void InitCurrentAttack()
+    {
+        CurrentStageAbility[_curentAttackIndex].OnAbilityStarted += OnAttackStarted;
+        CurrentStageAbility[_curentAttackIndex].OnAbilityFinished += OnAttackComplete;
+    }
+    virtual protected void NextAttack()
     {
         if (CurrentStageAbility.Count == 0) return;
         _curentAttackIndex++;
@@ -213,8 +220,8 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         {
             _curentAttackIndex = 0;
         }
-        CurrentStageAbility[_curentAttackIndex].OnAbilityStarted += OnAttackStarted;
-        CurrentStageAbility[_curentAttackIndex].OnAbilityFinished += OnAttackComplete;
+        InitCurrentAttack();
+
     }
     virtual public void SkipAttack()
     {
@@ -243,7 +250,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         _isUsingAttack = false;
         _canUseAttack = false;
         CurrentStageAbility[_curentAttackIndex].OnAbilityFinished -= OnAttackComplete;
-        _timeBetweenAttack = CurrentStageAbility[_curentAttackIndex].GetTimeBetweenAbilities();
+        _currentTimeBtwnAttacks = CurrentStageAbility[_curentAttackIndex].GetTimeBetweenAbilities();
     }
     virtual protected bool InAbilityRange()
     {
@@ -273,6 +280,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
             if (_currentTimeBtwnAttacks <= 0)
             {
                 _canUseAttack = true;
+                NextAttack();
             }
         }
     }
@@ -306,6 +314,15 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
             BodyAttackCollider[i].ToggleColiider(isEnabled);
         }
     }
+    public AttackCollider[] GetBodyAttackColliders()
+    {
+        return BodyAttackCollider;
+    }
+    public AttackCollider[] GetLimbAttackCollide()
+    {
+        return LimbAttackColliders;
+    }
+
 
     public AttackData GetAttackData()
     {
