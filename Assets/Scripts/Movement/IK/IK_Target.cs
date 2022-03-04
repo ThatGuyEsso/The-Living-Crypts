@@ -6,8 +6,11 @@ public class IK_Target : MonoBehaviour
 {
     [SerializeField] private Transform TargetBody;
     [SerializeField] private LayerMask GroundLayers;
-
-
+    private Vector3 _defaultPosition;
+    private void Awake()
+    {
+        _defaultPosition = transform.localPosition;
+    }
     public void Update()
     {
         if (TargetBody)
@@ -18,5 +21,10 @@ public class IK_Target : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, hitInfo.point.y, transform.position.z);
             }
         }
+    }
+
+    public void ReturnToDefaultPosition()
+    {
+        transform.localPosition = _defaultPosition;
     }
 }

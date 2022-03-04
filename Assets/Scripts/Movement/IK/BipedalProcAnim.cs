@@ -146,4 +146,10 @@ public class BipedalProcAnim : MonoBehaviour
 
 
     }
+
+    public void SetTargetsAtCurrentFootPoint()
+    {
+        _currentRightTarget.position = new Vector3(RightLeg.transform.position.x,RightTarget.position.y, RightLeg.transform.position.z);
+        _currentLeftTarget.position = new Vector3(LeftLeg.transform.position.x,LeftTarget.position.y, LeftLeg.transform.position.z);
+    }
 }

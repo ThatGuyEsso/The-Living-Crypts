@@ -6,10 +6,11 @@ public class LimbTargetManager : MonoBehaviour
 {
     private FastIKFabric[] IKs;
     private List<Transform> previousTarget = new List<Transform>();
-
+    private BipedalProcAnim animManager;
     private void Awake()
     {
         IKs = GetComponentsInChildren<FastIKFabric>();
+        animManager = GetComponent<BipedalProcAnim>();
     }
 
     public void UseSelfAsTarget()
@@ -20,6 +21,7 @@ public class LimbTargetManager : MonoBehaviour
         {
             previousTarget.Add(IKs[i].Target);
             IKs[i].Target = IKs[i].transform;
+            IKs[i].enabled = false;
         }
     }
 
@@ -27,9 +29,10 @@ public class LimbTargetManager : MonoBehaviour
     public void UseInitialTarget()
     {
         if (previousTarget.Count == 0) return;
+        animManager.SetTargetsAtCurrentFootPoint();
         for (int i = 0; i < IKs.Length; i++)
         {
-        
+            IKs[i].enabled = true;
             IKs[i].Target = previousTarget[i];
         }
     }
