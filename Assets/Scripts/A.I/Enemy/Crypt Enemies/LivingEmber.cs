@@ -126,7 +126,10 @@ public class LivingEmber : BaseEnemy
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player")){
+        Iteam otherTeam = other.gameObject.GetComponent<Iteam>();
+        if (otherTeam != null){
+
+            if (IsOnTeam(otherTeam.GetTeam())) return;
             if (_canAttack && !_hManager.IsHurt)
             {
                 DoAttack(other.gameObject,other.collider.ClosestPoint(transform.position));

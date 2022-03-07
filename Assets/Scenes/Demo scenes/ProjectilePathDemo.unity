@@ -194,7 +194,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25652
+  m_Name: pb_Mesh23600
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -382,10 +382,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _origin: {x: 15, y: 0, z: 0}
-  _targetPoint: {x: 25, y: -1.5, z: 0}
-  _peakHeight: 6
-  nPoints: 30
-  points: []
+  _targetPoint: {x: 25, y: -1.5, z: 10}
+  MaxHeight: 7
+  _initVelocity: {x: 0, y: 0, z: 0}
+  Resolution: 10
+  InDebug: 1
 --- !u!4 &317266821
 Transform:
   m_ObjectHideFlags: 0
@@ -406,7 +407,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25692
+  m_Name: pb_Mesh23628
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -824,7 +825,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4520
+  m_Name: pb_Mesh-1226
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

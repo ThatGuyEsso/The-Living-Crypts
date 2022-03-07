@@ -11,7 +11,7 @@ public struct HealthData
 }
 [RequireComponent(typeof(Rigidbody))]
 
-public class Dummy : MonoBehaviour, IDamage
+public class Dummy : MonoBehaviour, IDamage, Iteam
 {
     [SerializeField] private HealthData _healthData;
     [SerializeField] private GameObject _damageVFX;
@@ -84,5 +84,15 @@ public class Dummy : MonoBehaviour, IDamage
                 _currentHurtTime -= Time.deltaTime;
             }
         }
+    }
+
+    public Team GetTeam()
+    {
+        return Team.Neutral;
+    }
+
+    public bool IsOnTeam(Team team)
+    {
+        return false;
     }
 }

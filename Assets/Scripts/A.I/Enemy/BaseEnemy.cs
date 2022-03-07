@@ -34,7 +34,7 @@ public struct EnemySettings
     }
 }
     [RequireComponent(typeof(PathFinder))]
-public abstract class BaseEnemy : MonoBehaviour
+public abstract class BaseEnemy : MonoBehaviour ,Iteam
 {
     [Header("Debug Settings")]
     [SerializeField] protected bool InDebug;
@@ -131,4 +131,25 @@ public abstract class BaseEnemy : MonoBehaviour
     protected abstract void DoAttack(GameObject target, Vector3 point);
 
     protected abstract void KillEnemy();
+
+    public void WaitToInit(float time)
+    {
+        Invoke("Init", time);
+    }
+
+
+    public bool IsOnTeam(Team team)
+    {
+        return team == Team.Enviroment;
+    }
+
+    public Transform GetTaget()
+    {
+        return CurrentTarget;
+    }
+
+    public Team GetTeam()
+    {
+        return Team.Enviroment;
+    }
 }

@@ -45,12 +45,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityData:
     AbilityPrefab: {fileID: 0}
-    attackAnimationName: 
     IsPriority: 0
     IsTransitionAbility: 0
     IsCloseRange: 0
     AttackRange: 0
     MaxAttackDamage: 0
     MinAttackDamage: 0
+    MaxKnockBack: 0
+    MinKnockBack: 0
+    MaxTimeToAttempt: 0
     AttackCooldown: 0
     AbilityCooldown: 0
+  HoldFinalPoseTime: 1
+  MaxPoseTime: 0.5
+  EnemyPrefab: {fileID: 951077903895921032, guid: b00f961df0f40a043a5c346c685ae99b, type: 3}
+  MinToSpawn: 3
+  MaxToSpawn: 5
+  MinArchHeight: 4
+  MaxArchHeight: 8
+  MinSpawnRate: 1
+  MaxSpawnRate: 2.5
+  MaxInaccuracy: 7
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  ReadyUpAnim: EmberReleaseCharge

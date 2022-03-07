@@ -56,7 +56,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7935081028460219392
 MonoBehaviour:
@@ -165,8 +165,8 @@ MonoBehaviour:
     GroundedLayers:
       serializedVersion: 2
       m_Bits: 2048
-    JumpForce: 5
-    JumpHeightMultiplier: 3
+    JumpForce: 2.5
+    JumpHeightMultiplier: 2
     MaxJumpCooldown: 0.5
   _isGrounded: 0
 --- !u!114 &951077903895921031
@@ -298,7 +298,7 @@ Transform:
   m_GameObject: {fileID: 951077905219355479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 951077903895921038}
   m_RootOrder: 0

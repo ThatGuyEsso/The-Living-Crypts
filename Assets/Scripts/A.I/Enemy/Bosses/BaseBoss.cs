@@ -17,6 +17,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     [SerializeField] protected float PercentageStageTrigger =0.3f;
     [SerializeField] protected AttackCollider[] BodyAttackCollider;
     [SerializeField] protected AttackCollider[] LimbAttackColliders;
+    [SerializeField] protected Transform FirePoint;
     [Header("Boss Abillities")]
     [SerializeField] protected List<BaseBossAbility> CurrentStageAbility = new List<BaseBossAbility>();
     [SerializeField] protected BossAbilityData TransitionAbilityData;
@@ -328,5 +329,10 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     {
         BossAbilityData data = CurrentStageAbility[_curentAttackIndex].GetAbilityData();
         return new AttackData(data.MinAttackDamage, data.MaxAttackDamage, data.MinKnockBack, data.MaxKnockBack);
+    }
+
+    public Transform GetFirePoint()
+    {
+        return FirePoint;
     }
 }

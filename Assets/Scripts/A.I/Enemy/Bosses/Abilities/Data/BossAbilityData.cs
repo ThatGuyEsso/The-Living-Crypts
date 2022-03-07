@@ -7,8 +7,6 @@ public struct BossAbilityData
 {
     [Header("Ability Prefab")]
     public BaseBossAbility AbilityPrefab;
-    [Header("Animations")]
-    public string attackAnimationName;
 
     [Header("Ability Settings")]
     [Tooltip("Priorities can't be skipped by boss or other abilities")]
