@@ -177,7 +177,7 @@ public class EmberRelease : BaseBossAbility
     {
         if (_attackAnimManager)
         {
-            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
         }
         StartCoroutine(WaitToExecuteAttack(MaxPoseTime));
 

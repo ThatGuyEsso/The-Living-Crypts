@@ -7,14 +7,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BaseProjectile : MonoBehaviour, IProjectile
 {
-    [SerializeField] private ProjectileData _projectileData;
-    [SerializeField] private LayerMask _blockingLayers;
-    [SerializeField] private LayerMask _damageLayers;
+    [SerializeField] protected ProjectileData _projectileData;
+    [SerializeField] protected LayerMask _blockingLayers;
+    [SerializeField] protected LayerMask _damageLayers;
     private float _currentLifeTime;
-    private Rigidbody _rb;
+    protected Rigidbody _rb;
 
-
-    private void Update()
+    public System.Action OnProjectileDestroyed;
+    virtual protected void Update()
     {
         if (_currentLifeTime > 0)
         {
@@ -31,7 +31,16 @@ public class BaseProjectile : MonoBehaviour, IProjectile
     }
     virtual public void BreakProjectile()
     {
-        Destroy(gameObject);
+        OnProjectileDestroyed?.Invoke();
+        if (ObjectPoolManager.instance)
+        {
+            ObjectPoolManager.Recycle(gameObject);
+        }
+        else
+        {
+
+             Destroy(gameObject);
+        }
     }
 
     public GameObject GetOwner()
@@ -83,10 +92,14 @@ public class BaseProjectile : MonoBehaviour, IProjectile
 
     virtual public void ShootProjectile(ProjectileData data)
     {
+        if (!_rb)
+        {
+            Init();
+        }
         _projectileData = data;
 
         _currentLifeTime = _projectileData._lifeTime;
-        _rb.velocity = data._direction * data._speed*Time.deltaTime;
+        _rb.velocity = data._direction * data._speed;
         transform.forward= _rb.velocity;
     }
 
@@ -94,7 +107,7 @@ public class BaseProjectile : MonoBehaviour, IProjectile
     virtual public void ShootProjectile()
     {
         _currentLifeTime = _projectileData._lifeTime;
-        _rb.velocity = _projectileData._direction * _projectileData._speed * Time.deltaTime;
+        _rb.velocity = _projectileData._direction * _projectileData._speed;
         transform.forward = _rb.velocity;
     }
 
@@ -105,27 +118,40 @@ public class BaseProjectile : MonoBehaviour, IProjectile
 
 
         }else if (_damageLayers == (_damageLayers | (1 << other.gameObject.layer))){
+            Iteam otherTeam = other.GetComponent<Iteam>();
+
+            if (otherTeam == null)
+            {
+                return;
+            }
+            IProjectile proj = other.gameObject.GetComponent<IProjectile>();
             if(other.transform.parent != _projectileData._owner)
             {
-                IProjectile proj = other.gameObject.GetComponent<IProjectile>();
-                if(proj !=null)
+                Iteam ourTeam = _projectileData._owner.GetComponent<Iteam>();
+
+                if (ourTeam == null || !ourTeam.IsOnTeam(otherTeam.GetTeam()))
                 {
-                    GameObject otherOwner = proj.GetOwner();
-                    if(otherOwner != _projectileData._owner)
+
+                    if (proj != null)
                     {
+                        GameObject otherOwner = proj.GetOwner();
+                        if (otherOwner != _projectileData._owner)
+                        {
+                            BreakProjectile();
+                        }
+                    }
+                    else
+                    {
+                        IDamage damage = other.GetComponent<IDamage>();
+
+                        if (damage != null)
+                        {
+                            damage.OnDamage(_projectileData._damage, _rb.velocity.normalized,
+                                _projectileData._knockback, _projectileData._owner, other.ClosestPoint(transform.position));
+                        }
+
                         BreakProjectile();
                     }
-                }
-                else
-                {
-                    IDamage damage = other.GetComponent<IDamage>();
-
-                    if(damage != null){
-                        damage.OnDamage(_projectileData._damage, _rb.velocity.normalized, 
-                            _projectileData._knockback, _projectileData._owner,other.ClosestPoint(transform.position));
-                    }
-
-                    BreakProjectile();
                 }
             }
         }
