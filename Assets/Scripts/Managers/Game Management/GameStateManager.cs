@@ -8,6 +8,9 @@ public class GameStateManager : MonoBehaviour
     private GameState currentState = GameState.Init;
     public Action<GameState> OnNewGameState;
 
+    public SceneTransitionManager SceneManager;
+    public AudioManager AudioManager;
+    public LoadingScreen LoadingScreenManager;
     [SerializeField] private GameObject[] managersToInit;
     [SerializeField] private GameObject[] dungeonManagersToInit;
     private void Awake()
@@ -33,6 +36,7 @@ public class GameStateManager : MonoBehaviour
         InitManagers();
 
     }
+
 
 
     private void InitManagers()
@@ -69,12 +73,12 @@ public class GameStateManager : MonoBehaviour
         switch (currentState)
         {
             case GameState.Init:
-                SceneTransitionManager.instance.BeginLoadMenuScreen(SceneIndex.TitleScreen);
+                SceneManager.BeginLoadMenuScreen(SceneIndex.TitleScreen);
                 break;
             case GameState.GoToTitle:
                 break;
             case GameState.TitleScreen:
-                LoadingScreen.instance.BeginFadeOut();
+                LoadingScreenManager.BeginFadeOut();
                 break;
             case GameState.BeginLevelLoad:
                 break;
@@ -84,7 +88,7 @@ public class GameStateManager : MonoBehaviour
             case GameState.GameSetUp:
                 break;
             case GameState.LevelGenerated:
-                LoadingScreen.instance.BeginFadeOut();
+                LoadingScreenManager.BeginFadeOut();
                 break;
             case GameState.PlayerSpawned:
                 break;

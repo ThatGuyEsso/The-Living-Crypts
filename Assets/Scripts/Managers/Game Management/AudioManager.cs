@@ -8,24 +8,15 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
 {
     public Sound[] sounds;
     public SoundGroup[] soundGroups;
-    public static AudioManager instance;
- 
 
     [SerializeField] private AudioMixerGroup uiGroup, soundEffectGroup;
+
+    [Header("AudioPlayers")]
+    [SerializeField] private GameObject audioPlayer;
+    [SerializeField] private GameObject uiAudioPlayer;
+    [SerializeField] private bool inDebug = false;
     public void Init()
     {
-        //Initialise Singleton Instance
-        if (instance == false)
-        {
-            instance = this;
-            BindToGameStateManager();
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
 
         //Create sound class
         foreach (Sound s in sounds)
@@ -47,7 +38,11 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             soundGroups[i].source.loop = soundGroups[i].loop;
             soundGroups[i].source.outputAudioMixerGroup = soundGroups[i].mixerGroup;
         }
- 
+
+        if (GameStateManager.instance)
+        {
+            GameStateManager.instance.AudioManager = this;
+        }
     }
 
     public void PlayRandFromGroup(string groupName)
@@ -159,6 +154,180 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
     }
 
 
+
+    public AudioPlayer PlayThroughAudioPlayer(string name, Vector3 pos) //Function Spawns Audio player then players the sound
+    {
+        if (name == string.Empty)
+        {
+            return null;
+        }
+        if (ObjectPoolManager.instance) //check instance of object pool
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
+            if (audio)
+            {
+                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                audio.Play(); //Then play 
+                return audio;
+            }
+        }
+        return null;
+    }
+    public AudioPlayer PlayThroughAudioPlayer(string name, Transform targetTransform) //Function Spawns Audio player then players the sound
+    {
+        if(name == string.Empty)
+        {
+            return null;
+        }
+        if (ObjectPoolManager.instance) //check instance of object pool
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, targetTransform).GetComponent<AudioPlayer>(); //Gets the audioplayer
+            if (audio)
+            {
+                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                audio.Play(); //Then play 
+                return audio;
+            }
+        }
+        return null;
+    }
+
+    public AudioPlayer PlayGroupThroughAudioPlayer(string name, Vector3 pos) //Function Spawns Audio player then players the sound
+    {
+        if (name == string.Empty)
+        {
+            return null;
+        }
+        //Find Sound Group
+        SoundGroup soundGroup = Array.Find(soundGroups, group => group.name == name);
+        if (soundGroup == null) return null;
+        //load new clip into source
+        Sound groupMemeber = soundGroup.GetRandomSoundMember();
+
+        if (ObjectPoolManager.instance) //check instance of object pool
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
+            if (audio)
+            {
+                audio.SetUpAudioSource(groupMemeber); //set the Audio up
+                audio.Play(); //Then play 
+                return audio;
+            }
+        }
+        return null;
+    }
+
+    public AudioPlayer PlayGroupThroughAudioPlayer(string name, Vector3 pos, bool randPitch) //Function Spawns Audio player then players the sound
+    {
+        if (name == string.Empty)
+        {
+            return null;
+        }
+        //Find Sound Group
+        SoundGroup soundGroup = Array.Find(soundGroups, group => group.name == name);
+        if (soundGroup == null) return null;
+        //load new clip into source
+        Sound groupMemeber = soundGroup.GetRandomSoundMember();
+
+        if (ObjectPoolManager.instance) //check instance of object pool
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
+            if (audio)
+            {
+                audio.SetUpAudioSource(groupMemeber); //set the Audio up
+                audio.PlaySoundAtRandomPitch(); //Then play 
+                return audio;
+            }
+        }
+        return null;
+    }
+
+
+    public AudioPlayer PlayGThroughAudioPlayerPitchShift(string name, Vector3 pos, float pitchShift)
+    {
+        if (name == string.Empty)
+        {
+            return null;
+        }
+        if (ObjectPoolManager.instance) //check instance of object pool
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
+            if (audio)
+            {
+                Sound sound = GetSound(name);
+                audio.SetUpAudioSource(GetSound(name), sound.pitch + pitchShift); //set the Audio up
+                audio.Play(); //Then play 
+                return audio;
+            }
+        }
+        return null;
+    }
+    //Function Spawns Audio player then players the sound
+    public AudioPlayer PlayThroughAudioPlayer(string name, Vector3 pos, bool randPitch) //Function Spawns Audio player then players the sound
+    {
+        if (name == string.Empty)
+        {
+            return null;
+        }
+        if (ObjectPoolManager.instance) //check instance of object pool
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
+
+            if (audio)
+            {
+                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                if (randPitch) audio.PlayAtRandomPitch();
+                else
+                    audio.Play(); //Then play 
+
+                return audio;
+
+            }
+        }
+
+        return null;
+    }
+
+    public AudioPlayer PlayUISound(string name, Vector3 pos) //Function sets up UI Audio player then plays the sound
+    {
+        if (name == string.Empty)
+        {
+            return null;
+        }
+        if (ObjectPoolManager.instance) //check instance
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(uiAudioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
+            if (audio)
+            {
+                audio.SetUpAudioSource(GetSound(name));
+                audio.Play();
+                return audio;
+            }
+        }
+        return null;
+
+    }
+
+    public void PlayUISound(string name, Vector3 pos, bool randPitch) //Function sets up UI Audio player then plays the sound
+    {
+        if (name == string.Empty)
+        {
+            return;
+        }
+        if (ObjectPoolManager.instance) //check instance
+        {
+            IAudio audio = ObjectPoolManager.Spawn(uiAudioPlayer, pos, Quaternion.identity).GetComponent<IAudio>(); //Get interface from spawned gameobject
+            if (audio != null)
+            {
+                audio.SetUpAudioSource(GetSound(name));
+                if (randPitch)
+                    audio.PlayAtRandomPitch();
+                else
+                    audio.Play();
+            }
+        }
+
+    }
 
     public void BindToGameStateManager()
     {

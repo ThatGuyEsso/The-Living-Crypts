@@ -35,7 +35,7 @@ public class BossUI : MonoBehaviour
 
     public void PlaySFX()
     {
-        if (AudioManager.instance)
+        if (GameStateManager.instance.AudioManager)
         {
             //AudioManager.instance.PlayUISound("RoomSpawn",transform.position);
         }

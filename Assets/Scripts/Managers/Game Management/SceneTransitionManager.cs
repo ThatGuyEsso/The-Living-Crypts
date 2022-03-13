@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
 {
-    public static SceneTransitionManager instance;
     public static SceneIndex currentScene;
     private List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
     private bool isFading;
+    LoadingScreen _loadingScreen;
     public void BindToGameStateManager()
     {
         GameStateManager.instance.OnNewGameState += EvaluateGameState;
@@ -26,16 +26,10 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
 
     public void Init()
     {
-        if (instance == false)
+        if (GameStateManager.instance)
         {
-            instance = this;
-
+            GameStateManager.instance.SceneManager = this;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
     }
 
     private Scene[] GetAllActiveScenes()
@@ -67,12 +61,34 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
     }
     private IEnumerator LoadLevel(SceneIndex newLevel)
     {
+        if (!ValidateHasLoadingScreen())
+        {
+
+            currentScene = newLevel;
+            GameStateManager.instance.BeginNewState(GameState.GameLevelLoaded);
+            Debug.LogError("No Loading screen");
+
+            yield break;
+        }
         GameStateManager.instance.BeginNewState(GameState.BeginLevelLoad);
-        if (!LoadingScreen.instance.IsLoadingScreenOn())
+   
+        if (!_loadingScreen)
+        {
+            _loadingScreen = GameStateManager.instance.LoadingScreenManager;
+            if (!_loadingScreen)
+            {
+                //clear scens loading
+                sceneLoading.Clear();
+                currentScene = newLevel;
+                GameStateManager.instance.BeginNewState(GameState.GameLevelLoaded);
+                yield return null;
+            }
+        }
+        if (!_loadingScreen.IsLoadingScreenOn())
         {
             isFading = true;
-            LoadingScreen.instance.OnFadeComplete += OnFadeComplete;
-            LoadingScreen.instance.BeginFadeIn();
+            _loadingScreen.OnFadeComplete += OnFadeComplete;
+            _loadingScreen.BeginFadeIn();
             while (isFading)
             {
                 yield return null;
@@ -92,20 +108,26 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
             }
         }
 
-        //clear scens loading
-        sceneLoading.Clear();
-        currentScene = newLevel;
-        GameStateManager.instance.BeginNewState(GameState.GameLevelLoaded);
+    
     }
     private IEnumerator LoadMenuScreen(SceneIndex menuSceneIndex)
     {
+        if (!ValidateHasLoadingScreen())
+        {
+
+            currentScene = menuSceneIndex;
+            GameStateManager.instance.BeginNewState(GameState.GameLevelLoaded);
+            Debug.LogError("No Loading screen");
+
+            yield break;
+        }
         Scene[] loadedScenes = GetAllActiveScenes();
 
-        if (!LoadingScreen.instance.IsLoadingScreenOn())
+        if (!_loadingScreen.IsLoadingScreenOn())
         {
             isFading = true;
-            LoadingScreen.instance.OnFadeComplete += OnFadeComplete;
-            LoadingScreen.instance.BeginFadeIn();
+            _loadingScreen.OnFadeComplete += OnFadeComplete;
+            _loadingScreen.BeginFadeIn();
             while (isFading)
             {
                 yield return null;
@@ -153,16 +175,26 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
                 
                 break;
 
-            case SceneIndex.HighScoreScreen:
-                GameStateManager.instance.BeginNewState(GameState.HighScoreTable);
            
-                break;
         }
     }
 
+    public bool ValidateHasLoadingScreen()
+    {
+        if (!_loadingScreen)
+        {
+            _loadingScreen = GameStateManager.instance.LoadingScreenManager;
+            if (!_loadingScreen)
+            {
+              
+                return false;
+            }
+        }
+        return true;
+    }
     public void OnFadeComplete()
     {
         isFading = false;
-        LoadingScreen.instance.OnFadeComplete -= OnFadeComplete;
+        _loadingScreen.OnFadeComplete -= OnFadeComplete;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 public class LoadingScreen : MonoBehaviour, IInitialisable
 {
-    public static LoadingScreen instance;
+
     [Header("Loading Screen Component")]
     [SerializeField] private Image blackScreen;
     [SerializeField] private TextMeshProUGUI loadingText;
@@ -22,18 +22,10 @@ public class LoadingScreen : MonoBehaviour, IInitialisable
     public void Init()
     {
 
-        if (instance == false)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+        GameStateManager.instance.LoadingScreenManager = this;
 
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
 
-    
+
     }
 
 
@@ -47,7 +39,10 @@ public class LoadingScreen : MonoBehaviour, IInitialisable
             {
                 currentAlpha = 1.0f;
                 blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, currentAlpha);
-                loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                if (loadingText)
+                {
+                    loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                }
                 isFadingIn = false;
                 OnFadeComplete?.Invoke();
             }
@@ -55,7 +50,10 @@ public class LoadingScreen : MonoBehaviour, IInitialisable
             {
 
                 blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, currentAlpha);
-                loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                if (loadingText)
+                {
+                    loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                }
             }
 
            
@@ -68,7 +66,10 @@ public class LoadingScreen : MonoBehaviour, IInitialisable
             {
                 currentAlpha = 0f;
                 blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, currentAlpha);
-                loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                if (loadingText)
+                { 
+                    loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                }
                 isFadingOut = false;
                 OnFadeComplete?.Invoke();
                 DisableScreen();
@@ -77,7 +78,10 @@ public class LoadingScreen : MonoBehaviour, IInitialisable
             {
 
                 blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, currentAlpha);
-                loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                if (loadingText)
+                {
+                    loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+                }
             }
         }
     }
@@ -85,11 +89,17 @@ public class LoadingScreen : MonoBehaviour, IInitialisable
     public void BeginFadeIn()
     {
         if (!blackScreen.gameObject.activeInHierarchy) blackScreen.gameObject.SetActive(true);
-        if (!loadingText.gameObject.activeInHierarchy) loadingText.gameObject.SetActive(true);
+        if (loadingText)
+        {
+            if (!loadingText.gameObject.activeInHierarchy) loadingText.gameObject.SetActive(true);
+        }
         if (!loadingCam.activeInHierarchy) loadingCam.SetActive(true);
         currentAlpha = 0f;
         blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, currentAlpha);
-        loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+        if (loadingText)
+        {
+            loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+        }
         isFadingOut = false;
         isFadingIn = true;
     }
@@ -97,18 +107,28 @@ public class LoadingScreen : MonoBehaviour, IInitialisable
     public void BeginFadeOut()
     {
         if (!blackScreen.gameObject.activeInHierarchy) blackScreen.gameObject.SetActive(true);
-        if (!loadingText.gameObject.activeInHierarchy) loadingText.gameObject.SetActive(true);
+        if (loadingText)
+        {
+            if (!loadingText.gameObject.activeInHierarchy) loadingText.gameObject.SetActive(true);
+        }
+  
         if (!loadingCam.activeInHierarchy) loadingCam.SetActive(true);
         currentAlpha = 1.0f;
         blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, currentAlpha);
-        loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+        if (loadingText)
+        {
+            loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, currentAlpha);
+        }
         isFadingIn = false;
         isFadingOut = true;
     }
     public void DisableScreen()
     {
         if (blackScreen.gameObject.activeInHierarchy) blackScreen.gameObject.SetActive(false);
-        if (loadingText.gameObject.activeInHierarchy) loadingText.gameObject.SetActive(false);
+        if (loadingText)
+        {
+            if (loadingText.gameObject.activeInHierarchy) loadingText.gameObject.SetActive(false);
+        }
         if (loadingCam.activeInHierarchy) loadingCam.SetActive(false);
     }
 
