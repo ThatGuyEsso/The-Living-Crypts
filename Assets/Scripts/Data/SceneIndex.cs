@@ -6,10 +6,8 @@ public enum SceneIndex
 {
     RootScene = 0,
     TitleScreen = 1,
-    HighScoreScreen = 2,
     GameScene = 3,
-    PlayerScene = 4,
-    HUDscene = 5,
-    SquareRoom =6,
+    PlayerScene = 5,
+    HUDscene = 6,
     PauseScene = 7
 };
