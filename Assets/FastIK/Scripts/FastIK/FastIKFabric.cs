@@ -245,6 +245,6 @@ namespace DitzelGames.FastIK
             }
         }
 #endif
-
+    
     }
 }

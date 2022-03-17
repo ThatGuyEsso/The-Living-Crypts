@@ -11,8 +11,13 @@ public class GameStateManager : MonoBehaviour
     public SceneTransitionManager SceneManager;
     public AudioManager AudioManager;
     public LoadingScreen LoadingScreenManager;
+    public RoomManager RoomManager;
+
     [SerializeField] private GameObject[] managersToInit;
     [SerializeField] private GameObject[] dungeonManagersToInit;
+
+    [SerializeField] private GameObject RoomManagerPrefab;
+
     private void Awake()
     {
 
