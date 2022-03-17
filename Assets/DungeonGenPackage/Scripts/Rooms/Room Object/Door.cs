@@ -84,11 +84,13 @@ public class Door : MonoBehaviour
 
         if (_isEntry)
         {
+            if (!_entryDebugPrefab) return;
             _debugVisual=Instantiate(_entryDebugPrefab, _roomSpawnPoint.position + transform.right*0.5f+_debugOffset, transform.rotation);
         }
         else
         {
-            _debugVisual=Instantiate(_exitDebugPrefab, _roomSpawnPoint.position  + transform.right*0.5f + _debugOffset, transform.rotation);
+            if (!_exitDebugPrefab) return;
+            _debugVisual =Instantiate(_exitDebugPrefab, _roomSpawnPoint.position  + transform.right*0.5f + _debugOffset, transform.rotation);
         }
     }
 

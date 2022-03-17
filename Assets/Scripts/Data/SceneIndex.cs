@@ -9,26 +9,28 @@ public enum SceneIndex
     GameRootScene = 1,
 
     //Menu Scenes       
-    TitleScreen = 1,
+    TitleScreen = 2,
 
-    HubCorridor =4,
-   
-    PlayerScene = 5,
-    HUDscene = 6,
-    PauseScene = 7,
+    //Entrance
+    SpawnRoom = 3,
+    HubRoom = 4,
+    EntranceCorridor = 5,
 
-   
+    //Component Scene
+    PlayerScene = 6,
+    //UI
+    HUDscene = 7,
+    PauseScene = 8,
+
+
     //Corridors
-    EntranceCorridor =8,
+
     E_Corridor6X10 = 9,
     N_Corridor6X10 = 10,
     S_Corridor6X10 =  11,
     W_Corridor6X10 = 12,
 
     //Rooms
-    SpawnRoom = 13,
-    HubRoom = 14,
-
     E_C_4D_8x8 = 15,
     N_C_4D_8x8 = 16,
     S_C_4D_8x8 = 17,

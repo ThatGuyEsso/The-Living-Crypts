@@ -13,11 +13,12 @@ public class Room : MonoBehaviour
 {
     //Dimensions
 
-    [SerializeField] private int _width, _length;
+    [SerializeField] private int _width, _length, _height;
 
     [SerializeField] private Vector3 _offset;
   
     [SerializeField] private Transform _origin;
+    [SerializeField] private Transform _connectingPoint;
 
     private List<Door> _doors = new List<Door>();
 
@@ -33,15 +34,17 @@ public class Room : MonoBehaviour
         if (!_origin) return;
         Vector3 centre = _origin.position;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(centre+ _offset, new Vector3(_width, 5f, _length));
+        Gizmos.DrawWireCube(centre+ _offset, new Vector3(_width, _height, _length));
 
         if (_drawDebug)
         {
 
-            ExtDebug.DrawBoxCastBox(transform.position, new Vector3(_width / 2 - 0.5f, 2.5f, _length / 2 - 0.5f), transform.rotation,
+            ExtDebug.DrawBoxCastBox(transform.position, new Vector3(_width / 2 - 0.5f, _height/2.0f - 0.5f, _length / 2 - 0.5f), transform.rotation,
                 Vector3.up,2.5f, Color.cyan) ;
         }
     }
+
+   
 
     public void Init()
     {
@@ -72,7 +75,11 @@ public class Room : MonoBehaviour
 
     private void OnEnable()
     {
-        if(RoomManager._instance) RoomManager._instance.OnNewRoomLoaded(this);
+        if (!GameStateManager.instance) return;
+        if (!GameStateManager.instance.GameManager) return;
+        if (!GameStateManager.instance.GameManager.GetRoomManager()) return;
+        GameStateManager.instance.GameManager.GetRoomManager().OnNewRoomLoaded(this);
+
     }
 
 
@@ -191,5 +198,17 @@ public class Room : MonoBehaviour
     public int GetDoorCount()
     {
         return _doors.Count;
+    }
+    public Vector3 GetConnectingPoint()
+    {
+        if (_connectingPoint)
+        {
+            return _connectingPoint.position;
+        }
+        else
+        {
+            return transform.position;
+        }
+    
     }
 }

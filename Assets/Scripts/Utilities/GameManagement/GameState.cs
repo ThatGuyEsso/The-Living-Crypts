@@ -9,15 +9,13 @@ public enum GameState
     GoToTitle,
     TitleScreen,
     BeginLevelLoad,
-    GameLevelLoaded,
 
-    GameSetUp,
+    GoToGameScene,
+    GameSceneLoadComplete,
+    GameSceneSetUpComplete,
     LevelGenerated,
-    PlayerSpawned,
     GamePaused,
     GameRunning,
-    PlayerDied,
-    HighScoreTable
 
 
 };

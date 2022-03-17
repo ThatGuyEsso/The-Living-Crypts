@@ -14,6 +14,8 @@ public class DungeonGenerator : MonoBehaviour
     private int _currentBuilderIndex =0;
     private Direction _initDirection;
     RoomInfo _initRoomInfo;
+
+    private RoomManager _roomManager;
     private void Awake()
     {
         if (_inDebug) Init();
@@ -34,16 +36,6 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public void BeginSpawnHub()
-    {
-        if (RoomManager._instance)
-        {
-            RoomManager._instance.BeginRoomLoad(SceneIndex.HubRoom, Vector3.zero);
-
-            
-        }
-    }
-
 
     private void Start()
     {
@@ -54,7 +46,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public void BeginDungeonGeneration(Room startingRoom, Direction startDirection)
     {
-        if (_canSpawnDungeon&& RoomManager._instance)
+        if (_canSpawnDungeon&& _roomManager)
         {
             _canSpawnDungeon = false;
             _initDirection = startDirection;
@@ -65,8 +57,8 @@ public class DungeonGenerator : MonoBehaviour
 
     public void BeginBuildDungeon()
     {
-        RoomManager._instance.OnRoomLoadComplete -= BeginBuildDungeon;
-        Room currRoom = RoomManager._instance.GetLoadedRooms()[RoomManager._instance.GetLoadedRooms().Count - 1];
+        _roomManager.OnRoomLoadComplete -= BeginBuildDungeon;
+        Room currRoom = _roomManager.GetLastRoom();
         currRoom.SetRoomInfo(_initRoomInfo);
         InitCrawlers(_genData, _initDirection);
      
@@ -74,9 +66,25 @@ public class DungeonGenerator : MonoBehaviour
     private void SpawnInitCorridor(Room startingRoom, Direction startDirection)
     {
      
-        if (RoomManager._instance)
+        if (!_roomManager)
         {
-            RoomManager._instance.OnRoomLoadComplete += BeginBuildDungeon;
+            if (GameStateManager.instance)
+            {
+                if (!GameStateManager.instance.GameManager)
+                {
+                    return;
+                }
+                _roomManager = GameStateManager.instance.GameManager.GetRoomManager();
+
+                if (!_roomManager)
+                {
+                    Debug.LogError("No room manager reference --- Check Prefab");
+                    return;
+                }
+            }
+        }
+        
+            _roomManager.OnRoomLoadComplete += BeginBuildDungeon;
             List<Door> targetDoors = startingRoom.GetDoorsInDirection(startDirection);
             Door targetDoor = null;
             if (targetDoors.Count>0)
@@ -92,25 +100,25 @@ public class DungeonGenerator : MonoBehaviour
                 switch (startDirection)
                 {
                     case Direction.North:
-                        RoomManager._instance.BeginRoomLoad(SceneIndex.N_Corridor6X10, targetDoor.GetRoomSpawnPoint());
+                        _roomManager.BeginRoomLoad(SceneIndex.N_Corridor6X10, targetDoor.GetRoomSpawnPoint());
                         _initRoomInfo = new RoomInfo(SceneIndex.N_Corridor6X10, 1, startDirection, RoomType.Corridor);
                         break;
                     case Direction.South:
-                        RoomManager._instance.BeginRoomLoad(SceneIndex.S_Corridor6X10, targetDoor.GetRoomSpawnPoint());
+                        _roomManager.BeginRoomLoad(SceneIndex.S_Corridor6X10, targetDoor.GetRoomSpawnPoint());
                         _initRoomInfo = new RoomInfo(SceneIndex.S_Corridor6X10, 1, startDirection, RoomType.Corridor);
                         break;
                     case Direction.West:
-                        RoomManager._instance.BeginRoomLoad(SceneIndex.W_Corridor6X10, targetDoor.GetRoomSpawnPoint());
+                        _roomManager.BeginRoomLoad(SceneIndex.W_Corridor6X10, targetDoor.GetRoomSpawnPoint());
                         _initRoomInfo = new RoomInfo(SceneIndex.W_Corridor6X10, 1, startDirection, RoomType.Corridor);
                         break;
                     case Direction.East:
-                        RoomManager._instance.BeginRoomLoad(SceneIndex.E_Corridor6X10, targetDoor.GetRoomSpawnPoint());
+                        _roomManager.BeginRoomLoad(SceneIndex.E_Corridor6X10, targetDoor.GetRoomSpawnPoint());
                         _initRoomInfo = new RoomInfo(SceneIndex.E_Corridor6X10, 1, startDirection, RoomType.Corridor);
                         break;
                 }
                
             }
-        }
+        
     }
     public void InitCrawlers(DungeonGenData data, Direction startDirection)
     {
@@ -119,7 +127,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             DungeonBuilder newBuilder = new GameObject("Dungeon Builder"+ _builders.Count).AddComponent<DungeonBuilder>();
 
-            newBuilder.InitBuilder(data, startDirection, RoomManager._instance.GetLoadedRooms()[RoomManager._instance.GetLoadedRooms().Count-1],Random.Range(data._minSteps,data._maxSteps+1));
+            newBuilder.InitBuilder(data, startDirection, _roomManager.GetLastRoom(),Random.Range(data._minSteps,data._maxSteps+1), _roomManager);
 
             _builders.Add(newBuilder);
         }

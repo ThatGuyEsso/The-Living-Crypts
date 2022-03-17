@@ -8,7 +8,6 @@ using System;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private bool _inDebug;
-    public static RoomManager _instance;
     private bool _isLoadingRoom;
     private bool _isUnLoadingRoom;
     private List<Room> _loadedRooms = new List<Room>();
@@ -16,21 +15,7 @@ public class RoomManager : MonoBehaviour
     //Events
     public Action OnRoomLoadComplete;
     public Action OnRoomUnloadComplete;
-    private void Awake()
-    {
-        if (_inDebug) Init();
-    }
-    public void Init()
-    {
-        if (!_instance)
-        {
-            _instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
+
 
 
     public void BeginRoomLoad(SceneIndex roomIndex, Vector3 position)
@@ -55,7 +40,15 @@ public class RoomManager : MonoBehaviour
             yield return null;
         }
         Debug.Log("Finished loading room");
-        _loadedRooms[_loadedRooms.Count - 1].transform.parent.position = position;
+        if(_loadedRooms[_loadedRooms.Count - 1].transform.parent)
+        {
+            _loadedRooms[_loadedRooms.Count - 1].transform.parent.position = position;
+        }
+        else
+        {
+            _loadedRooms[_loadedRooms.Count - 1].transform.position = position;
+        }
+  
         _loadedRooms[_loadedRooms.Count - 1].Init();
         OnRoomLoadComplete?.Invoke();
     }
@@ -80,7 +73,16 @@ public class RoomManager : MonoBehaviour
     }
 
 
-    public List<Room> GetLoadedRooms( ) { return _loadedRooms; }
+    public List<Room> GetLoadedRooms( ) 
+    { 
+        return _loadedRooms;
+    }
+
+    public Room GetLastRoom()
+    {
+        return _loadedRooms[_loadedRooms.Count-1];
+    }
+
 
 
     public void OnNewRoomLoaded(Room room)

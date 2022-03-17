@@ -14,16 +14,18 @@ public class DungeonBuilder :MonoBehaviour
     private bool _isWalking;
     private Door _currentTargetDoor;
     private RoomInfo _currentRoomInfo;
+
+    private RoomManager _roomManager;
     [SerializeField] private int _attemptsLeft;
     //Init builder
-    public void InitBuilder(DungeonGenData data, Direction dir,Room startingRoom,int steps)
+    public void InitBuilder(DungeonGenData data, Direction dir,Room startingRoom,int steps,RoomManager roomManager)
     {
         _genData = data;
         //_currentDirection = dir;
         _currentRoom = startingRoom;
         _remainingSteps = steps;
+        _roomManager = roomManager;
 
-    
         //remove opposite direction from start (No walking back)
         switch (dir)
         {
@@ -189,7 +191,7 @@ public class DungeonBuilder :MonoBehaviour
         if (!_currentTargetDoor.GetLinkedRoom())
         {
             Debug.Log(gameObject.name + "building new room");
-            RoomManager._instance.OnRoomLoadComplete += ValidateRoom;
+            _roomManager.OnRoomLoadComplete += ValidateRoom;
        
             switch (type)
             {
@@ -199,7 +201,7 @@ public class DungeonBuilder :MonoBehaviour
                     Debug.Log(gameObject.name + "building new corridor with info: " + _currentRoomInfo._roomSceneIndex);
                     if (_currentRoomInfo._weight != 0) {
                         Debug.Log(gameObject.name +  "Trying to spawn room");
-                        RoomManager._instance.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+                        _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
                     }
                     else
                         EndStep();
@@ -213,7 +215,7 @@ public class DungeonBuilder :MonoBehaviour
                         if (_currentRoomInfo._weight != 0)
                         {
                             Debug.Log(gameObject.name + "Trying to spawn room");
-                            RoomManager._instance.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+                            _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
                         }
                         else
                             EndStep();
@@ -225,7 +227,7 @@ public class DungeonBuilder :MonoBehaviour
                         if (_currentRoomInfo._weight != 0)
                         {
                             Debug.Log(gameObject.name + "Trying to spawn room");
-                            RoomManager._instance.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+                            _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
                         }
                         else
                             EndStep();
@@ -245,14 +247,14 @@ public class DungeonBuilder :MonoBehaviour
     public void ValidateRoom()
     {
         Debug.Log("Begin room validation");
-        RoomManager._instance.OnRoomLoadComplete -= ValidateRoom;
+        _roomManager.OnRoomLoadComplete -= ValidateRoom;
         if (!_isWalking)
         {
             Debug.Log("not walking end ");
             EndStep();
         }
         _previosRoom = _currentRoom;
-        _currentRoom = RoomManager._instance.GetLoadedRooms()[RoomManager._instance.GetLoadedRooms().Count - 1];
+        _currentRoom = _roomManager.GetLastRoom();
         _currentRoom.SetRoomInfo(_currentRoomInfo);
 
         if (_currentRoom.IsOverlapping(_genData._roomLayers))
@@ -274,7 +276,7 @@ public class DungeonBuilder :MonoBehaviour
 
     public void OnCurrentRoomRemoved()
     {
-        RoomManager._instance.OnRoomUnloadComplete -= OnCurrentRoomRemoved;
+        _roomManager.OnRoomUnloadComplete -= OnCurrentRoomRemoved;
         Debug.Log("Room Removed");
         _currentRoom = _previosRoom;
         if (_attemptsLeft > 0)
@@ -289,8 +291,12 @@ public class DungeonBuilder :MonoBehaviour
     }
     public void RemoveCurrentRoom()
     {
-        RoomManager._instance.OnRoomUnloadComplete += OnCurrentRoomRemoved;
-        RoomManager._instance.BeginUnload(_currentRoom.gameObject.scene);
+        if (GameStateManager.instance)
+        {
+            _roomManager.OnRoomUnloadComplete += OnCurrentRoomRemoved;
+            _roomManager.BeginUnload(_currentRoom.gameObject.scene);
+        }
+    
     }
 }
 

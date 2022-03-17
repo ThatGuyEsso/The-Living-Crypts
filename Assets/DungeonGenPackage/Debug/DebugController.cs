@@ -16,6 +16,7 @@ public class DebugController : MonoBehaviour {
     public static DebugCommand SPAWN_WEST_DUNGEON;
     public static DebugCommand SPAWN_EAST_DUNGEON;
     public List<object> commandList;
+    private RoomManager _roomManager;
     private void Awake()
     {
 
@@ -88,25 +89,25 @@ public class DebugController : MonoBehaviour {
 
     public void GenNorthDungeon()
     {
-        Room initRoom = RoomManager._instance.GetLoadedRooms()[0];
+        Room initRoom = _roomManager.GetLoadedRooms()[0];
 
         if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.North);
     }
     public void GenSouthDungeon()
     {
-        Room initRoom = RoomManager._instance.GetLoadedRooms()[0];
+        Room initRoom = _roomManager.GetLoadedRooms()[0];
 
         if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.South);
     }
     public void GenEastDungeon()
     {
-        Room initRoom = RoomManager._instance.GetLoadedRooms()[0];
+        Room initRoom = _roomManager.GetLoadedRooms()[0];
 
         if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.East);
     }
     public void GenWestDungeon()
     {
-        Room initRoom = RoomManager._instance.GetLoadedRooms()[0];
+        Room initRoom = _roomManager.GetLoadedRooms()[0];
 
         if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.West);
     }

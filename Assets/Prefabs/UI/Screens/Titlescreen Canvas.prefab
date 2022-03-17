@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3032086224314885049
 RectTransform:
@@ -78,12 +78,13 @@ GameObject:
   - component: {fileID: 3032086225198193031}
   - component: {fileID: 3032086225198193028}
   - component: {fileID: 3032086225198193029}
+  - component: {fileID: 3032086224191696343}
   m_Layer: 5
   m_Name: Titlescreen Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3032086225198193030
 RectTransform:
@@ -167,6 +168,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3032086224191696343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3032086225198193050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a12a89f77f47a4db9a582ea93fec4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3032086225251276085
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +196,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &3032086225251276084
 RectTransform:
@@ -315,6 +328,10 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 3279116612278932036, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3279116612316192070, guid: 14b57134527758e4792ac927bec9086a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -403,6 +420,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Settings
       objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192071, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b57134527758e4792ac927bec9086a, type: 3}
 --- !u!224 &546590819790623253 stripped
@@ -417,6 +438,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3032086224314885049}
     m_Modifications:
+    - target: {fileID: 3279116612278932036, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192069, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192069, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192069, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 3032086224191696343}
+    - target: {fileID: 3279116612316192069, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192069, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnPlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192069, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TitlescreenMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192069, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3279116612316192070, guid: 14b57134527758e4792ac927bec9086a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -505,6 +558,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192071, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b57134527758e4792ac927bec9086a, type: 3}
 --- !u!224 &546590819386462304 stripped
@@ -524,6 +581,10 @@ PrefabInstance:
       value: 'Credits
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612278932036, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3279116612316192070, guid: 14b57134527758e4792ac927bec9086a, type: 3}
       propertyPath: m_Pivot.x
@@ -613,6 +674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Credits
       objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192071, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b57134527758e4792ac927bec9086a, type: 3}
 --- !u!224 &546590819177008988 stripped
@@ -632,6 +697,10 @@ PrefabInstance:
       value: 'Quit
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612278932036, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3279116612316192070, guid: 14b57134527758e4792ac927bec9086a, type: 3}
       propertyPath: m_Pivot.x
@@ -720,6 +789,10 @@ PrefabInstance:
     - target: {fileID: 3279116612316192071, guid: 14b57134527758e4792ac927bec9086a, type: 3}
       propertyPath: m_Name
       value: QuitButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279116612316192071, guid: 14b57134527758e4792ac927bec9086a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b57134527758e4792ac927bec9086a, type: 3}

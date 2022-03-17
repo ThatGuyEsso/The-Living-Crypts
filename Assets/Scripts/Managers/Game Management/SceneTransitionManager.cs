@@ -9,6 +9,9 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
     private List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
     private bool isFading;
     LoadingScreen _loadingScreen;
+
+
+    public System.Action OnSceneAdded;
     public void BindToGameStateManager()
     {
         GameStateManager.instance.OnNewGameState += EvaluateGameState;
@@ -21,6 +24,8 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
             case GameState.Init:
                 BeginLoadMenuScreen(SceneIndex.TitleScreen);
             break;
+
+
         }
     }
 
@@ -29,6 +34,7 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
         if (GameStateManager.instance)
         {
             GameStateManager.instance.SceneManager = this;
+            BindToGameStateManager();
         }
     }
 
@@ -59,18 +65,23 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
         StopAllCoroutines();
         StartCoroutine(LoadLevel(sceneIndex));
     }
+
+    public void AddNewScene(SceneIndex sceneIndex)
+    {
+        StopAllCoroutines();
+        StartCoroutine(AddScene(sceneIndex));
+    }
     private IEnumerator LoadLevel(SceneIndex newLevel)
     {
         if (!ValidateHasLoadingScreen())
         {
 
             currentScene = newLevel;
-            GameStateManager.instance.BeginNewState(GameState.GameLevelLoaded);
+            GameStateManager.instance.BeginNewState(GameState.GameSceneLoadComplete);
             Debug.LogError("No Loading screen");
 
             yield break;
         }
-        GameStateManager.instance.BeginNewState(GameState.BeginLevelLoad);
    
         if (!_loadingScreen)
         {
@@ -80,24 +91,21 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
                 //clear scens loading
                 sceneLoading.Clear();
                 currentScene = newLevel;
-                GameStateManager.instance.BeginNewState(GameState.GameLevelLoaded);
+                GameStateManager.instance.BeginNewState(GameState.GameSceneLoadComplete);
                 yield return null;
             }
         }
-        if (!_loadingScreen.IsLoadingScreenOn())
+       
+        isFading = true;
+        _loadingScreen.OnFadeComplete += OnFadeComplete;
+        _loadingScreen.BeginFadeIn();
+        while (isFading)
         {
-            isFading = true;
-            _loadingScreen.OnFadeComplete += OnFadeComplete;
-            _loadingScreen.BeginFadeIn();
-            while (isFading)
-            {
-                yield return null;
-            }
+            yield return null;
         }
+
         yield return new WaitForSeconds(0.5f);
         sceneLoading.Add(SceneManager.UnloadSceneAsync((int)currentScene));
-        //sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.PlayerScene, LoadSceneMode.Additive));
-        //sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndex.HUDscene, LoadSceneMode.Additive));
         sceneLoading.Add(SceneManager.LoadSceneAsync((int)newLevel, LoadSceneMode.Additive));
         //wait until every scene has unloaded
         for (int i = 0; i < sceneLoading.Count; i++)
@@ -107,8 +115,28 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
                 yield return null;
             }
         }
+        currentScene = newLevel;
+        EvaluateSceneLoaded(currentScene);
 
+
+    }
+    private IEnumerator AddScene(SceneIndex newScene)
+    {
     
+        sceneLoading.Add(SceneManager.LoadSceneAsync((int)newScene, LoadSceneMode.Additive));
+        //wait until every scene has unloaded
+        for (int i = 0; i < sceneLoading.Count; i++)
+        {
+            while (!sceneLoading[i].isDone)
+            {
+                yield return null;
+            }
+        }
+
+        OnSceneAdded?.Invoke();
+        EvaluateSceneLoaded(newScene);
+
+
     }
     private IEnumerator LoadMenuScreen(SceneIndex menuSceneIndex)
     {
@@ -116,7 +144,7 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
         {
 
             currentScene = menuSceneIndex;
-            GameStateManager.instance.BeginNewState(GameState.GameLevelLoaded);
+            GameStateManager.instance.BeginNewState(GameState.GameSceneLoadComplete);
             Debug.LogError("No Loading screen");
 
             yield break;
@@ -174,8 +202,11 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
                 GameStateManager.instance.BeginNewState(GameState.TitleScreen);
                 
                 break;
+            case SceneIndex.GameRootScene:
+                GameStateManager.instance.BeginNewState(GameState.GameSceneLoadComplete);
 
-           
+                break;
+
         }
     }
 

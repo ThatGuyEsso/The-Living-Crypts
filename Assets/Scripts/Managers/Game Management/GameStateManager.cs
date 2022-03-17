@@ -8,15 +8,19 @@ public class GameStateManager : MonoBehaviour
     private GameState currentState = GameState.Init;
     public Action<GameState> OnNewGameState;
 
+    [HideInInspector]
     public SceneTransitionManager SceneManager;
+    [HideInInspector]
     public AudioManager AudioManager;
+    [HideInInspector]
     public LoadingScreen LoadingScreenManager;
-    public RoomManager RoomManager;
 
+    [HideInInspector]
+    public GameManager GameManager;
+    [SerializeField] private GameObject GameManagerPrefab;
     [SerializeField] private GameObject[] managersToInit;
-    [SerializeField] private GameObject[] dungeonManagersToInit;
 
-    [SerializeField] private GameObject RoomManagerPrefab;
+
 
     private void Awake()
     {
@@ -58,19 +62,7 @@ public class GameStateManager : MonoBehaviour
 
 
     }
-    private void InitDungeonManagers()
-    {
-        foreach (GameObject manager in dungeonManagersToInit)
-        {
-            GameObject currManager = Instantiate(manager, Vector3.zero, Quaternion.identity);
-            IInitialisable init = currManager.GetComponent<IInitialisable>();
-            if (init != null) init.Init();
-
-
-        }
-        BeginNewState(GameState.GameSetUp);
-
-    }
+  
     public void BeginNewState(GameState newState)
     {
         currentState = newState;
@@ -87,23 +79,43 @@ public class GameStateManager : MonoBehaviour
                 break;
             case GameState.BeginLevelLoad:
                 break;
-            case GameState.GameLevelLoaded:
-                InitDungeonManagers();
+
+            case GameState.GoToGameScene:
+                SceneManager.BeginLoadLevel(SceneIndex.GameRootScene);
                 break;
-            case GameState.GameSetUp:
+
+            case GameState.GameSceneLoadComplete:
+                if (GameManager)
+                {
+                    GameManager.InitGame();
+                }
+                else
+                {
+                    GameManager = Instantiate(GameManagerPrefab, Vector3.zero, Quaternion.identity).GetComponent<GameManager>();
+
+                    if (GameManager)
+                    {
+                        GameManager.Init();
+                        GameManager.InitGame();
+                    }
+                    else
+                    {
+                        Debug.LogError("No Game manager reference --- Check Prefab");
+                    }
+                }
                 break;
-            case GameState.LevelGenerated:
-                LoadingScreenManager.BeginFadeOut();
-                break;
-            case GameState.PlayerSpawned:
+
+            case GameState.GameSceneSetUpComplete:
+                if (LoadingScreenManager.IsLoadingScreenOn())
+                {
+
+                    LoadingScreenManager.BeginFadeOut();
+                 
+                }
                 break;
             case GameState.GamePaused:
                 break;
             case GameState.GameRunning:
-                break;
-            case GameState.PlayerDied:
-                break;
-            case GameState.HighScoreTable:
                 break;
         }
         OnNewGameState?.Invoke(currentState);
