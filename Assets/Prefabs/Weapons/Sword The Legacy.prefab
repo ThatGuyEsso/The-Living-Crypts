@@ -842,7 +842,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a353cb18dc84184c9af97a5f9158591, type: 2}
+  - {fileID: 2100000, guid: 118f8d13e10ee5e4580ada754f28dae6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -897,6 +897,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaefc4babed527049aa9110053fce36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _positionOffset: {x: 0, y: 0, z: 0}
+  _rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+  UseLocalRot: 1
 --- !u!114 &6756061220747736393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -968,11 +971,13 @@ MonoBehaviour:
   _equipTransform: {fileID: 0}
   _primaryFireRate: 0
   _secondaryFireRate: 2
+  _followEquipSpeed: 20
   _animController: {fileID: 1670333479}
   _attackCollider: {fileID: 1296050697}
   _primaryTimeToIdle: 1.5
   _secondaryTimeToIdle: 0.5
   _idleReset: {fileID: 2486976172112579727}
+  _idleResetRate: 5
 --- !u!54 &5183274557755777935
 Rigidbody:
   m_ObjectHideFlags: 0

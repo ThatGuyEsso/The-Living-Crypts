@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
     [SerializeField] private GameObject RoomManagerPrefab;
     [SerializeField] private GameObject[] dungeonManagersToInit;
+    [SerializeField] private Material SkyBox;
+    [SerializeField] private LightingSettings lightSettings;
     // Start is called before the first frame update
 
     private bool _isWaiting;
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     }
     public void InitGame()
     {
+        RenderSettings.skybox = SkyBox;
+
         StartCoroutine(SetUpGameScene());
     }
     private void InitDungeonManagers()
