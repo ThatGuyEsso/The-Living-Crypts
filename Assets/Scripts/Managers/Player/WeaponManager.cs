@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : MonoBehaviour,IInitialisable
 {
     public static WeaponManager _instance;
 
@@ -12,11 +12,10 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private Transform _weaponEquipPoint;
     [SerializeField] private FPSMovement _ownerMovement;
     private Controls _input;
-    private void Awake()
-    {
-        Init();
-    }
-    private void Init()
+
+    public System.Action<string> OnWeaponEquipped;
+   
+    public void Init()
     {
         if (!_instance)
         {
@@ -61,6 +60,7 @@ public class WeaponManager : MonoBehaviour
         if (!_equippedWeapon)
         {
             _equippedWeapon = weapon;
+            OnWeaponEquipped?.Invoke(weapon.WeaponName);
             _isWeaponEquipped = true;
             _equippedWeapon.transform.position = _weaponEquipPoint.position;
             _equippedWeapon.SetEquipPoint(_weaponEquipPoint);
@@ -71,6 +71,7 @@ public class WeaponManager : MonoBehaviour
             UnequipWeapon();
             EquipWeapon(weapon);
         }
+
 
    
     }

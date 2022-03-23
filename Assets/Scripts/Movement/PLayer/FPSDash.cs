@@ -40,6 +40,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         _input.Dash.SetCallbacks(this);
         _input.Enable();
         if (_gravity) _initGravScalar = _gravity.GravityScale;
+        Debug.Log("Dash");
     }
 
     private void FixedUpdate()

@@ -122,4 +122,6 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         _isOwnerMoving = isMoving;
     }
+
+    public string WeaponName { get { return _weaponName; } }
 }

@@ -673,6 +673,33 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Interact"",
+            ""id"": ""08ea524c-aadd-4b02-954a-64dfe78d8231"",
+            ""actions"": [
+                {
+                    ""name"": ""TryToInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d3afc8b-4391-413e-8a1f-05bec6ec8ec2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""765062b3-7790-4dfa-8c3c-12ad56573ae0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""TryToInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -735,6 +762,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
         m_Attack_PrimaryAttack = m_Attack.FindAction("PrimaryAttack", throwIfNotFound: true);
         m_Attack_SecondaryAttack = m_Attack.FindAction("SecondaryAttack", throwIfNotFound: true);
+        // Interact
+        m_Interact = asset.FindActionMap("Interact", throwIfNotFound: true);
+        m_Interact_TryToInteract = m_Interact.FindAction("TryToInteract", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1092,6 +1122,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public AttackActions @Attack => new AttackActions(this);
+
+    // Interact
+    private readonly InputActionMap m_Interact;
+    private IInteractActions m_InteractActionsCallbackInterface;
+    private readonly InputAction m_Interact_TryToInteract;
+    public struct InteractActions
+    {
+        private @Controls m_Wrapper;
+        public InteractActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TryToInteract => m_Wrapper.m_Interact_TryToInteract;
+        public InputActionMap Get() { return m_Wrapper.m_Interact; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractActions instance)
+        {
+            if (m_Wrapper.m_InteractActionsCallbackInterface != null)
+            {
+                @TryToInteract.started -= m_Wrapper.m_InteractActionsCallbackInterface.OnTryToInteract;
+                @TryToInteract.performed -= m_Wrapper.m_InteractActionsCallbackInterface.OnTryToInteract;
+                @TryToInteract.canceled -= m_Wrapper.m_InteractActionsCallbackInterface.OnTryToInteract;
+            }
+            m_Wrapper.m_InteractActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @TryToInteract.started += instance.OnTryToInteract;
+                @TryToInteract.performed += instance.OnTryToInteract;
+                @TryToInteract.canceled += instance.OnTryToInteract;
+            }
+        }
+    }
+    public InteractActions @Interact => new InteractActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -1147,5 +1210,9 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnPrimaryAttack(InputAction.CallbackContext context);
         void OnSecondaryAttack(InputAction.CallbackContext context);
+    }
+    public interface IInteractActions
+    {
+        void OnTryToInteract(InputAction.CallbackContext context);
     }
 }

@@ -47,6 +47,7 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
         _canMove = true;
         _input.Movement.Move.canceled += _ => BeginStop();
         _isInitialised = true;
+        Debug.Log("Move");
     }
 
     private void Update()

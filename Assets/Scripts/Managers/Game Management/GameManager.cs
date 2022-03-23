@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameplayEvents
+{
+    WeaponSelected,
+    DungeonInvoked,
+    GameComplete,
+    PlayerDied,
+    PlayerRespawned
+};
+
 public class GameManager : MonoBehaviour, IManager, IInitialisable
 {
 
@@ -11,12 +20,16 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     [SerializeField] private LightingSettings lightSettings;
     // Start is called before the first frame update
 
+    public System.Action<GameplayEvents> OnNewGamplayEvent;
+
     private bool _isWaiting;
 
     private RoomManager _roomManager;
+    private HUDManager _HUDManager;
     private SceneTransitionManager _sceneManager;
     private Transform _spawnPoint;
     private GameObject _player;
+    private GameplayEvents _currentGameplayEvent;
     public void BindToGameStateManager()
     {
         GameStateManager.instance.OnNewGameState += EvaluateGameState;
@@ -37,6 +50,12 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
 
         }
+    }
+
+    public void BeginNewGameplayEvent(GameplayEvents Event)
+    {
+        _currentGameplayEvent = Event;
+        OnNewGamplayEvent?.Invoke(_currentGameplayEvent);
     }
 
     public void Init()
@@ -163,6 +182,20 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
         }
         _player.transform.position = _spawnPoint.position;
+
+        _player.GetComponent<PlayerBehaviour>().Init();
+        if (WeaponManager._instance)
+        {
+            WeaponManager._instance.OnWeaponEquipped += OnPlayerHasEquippedWeapon;
+        }
+
+        _isWaiting = true;
+        _sceneManager.AddNewScene(SceneIndex.HUDscene);
+        while (_isWaiting)
+        {
+            yield return null;
+        }
+        _HUDManager = FindObjectOfType<HUDManager>();
         _sceneManager.OnSceneAdded -= OnWaitComplete;
 
         GameStateManager.instance.BeginNewState(GameState.GameSceneSetUpComplete);
@@ -176,5 +209,24 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     private void OnWaitComplete()
     {
         _isWaiting = false;
+    }
+
+
+    public HUDManager HUDManager
+    {
+        get
+        {
+            return _HUDManager;
+        }
+    }
+
+    public void OnPlayerHasEquippedWeapon(string weapon)
+    {
+        if (WeaponManager._instance)
+        {
+            WeaponManager._instance.OnWeaponEquipped -= OnPlayerHasEquippedWeapon;
+        }
+
+        BeginNewGameplayEvent(GameplayEvents.WeaponSelected);
     }
 }

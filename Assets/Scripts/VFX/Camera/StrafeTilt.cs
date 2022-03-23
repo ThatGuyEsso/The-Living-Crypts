@@ -101,6 +101,7 @@ public class StrafeTilt : MonoBehaviour,IInitialisable
             _movementController.OnStop += OnStopped;
             if (_targetCamera) _defaultTilt = _targetCamera.m_Lens.Dutch;
             _isInitialised = true;
+           
         }
     }
 
