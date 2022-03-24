@@ -59,6 +59,7 @@ public class GenerationCounterManager : MonoBehaviour
                 OnStandby();
                 break;
             case GameplayEvents.DungeonInvoked:
+                OnPending();
                 break;
             case GameplayEvents.GameComplete:
                 break;
@@ -82,6 +83,22 @@ public class GenerationCounterManager : MonoBehaviour
             light.enabled = true;
             light.intensity = LightIntensity;
             light.color = StandByColour;
+        }
+    }
+
+    public void OnPending()
+    {
+        foreach (MeshRenderer renderer in ProgressCounters)
+        {
+
+            renderer.material = PendingMaterial;
+
+        }
+        foreach (Light light in ProgressCounterLights)
+        {
+            light.enabled = true;
+            light.intensity = LightIntensity;
+            light.color = PendingColour;
         }
     }
 

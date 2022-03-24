@@ -33,8 +33,8 @@ public class WeaponPickUp : BasePickUp, Controls.IInteractActions
 
 
         _input = new Controls();
-        _isEnabled = true;
         _input.Interact.SetCallbacks(this);
+        _isEnabled = true;
         PickUpName = _weaponPrefab.GetComponent<BaseWeapon>().WeaponName;
 
 
