@@ -11,6 +11,7 @@ public class HazardVolume : MonoBehaviour
 
     private GameObject _owner;
     private bool _isAlive;
+    private bool _isPersistent=false;
     private float _timeToDamage;
     private float _currentLifeTime;
     private List<GameObject> _objectsToAttack = new List<GameObject>();
@@ -34,6 +35,7 @@ public class HazardVolume : MonoBehaviour
     {
         if (_isAlive)
         {
+
             if (_currentLifeTime <=0f) {
                 _isAlive = false;
                 RemoveHazard();
@@ -43,6 +45,18 @@ public class HazardVolume : MonoBehaviour
             {
                 _currentLifeTime -= Time.deltaTime;
             }
+            if (_timeToDamage <= 0f)
+            {
+                ApplyDamage();
+                _timeToDamage = TickRate;
+            }
+            else
+            {
+                _timeToDamage -= Time.deltaTime;
+            }
+
+        }else if (_isPersistent)
+        {
             if (_timeToDamage <= 0f)
             {
                 ApplyDamage();
@@ -93,6 +107,44 @@ public class HazardVolume : MonoBehaviour
                 _objectsToAttack.Remove(other.gameObject);
             }
          
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Iteam otherTeam = other.gameObject.GetComponent<Iteam>();
+
+        if (otherTeam == null)
+        {
+            return;
+        }
+        Iteam ourTeam = _owner.GetComponent<Iteam>();
+
+        if (ourTeam == null || !otherTeam.IsOnTeam(Team))
+        {
+            if (_objectsToAttack.Count == 0)
+            {
+                _objectsToAttack.Add(other.gameObject);
+                ApplyDamage();
+                _timeToDamage = TickRate;
+            }
+            else
+            {
+                _objectsToAttack.Add(other.gameObject);
+            }
+        }
+    }
+
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (_objectsToAttack.Count > 0)
+        {
+            if (_objectsToAttack.Contains(other.gameObject))
+            {
+                _objectsToAttack.Remove(other.gameObject);
+            }
+
         }
     }
     public void ApplyDamage()
