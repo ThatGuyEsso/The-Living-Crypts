@@ -229,4 +229,6 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
         BeginNewGameplayEvent(GameplayEvents.WeaponSelected);
     }
+
+    public GameplayEvents Event { get {return _currentGameplayEvent; } }
 }

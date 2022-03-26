@@ -1,33 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-
-public class Door : MonoBehaviour
-{ 
-    [SerializeField] private bool _inDebug;
-    [SerializeField] private GameObject _entryDebugPrefab;
-    [SerializeField] private GameObject _exitDebugPrefab;
-    [SerializeField] private GameObject _debugVisual;
+public class Door : MonoBehaviour, Controls.IInteractActions
+{
     [Header("Door Settings")]
     [SerializeField] private Transform _roomSpawnPoint;
     [SerializeField] private bool _isEntry;
     [SerializeField] private Direction _faceDirection;
-    [SerializeField] private float _width, _length,_height;
-    [SerializeField] private Vector3 _offset;
+    [SerializeField] private float _width, _length, _height;
+
+    [Header("Debug Settings")]
+    [SerializeField] private bool _inDebug;
+    [SerializeField] private GameObject _entryDebugPrefab;
+    [SerializeField] private GameObject _exitDebugPrefab;
+    [SerializeField] private GameObject _debugVisual;
     [SerializeField] private Vector3 _debugOffset;
-    [SerializeField] private Vector2Int _rootCell;
+    [SerializeField] private Vector3 _offset;
+
+    [Header("Interaction")]
+    [SerializeField] private string InteractPrompt = "[E] - To Open Door";
+    private Controls _input;
+    [Header("Door Animations")]
+    [SerializeField] private string OpenAnimName, CloseAnimName;
+    //Events
+    public System.Action OnDoorOpened;
+    public System.Action OnDoorClosed;
+    public System.Action OnDoorTriggered;
+    //States
+    private bool _isInRange;
+    private bool _canOpen;
+    private bool _isOpen=false;
+
     //Object References
     private Room _parentRoom;
     private Room _linkedRoom;
+    private HUDPrompt Prompt;
+    private Animator _animator;
     bool _isInitialised;
     public void Init()
     {
-      
-      
-        _isInitialised = true;
-        if (_inDebug) SpawnDebugVisual();
+        _animator = GetComponent<Animator>();
+        _input = new Controls();
+        _input.Interact.SetCallbacks(this);
+        if (_inDebug)
+        {
+            SpawnDebugVisual();
+        }
 
+   
     }
     public void RegisterOnGrid(Grid2D<GridObject> grid)
     {
@@ -44,41 +66,7 @@ public class Door : MonoBehaviour
 
 
     }
- 
-    //public void GetTargetCells()
-    //{
-    //    if (_occupiedCells.Count > 0)
-    //    {
-    //        switch (_faceDirection)
-    //        {
-    //            case GridDirection.North:
-    //                for (int i= 0; i < _occupiedCells.Count;i++ ){
-    //                    _targetCells.Add(new Vector2Int(_occupiedCells[i].x, _occupiedCells[i].y + 1));
-    //                }
-    //            break;
-    //            case GridDirection.South:
-    //                for (int i = 0; i < _occupiedCells.Count; i++)
-    //                {
-    //                    _targetCells.Add(new Vector2Int(_occupiedCells[i].x, _occupiedCells[i].y - 1));
-    //                }
-    //                break;
-    //            case GridDirection.West:
-    //                for (int i = 0; i < _occupiedCells.Count; i++)
-    //                {
-    //                    _targetCells.Add(new Vector2Int(_occupiedCells[i].x-1, _occupiedCells[i].y));
-    //                }
-    //                break;
-    //            case GridDirection.East:
-    //                for (int i = 0; i < _occupiedCells.Count; i++)
-    //                {
-    //                    _targetCells.Add(new Vector2Int(_occupiedCells[i].x + 1, _occupiedCells[i].y));
-    //                }
-    //                break;
-    //        }
-    //    }
-  
-    //}
-    public Vector2Int GetRootCell() { return _rootCell; }
+
     public void SpawnDebugVisual()
     {
 
@@ -106,8 +94,144 @@ public class Door : MonoBehaviour
     public void SetLinkedRoom(Room link) { _linkedRoom = link; }
     public Room GetLinkedRoom( ) { return _linkedRoom; }
 
+
+ 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!_canOpen) return;
+        if (other.CompareTag("Player"))
+        {
+            _isInRange = true;
+            if (_input != null)
+            {
+                _input.Enable();
+            }
+
+            if (Prompt)
+            {
+                Prompt.ShowPrompt(InteractPrompt);
+            }
+            else
+            {
+                Prompt = GetPromptFromGameManager();
+                if (Prompt)
+                {
+                    Prompt.ShowPrompt(InteractPrompt);
+                }
+
+            }
+
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!_canOpen) return;
+        if (other.CompareTag("Player"))
+        {
+            _isInRange = false;
+            if (_input != null)
+            {
+                _input.Disable();
+            }
+            if (Prompt)
+            {
+                Prompt.RemovePrompt(InteractPrompt);
+            }
+            else
+            {
+                Prompt = GetPromptFromGameManager();
+                if (Prompt)
+                {
+                    Prompt.RemovePrompt(InteractPrompt);
+                }
+
+            }
+        }
+    }
+    public HUDPrompt GetPromptFromGameManager()
+    {
+        if (!GameStateManager.instance)
+        {
+            return null;
+        }
+        if (!GameStateManager.instance.GameManager)
+        {
+            return null;
+        }
+        if (!GameStateManager.instance.GameManager.HUDManager)
+        {
+            return null;
+        }
+        return GameStateManager.instance.GameManager.HUDManager.PromptManager;
+    }
+
+    public void OnTryToInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed && _isInRange)
+        {
+            _canOpen = false;
+            OnDoorTriggered.Invoke();
+            OpenDoor();
+        }
+    }
+
+
+    public void OpenDoor()
+    {
+        if (_animator)
+        {
+            _animator.enabled = true;
+            _animator.Play(OpenAnimName, 0, 0f);
+        }
+    }
+
+    public void CloseDoor()
+    {
+        if (_animator)
+        {
+            _animator.enabled = true;
+            _animator.Play(CloseAnimName, 0, 0f);
+        }
+    }
+    private void OnDisable()
+    {
+        if (_input != null)
+        {
+            _input.Disable();
+        }
+    }
     private void OnDestroy()
     {
-        if (_debugVisual) Destroy(_debugVisual);
+        if (_debugVisual)
+        {
+            Destroy(_debugVisual);
+        }
+
+        if (_input != null)
+        {
+            _input.Disable();
+        }
+    }
+
+    public void OnDoorOpenComplete()
+    {
+        if (_animator)
+        {
+            _animator.enabled = false;
+        }
+    
+        _isOpen = true;
+        OnDoorOpened?.Invoke();
+    }
+    public void OnDoorCloseComplete()
+    {
+        if (_animator)
+        {
+            _animator.enabled = false;
+        }
+        _isOpen = false;
+        OnDoorClosed?.Invoke();
     }
 }
