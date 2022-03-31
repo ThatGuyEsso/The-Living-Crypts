@@ -6,11 +6,14 @@ public enum RoomType
 {
     Crypt,
  
-    Corridor
+    Corridor,
+
+    BossCrypt
 };
 
 public class Room : MonoBehaviour
 {
+    [SerializeField] private bool _inDebug;
     //Dimensions
 
     [SerializeField] private int _width, _length, _height;
@@ -22,7 +25,7 @@ public class Room : MonoBehaviour
 
     private List<Door> _doors = new List<Door>();
 
-
+    private RoomManager _roomManager;
     [SerializeField] private bool _useGridOffset = false;
 
     private bool _drawDebug;
@@ -44,8 +47,14 @@ public class Room : MonoBehaviour
         }
     }
 
-   
 
+    private void Awake()
+    {
+        if (_inDebug)
+        {
+            Init();
+        }
+    }
     public void Init()
     {
       
@@ -75,6 +84,20 @@ public class Room : MonoBehaviour
 
     private void OnEnable()
     {
+        if (FindObjectOfType<DebugController>())
+        {
+            if (!_roomManager)
+            {
+                _roomManager = FindObjectOfType<RoomManager>();
+                _roomManager.OnNewRoomLoaded(this);
+            }
+
+            if (!_roomManager)
+            {
+                Debug.LogError("No Room Manager");
+                return;
+            }
+        }
         if (!GameStateManager.instance) return;
         if (!GameStateManager.instance.GameManager) return;
         if (!GameStateManager.instance.GameManager.GetRoomManager()) return;

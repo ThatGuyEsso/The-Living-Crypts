@@ -17,7 +17,7 @@ public class RoomManager : MonoBehaviour
     public Action OnRoomUnloadComplete;
 
 
-
+    
     public void BeginRoomLoad(SceneIndex roomIndex, Vector3 position)
     {
         if (_isLoadingRoom)
@@ -40,14 +40,22 @@ public class RoomManager : MonoBehaviour
             yield return null;
         }
         Debug.Log("Finished loading room");
-        if(_loadedRooms[_loadedRooms.Count - 1].transform.parent)
+        if (_loadedRooms.Count > 1)
         {
-            _loadedRooms[_loadedRooms.Count - 1].transform.parent.position = position;
+            if (_loadedRooms[_loadedRooms.Count - 1].transform.parent)
+            {
+                _loadedRooms[_loadedRooms.Count - 1].transform.parent.position = position;
+            }
+            else
+            {
+                _loadedRooms[_loadedRooms.Count - 1].transform.position = position;
+            }
         }
         else
         {
-            _loadedRooms[_loadedRooms.Count - 1].transform.position = position;
+            _loadedRooms[0].transform.position = Vector3.zero;
         }
+   
   
         _loadedRooms[_loadedRooms.Count - 1].Init();
         OnRoomLoadComplete?.Invoke();

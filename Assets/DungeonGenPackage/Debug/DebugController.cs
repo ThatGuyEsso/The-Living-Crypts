@@ -17,6 +17,7 @@ public class DebugController : MonoBehaviour {
     public static DebugCommand SPAWN_EAST_DUNGEON;
     public List<object> commandList;
     private RoomManager _roomManager;
+    private DungeonGenerator _dungeonGenerator;
     private void Awake()
     {
 
@@ -89,27 +90,150 @@ public class DebugController : MonoBehaviour {
 
     public void GenNorthDungeon()
     {
-        Room initRoom = _roomManager.GetLoadedRooms()[0];
+        if (!_roomManager)
+        {
+            _roomManager = FindObjectOfType<RoomManager>();
+        }
 
-        if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.North);
+        if (!_roomManager)
+        {
+            Debug.LogError("No Room Manager");
+            return;
+        }
+
+
+        if (!_dungeonGenerator)
+        {
+            _dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+        }
+
+        if (!_dungeonGenerator)
+        {
+            Debug.LogError("No Dungeon Generator ");
+            return;
+        }
+        if (_roomManager.GetLoadedRooms().Count == 0)
+        {
+            Room initRoom = FindObjectOfType<Room>();
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.North);
+        }
+        else
+        {
+            Room initRoom = _roomManager.GetLoadedRooms()[0];
+
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.North);
+        }
+  
     }
     public void GenSouthDungeon()
     {
-        Room initRoom = _roomManager.GetLoadedRooms()[0];
+        if (!_roomManager)
+        {
+            _roomManager = FindObjectOfType<RoomManager>();
+        }
 
-        if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.South);
+        if (!_roomManager)
+        {
+            Debug.LogError("No Room Manager");
+            return;
+        }
+
+
+        if (!_dungeonGenerator)
+        {
+            _dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+        }
+
+        if (!_dungeonGenerator)
+        {
+            Debug.LogError("No Dungeon Generator ");
+            return;
+        }
+        if (_roomManager.GetLoadedRooms().Count == 0)
+        {
+            Room initRoom = FindObjectOfType<Room>();
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.South);
+        }
+        else
+        {
+            Room initRoom = _roomManager.GetLoadedRooms()[0];
+
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.South);
+        }
     }
     public void GenEastDungeon()
     {
-        Room initRoom = _roomManager.GetLoadedRooms()[0];
+        if (!_roomManager)
+        {
+            _roomManager = FindObjectOfType<RoomManager>();
+        }
 
-        if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.East);
+        if (!_roomManager)
+        {
+            Debug.LogError("No Room Manager");
+            return;
+        }
+
+
+        if (!_dungeonGenerator)
+        {
+            _dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+        }
+
+        if (!_dungeonGenerator)
+        {
+            Debug.LogError("No Dungeon Generator ");
+            return;
+        }
+        if (_roomManager.GetLoadedRooms().Count == 0)
+        {
+            Room initRoom = FindObjectOfType<Room>();
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.East);
+        }
+        else
+        {
+            Room initRoom = _roomManager.GetLoadedRooms()[0];
+
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.East);
+        }
     }
     public void GenWestDungeon()
     {
-        Room initRoom = _roomManager.GetLoadedRooms()[0];
+        if (!_roomManager)
+        {
+            _roomManager = FindObjectOfType<RoomManager>();
+        }
 
-        if (DungeonGenerator._instance) DungeonGenerator._instance.BeginDungeonGeneration(initRoom, Direction.West);
+        if (!_roomManager)
+        {
+            Debug.LogError("No Room Manager");
+            return;
+        }
+
+
+        if (!_dungeonGenerator)
+        {
+            _dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+        }
+
+        if (!_dungeonGenerator)
+        {
+            Debug.LogError("No Dungeon Generator ");
+            return;
+        }
+        if (_roomManager.GetLoadedRooms().Count == 0)
+        {
+            Room initRoom = FindObjectOfType<Room>();
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.West);
+        }
+        else
+        {
+            Room initRoom = _roomManager.GetLoadedRooms()[0];
+
+            _dungeonGenerator.BeginDungeonGeneration(initRoom, Direction.West);
+        }
     }
 
+
+ 
 }

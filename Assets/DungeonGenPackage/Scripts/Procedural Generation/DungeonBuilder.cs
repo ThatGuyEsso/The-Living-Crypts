@@ -14,18 +14,18 @@ public class DungeonBuilder :MonoBehaviour
     private bool _isWalking;
     private Door _currentTargetDoor;
     private RoomInfo _currentRoomInfo;
-
+    DungeonGenerator _generationManager;
     private RoomManager _roomManager;
     [SerializeField] private int _attemptsLeft;
     //Init builder
-    public void InitBuilder(DungeonGenData data, Direction dir,Room startingRoom,int steps,RoomManager roomManager)
+    public void InitBuilder(DungeonGenData data, Direction dir,Room startingRoom,int steps,RoomManager roomManager, DungeonGenerator GenerationManager)
     {
         _genData = data;
         //_currentDirection = dir;
         _currentRoom = startingRoom;
         _remainingSteps = steps;
         _roomManager = roomManager;
-
+        _generationManager = GenerationManager;
         //remove opposite direction from start (No walking back)
         switch (dir)
         {
@@ -160,13 +160,13 @@ public class DungeonBuilder :MonoBehaviour
         if (_remainingSteps <= 0)
         {
             Debug.Log(gameObject.name + "Done Building");
-            DungeonGenerator._instance.GenComplete();
+            _generationManager.GenComplete();
 
         }
         else
         {
             Debug.Log(gameObject.name + "not done Building");
-            DungeonGenerator._instance.EvaluateCanBuild();
+            _generationManager.EvaluateCanBuild();
         }
       
     }
