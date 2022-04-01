@@ -42,8 +42,8 @@ public class Room : MonoBehaviour
         if (_drawDebug)
         {
 
-            ExtDebug.DrawBoxCastBox(transform.position, new Vector3(_width / 2 - 0.5f, _height/2.0f - 0.5f, _length / 2 - 0.5f), transform.rotation,
-                Vector3.up,2.5f, Color.cyan) ;
+            ExtDebug.DrawBoxCastBox(transform.position + Vector3.up * -1 , new Vector3(_width / 2f - 0.5f, _height / 2f - 0.5f, _length / 2f - 0.5f), Quaternion.identity,
+                Vector3.up, _height / 2f, Color.cyan) ;
         }
     }
 
@@ -114,7 +114,7 @@ public class Room : MonoBehaviour
             RaycastHit[] hits;
 
 
-            hits = Physics.BoxCastAll(transform.position , new Vector3(_width / 2-0.5f, 2.5f, _length / 2-0.5f), Vector3.up, transform.rotation, 2.5f, overLapLayers);
+            hits = Physics.BoxCastAll(transform.position+ Vector3.up*-1 , new Vector3(_width / 2f- 0.5f, _height/2f-0.5f, _length / 2f- 0.5f), Vector3.up,Quaternion.identity, _height/2f, overLapLayers);
             _drawDebug = true;
             if (hits.Length > 0)
             {

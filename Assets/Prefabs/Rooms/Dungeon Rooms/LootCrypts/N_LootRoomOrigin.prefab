@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7768780110510496390}
   - component: {fileID: 7768780110510496389}
   - component: {fileID: 7768780110510496388}
-  - component: {fileID: 7768780110510496387}
+  - component: {fileID: 5790541722070777549}
   m_Layer: 14
   m_Name: Wall
   m_TagString: Untagged
@@ -750,8 +750,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768780110510496386}
   m_Mesh: {fileID: 0}
---- !u!64 &7768780110510496387
-MeshCollider:
+--- !u!65 &5790541722070777549
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -760,10 +760,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 24, y: 8, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768780110805071293
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad28c17fc9cafe548a8073394790cab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inDebug: 0
   _width: 24
   _length: 24
   _height: 9
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 7768780110815806391}
   - component: {fileID: 7768780110815806390}
   - component: {fileID: 7768780110815806389}
-  - component: {fileID: 7768780110815806388}
+  - component: {fileID: 7428223946865350001}
   m_Layer: 14
   m_Name: Wall (3)
   m_TagString: Untagged
@@ -1584,8 +1584,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768780110815806387}
   m_Mesh: {fileID: 0}
---- !u!64 &7768780110815806388
-MeshCollider:
+--- !u!65 &7428223946865350001
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1594,10 +1594,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 23, y: 8, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768780110832499673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1610,7 @@ GameObject:
   - component: {fileID: 7768780110832499677}
   - component: {fileID: 7768780110832499676}
   - component: {fileID: 7768780110832499675}
-  - component: {fileID: 7768780110832499674}
+  - component: {fileID: 2998673253923822019}
   m_Layer: 11
   m_Name: Floor
   m_TagString: Untagged
@@ -1926,8 +1925,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768780110832499673}
   m_Mesh: {fileID: 0}
---- !u!64 &7768780110832499674
-MeshCollider:
+--- !u!65 &2998673253923822019
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1936,10 +1935,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 24, y: 1, z: 24}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768780111257894918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,7 +1951,7 @@ GameObject:
   - component: {fileID: 7768780111257894923}
   - component: {fileID: 7768780111257894922}
   - component: {fileID: 7768780111257894921}
-  - component: {fileID: 7768780111257894920}
+  - component: {fileID: 7342095987645141555}
   m_Layer: 14
   m_Name: Ceiling
   m_TagString: Untagged
@@ -2268,8 +2266,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768780111257894918}
   m_Mesh: {fileID: 0}
---- !u!64 &7768780111257894920
-MeshCollider:
+--- !u!65 &7342095987645141555
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2278,10 +2276,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 24, y: 1, z: 24}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768780111457282749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2292,7 @@ GameObject:
   - component: {fileID: 7768780111457282625}
   - component: {fileID: 7768780111457282624}
   - component: {fileID: 7768780111457282751}
-  - component: {fileID: 7768780111457282750}
+  - component: {fileID: 491759759486007110}
   m_Layer: 14
   m_Name: Wall (1)
   m_TagString: Untagged
@@ -3032,8 +3029,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768780111457282749}
   m_Mesh: {fileID: 0}
---- !u!64 &7768780111457282750
-MeshCollider:
+--- !u!65 &491759759486007110
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3042,10 +3039,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 24, y: 8, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768780111461242174
 GameObject:
   m_ObjectHideFlags: 0
@@ -3059,7 +3055,7 @@ GameObject:
   - component: {fileID: 7768780111461242050}
   - component: {fileID: 7768780111461242049}
   - component: {fileID: 7768780111461242048}
-  - component: {fileID: 7768780111461242175}
+  - component: {fileID: 7137073043292822948}
   m_Layer: 14
   m_Name: Wall (2)
   m_TagString: Untagged
@@ -3796,8 +3792,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768780111461242174}
   m_Mesh: {fileID: 0}
---- !u!64 &7768780111461242175
-MeshCollider:
+--- !u!65 &7137073043292822948
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3806,10 +3802,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 23, y: 8, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768780111803158911
 GameObject:
   m_ObjectHideFlags: 0
