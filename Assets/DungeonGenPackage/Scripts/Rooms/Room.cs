@@ -42,8 +42,8 @@ public class Room : MonoBehaviour
         if (_drawDebug)
         {
 
-            ExtDebug.DrawBoxCastBox(transform.position, new Vector3(_width / 2 - 0.5f, _height/2.0f - 0.5f, _length / 2 - 0.5f), transform.rotation,
-                Vector3.up,2.5f, Color.cyan) ;
+            ExtDebug.DrawBoxCastBox(transform.parent.position + _offset , new Vector3(_width / 2f - 0.1f, _offset.y, _length / 2f - 0.1f), Quaternion.identity,
+                Vector3.up, _height/2f, Color.cyan) ;
         }
     }
 
@@ -108,26 +108,43 @@ public class Room : MonoBehaviour
 
     public bool IsOverlapping(LayerMask overLapLayers)
     {
-        if(_roomInfo._weight!=0)
-        {
+        
             
             RaycastHit[] hits;
 
 
-            hits = Physics.BoxCastAll(transform.position , new Vector3(_width / 2-0.5f, 2.5f, _length / 2-0.5f), Vector3.up, transform.rotation, 2.5f, overLapLayers);
+            hits = Physics.BoxCastAll(transform.parent.position +_offset +Vector3.up*-1f, 
+                new Vector3(_width / 2f- 0.1f, _offset.y, _length / 2f- 0.1f), Vector3.up,Quaternion.identity, _height/2f, overLapLayers);
             _drawDebug = true;
+
+            Debug.Log(transform.parent.name);
             if (hits.Length > 0)
             {
+                
                 foreach (RaycastHit hit in hits)
                 {
-                    if (hit.collider.transform.parent != transform.parent)
+                 Debug.Log(hit.collider.gameObject);
+                    if (hit.transform.parent)
                     {
-                        return true;
+                        
+                        if (hit.collider.transform.parent != transform.parent)
+                        {
+                            
+                            return true;
+                        }
                     }
+                    else
+                    {
+                        if (hit.collider.gameObject != transform.parent)
+                        {
+                            return true;
+                        }
+                    }
+                  
                 }
             }
 
-        }
+        
 
         return false;
     }

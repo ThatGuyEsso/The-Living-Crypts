@@ -97,6 +97,7 @@ public class RoomManager : MonoBehaviour
     {
         if (room)
         {
+            room.transform.parent.gameObject.name = room.transform.parent.gameObject.name + _loadedRooms.Count;
             _loadedRooms.Add(room);
             _isLoadingRoom = false;
         }

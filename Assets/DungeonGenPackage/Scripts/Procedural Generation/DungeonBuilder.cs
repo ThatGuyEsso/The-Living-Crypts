@@ -248,20 +248,22 @@ public class DungeonBuilder :MonoBehaviour
     {
         Debug.Log("Begin room validation");
         _roomManager.OnRoomLoadComplete -= ValidateRoom;
-        if (!_isWalking)
-        {
-            Debug.Log("not walking end ");
-            EndStep();
-        }
+     
         _previosRoom = _currentRoom;
         _currentRoom = _roomManager.GetLastRoom();
         _currentRoom.SetRoomInfo(_currentRoomInfo);
 
         if (_currentRoom.IsOverlapping(_genData._roomLayers))
         {
-            Debug.Log("Overlapping Remove room ");
+      
+                Debug.Log("Overlapping Remove room "+_currentRoom.transform.parent.gameObject.name);
             RemoveCurrentRoom();
 
+        }
+        else if (!_isWalking)
+        {
+            Debug.Log("not walking end ");
+            EndStep();
         }
         else
         {
@@ -272,6 +274,7 @@ public class DungeonBuilder :MonoBehaviour
             EndStep();
         }
 
+    
     }
 
     public void OnCurrentRoomRemoved()
@@ -291,7 +294,7 @@ public class DungeonBuilder :MonoBehaviour
     }
     public void RemoveCurrentRoom()
     {
-        if (GameStateManager.instance)
+        if (_roomManager)
         {
             _roomManager.OnRoomUnloadComplete += OnCurrentRoomRemoved;
             _roomManager.BeginUnload(_currentRoom.gameObject.scene);
