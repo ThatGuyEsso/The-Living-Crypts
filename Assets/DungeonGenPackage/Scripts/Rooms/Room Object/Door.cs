@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
+
 public class Door : MonoBehaviour, Controls.IInteractActions
 {
     [Header("Door Settings")]
     [SerializeField] private Transform _roomSpawnPoint;
     [SerializeField] private bool _isEntry;
+    [SerializeField] private bool _requiresInput =false;
     [SerializeField] private Direction _faceDirection;
     [SerializeField] private float _width, _length, _height;
 
+    [Header("Door GFX")]
+    [SerializeField] private GameObject NothInUseMesh;
+    [SerializeField] private GameObject[] InUseMeshes;
     [Header("Debug Settings")]
     [SerializeField] private bool _inDebug;
     [SerializeField] private GameObject _entryDebugPrefab;
@@ -35,13 +42,19 @@ public class Door : MonoBehaviour, Controls.IInteractActions
 
     //Object References
     private Room _parentRoom;
-    private Room _linkedRoom;
+   [SerializeField] private Room _linkedRoom;
     private HUDPrompt Prompt;
     private Animator _animator;
     bool _isInitialised;
-    public void Init()
+
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _animator.enabled = false;
+    }
+    public void Init()
+    {
+      
         _input = new Controls();
         _input.Interact.SetCallbacks(this);
         if (_inDebug)
@@ -95,31 +108,42 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     public Room GetLinkedRoom( ) { return _linkedRoom; }
 
 
- 
+    public void ToggleDoorLock(bool isLocked)
+    {
+        _canOpen = !isLocked;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (!_canOpen) return;
         if (other.CompareTag("Player"))
         {
-            _isInRange = true;
-            if (_input != null)
+            if (_requiresInput)
             {
-                _input.Enable();
-            }
+                _isInRange = true;
+                if (_input != null)
+                {
+                    _input.Enable();
+                }
 
-            if (Prompt)
-            {
-                Prompt.ShowPrompt(InteractPrompt);
-            }
-            else
-            {
-                Prompt = GetPromptFromGameManager();
                 if (Prompt)
                 {
                     Prompt.ShowPrompt(InteractPrompt);
                 }
+                else
+                {
+                    Prompt = GetPromptFromGameManager();
+                    if (Prompt)
+                    {
+                        Prompt.ShowPrompt(InteractPrompt);
+                    }
 
+                }
             }
+            else
+            {
+                OpenDoor();
+            }
+  
 
 
         }
@@ -130,24 +154,28 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         if (!_canOpen) return;
         if (other.CompareTag("Player"))
         {
-            _isInRange = false;
-            if (_input != null)
+            if (_requiresInput)
             {
-                _input.Disable();
-            }
-            if (Prompt)
-            {
-                Prompt.RemovePrompt(InteractPrompt);
-            }
-            else
-            {
-                Prompt = GetPromptFromGameManager();
+                _isInRange = false;
+                if (_input != null)
+                {
+                    _input.Disable();
+                }
                 if (Prompt)
                 {
                     Prompt.RemovePrompt(InteractPrompt);
                 }
+                else
+                {
+                    Prompt = GetPromptFromGameManager();
+                    if (Prompt)
+                    {
+                        Prompt.RemovePrompt(InteractPrompt);
+                    }
 
+                }
             }
+         
         }
     }
     public HUDPrompt GetPromptFromGameManager()
@@ -180,11 +208,16 @@ public class Door : MonoBehaviour, Controls.IInteractActions
 
     public void OpenDoor()
     {
-        if (_animator)
+        if (!_animator)
         {
-            _animator.enabled = true;
-            _animator.Play(OpenAnimName, 0, 0f);
+            _animator = GetComponent<Animator>();
         }
+            
+      
+      
+        _animator.enabled = true;
+        _animator.Play(OpenAnimName, 0, 0f);
+        
     }
 
     public void CloseDoor()
@@ -233,5 +266,20 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         }
         _isOpen = false;
         OnDoorClosed?.Invoke();
+    }
+
+    public void DisableDoor()
+    {
+        if (NothInUseMesh)
+        {
+            NothInUseMesh.SetActive(true);
+        }
+
+        foreach(GameObject inUse in InUseMeshes)
+        {
+            inUse.SetActive(false);
+        }
+
+        Destroy(this);
     }
 }

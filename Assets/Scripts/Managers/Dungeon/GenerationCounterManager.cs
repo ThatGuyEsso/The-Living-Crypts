@@ -10,6 +10,7 @@ public class GenerationCounterManager : MonoBehaviour
     [SerializeField] private List<MeshRenderer> ProgressCounters;
     [SerializeField] private List<Light> ProgressCounterLights;
     private int CurrentPorgressIndex = 0;
+    private DungeonGenerator _dungeonGenerator;
 
     private void Awake()
     {
@@ -61,6 +62,9 @@ public class GenerationCounterManager : MonoBehaviour
             case GameplayEvents.DungeonInvoked:
                 OnPending();
                 break;
+            case GameplayEvents.DungeonBegunGenerating:
+                ListenToDungeonGenerator();
+                break;
             case GameplayEvents.GameComplete:
                 break;
             case GameplayEvents.PlayerDied:
@@ -70,6 +74,47 @@ public class GenerationCounterManager : MonoBehaviour
         }
     }
 
+    public void ListenToDungeonGenerator()
+    {
+        if (!_dungeonGenerator)
+        {
+            if (!GameStateManager.instance) return;
+            if (!GameStateManager.instance.GameManager) return;
+            if (!GameStateManager.instance.GameManager.GetGenerationManager()) return;
+            _dungeonGenerator = GameStateManager.instance.GameManager.GetGenerationManager();
+        }
+
+        _dungeonGenerator.OnDungeonGenerationComplete += OnNewProgress;
+        _dungeonGenerator.OnSpecialRoomsBuilt += OnNewProgress;
+        _dungeonGenerator.OnDungeonComplete += OnNewProgress;
+        _dungeonGenerator.OnDungeonComplete += OnGenerationComplete;
+    }
+
+    public void OnGenerationComplete()
+    {
+        if (!_dungeonGenerator)
+        {
+            return;
+        }
+
+        _dungeonGenerator.OnDungeonGenerationComplete -= OnNewProgress;
+        _dungeonGenerator.OnSpecialRoomsBuilt -= OnNewProgress;
+        _dungeonGenerator.OnDungeonComplete -= OnNewProgress;
+        _dungeonGenerator.OnDungeonComplete -= OnGenerationComplete;
+    }
+    public void OnNewProgress()
+    {
+        ProgressCounters[CurrentPorgressIndex].material = CompleteMaterial;
+        ProgressCounterLights[CurrentPorgressIndex].color = CompleteColour;
+
+        CurrentPorgressIndex++;
+        if(CurrentPorgressIndex>= ProgressCounters.Count)
+        {
+            CurrentPorgressIndex = 0;
+        }
+
+
+    }
     public void OnStandby()
     {
         foreach (MeshRenderer renderer in ProgressCounters)

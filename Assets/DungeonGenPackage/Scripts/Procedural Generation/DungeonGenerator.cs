@@ -14,6 +14,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private RoomManager _roomManager;
     [SerializeField] private Room _debugStartingRoom;
     private bool _canSpawnDungeon;
+    private bool _isWaitingForRoom;
     private int _buildersCompleteCount = 0;
     private int _currentBuilderIndex =0;
     private Direction _initDirection;
@@ -24,8 +25,8 @@ public class DungeonGenerator : MonoBehaviour
     public System.Action OnBossRoomBuilt;
     public System.Action OnBossRoomFailedToBuild;
     public System.Action OnSpecialRoomsBuilt;
-    public System.Action OnRedundanciesRemoved;
-    public System.Action OnDungeonCleared;
+    public System.Action OnDungeonComplete;
+
     private void Awake()
     {
         if (_inDebug) Init();
@@ -41,7 +42,16 @@ public class DungeonGenerator : MonoBehaviour
      
      
     }
-
+    public void BeginDungeonGeneration(Room startingRoom, Direction startDirection, RoomManager roomManager)
+    {
+        _roomManager = roomManager;
+        if (_canSpawnDungeon && _roomManager)
+        {
+            _canSpawnDungeon = false;
+            _initDirection = startDirection;
+            SpawnInitCorridor(startingRoom, startDirection);
+        }
+    }
     public void BeginDungeonGeneration(Room startingRoom, Direction startDirection)
     {
         if (_canSpawnDungeon&& _roomManager)
@@ -165,11 +175,15 @@ public class DungeonGenerator : MonoBehaviour
 
     public void CleanUp()
     {
-        foreach(DungeonBuilder builder in _builders)
+        if (_builders.Count > 0)
         {
-            Destroy(builder.gameObject);
+
+            foreach(DungeonBuilder builder in _builders)
+            {
+                Destroy(builder.gameObject);
+            }
+            _builders.Clear();
         }
-        _builders.Clear();
     }
     private IEnumerator BuildDungeon()
     {
@@ -208,7 +222,10 @@ public class DungeonGenerator : MonoBehaviour
     public void IncrementCurrentBuilderIndex()
     {
         _currentBuilderIndex++;
-        if (_currentBuilderIndex >= _builders.Count) _currentBuilderIndex = 0;
+        if (_currentBuilderIndex >= _builders.Count)
+        {
+            _currentBuilderIndex = 0;
+        }
     }
     public void EvaluateCanBuild()
     {
@@ -242,18 +259,35 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    public void PlaceLootRoom()
+    {
+        if (_builders[_currentBuilderIndex])
+        {
+            Debug.Log("Attempt to buid boss step " + _builders[_currentBuilderIndex].gameObject);
+            _builders[_currentBuilderIndex].TryAndPlaceLootRoom();
+
+        }
+        
+      
+    }
+
+
 
     public void TriedToBuildBossRoom(bool WasSuccessful)
     {
         if (WasSuccessful)
         {
             OnBossRoomBuilt?.Invoke();
+            _roomManager.TidyLoadedRoomList();
+            PlaceLootRoom();
+            Debug.Log("Boss Room added");
         }
         else
         {
-            if(_currentBuilderIndex>=_builders.Count)
+            if (_currentBuilderIndex >= _builders.Count)
             {
                 OnBossRoomFailedToBuild?.Invoke();
+                
                 Debug.Log("Failed To Build Room");
             }
             else
@@ -261,7 +295,124 @@ public class DungeonGenerator : MonoBehaviour
                 IncrementCurrentBuilderIndex();
                 PlaceBossRoom();
             }
+
+        }
+
+    }
+    public void TriedToPlaceLootRoom()
+    {
+        if (_currentBuilderIndex >= _builders.Count-1)
+        {
+            OnSpecialRoomsBuilt?.Invoke();
+            CleanUpDeadEnds();
+            Debug.Log("Loot Rooms  added");
+        }
+        else
+        {
+            IncrementCurrentBuilderIndex();
+            PlaceLootRoom();
+        }
+
+            
+    }
+
+
+    public void CleanUpDeadEnds()
+    {
+        CleanUp();
+        _roomManager.TidyLoadedRoomList();
+        List<Room> corridors = _roomManager.GetRoomsOfType(RoomType.Corridor);
+
+        List<Room> deadEnds = new List<Room>();
+        if (corridors != null && corridors.Count > 0)
+        {
+            deadEnds = GetDeadEnds(corridors);
+        }
+        else
+        {
+            RemoveRedudantDoors();
+            return;
+        }
+          
+        if (deadEnds != null && deadEnds.Count > 0)
+        {
+            StartCoroutine(RemoveRoomsOverTime(deadEnds));
+        }
+        else
+        {
+            RemoveRedudantDoors();
+            return;
+        }
+
+    }
+    public List<Room> GetDeadEnds(List<Room> corridors)
+    {
+        List<Room> deadEnds = new List<Room>();
+
+        foreach (Room room in corridors)
+        {
+            List<Direction> directions = room.GetAvailableDirections();
+            if (directions.Count > 0)
+            {
+                List<Door> doors = room.GetDoorsInDirection(directions[0]);
+                if (doors.Count > 0)
+                {
+                    if (doors[0].GetLinkedRoom() == null)
+                    {
+                        deadEnds.Add(room);
+                    }
+
+                }
+            }
+         
+        }
+
+
+        return deadEnds;
+    }
+
+
+
+
+    private IEnumerator RemoveRoomsOverTime(List<Room> rooms)
+    {
+        foreach(Room room in rooms)
+        {
+            if (room)
+            {
+                _isWaitingForRoom = true;
+                _roomManager.OnRoomUnloadComplete += OnRoomWaitComplete;
+                _roomManager.BeginUnload(room.gameObject.scene);
+                yield return null;
+            }
        
         }
+        CleanUpDeadEnds();
+    }
+
+    private void OnRoomWaitComplete()
+    {
+        _roomManager.OnRoomUnloadComplete -= OnRoomWaitComplete;
+        _isWaitingForRoom = false;
+    }
+
+    public void RemoveRedudantDoors()
+    {
+        _roomManager.TidyLoadedRoomList();
+        List<Room> rooms = _roomManager.GetRoomsOfType(RoomType.Crypt);
+
+        if(rooms!=null && rooms.Count > 0)
+        {
+          
+            foreach(Room room in rooms)
+            {
+                if (room)
+                {
+                    room.DisableRedudantDoors();
+                }
+            }
+        }
+
+        OnDungeonComplete?.Invoke();
     }
 }

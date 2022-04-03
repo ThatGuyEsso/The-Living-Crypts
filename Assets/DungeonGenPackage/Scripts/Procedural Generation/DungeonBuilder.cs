@@ -101,6 +101,52 @@ public class DungeonBuilder :MonoBehaviour
         BuildBossRoom(targetDoor.GetDirection());
     }
 
+    public void TryAndPlaceLootRoom()
+    {
+        if(_currentRoom.GetRoomInfo()._roomType == RoomType.Corridor)
+        {
+            if(Random.value> _genData._percentageChanceForLootRoom)
+            {
+                _generationManager.TriedToPlaceLootRoom();
+                return;
+            }
+            //Get possible exit direction of current room;
+            List<Direction> possibleDirections = _currentRoom.GetAvailableDirections();
+
+
+            if (possibleDirections == null || possibleDirections.Count == 0)
+            {
+                _generationManager.TriedToPlaceLootRoom();
+                return;
+            }
+
+            Direction direction = possibleDirections[Random.Range(0, possibleDirections.Count)];
+            Door targetDoor = _currentRoom.GetDoorsInDirection(direction)
+                [Random.Range(0, _currentRoom.GetDoorsInDirection(direction).Count)];
+
+
+            if (!targetDoor)
+            {
+                _generationManager.TriedToPlaceLootRoom();
+                return;
+            }
+
+            _currentTargetDoor = targetDoor;
+
+            BuildLootRoom(targetDoor.GetDirection());
+        }
+        else
+        {
+            _generationManager.TriedToPlaceLootRoom();
+        }
+      
+
+
+     
+
+      
+    }
+
     public void BuildBossRoomCorridor(Direction direction)
     {
         if (!_currentTargetDoor.GetLinkedRoom())
@@ -109,7 +155,7 @@ public class DungeonBuilder :MonoBehaviour
             _roomManager.OnRoomLoadComplete += ValidateBossRoomCorridor;
 
 
-        
+
             _currentRoomInfo = _genData.GetWeightedOfTypeInDirection(direction, RoomType.Corridor,7);
             Debug.Log(gameObject.name + "building new Corridor with info: " + _currentRoomInfo);
     
@@ -123,6 +169,41 @@ public class DungeonBuilder :MonoBehaviour
         }
     }
 
+    public void BuildLootRoom(Direction direction)
+    {
+        if (!_currentTargetDoor.GetLinkedRoom())
+        {
+            Debug.Log(gameObject.name + "building new room");
+            _roomManager.OnRoomLoadComplete += ValidateLootRoom;
+
+            Debug.Log(gameObject.name + "building  Loot Room: ");
+            switch (direction)
+            {
+                case Direction.North:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.N_LootRoom, 0, direction, RoomType.Corridor);
+                    _roomManager.BeginRoomLoad(SceneIndex.N_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
+
+                    break;
+                case Direction.South:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.S_LootRoom, 0, direction, RoomType.Corridor);
+                    _roomManager.BeginRoomLoad(SceneIndex.S_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
+                    break;
+                case Direction.West:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.W_LootRoom, 0, direction, RoomType.Corridor);
+                    _roomManager.BeginRoomLoad(SceneIndex.W_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
+                    break;
+                case Direction.East:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.E_LootRoom, 0, direction, RoomType.Corridor);
+                    _roomManager.BeginRoomLoad(SceneIndex.E_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
+                    break;
+            }
+
+        }
+        else
+        {
+            _generationManager.TriedToPlaceLootRoom();
+        }
+    }
     public void BuildBossRoom(Direction direction)
     {
         if (!_currentTargetDoor.GetLinkedRoom())
@@ -134,16 +215,20 @@ public class DungeonBuilder :MonoBehaviour
             switch (direction)
             {
                 case Direction.North:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.N_BossRoom, 0, direction, RoomType.BossCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.N_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
 
                     break;
                 case Direction.South:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.S_BossRoom, 0, direction, RoomType.BossCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.S_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
                     break;
                 case Direction.West:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.W_BossRoom, 0, direction, RoomType.BossCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.W_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
                     break;
                 case Direction.East:
+                    _currentRoomInfo = new RoomInfo(SceneIndex.E_BossRoom, 0, direction, RoomType.BossCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.E_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
                     break;
             }
@@ -400,6 +485,9 @@ public class DungeonBuilder :MonoBehaviour
         }
         else
         {
+            _currentTargetDoor.SetLinkedRoom(_currentRoom);
+            _previosRoom.DecrementCrawlers();
+            _currentRoom.IncrementCrawlers();
             TryAndPlaceBossRoom();
         }
    
@@ -424,7 +512,38 @@ public class DungeonBuilder :MonoBehaviour
         }
         else
         {
+            _currentTargetDoor.SetLinkedRoom(_currentRoom);
+            _previosRoom.DecrementCrawlers();
+            _currentRoom.IncrementCrawlers();
+       
             _generationManager.TriedToBuildBossRoom(true);
+        }
+
+
+    }
+
+    public void ValidateLootRoom()
+    {
+        Debug.Log("Begin room validation");
+        _roomManager.OnRoomLoadComplete -= ValidateLootRoom;
+
+        _previosRoom = _currentRoom;
+        _currentRoom = _roomManager.GetLastRoom();
+        _currentRoom.SetRoomInfo(_currentRoomInfo);
+
+        if (_currentRoom.IsOverlapping(_genData._roomLayers))
+        {
+
+            Debug.Log("Overlapping Remove room " + _currentRoom.transform.parent.gameObject.name);
+            RemoveCurrentRoom();
+            _generationManager.TriedToPlaceLootRoom();
+        }
+        else
+        {
+            _currentTargetDoor.SetLinkedRoom(_currentRoom);
+            _previosRoom.DecrementCrawlers();
+            _currentRoom.IncrementCrawlers();
+            _generationManager.TriedToPlaceLootRoom();
         }
 
 
@@ -435,16 +554,21 @@ public class DungeonBuilder :MonoBehaviour
     public void OnCurrentRoomRemoved()
     {
         _roomManager.OnRoomUnloadComplete -= OnCurrentRoomRemoved;
-        Debug.Log("Room Removed");
-        _currentRoom = _previosRoom;
-        if (_attemptsLeft > 0)
+        if (_isWalking)
         {
-            RetryStep();
+            Debug.Log("Room Removed");
+            _currentRoom = _previosRoom;
+            if (_attemptsLeft > 0)
+            {
+                RetryStep();
+            }
+            else
+            {
+
+                EndStep();
+            }
         }
-        else
-        {
-            EndStep();
-        }
+    
 
     }
     public void RemoveCurrentRoom()

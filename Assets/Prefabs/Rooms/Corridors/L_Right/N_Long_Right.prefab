@@ -1100,7 +1100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8123363067537967619}
-  - component: {fileID: 8852107353234728519}
   m_Layer: 15
   m_Name: N_Long_Right
   m_TagString: Untagged
@@ -1123,19 +1122,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8852107353234728519
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8123363067537967620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 26, y: 10, z: 26}
-  m_Center: {x: 7, y: 4, z: 13}
 --- !u!1 &8123363067925893107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1135,7 @@ GameObject:
   - component: {fileID: 8123363067925892879}
   - component: {fileID: 8123363067925893104}
   - component: {fileID: 8123363067925893105}
-  - component: {fileID: 5080017949745842737}
+  - component: {fileID: 7581519665518060523}
   m_Layer: 14
   m_Name: ShortWall (1)
   m_TagString: Untagged
@@ -2157,8 +2143,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8123363067925893107}
   m_Mesh: {fileID: 0}
---- !u!65 &5080017949745842737
-BoxCollider:
+--- !u!64 &7581519665518060523
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2167,9 +2153,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12, y: 8, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0.0000019073486}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8123363067983715389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2170,7 @@ GameObject:
   - component: {fileID: 8123363067983715385}
   - component: {fileID: 8123363067983715386}
   - component: {fileID: 8123363067983715387}
-  - component: {fileID: 4534822527011090940}
+  - component: {fileID: 1016299138965959283}
   m_Layer: 14
   m_Name: ShortWall
   m_TagString: Untagged
@@ -3191,8 +3178,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8123363067983715389}
   m_Mesh: {fileID: 0}
---- !u!65 &4534822527011090940
-BoxCollider:
+--- !u!64 &1016299138965959283
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3201,9 +3188,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12, y: 8, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8123363068065821558
 GameObject:
   m_ObjectHideFlags: 0

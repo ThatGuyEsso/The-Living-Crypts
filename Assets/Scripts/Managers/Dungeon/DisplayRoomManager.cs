@@ -54,7 +54,8 @@ public class DisplayRoomManager : MonoBehaviour, Controls.IInteractActions
             case GameplayEvents.WeaponSelected:
                 Init();
                 break;
-            case GameplayEvents.DungeonInvoked:
+            case GameplayEvents.DungeonGenComplete:
+                DungeonEntrance.OpenDoor();
                 break;
             case GameplayEvents.GameComplete:
                 break;

@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 3950317054871896638}
   - component: {fileID: 3950317054871896639}
   - component: {fileID: 3950317054871896636}
-  - component: {fileID: 365494640425846013}
+  - component: {fileID: 2292179191559147101}
   m_Layer: 14
   m_Name: Shortwalls
   m_TagString: Untagged
@@ -1703,8 +1703,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3950317054871896634}
   m_Mesh: {fileID: 0}
---- !u!65 &365494640425846013
-BoxCollider:
+--- !u!64 &2292179191559147101
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1713,9 +1713,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12, y: 8, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &3950317055162319971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2071,7 @@ GameObject:
   - component: {fileID: 3950317055353108277}
   - component: {fileID: 3950317055353108274}
   - component: {fileID: 3950317055353108275}
-  - component: {fileID: 8533974883870409721}
+  - component: {fileID: 2433080186270289729}
   m_Layer: 14
   m_Name: Shortwalls (1)
   m_TagString: Untagged
@@ -3078,8 +3079,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3950317055353108273}
   m_Mesh: {fileID: 0}
---- !u!65 &8533974883870409721
-BoxCollider:
+--- !u!64 &2433080186270289729
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3088,9 +3089,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12, y: 8, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &3950317055888474488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,7 +3166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3950317056231656542}
-  - component: {fileID: 9043339490935631564}
   m_Layer: 15
   m_Name: N_LongCorridor
   m_TagString: Untagged
@@ -3187,19 +3188,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &9043339490935631564
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3950317056231656543}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12, y: 1, z: 30}
-  m_Center: {x: 0, y: 0, z: 15}
 --- !u!1 &3950317056517433080
 GameObject:
   m_ObjectHideFlags: 0

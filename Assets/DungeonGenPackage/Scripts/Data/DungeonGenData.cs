@@ -15,7 +15,7 @@ public class DungeonGenData : ScriptableObject
     public LayerMask _roomLayers;
 
     public float _percentageRepeatingCorridors;
-
+    public float _percentageChanceForLootRoom;
     public List<RoomInfo> _roomPool = new List<RoomInfo>();
 
 

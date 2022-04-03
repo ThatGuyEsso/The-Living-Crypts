@@ -86,6 +86,24 @@ public class RoomManager : MonoBehaviour
         return _loadedRooms;
     }
 
+    public List<Room> GetRoomsOfType(RoomType type)
+    {
+        if (_loadedRooms.Count==0)
+        {
+            return null;
+        }
+        List<Room> roomsOfType = new List<Room>();
+
+        foreach(Room room in _loadedRooms)
+        {
+            if(room.GetRoomInfo()._roomType == type)
+            {
+                roomsOfType.Add(room);
+            }
+        }
+        return roomsOfType;
+    }
+
     public Room GetLastRoom()
     {
         return _loadedRooms[_loadedRooms.Count-1];
@@ -97,8 +115,8 @@ public class RoomManager : MonoBehaviour
     {
         if (room)
         {
-            room.transform.parent.gameObject.name = room.transform.parent.gameObject.name + _loadedRooms.Count;
             _loadedRooms.Add(room);
+      
             _isLoadingRoom = false;
         }
     }

@@ -6,6 +6,8 @@ public enum GameplayEvents
 {
     WeaponSelected,
     DungeonInvoked,
+    DungeonBegunGenerating,
+    DungeonGenComplete,
     GameComplete,
     PlayerDied,
     PlayerRespawned
@@ -15,7 +17,7 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 {
 
     [SerializeField] private GameObject RoomManagerPrefab;
-    [SerializeField] private GameObject[] dungeonManagersToInit;
+    [SerializeField] private GameObject DungeonGenerationManagerPrefab;
     [SerializeField] private Material SkyBox;
     [SerializeField] private LightingSettings lightSettings;
     // Start is called before the first frame update
@@ -25,11 +27,14 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     private bool _isWaiting;
 
     private RoomManager _roomManager;
+    private DungeonGenerator _generationManager;
     private HUDManager _HUDManager;
     private SceneTransitionManager _sceneManager;
     private Transform _spawnPoint;
     private GameObject _player;
     private GameplayEvents _currentGameplayEvent;
+
+    private Room _hubRoom;
     public void BindToGameStateManager()
     {
         GameStateManager.instance.OnNewGameState += EvaluateGameState;
@@ -40,7 +45,7 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         switch (newState)
         {
             case GameState.GamePaused:
-             
+
                 break;
             case GameState.GameRunning:
 
@@ -56,6 +61,14 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     {
         _currentGameplayEvent = Event;
         OnNewGamplayEvent?.Invoke(_currentGameplayEvent);
+
+
+        switch (_currentGameplayEvent)
+        {
+            case GameplayEvents.DungeonInvoked:
+                InitDungeonGeneration();
+                break;
+        }
     }
 
     public void Init()
@@ -72,19 +85,32 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
         StartCoroutine(SetUpGameScene());
     }
-    private void InitDungeonManagers()
+
+    public void InitDungeonGeneration()
     {
-        foreach (GameObject manager in dungeonManagersToInit)
+        if (!_generationManager)
         {
-            GameObject currManager = Instantiate(manager, Vector3.zero, Quaternion.identity);
-            IInitialisable init = currManager.GetComponent<IInitialisable>();
-            if (init != null) init.Init();
-
-
+            if (ObjectPoolManager.instance)
+            {
+                _generationManager = ObjectPoolManager.Spawn(DungeonGenerationManagerPrefab, transform).GetComponent<DungeonGenerator>();
+            }
+            else
+            {
+                _generationManager = Instantiate(DungeonGenerationManagerPrefab, transform).GetComponent<DungeonGenerator>();
+            }
         }
 
+        if (_generationManager)
+        {
+            _generationManager.Init();
+            _generationManager.OnDungeonComplete += OnDungeonoCompleted;
+            _generationManager.BeginDungeonGeneration(_hubRoom, Direction.North,_roomManager);
+            BeginNewGameplayEvent(GameplayEvents.DungeonBegunGenerating);
+            
+        }
+    
     }
-
+    
     private IEnumerator SetUpGameScene()
     {
      
@@ -101,7 +127,7 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                 
         }
 
-
+        Room currentRoom;
         //Loading SpawnRoom
         _isWaiting = true;
         _roomManager.OnRoomLoadComplete += OnWaitComplete;
@@ -110,36 +136,56 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         {
             yield return null;
         }
-
+        currentRoom = _roomManager.GetLastRoom();
+        if (currentRoom)
+        {
+            currentRoom.SetRoomInfo(new RoomInfo(SceneIndex.SpawnRoom, 0,Direction.North, RoomType.NonDungeonRoom));
+            currentRoom.Init();
+        }
         //Loading Hub Corridor
         _spawnPoint = GameObject.Find("SpawnPoint").transform ;
         Vector3 attachPoint = Vector3.zero;
           //Loading SpawnRoom
           _isWaiting = true;
 
-        if (_roomManager.GetLastRoom())
+        if (currentRoom)
         {
-            attachPoint = _roomManager.GetLastRoom().GetConnectingPoint();
+            attachPoint = currentRoom.GetConnectingPoint();
         }
+
         _roomManager.BeginRoomLoad(SceneIndex.EntranceCorridor, attachPoint);
         while (_isWaiting)
         {
             yield return null;
         }
 
-
+        currentRoom = _roomManager.GetLastRoom();
+        if (currentRoom)
+        {
+            currentRoom.SetRoomInfo(new RoomInfo(SceneIndex.EntranceCorridor, 0, Direction.North, RoomType.NonDungeonRoom));
+            currentRoom.Init();
+        }
         //Loading Hub room
         _isWaiting = true;
 
-        if (_roomManager.GetLastRoom())
+        if (currentRoom)
         {
-            attachPoint = _roomManager.GetLastRoom().GetConnectingPoint();
+
+            attachPoint = currentRoom.GetConnectingPoint();
         }
         _roomManager.BeginRoomLoad(SceneIndex.HubRoom, attachPoint);
         while (_isWaiting)
         {
             yield return null;
         }
+        currentRoom = _roomManager.GetLastRoom();
+        if (currentRoom)
+        {
+            currentRoom.SetRoomInfo(new RoomInfo(SceneIndex.HubRoom, 0, Direction.North, RoomType.NonDungeonRoom));
+            currentRoom.Init();
+
+        }
+        _hubRoom = currentRoom;
         _roomManager.OnRoomLoadComplete -= OnWaitComplete;
 
         StartCoroutine(SetUpPlayer());
@@ -205,6 +251,10 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     {
         return _roomManager;
     }
+    public DungeonGenerator GetGenerationManager()
+    {
+        return _generationManager;
+    }
 
     private void OnWaitComplete()
     {
@@ -231,4 +281,14 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     }
 
     public GameplayEvents Event { get {return _currentGameplayEvent; } }
+
+    public void OnDungeonoCompleted()
+    {
+        BeginNewGameplayEvent(GameplayEvents.DungeonGenComplete);
+        if (!_generationManager)
+        {
+            return;
+        }
+        _generationManager.OnDungeonComplete -= OnDungeonoCompleted;
+    }
 }

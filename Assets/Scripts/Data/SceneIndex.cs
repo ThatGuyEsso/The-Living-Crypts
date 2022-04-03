@@ -26,7 +26,7 @@ public enum SceneIndex
     E_LootRoom =8,
     N_LootRoom = 9,
     S_LootRoom =10,
-    W_LootROom=11,
+    W_LootRoom=11,
 
     //Boss Room
     E_BossRoom =12,

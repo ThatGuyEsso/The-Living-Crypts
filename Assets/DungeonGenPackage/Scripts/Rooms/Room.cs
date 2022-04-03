@@ -8,7 +8,9 @@ public enum RoomType
  
     Corridor,
 
-    BossCrypt
+    BossCrypt,
+
+    NonDungeonRoom,
 };
 
 public class Room : MonoBehaviour
@@ -69,13 +71,50 @@ public class Room : MonoBehaviour
                 doors[i].Init();
             
             }
+
+           
         }
+
+     
     }
 
     public void SetRoomInfo(RoomInfo info)
     {
         _roomInfo = info;
-    
+        switch (_roomInfo._roomType)
+        {
+            case RoomType.Corridor:
+                foreach (Door door in _doors)
+                {
+                    if (door.IsEntry())
+                    {
+                        door.OpenDoor();
+                    }
+                    else
+                    {
+                        door.ToggleDoorLock(false);
+                    }
+                }
+                break;
+
+
+            case RoomType.Crypt:
+                foreach (Door door in _doors)
+                {
+
+                    door.OpenDoor();
+                }
+                break;
+
+            case RoomType.BossCrypt:
+                foreach (Door door in _doors)
+                {
+
+                    door.OpenDoor();
+                }
+                break;
+        }
+
     }
     public RoomInfo GetRoomInfo()
     {
@@ -250,5 +289,19 @@ public class Room : MonoBehaviour
             return transform.position;
         }
     
+    }
+
+    public void DisableRedudantDoors()
+    {
+        if (_doors.Count > 0)
+        {
+            foreach(Door door in _doors)
+            {
+                if (!door.GetLinkedRoom()&& !door.IsEntry())
+                {
+                    door.DisableDoor();
+                }
+            }
+        }
     }
 }
