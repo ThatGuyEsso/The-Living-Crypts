@@ -10,7 +10,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private bool _inDebug;
     private bool _isLoadingRoom;
     private bool _isUnLoadingRoom;
-    private List<Room> _loadedRooms = new List<Room>();
+    [SerializeField] private List<Room> _loadedRooms = new List<Room>();
 
     //Events
     public Action OnRoomLoadComplete;
@@ -108,6 +108,25 @@ public class RoomManager : MonoBehaviour
         _loadedRooms.Remove(room);
         StartCoroutine(UnLoadRoom(room.gameObject.scene));
    
+    }
+
+   /// <summary>
+   /// Removes null references in loaded room list
+   /// </summary>
+    public void TidyLoadedRoomList()
+    {
+        List<Room> listToTidy = new List<Room>();
+     
+
+        for(int i =0; i< _loadedRooms.Count; i++)
+        {
+            if (_loadedRooms[i])
+            {
+                listToTidy.Add(_loadedRooms[i]);
+            }
+        }
+
+        _loadedRooms = listToTidy;
     }
 }
 

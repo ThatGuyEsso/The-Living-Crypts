@@ -47,4 +47,20 @@ public class DungeonGenData : ScriptableObject
         
     }
 
+    public RoomInfo GetWeightedOfTypeInDirection(Direction dir, RoomType type,int weight)
+    {
+        RoomInfo room;
+        List<RoomInfo> validRooms = GetRoomsOfTypeInDirection(dir, type);
+        List<RoomInfo> availableRooms = new List<RoomInfo>();
+
+
+        foreach (RoomInfo info in validRooms)
+        {
+            if (info._weight >= weight) availableRooms.Add(info);
+        }
+        room = availableRooms[Random.Range(0, availableRooms.Count)];
+        return room;
+
+    }
+
 }

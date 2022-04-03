@@ -48,8 +48,112 @@ public class DungeonBuilder :MonoBehaviour
         }
     }
 
+    public void TryAndPlaceBossRoomCorridor()
+    {
+        //Get possible exit direction of current room;
+        List<Direction> possibleDirections = _currentRoom.GetAvailableDirections();
+
+        if(possibleDirections == null ||possibleDirections.Count == 0)
+        {
+            _generationManager.TriedToBuildBossRoom(false);
+            return;
+        }
+
+        Direction direction = possibleDirections[Random.Range(0, possibleDirections.Count)];
+        //Get door in target direction
+        Door targetDoor = _currentRoom.GetDoorsInDirection(direction)
+            [Random.Range(0, _currentRoom.GetDoorsInDirection(direction).Count)];
+
+        if (!targetDoor)
+        {
+            _generationManager.TriedToBuildBossRoom(false);
+            return;
+        }
+
+        _currentTargetDoor = targetDoor;
+
+        BuildBossRoomCorridor(targetDoor.GetDirection());
+    }
+    public void TryAndPlaceBossRoom()
+    {
+        //Get possible exit direction of current room;
+        List<Direction> possibleDirections = _currentRoom.GetAvailableDirections();
+
+        if (possibleDirections == null || possibleDirections.Count == 0)
+        {
+            _generationManager.TriedToBuildBossRoom(false);
+            return;
+        }
+
+        Direction direction = possibleDirections[Random.Range(0, possibleDirections.Count)];
+        //Get door in target direction
+        Door targetDoor = _currentRoom.GetDoorsInDirection(direction)
+            [Random.Range(0, _currentRoom.GetDoorsInDirection(direction).Count)];
+
+        if (!targetDoor)
+        {
+            _generationManager.TriedToBuildBossRoom(false);
+            return;
+        }
+
+        _currentTargetDoor = targetDoor;
+
+        BuildBossRoom(targetDoor.GetDirection());
+    }
+
+    public void BuildBossRoomCorridor(Direction direction)
+    {
+        if (!_currentTargetDoor.GetLinkedRoom())
+        {
+            Debug.Log(gameObject.name + "building new room");
+            _roomManager.OnRoomLoadComplete += ValidateBossRoomCorridor;
 
 
+        
+            _currentRoomInfo = _genData.GetWeightedOfTypeInDirection(direction, RoomType.Corridor,7);
+            Debug.Log(gameObject.name + "building new Corridor with info: " + _currentRoomInfo);
+    
+            Debug.Log(gameObject.name + "Trying to spawn Corridor");
+            _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+
+        }
+        else
+        {
+            _generationManager.TriedToBuildBossRoom(false);
+        }
+    }
+
+    public void BuildBossRoom(Direction direction)
+    {
+        if (!_currentTargetDoor.GetLinkedRoom())
+        {
+            Debug.Log(gameObject.name + "building new room");
+            _roomManager.OnRoomLoadComplete += ValidateBossRoom;
+
+            Debug.Log(gameObject.name + "building  Boss Room: ");
+            switch (direction)
+            {
+                case Direction.North:
+                    _roomManager.BeginRoomLoad(SceneIndex.N_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
+
+                    break;
+                case Direction.South:
+                    _roomManager.BeginRoomLoad(SceneIndex.S_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
+                    break;
+                case Direction.West:
+                    _roomManager.BeginRoomLoad(SceneIndex.W_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
+                    break;
+                case Direction.East:
+                    _roomManager.BeginRoomLoad(SceneIndex.E_BossRoom, _currentTargetDoor.GetRoomSpawnPoint());
+                    break;
+            }
+
+        }
+        else
+        {
+            _generationManager.TriedToBuildBossRoom(false);
+        }
+    }
     public void TakeStep()
     {
         Debug.Log(gameObject.name + "Taking Step");
@@ -276,6 +380,57 @@ public class DungeonBuilder :MonoBehaviour
 
     
     }
+
+
+    public void ValidateBossRoomCorridor()
+    {
+        Debug.Log("Begin room validation");
+        _roomManager.OnRoomLoadComplete -= ValidateBossRoomCorridor;
+
+        _previosRoom = _currentRoom;
+        _currentRoom = _roomManager.GetLastRoom();
+        _currentRoom.SetRoomInfo(_currentRoomInfo);
+
+        if (_currentRoom.IsOverlapping(_genData._roomLayers))
+        {
+
+            Debug.Log("Overlapping Remove room " + _currentRoom.transform.parent.gameObject.name);
+            RemoveCurrentRoom();
+            _generationManager.TriedToBuildBossRoom(false);
+        }
+        else
+        {
+            TryAndPlaceBossRoom();
+        }
+   
+
+    }
+
+    public void ValidateBossRoom()
+    {
+        Debug.Log("Begin room validation");
+        _roomManager.OnRoomLoadComplete -= ValidateBossRoom;
+
+        _previosRoom = _currentRoom;
+        _currentRoom = _roomManager.GetLastRoom();
+        _currentRoom.SetRoomInfo(_currentRoomInfo);
+
+        if (_currentRoom.IsOverlapping(_genData._roomLayers))
+        {
+
+            Debug.Log("Overlapping Remove room " + _currentRoom.transform.parent.gameObject.name);
+            RemoveCurrentRoom();
+            _generationManager.TriedToBuildBossRoom(false);
+        }
+        else
+        {
+            _generationManager.TriedToBuildBossRoom(true);
+        }
+
+
+    }
+
+
 
     public void OnCurrentRoomRemoved()
     {

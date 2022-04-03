@@ -19,6 +19,13 @@ public class DungeonGenerator : MonoBehaviour
     private Direction _initDirection;
     RoomInfo _initRoomInfo;
 
+
+    public System.Action OnDungeonGenerationComplete;
+    public System.Action OnBossRoomBuilt;
+    public System.Action OnBossRoomFailedToBuild;
+    public System.Action OnSpecialRoomsBuilt;
+    public System.Action OnRedundanciesRemoved;
+    public System.Action OnDungeonCleared;
     private void Awake()
     {
         if (_inDebug) Init();
@@ -140,8 +147,13 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log("Builder Complete"+ _buildersCompleteCount);
         if (_buildersCompleteCount >= _builders.Count)
         {
-            Debug.Log("Generation Complete");
-            ClearBuilders();
+            OnDungeonGenerationComplete?.Invoke();
+            if (_roomManager)
+            {
+                _roomManager.TidyLoadedRoomList();
+            }
+            _currentBuilderIndex = 0;
+            PlaceBossRoom();
         }
         else
         {
@@ -217,5 +229,39 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         _builders.Clear();
+    }
+
+
+    public void PlaceBossRoom()
+    {
+        if (_builders[_currentBuilderIndex])
+        {
+            Debug.Log("Attempt to buid boss step " + _builders[_currentBuilderIndex].gameObject);
+            _builders[_currentBuilderIndex].TryAndPlaceBossRoomCorridor();
+
+        }
+    }
+
+
+    public void TriedToBuildBossRoom(bool WasSuccessful)
+    {
+        if (WasSuccessful)
+        {
+            OnBossRoomBuilt?.Invoke();
+        }
+        else
+        {
+            if(_currentBuilderIndex>=_builders.Count)
+            {
+                OnBossRoomFailedToBuild?.Invoke();
+                Debug.Log("Failed To Build Room");
+            }
+            else
+            {
+                IncrementCurrentBuilderIndex();
+                PlaceBossRoom();
+            }
+       
+        }
     }
 }

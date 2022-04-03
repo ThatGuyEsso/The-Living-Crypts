@@ -42,7 +42,7 @@ public class Room : MonoBehaviour
         if (_drawDebug)
         {
 
-            ExtDebug.DrawBoxCastBox(transform.parent.position + _offset , new Vector3(_width / 2f - 0.1f, _offset.y, _length / 2f - 0.1f), Quaternion.identity,
+            ExtDebug.DrawBoxCastBox(transform.parent.position + _offset , new Vector3(_width / 2f - 0.25f, _offset.y, _length / 2f - 0.25f), Quaternion.identity,
                 Vector3.up, _height/2f, Color.cyan) ;
         }
     }
@@ -114,7 +114,7 @@ public class Room : MonoBehaviour
 
 
             hits = Physics.BoxCastAll(transform.parent.position +_offset +Vector3.up*-1f, 
-                new Vector3(_width / 2f- 0.1f, _offset.y, _length / 2f- 0.1f), Vector3.up,Quaternion.identity, _height/2f, overLapLayers);
+                new Vector3(_width / 2f- 0.25f, _offset.y, _length / 2f- 0.25f), Vector3.up,Quaternion.identity, _height/2f, overLapLayers);
             _drawDebug = true;
 
             Debug.Log(transform.parent.name);
