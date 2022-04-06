@@ -5,7 +5,9 @@ using UnityEngine;
 public enum RoomType
 {
     Crypt,
- 
+
+    LootCrypt,
+
     Corridor,
 
     BossCrypt,
@@ -21,7 +23,7 @@ public class Room : MonoBehaviour
     [SerializeField] private int _width, _length, _height;
 
     [SerializeField] private Vector3 _offset;
-  
+
     [SerializeField] private Transform _origin;
     [SerializeField] private Transform _connectingPoint;
 
@@ -33,23 +35,94 @@ public class Room : MonoBehaviour
     private bool _drawDebug;
     private RoomInfo _roomInfo;
 
-    [SerializeField] private int _nCrawlersPresent=0;
+    [SerializeField] private int _nCrawlersPresent = 0;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject EnemySpawnManagerPrefab;
+
+    private CryptEnemyManager enemyManager;
+
+ 
+
     private void OnDrawGizmos()
     {
         if (!_origin) return;
         Vector3 centre = _origin.position;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(centre+ _offset, new Vector3(_width, _height, _length));
+        Gizmos.DrawWireCube(centre + _offset, new Vector3(_width, _height, _length));
 
         if (_drawDebug)
         {
 
-            ExtDebug.DrawBoxCastBox(transform.parent.position + _offset , new Vector3(_width / 2f - 0.25f, _offset.y, _length / 2f - 0.25f), Quaternion.identity,
-                Vector3.up, _height/2f, Color.cyan) ;
+            ExtDebug.DrawBoxCastBox(transform.parent.position + _offset, new Vector3(_width / 2f - 0.25f, _offset.y, _length / 2f - 0.25f), Quaternion.identity,
+                Vector3.up, _height / 2f, Color.cyan);
+        }
+    }
+
+    public void BeginRoomEncounter()
+    {
+
+        if (_doors.Count > 0)
+        {
+            foreach (Door door in _doors)
+            {
+                if (door)
+                {
+                    door.OnPlayerEnteredRoom -= BeginRoomEncounter;
+                }
+            }
+        }
+        switch (_roomInfo._roomType)
+        {
+            case RoomType.Crypt:
+
+                BeginEnemyEcounter();
+
+                break;
+
+            case RoomType.LootCrypt:
+
+                BeginLootEcounter();
+                break;
         }
     }
 
 
+    public void BeginEnemyEcounter()
+    {
+        LockDoors();
+        if (EnemySpawnManagerPrefab)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                enemyManager = ObjectPoolManager.Spawn(EnemySpawnManagerPrefab.transform).GetComponent<CryptEnemyManager>();
+
+            }
+            else
+            {
+                enemyManager = Instantiate(EnemySpawnManagerPrefab.transform).GetComponent<CryptEnemyManager>();
+            }
+
+            if (enemyManager)
+            {
+                enemyManager.Init(this);
+                enemyManager.Begin();
+                enemyManager.OnEnemiesCleared += OnRoomCleared;
+            }
+        }
+    }
+
+    public void OnRoomCleared()
+    {
+        if (enemyManager)
+        {
+            enemyManager.OnEnemiesCleared -= OnRoomCleared;
+        }
+    }
+    public void BeginLootEcounter()
+    {
+
+    }
     private void Awake()
     {
         if (_inDebug)
@@ -59,23 +132,23 @@ public class Room : MonoBehaviour
     }
     public void Init()
     {
-      
+
         Door[] doors = GetComponentsInChildren<Door>();
 
 
         if (doors != null)
         {
-            for(int i = 0; i < doors.Length; i++)
+            for (int i = 0; i < doors.Length; i++)
             {
                 _doors.Add(doors[i]);
                 doors[i].Init();
-            
+                doors[i].OnPlayerEnteredRoom += BeginRoomEncounter;
             }
 
-           
+
         }
 
-     
+
     }
 
     public void SetRoomInfo(RoomInfo info)
@@ -144,46 +217,45 @@ public class Room : MonoBehaviour
 
     }
 
-
     public bool IsOverlapping(LayerMask overLapLayers)
     {
-        
-            
-            RaycastHit[] hits;
 
 
-            hits = Physics.BoxCastAll(transform.parent.position +_offset +Vector3.up*-1f, 
-                new Vector3(_width / 2f- 0.25f, _offset.y, _length / 2f- 0.25f), Vector3.up,Quaternion.identity, _height/2f, overLapLayers);
-            _drawDebug = true;
+        RaycastHit[] hits;
 
-            Debug.Log(transform.parent.name);
-            if (hits.Length > 0)
+
+        hits = Physics.BoxCastAll(transform.parent.position + _offset + Vector3.up * -1f,
+            new Vector3(_width / 2f - 0.25f, _offset.y, _length / 2f - 0.25f), Vector3.up, Quaternion.identity, _height / 2f, overLapLayers);
+        _drawDebug = true;
+
+        Debug.Log(transform.parent.name);
+        if (hits.Length > 0)
+        {
+
+            foreach (RaycastHit hit in hits)
             {
-                
-                foreach (RaycastHit hit in hits)
+                Debug.Log(hit.collider.gameObject);
+                if (hit.transform.parent)
                 {
-                 Debug.Log(hit.collider.gameObject);
-                    if (hit.transform.parent)
-                    {
-                        
-                        if (hit.collider.transform.parent != transform.parent)
-                        {
-                            
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        if (hit.collider.gameObject != transform.parent)
-                        {
-                            return true;
-                        }
-                    }
-                  
-                }
-            }
 
-        
+                    if (hit.collider.transform.parent != transform.parent)
+                    {
+
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (hit.collider.gameObject != transform.parent)
+                    {
+                        return true;
+                    }
+                }
+
+            }
+        }
+
+
 
         return false;
     }
@@ -213,23 +285,21 @@ public class Room : MonoBehaviour
         return transform.forward;
     }
 
-
-  
     public List<Direction> GetAvailableDirections()
     {
         List<Direction> dirs = new List<Direction>();
 
         if (_doors.Count <= 0) return dirs;
 
-        for(int i =0; i<_doors.Count; i++)
+        for (int i = 0; i < _doors.Count; i++)
         {
-            if(dirs.Count == 0& !_doors[i].IsEntry())
+            if (dirs.Count == 0 & !_doors[i].IsEntry())
             {
                 dirs.Add(_doors[i].GetDirection());
             }
             else
             {
-                if (!dirs.Contains(_doors[i].GetDirection())&& !_doors[i].IsEntry())
+                if (!dirs.Contains(_doors[i].GetDirection()) && !_doors[i].IsEntry())
                 {
                     dirs.Add(_doors[i].GetDirection());
                 }
@@ -243,9 +313,9 @@ public class Room : MonoBehaviour
         List<Door> doors = new List<Door>();
 
         if (doors.Count > 0) return doors;
-        for(int i=0; i < _doors.Count; i++)
+        for (int i = 0; i < _doors.Count; i++)
         {
-            if (_doors[i].GetDirection()== direction&&!_doors[i].IsEntry())
+            if (_doors[i].GetDirection() == direction && !_doors[i].IsEntry())
             {
                 doors.Add(_doors[i]);
             }
@@ -258,16 +328,20 @@ public class Room : MonoBehaviour
     {
         return new Vector2Int(_width, _length);
     }
-    
+    public Vector2Int GetRoomHalfExtents()
+    {
+        return new Vector2Int(_width/2, _length/2);
+    }
+
     public void IncrementCrawlers()
     {
         _nCrawlersPresent++;
     }
     public void DecrementCrawlers()
     {
-        
+
         _nCrawlersPresent--;
-        if(_nCrawlersPresent <0 )_nCrawlersPresent=0;
+        if (_nCrawlersPresent < 0) _nCrawlersPresent = 0;
     }
     public int GetNCrawlers()
     {
@@ -288,18 +362,69 @@ public class Room : MonoBehaviour
         {
             return transform.position;
         }
-    
+
     }
 
     public void DisableRedudantDoors()
     {
         if (_doors.Count > 0)
         {
-            foreach(Door door in _doors)
+            foreach (Door door in _doors)
             {
-                if (!door.GetLinkedRoom()&& !door.IsEntry())
+                if (!door.GetLinkedRoom() && !door.IsEntry())
                 {
                     door.DisableDoor();
+                }
+            }
+        }
+    }
+
+    public void LockDoors()
+    {
+        if (_doors.Count > 0)
+        {
+            foreach(Door door in _doors)
+            {
+                door.ToggleDoorLock(true);
+                door.CloseDoor();
+            }
+        }
+    }
+
+    public void UnlockDoors()
+    {
+        if (_doors.Count > 0)
+        {
+            foreach (Door door in _doors)
+            {
+                door.ToggleDoorLock(false);
+               
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_doors.Count > 0)
+        {
+            foreach (Door door in _doors)
+            {
+                if (door)
+                {
+                    door.OnPlayerEnteredRoom -= BeginRoomEncounter;
+                }
+            }
+        }
+    }
+    private void OnDestroy()
+    {
+        if (_doors.Count > 0)
+        {
+            foreach (Door door in _doors)
+            {
+                if (door)
+                {
+                    door.OnPlayerEnteredRoom -= BeginRoomEncounter;
                 }
             }
         }

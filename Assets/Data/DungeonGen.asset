@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cd5cab476bd0141b7c410b2bebcc53, type: 3}
   m_Name: DungeonGen
   m_EditorClassIdentifier: 
-  _maxSteps: 20
-  _minSteps: 10
+  _maxSteps: 10
+  _minSteps: 8
   _maxWeight: 10
   _minWeight: 1
-  _maxBuildAttempts: 3
+  _maxBuildAttempts: 2
   _minBuildAttempts: 1
   _numberOfCrawlers: 10
   _roomLayers:
@@ -108,11 +108,11 @@ MonoBehaviour:
   - _roomSceneIndex: 36
     _weight: 10
     _roomDirection: 3
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 37
     _weight: 10
     _roomDirection: 0
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 38
     _weight: 10
     _roomDirection: 1
@@ -120,55 +120,55 @@ MonoBehaviour:
   - _roomSceneIndex: 39
     _weight: 10
     _roomDirection: 2
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 40
     _weight: 7
     _roomDirection: 3
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 41
     _weight: 7
     _roomDirection: 0
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 42
     _weight: 7
     _roomDirection: 1
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 43
     _weight: 7
     _roomDirection: 2
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 44
     _weight: 3
     _roomDirection: 3
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 45
     _weight: 3
     _roomDirection: 0
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 46
     _weight: 3
     _roomDirection: 1
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 47
     _weight: 3
     _roomDirection: 2
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 48
     _weight: 3
     _roomDirection: 3
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 49
     _weight: 3
     _roomDirection: 0
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 50
     _weight: 3
     _roomDirection: 1
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 51
     _weight: 3
     _roomDirection: 2
-    _roomType: 1
+    _roomType: 2
   - _roomSceneIndex: 12
     _weight: 0
     _roomDirection: 2
@@ -186,22 +186,18 @@ MonoBehaviour:
     _roomDirection: 2
     _roomType: 3
   - _roomSceneIndex: 8
-    _weight: 0
+    _weight: 10
     _roomDirection: 3
-    _roomType: 2
-  - _roomSceneIndex: 8
-    _weight: 1
-    _roomDirection: 3
-    _roomType: 0
+    _roomType: 1
   - _roomSceneIndex: 9
-    _weight: 1
+    _weight: 10
     _roomDirection: 0
-    _roomType: 0
+    _roomType: 1
   - _roomSceneIndex: 10
-    _weight: 1
+    _weight: 10
     _roomDirection: 1
-    _roomType: 0
+    _roomType: 1
   - _roomSceneIndex: 11
-    _weight: 1
+    _weight: 10
     _roomDirection: 2
-    _roomType: 0
+    _roomType: 1

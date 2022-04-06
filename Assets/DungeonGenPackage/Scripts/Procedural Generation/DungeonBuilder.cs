@@ -180,20 +180,20 @@ public class DungeonBuilder :MonoBehaviour
             switch (direction)
             {
                 case Direction.North:
-                    _currentRoomInfo = new RoomInfo(SceneIndex.N_LootRoom, 0, direction, RoomType.Corridor);
+                    _currentRoomInfo = new RoomInfo(SceneIndex.N_LootRoom, 0, direction, RoomType.LootCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.N_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
 
                     break;
                 case Direction.South:
-                    _currentRoomInfo = new RoomInfo(SceneIndex.S_LootRoom, 0, direction, RoomType.Corridor);
+                    _currentRoomInfo = new RoomInfo(SceneIndex.S_LootRoom, 0, direction, RoomType.LootCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.S_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
                     break;
                 case Direction.West:
-                    _currentRoomInfo = new RoomInfo(SceneIndex.W_LootRoom, 0, direction, RoomType.Corridor);
+                    _currentRoomInfo = new RoomInfo(SceneIndex.W_LootRoom, 0, direction, RoomType.LootCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.W_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
                     break;
                 case Direction.East:
-                    _currentRoomInfo = new RoomInfo(SceneIndex.E_LootRoom, 0, direction, RoomType.Corridor);
+                    _currentRoomInfo = new RoomInfo(SceneIndex.E_LootRoom, 0, direction, RoomType.LootCrypt);
                     _roomManager.BeginRoomLoad(SceneIndex.E_LootRoom, _currentTargetDoor.GetRoomSpawnPoint());
                     break;
             }
@@ -292,7 +292,6 @@ public class DungeonBuilder :MonoBehaviour
   
     }
 
-
     public void RetryStep()
     {
         Debug.Log(gameObject.name + "trying");
@@ -341,7 +340,6 @@ public class DungeonBuilder :MonoBehaviour
         BuildRoom(_currentRoom.GetRoomInfo()._roomType, direction);
 
     }
-
     public void EndStep()
     {
        _isWalking = false;
@@ -359,9 +357,6 @@ public class DungeonBuilder :MonoBehaviour
         }
       
     }
-
-  
- 
 
     public bool CanWalk()
     {
@@ -396,6 +391,20 @@ public class DungeonBuilder :MonoBehaviour
                         EndStep();
 
                     break;
+
+                case RoomType.LootCrypt:
+
+                    _currentRoomInfo = _genData.GetWeightedOfTypeInDirection(direction, RoomType.Corridor);
+                    Debug.Log(gameObject.name + "building new corridor with info: " + _currentRoomInfo._roomSceneIndex);
+                    if (_currentRoomInfo._weight != 0)
+                    {
+                        Debug.Log(gameObject.name + "Trying to spawn room");
+                        _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+                    }
+                    else
+                        EndStep();
+
+                    break;
                 case RoomType.Corridor:
                     if (Random.value < _genData._percentageRepeatingCorridors)
                     {
@@ -410,16 +419,32 @@ public class DungeonBuilder :MonoBehaviour
                             EndStep();
                     }
                     else
-                    {
-                        _currentRoomInfo = _genData.GetWeightedOfTypeInDirection(direction, RoomType.Crypt);
-                        Debug.Log(gameObject.name + "building new Crypt with info: " + _currentRoomInfo);
-                        if (_currentRoomInfo._weight != 0)
+                    {   
+                        if(Random.value < _genData._percentageChanceForLootRoom)
                         {
-                            Debug.Log(gameObject.name + "Trying to spawn room");
-                            _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+                            _currentRoomInfo = _genData.GetWeightedOfTypeInDirection(direction, RoomType.LootCrypt);
+                            Debug.Log(gameObject.name + "building new Crypt with info: " + _currentRoomInfo);
+                            if (_currentRoomInfo._weight != 0)
+                            {
+                                Debug.Log(gameObject.name + "Trying to spawn room");
+                                _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+                            }
+                            else
+                                EndStep();
                         }
                         else
-                            EndStep();
+                        {
+                            _currentRoomInfo = _genData.GetWeightedOfTypeInDirection(direction, RoomType.Crypt);
+                            Debug.Log(gameObject.name + "building new Crypt with info: " + _currentRoomInfo);
+                            if (_currentRoomInfo._weight != 0)
+                            {
+                                Debug.Log(gameObject.name + "Trying to spawn room");
+                                _roomManager.BeginRoomLoad(_currentRoomInfo._roomSceneIndex, _currentTargetDoor.GetRoomSpawnPoint());
+                            }
+                            else
+                                EndStep();
+                        }
+                   
                     }
                     break;
             }

@@ -35,22 +35,30 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     public System.Action OnDoorOpened;
     public System.Action OnDoorClosed;
     public System.Action OnDoorTriggered;
+    public System.Action OnPlayerEnteredRoom;
+
     //States
     private bool _isInRange;
     private bool _canOpen;
     private bool _isOpen=false;
 
     //Object References
-    private Room _parentRoom;
-   [SerializeField] private Room _linkedRoom;
+    [SerializeField] private Room _linkedRoom;
+    private EntryTrigger _entryTrigger;
     private HUDPrompt Prompt;
     private Animator _animator;
-    bool _isInitialised;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _animator.enabled = false;
+
+        _entryTrigger = GetComponentInChildren<EntryTrigger>();
+
+        if (_entryTrigger)
+        {
+            _entryTrigger.OnTargetEntered += PlayerEnteredRoom;
+        }
     }
     public void Init()
     {
@@ -234,6 +242,10 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         {
             _input.Disable();
         }
+        if (_entryTrigger)
+        {
+            _entryTrigger.OnTargetEntered -= PlayerEnteredRoom;
+        }
     }
     private void OnDestroy()
     {
@@ -245,6 +257,10 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         if (_input != null)
         {
             _input.Disable();
+        }
+        if (_entryTrigger)
+        {
+            _entryTrigger.OnTargetEntered -= PlayerEnteredRoom;
         }
     }
 
@@ -281,5 +297,10 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         }
 
         Destroy(this);
+    }
+
+    public void PlayerEnteredRoom()
+    {
+        OnPlayerEnteredRoom?.Invoke();
     }
 }

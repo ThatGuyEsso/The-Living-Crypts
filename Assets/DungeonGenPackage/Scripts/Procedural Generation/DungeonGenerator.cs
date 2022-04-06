@@ -412,6 +412,18 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
+        rooms = _roomManager.GetRoomsOfType(RoomType.LootCrypt);
+        if (rooms != null && rooms.Count > 0)
+        {
+
+            foreach (Room room in rooms)
+            {
+                if (room)
+                {
+                    room.DisableRedudantDoors();
+                }
+            }
+        }
 
         OnDungeonComplete?.Invoke();
     }

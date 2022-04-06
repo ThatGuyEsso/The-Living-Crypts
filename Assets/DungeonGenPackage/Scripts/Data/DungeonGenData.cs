@@ -42,6 +42,10 @@ public class DungeonGenData : ScriptableObject
         {
             if (info._weight >= weight) availableRooms.Add(info);
         }
+        if (availableRooms.Count == 0)
+        {
+            Debug.Break();
+        }
         room = availableRooms[Random.Range(0, availableRooms.Count)];
         return room;
         
