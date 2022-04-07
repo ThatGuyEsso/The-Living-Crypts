@@ -34,7 +34,7 @@ public struct EnemySettings
     }
 }
     [RequireComponent(typeof(PathFinder))]
-public abstract class BaseEnemy : MonoBehaviour ,Iteam
+public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable
 {
     [Header("Debug Settings")]
     [SerializeField] protected bool InDebug;
@@ -67,6 +67,8 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam
     protected bool _canAttack;
 
     public System.Action OnInit;
+
+
     protected virtual void Awake()
     {
         if (InDebug) Init();

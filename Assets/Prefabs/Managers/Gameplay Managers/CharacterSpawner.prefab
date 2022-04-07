@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8285361903081368548
+--- !u!1 &7004822691859617149
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1006552683791241827}
-  - component: {fileID: 1397396289910370822}
+  - component: {fileID: 7004822691859617150}
+  - component: {fileID: 7004822691859617151}
   m_Layer: 0
-  m_Name: EnemySpawnManager
+  m_Name: CharacterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1006552683791241827
+--- !u!4 &7004822691859617150
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8285361903081368548}
+  m_GameObject: {fileID: 7004822691859617149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.899696, y: -81.87407, z: 105.72824}
+  m_LocalPosition: {x: -0.77116835, y: 1.1719067, z: 0.87119013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1397396289910370822
+--- !u!114 &7004822691859617151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8285361903081368548}
+  m_GameObject: {fileID: 7004822691859617149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9abe76d36766bf141a6c7b2656ebcd36, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e2118bb3e7ce342a780aa7a3b82606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvailableSpawnPatterns:
-  - {fileID: 11400000, guid: 87bad91ebda937844870f0209d8c05cf, type: 2}
-  GroundLayers:
+  SpawnExplosionVFXPrefab: {fileID: 2230816617325236938, guid: 9ea7ef9c78b430f48bf6181fa2a79a95, type: 3}
+  SpawnPrepareVFXPrefab: {fileID: 5471629347744244177, guid: 7f49c8c6e73e51b45a363cc9e3892758, type: 3}
+  SpawnTime: 1
+  BlockingLayers:
     serializedVersion: 2
-    m_Bits: 2048
-  MaxWeight: 10
-  MinWeight: 1
-  EnemySpawnAttempts: 5
-  CharacterSpawnerPrefab: {fileID: 7004822691859617149, guid: 2f25e5703aab7c1458068ee475a52186, type: 3}
+    m_Bits: 18432

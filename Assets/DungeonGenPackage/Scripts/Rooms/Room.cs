@@ -117,6 +117,7 @@ public class Room : MonoBehaviour
         if (enemyManager)
         {
             enemyManager.OnEnemiesCleared -= OnRoomCleared;
+            UnlockDoors();
         }
     }
     public void BeginLootEcounter()

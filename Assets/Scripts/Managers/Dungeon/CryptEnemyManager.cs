@@ -10,13 +10,18 @@ public class CryptEnemyManager : MonoBehaviour
 
     [SerializeField] private int MaxWeight = 10, MinWeight = 1;
     [SerializeField] private int EnemySpawnAttempts = 5;
+    [SerializeField] private GameObject CharacterSpawnerPrefab;
+
+
 
     private Room _owner;
 
+    private List<CharacterSpawner> _enemySpawners = new List<CharacterSpawner>();
+
     private EnemySpawnPattern _currentSpawnPattern;
 
-    private int _currentWaveEnemyCount;
-    private int _enemiesToSpawnLeft;
+    [SerializeField] private int _currentWaveEnemyCount;
+    [SerializeField] private int _enemiesToSpawnLeft;
 
     public System.Action OnEnemiesCleared;
     public void Init(Room owner)
@@ -57,6 +62,96 @@ public class CryptEnemyManager : MonoBehaviour
 
     }
 
+    public void OnEnemySpawned(CharacterSpawner spawner, GameObject enemy)
+    {
+        if (_enemySpawners.Count > 0)
+        {
+            CharacterSpawner spawnerToRemove=_enemySpawners.Find(  item => item.gameObject == spawner.gameObject);
+            if (spawnerToRemove)
+            {
+                spawnerToRemove.OnEnemySpawned -= OnEnemySpawned;
+                _enemySpawners.Remove(spawnerToRemove);
+            }
+
+        }
+
+        if (enemy)
+        {
+            CryptCharacterManager manager = enemy.GetComponent<CryptCharacterManager>();
+
+            if (manager)
+            {
+         
+                OnAddCharacter(manager);
+                _enemiesToSpawnLeft--;
+              
+            }
+        }
+    }
+
+    public void OnAddCharacters(List<CryptCharacterManager> CharactersAdded)
+    {
+        if (CharactersAdded.Count > 0)
+        {
+            foreach(CryptCharacterManager character in CharactersAdded)
+            {
+                if (character)
+                {
+                    character.OnCharacterRemoved += OnCharacterRemoved;
+                    character.OnAddCharacter += OnAddCharacter;
+                    _currentWaveEnemyCount++;
+
+                }
+            }
+        }
+   
+
+    }
+    public void OnAddCharacter(CryptCharacterManager CharacterAdded)
+    {
+        if (CharacterAdded)
+        {
+            CharacterAdded.OnCharacterRemoved += OnCharacterRemoved;
+            CharacterAdded.OnAddCharacter += OnAddCharacter;
+
+            _currentWaveEnemyCount++;
+        }
+     
+
+
+    }
+
+    public void OnCharacterRemoved(CryptCharacterManager CharacterRemoved)
+    {
+        if (CharacterRemoved)
+        {
+            CharacterRemoved.OnCharacterRemoved -= OnCharacterRemoved;
+            CharacterRemoved.OnAddCharacter -= OnAddCharacter;
+      
+            _currentWaveEnemyCount--;
+            
+        }
+        EvaluateWave();
+    }
+
+    public void EvaluateWave()
+    {
+        if(_currentWaveEnemyCount <= 0)
+        {
+            Debug.Log("Wave complete");
+            if (_enemiesToSpawnLeft>0)
+            {
+                Debug.Log("Next wave");
+                BeginSpawnCurrentWave();
+            }
+            else
+            {
+                OnEnemiesCleared?.Invoke();
+                Debug.Log("Room cleared");
+            }
+   
+        }
+    }
 
     public void Begin()
     {
@@ -81,8 +176,7 @@ public class CryptEnemyManager : MonoBehaviour
         {
             nToSpawn = _enemiesToSpawnLeft;
         }
-        _enemiesToSpawnLeft-= nToSpawn;
-        _currentWaveEnemyCount = nToSpawn;
+ 
 
 
         List<GameObject> enemies = new List<GameObject>();
@@ -100,6 +194,8 @@ public class CryptEnemyManager : MonoBehaviour
 
         StartCoroutine(SpawnWaveCurrentWave(enemies, spawnLagTime));
     }
+
+    
     IEnumerator SpawnWaveCurrentWave(List<GameObject> enemiesToSpawn, float lagTime)
     {
         if (enemiesToSpawn.Count > 0)
@@ -108,7 +204,7 @@ public class CryptEnemyManager : MonoBehaviour
             {
                 bool isPlaced = false;
                 int attempts = 0;
-                while(!isPlaced ||attempts < EnemySpawnAttempts)
+                while(!isPlaced && attempts < EnemySpawnAttempts)
                 {
                     isPlaced =SpawnEnemy(enemy);
                     attempts++;
@@ -133,19 +229,32 @@ public class CryptEnemyManager : MonoBehaviour
         Vector3 pointInSpace = _owner.transform.position + new Vector3(randomX, randomY, 0f);
 
         RaycastHit hit;
-
-        if(Physics.Raycast(pointInSpace,Vector3.down, out hit, Mathf.Infinity, GroundLayers)){
-
+        CharacterSpawner spawner;
+        if (Physics.Raycast(pointInSpace,Vector3.down, out hit, Mathf.Infinity, GroundLayers)){
+       
             if (ObjectPoolManager.instance)
             {
-                ObjectPoolManager.Spawn(EnemyPrefab, hit.point, Quaternion.identity);
+                spawner = ObjectPoolManager.Spawn(CharacterSpawnerPrefab, hit.point, Quaternion.identity).GetComponent<CharacterSpawner>();
+                if (spawner)
+                {
+                    _enemySpawners.Add(spawner);
+                    spawner.OnEnemySpawned += OnEnemySpawned;
+                    spawner.BeginEnemySpawn(hit.point, EnemyPrefab);
+                }
                 return true;
             }
             else
             {
-                Instantiate(EnemyPrefab, hit.point, Quaternion.identity);
+                spawner =  Instantiate(CharacterSpawnerPrefab, hit.point, Quaternion.identity).GetComponent<CharacterSpawner>();
+                if (spawner)
+                {
+                    _enemySpawners.Add(spawner);
+                    spawner.OnEnemySpawned += OnEnemySpawned;
+                    spawner.BeginEnemySpawn(hit.point, EnemyPrefab);
+                }
                 return true;
             }
+            
         }
 
         return false;

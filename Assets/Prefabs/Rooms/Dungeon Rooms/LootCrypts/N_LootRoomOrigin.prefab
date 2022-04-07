@@ -928,6 +928,7 @@ MonoBehaviour:
   _connectingPoint: {fileID: 0}
   _useGridOffset: 0
   _nCrawlersPresent: 0
+  EnemySpawnManagerPrefab: {fileID: 0}
 --- !u!1 &7768780110815806387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4840,7 +4841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000035762784
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4848,7 +4849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.00000016391276
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_LocalRotation.z
@@ -4860,7 +4861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

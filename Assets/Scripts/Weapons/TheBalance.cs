@@ -107,21 +107,24 @@ public class TheBalance : BaseWeapon
     {
         if (!_beamOriginVFX&&_beamOriginVFXPrefab) _beamOriginVFX = Instantiate(_beamOriginVFXPrefab, Vector3.zero, _beamSettings._firePoint.rotation);
         if (_beamOriginVFX) _beamOriginVFX.transform.position = _beamSettings._firePoint.position;
-
+        Vector3 dir = EssoUtility.GetCameraLookAtPoint(_fovCam, _beamSettings._distance, _beamSettings._targetLayers) - _beamSettings._firePoint.position;
         List<Vector3> points = new List<Vector3>();
-        Vector3 aimPoint = _beamSettings._firePoint.position + _beamSettings._firePoint.forward * _beamSettings._distance;
+        Vector3 aimPoint = _beamSettings._firePoint.position +dir.normalized  * _beamSettings._distance;
         RaycastHit hitInfo;
   
 
 
-        if (Physics.Raycast(_beamSettings._firePoint.position, _beamSettings._firePoint.forward, out hitInfo, _beamSettings._distance,
+        if (Physics.Raycast(_beamSettings._firePoint.position, dir.normalized, out hitInfo, _beamSettings._distance,
             _beamSettings._targetLayers))
         {
             aimPoint = hitInfo.point;
-            IDamage damage = hitInfo.collider.gameObject.GetComponent<IDamage>();
-            if(damage==null)
-                SpawnHitVFX(hitInfo.point);
+            
         }
+
+          
+         SpawnHitVFX(aimPoint);
+            
+      
         points.Add(aimPoint);
 
         _beamLineManager.DrawLinePositions(points);
@@ -149,6 +152,7 @@ public class TheBalance : BaseWeapon
 
             }
         }
+    
         _primCurrentTickRate = _primaryFireRate;
 
 
@@ -166,7 +170,14 @@ public class TheBalance : BaseWeapon
     public void SpawnHitVFX(Vector3 point)
     {
         if (_beamHitVFXPrefab)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(_beamHitVFXPrefab, point, Quaternion.identity);
+            }
             Instantiate(_beamHitVFXPrefab, point, Quaternion.identity);
+        }
+           
     }
 
     protected override void DoSecondaryAttack()

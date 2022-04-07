@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 951077903895921026}
   - component: {fileID: 951077903895921027}
   - component: {fileID: 1924905420}
+  - component: {fileID: 753587019200014727}
+  - component: {fileID: 3982368686327892857}
   m_Layer: 10
   m_Name: LivingEmber
   m_TagString: Enemy
@@ -107,7 +109,7 @@ MonoBehaviour:
     MaxJumpCooldown: 0.5
   MinimumSplitSize: 0.5
   MaxSplitCount: 4
-  LivingEmberPrefab: {fileID: 0}
+  LivingEmberPrefab: {fileID: 951077903895921039}
 --- !u!114 &951077903895921035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +274,33 @@ MonoBehaviour:
   MinSize: 1
   MaxSize: 3
   ResizeOnAwake: 0
+--- !u!114 &753587019200014727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951077903895921039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ffbf2a7db79e4c47912d8ef93655851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _width: 0.5
+  _length: 0.5
+  _height: 0.5
+--- !u!114 &3982368686327892857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951077903895921039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d952ef639409b4243b7c51a5298b4f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &951077905219355479
 GameObject:
   m_ObjectHideFlags: 0

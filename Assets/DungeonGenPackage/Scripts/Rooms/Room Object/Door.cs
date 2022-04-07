@@ -33,6 +33,9 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     [SerializeField] private string OpenAnimName, CloseAnimName;
     //Events
     public System.Action OnDoorOpened;
+    public System.Action OnDoorUnlocked;
+    public System.Action OnDoorLocked;
+
     public System.Action OnDoorClosed;
     public System.Action OnDoorTriggered;
     public System.Action OnPlayerEnteredRoom;
@@ -68,6 +71,15 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         if (_inDebug)
         {
             SpawnDebugVisual();
+        }
+        if (_canOpen)
+        {
+            OnDoorUnlocked?.Invoke();
+        }
+        else
+        {
+            OnDoorLocked?.Invoke();
+
         }
 
    
@@ -118,6 +130,14 @@ public class Door : MonoBehaviour, Controls.IInteractActions
 
     public void ToggleDoorLock(bool isLocked)
     {
+        if (isLocked)
+        {
+            OnDoorLocked?.Invoke();
+        }
+        else
+        {
+            OnDoorUnlocked?.Invoke();
+        }
         _canOpen = !isLocked;
     }
     private void OnTriggerEnter(Collider other)
@@ -208,7 +228,7 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         if (context.performed && _isInRange)
         {
             _canOpen = false;
-            OnDoorTriggered.Invoke();
+            OnDoorTriggered?.Invoke();
             OpenDoor();
         }
     }
@@ -270,7 +290,7 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         {
             _animator.enabled = false;
         }
-    
+
         _isOpen = true;
         OnDoorOpened?.Invoke();
     }

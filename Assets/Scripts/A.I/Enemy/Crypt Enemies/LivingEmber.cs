@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(JumpMovement))]
+[RequireComponent(typeof(CryptCharacterManager))]
 public class LivingEmber : BaseEnemy
 {
     [Header("Enemy Character Settings")]
@@ -14,6 +15,14 @@ public class LivingEmber : BaseEnemy
     private JumpMovement _jumpMovement;
   
     private RandomSizeInRange _randomSize;
+
+    private CryptCharacterManager _cryptCharacter;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _cryptCharacter = GetComponent<CryptCharacterManager>();
+    }
     public override void Init()
     {
         base.Init();
@@ -169,9 +178,23 @@ public class LivingEmber : BaseEnemy
     protected override void KillEnemy()
     {
         if (transform.localScale.x > MinimumSplitSize)
+        {
+
             Split();
+        }
         else
-            Destroy(gameObject);
+        {
+            _cryptCharacter.RemoveSelf();
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+           
     }
 
 
@@ -182,7 +205,15 @@ public class LivingEmber : BaseEnemy
         float splitSize = transform.localScale.x/ splitCount;
         if(splitSize < MinimumSplitSize)
         {
-            Destroy(gameObject);
+            _cryptCharacter.RemoveSelf();
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
@@ -204,11 +235,26 @@ public class LivingEmber : BaseEnemy
                     newEmber.OnEnemyStateChange(EnemyState.Chase);
                     newEmber.Init();
 
+                    CryptCharacterManager cryptEmber = newEmber.GetComponent<CryptCharacterManager>();
+
+                    if (cryptEmber)
+                    {
+                        _cryptCharacter.AddNewCharacter(cryptEmber);
+                    }
+
                 }
+            }
+            _cryptCharacter.RemoveSelf();
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
      
-        Destroy(gameObject);
     }
 
 
