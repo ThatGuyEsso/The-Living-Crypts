@@ -44,6 +44,7 @@ public class HUDManager : MonoBehaviour
             case GameplayEvents.PlayerDied:
                 break;
             case GameplayEvents.PlayerRespawned:
+                PlayerHealthBar.gameObject.SetActive(false);
                 break;
         }
     }

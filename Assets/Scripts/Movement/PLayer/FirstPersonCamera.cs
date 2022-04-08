@@ -13,7 +13,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     [Header("Camera Settings")]
      [Range(1f,60f)]
     [SerializeField] private float _sensitivity;
-   
+    [SerializeField] private ViewBob _viewBob;
     //State variables
     private bool _isInitialised;
     private bool _isFollowing;
@@ -27,19 +27,36 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     private Controls _input;
     private Vector3 _currentOffset;
     private Rigidbody _playerRB;
+
+    private PlayerBehaviour _player;
     private void Awake()
     {
         if (_inDebug)
         {
             Init();
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+        
         }
     }
     public void Init()
     {
-        if (_targetPosition) _isFollowing = true;
+        if (_targetPosition)
+        {
+            _isFollowing = true;
 
+            _player =_characterTransform.GetComponent<PlayerBehaviour>();
+            if (_player)
+            {
+                _player.OnPlayerDied += OnPlayerKilled;
+            }
+        }
+
+        if (_viewBob)
+        {
+            _viewBob.Init();
+        }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         _input = new Controls();
         _input.Aiming.SetCallbacks(this);
         _input.Enable();
@@ -101,6 +118,11 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
             _input.Disable();
     
         }
+
+        if (_player)
+        {
+            _player.OnPlayerDied -= OnPlayerKilled;
+        }
     }
 
     private void OnDestroy()
@@ -110,5 +132,19 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
             _input.Disable();
          
         }
+
+        if (_player)
+        {
+            _player.OnPlayerDied -= OnPlayerKilled;
+        }
+    }
+
+    public void OnPlayerKilled()
+    {
+        if (_input != null)
+        {
+            _input.Disable();
+        }
+
     }
 }

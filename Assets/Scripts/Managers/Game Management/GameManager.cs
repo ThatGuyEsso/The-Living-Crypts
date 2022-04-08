@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum GameplayEvents
 {
@@ -10,7 +11,9 @@ public enum GameplayEvents
     DungeonGenComplete,
     GameComplete,
     PlayerDied,
-    PlayerRespawned
+    PlayerRespawned,
+    PlayerRespawnBegun,
+
 };
 
 public class GameManager : MonoBehaviour, IManager, IInitialisable
@@ -20,6 +23,11 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     [SerializeField] private GameObject DungeonGenerationManagerPrefab;
     [SerializeField] private Material SkyBox;
     [SerializeField] private LightingSettings lightSettings;
+
+    [SerializeField] private VolumeProfile DeathProfile, GameProfile;
+    [SerializeField] private float TimeToRespawn =3f;
+
+    private Volume _gameVolume;
     // Start is called before the first frame update
 
     public System.Action<GameplayEvents> OnNewGamplayEvent;
@@ -38,6 +46,8 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     public void BindToGameStateManager()
     {
         GameStateManager.instance.OnNewGameState += EvaluateGameState;
+
+
     }
 
     public void EvaluateGameState(GameState newState)
@@ -50,9 +60,6 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
             case GameState.GameRunning:
 
                 break;
-
-
-
 
         }
     }
@@ -68,6 +75,14 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
             case GameplayEvents.DungeonInvoked:
                 InitDungeonGeneration();
                 break;
+            case GameplayEvents.PlayerDied:
+                PlayDeathVFX();
+                Invoke("InitRespawn", TimeToRespawn);
+                break;
+
+            case GameplayEvents.PlayerRespawnBegun:
+                StartCoroutine(DoPlayerRespawn());
+                break;
         }
     }
 
@@ -78,6 +93,17 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
             GameStateManager.instance.GameManager = this;
             BindToGameStateManager();
         }
+
+        if (!_gameVolume)
+        {
+            _gameVolume = FindObjectOfType<Volume>();
+           
+        }
+
+        if (_gameVolume)
+        {
+            _gameVolume.profile = GameProfile;
+        }
     }
     public void InitGame()
     {
@@ -86,6 +112,134 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         StartCoroutine(SetUpGameScene());
     }
 
+    public void PlayDeathVFX()
+    {
+        if (!_gameVolume)
+        {
+            _gameVolume = FindObjectOfType<Volume>();
+
+        }
+
+        if (_gameVolume)
+        {
+            _gameVolume.profile = DeathProfile;
+        }
+    }
+
+
+    private void InitRespawn()
+    {
+        if(!GameStateManager.instance || !GameStateManager.instance.LoadingScreenManager)
+        {
+            Debug.LogError("No loading screen");
+            return;
+        }
+
+        GameStateManager.instance.LoadingScreenManager.OnFadeComplete += BeginRespawn;
+
+        GameStateManager.instance.LoadingScreenManager.BeginFadeIn();
+    }
+
+    private void BeginRespawn()
+    {
+        if (!GameStateManager.instance || !GameStateManager.instance.LoadingScreenManager)
+        {
+            Debug.LogError("No loading screen");
+            return;
+        }
+        GameStateManager.instance.LoadingScreenManager.OnFadeComplete -= BeginRespawn;
+
+        BeginNewGameplayEvent(GameplayEvents.PlayerRespawnBegun);
+
+        
+    }
+
+
+    private IEnumerator DoPlayerRespawn()
+    {
+        //Unload Dungeon
+        List<Room> rooms = _roomManager.GetRoomsOfType(RoomType.Crypt);
+        _roomManager.OnRoomUnloadComplete += OnWaitComplete;
+
+        //unload crypts
+        if (rooms.Count > 0)
+        {
+            foreach (Room room in rooms)
+            {
+                _isWaiting = true;
+                _roomManager.BeginRemoveRoom(room);
+                while (_isWaiting)
+                {
+                   yield return null;
+                }
+            }
+       
+        }
+        //unload corridors
+        rooms = _roomManager.GetRoomsOfType(RoomType.Corridor);
+        if (rooms.Count > 0)
+        {
+            foreach (Room room in rooms)
+            {
+                _isWaiting = true;
+                _roomManager.BeginRemoveRoom(room);
+                while (_isWaiting)
+                {
+                    yield return null;
+                }
+            }
+
+        }
+        //Loot crypts
+        rooms = _roomManager.GetRoomsOfType(RoomType.LootCrypt);
+        if (rooms.Count > 0)
+        {
+            foreach (Room room in rooms)
+            {
+                _isWaiting = true;
+                _roomManager.BeginRemoveRoom(room);
+                while (_isWaiting)
+                {
+                    yield return null;
+                }
+            }
+
+        }
+
+        //Boss Crypt
+        rooms = _roomManager.GetRoomsOfType(RoomType.BossCrypt);
+        if (rooms.Count > 0)
+        {
+            foreach (Room room in rooms)
+            {
+                _isWaiting = true;
+                _roomManager.BeginRemoveRoom(room);
+                while (_isWaiting)
+                {
+                    yield return null;
+                }
+            }
+
+        }
+        _player.transform.position = _spawnPoint.position;
+        PlayerBehaviour player = GetComponent<PlayerBehaviour>();
+        if (player)
+        {
+            player.ResetCharacter();
+        }
+        if (WeaponManager._instance)
+        {
+            WeaponManager._instance.ResetManager();
+        }
+      
+        if (_gameVolume)
+        {
+            _gameVolume.profile = GameProfile;
+        }
+        BeginNewGameplayEvent(GameplayEvents.PlayerRespawned);
+        GameStateManager.instance.LoadingScreenManager.BeginFadeOut();
+
+    }
     public void InitDungeonGeneration()
     {
         if (!_generationManager)

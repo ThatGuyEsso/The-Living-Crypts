@@ -20,14 +20,26 @@ public class CharacterHealthManager : MonoBehaviour, IDamage,IInitialisable
     public System.Action OnNotHurt;
     public System.Action OnDie;
 
-
+    private bool _isInitialised;
    
     public void Init()
     {
-        _maxHealth = Random.Range(_healthData._minDefaultHealth, _healthData._maxDefaultHealth);
-        _currentHealth = _maxHealth;
-        _canBeHurt = true;
-        _isAlive = true;
+        if (_isInitialised)
+        {
+            _isInitialised = true;
+            _maxHealth = Random.Range(_healthData._minDefaultHealth, _healthData._maxDefaultHealth);
+            _currentHealth = _maxHealth;
+            _canBeHurt = true;
+            _isAlive = true;
+        }
+        else
+        {
+            _currentHealth = _maxHealth;
+            _canBeHurt = true;
+            _isAlive = true;
+            OnHealthUpdated?.Invoke(CurrentHealth);
+        }
+     
     }
     public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker, Vector3 point)
     {

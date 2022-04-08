@@ -123,8 +123,16 @@ public class RoomManager : MonoBehaviour
 
     public void BeginRemoveRoom(Room room)
     {
-        _loadedRooms.Remove(room);
-        StartCoroutine(UnLoadRoom(room.gameObject.scene));
+        if (room)
+        {
+            _loadedRooms.Remove(room);
+            StartCoroutine(UnLoadRoom(room.gameObject.scene));
+        }
+        else
+        {
+            OnRoomUnloadComplete?.Invoke();
+        }
+  
    
     }
 

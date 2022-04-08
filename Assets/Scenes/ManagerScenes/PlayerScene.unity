@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 836753347387585163, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: ManagerToInit.Array.data[1]
+      value: 
+      objectReference: {fileID: 1327657722}
     - target: {fileID: 2691887569142288993, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
       propertyPath: _targetCamera
       value: 
@@ -286,38 +290,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1300984223798459010, guid: c4032a603df829d45b8e23863a7237e4, type: 3}
   m_PrefabInstance: {fileID: 1327657720}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1327657723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327657722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: 0
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 1
-  m_Antialiasing: 1
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!1001 &1447440679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -375,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1799222598754567829, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.1044521
+      value: 2.362862
       objectReference: {fileID: 0}
     - target: {fileID: 1799222598754567830, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
       propertyPath: _camera
@@ -383,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 1447440680}
     - target: {fileID: 1799222598754567830, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
       propertyPath: inDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1799222598754567830, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
       propertyPath: targetPoint
@@ -396,6 +368,14 @@ PrefabInstance:
     - target: {fileID: 1799222598754567831, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
       propertyPath: _inDebug
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799222598754567831, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
+      propertyPath: _viewBob
+      value: 
+      objectReference: {fileID: 1447440682}
+    - target: {fileID: 1799222598754567831, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
+      propertyPath: _sensitivity
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1799222598754567831, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
       propertyPath: _targetPosition
@@ -431,5 +411,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1447440682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1799222598754567830, guid: 9889f3fba4996884891de1b35f0eb873, type: 3}
+  m_PrefabInstance: {fileID: 1447440679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b422200c7e7a1794ca9ee91270f4cff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

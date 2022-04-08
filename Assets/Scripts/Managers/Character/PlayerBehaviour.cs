@@ -16,6 +16,10 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
     //Cached referencs
     private CharacterHealthManager _healthManager;
     private GameManager _gameManager;
+
+    public System.Action OnPlayerDied;
+
+    public System.Action OnPlayerReset;
     public void Init()
     {
         ComponentsToInit = GetComponents<IInitialisable>();
@@ -48,6 +52,7 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
         {
             _healthManager = GetComponent<CharacterHealthManager>();
             _healthManager.OnHurt += OnDamageScreenShake;
+            _healthManager.OnDie += OnPlayerKilled;
         }
     }
 
@@ -60,8 +65,9 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
         }
     }
 
-    public void OnPlayerKilled()
+    private void OnPlayerKilled()
     {
+        OnPlayerDied?.Invoke();
         if (ICharacterComponents.Length > 0)
         {
             foreach(ICharacterComponents comp in ICharacterComponents)
@@ -70,24 +76,19 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
             }
         }
 
+        if (!_gameManager)
+        {
+            GetGameManager();
+        }
+
         if (_gameManager)
         {
             _gameManager.BeginNewGameplayEvent(GameplayEvents.PlayerDied);
         }
         else
         {
-            GetGameManager();
-            if (_gameManager)
-            {
-                GetGameManager();
-            }
-            else
-            {
-                Debug.LogError("No Game Manager");
-            }
+            Debug.LogError("No Game Manager");
         }
-
-
     }
 
     public void GetGameManager()
@@ -130,5 +131,30 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
     public bool IsOnTeam(Team team)
     {
         return Team.Player == team;
+    }
+
+
+    public void ResetCharacter()
+    {
+        if (ICharacterComponents.Length > 0)
+        {
+            foreach(ICharacterComponents comp in ICharacterComponents)
+            {
+                comp.ResetComponent();
+            }
+        }
+
+        if (ManagerToInit.Length > 0)
+        {
+            foreach (GameObject comp in ManagerToInit)
+            {
+                IInitialisable initComp = comp.GetComponent<IInitialisable>();
+                if (initComp != null)
+                {
+                    initComp.Init();
+                }
+
+            }
+        }
     }
 }

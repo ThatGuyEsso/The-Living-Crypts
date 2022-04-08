@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-public class ViewBob : MonoBehaviour, IInitialisable
+public class ViewBob : MonoBehaviour
 {
     [SerializeField] private bool inDebug;
     //component references and values

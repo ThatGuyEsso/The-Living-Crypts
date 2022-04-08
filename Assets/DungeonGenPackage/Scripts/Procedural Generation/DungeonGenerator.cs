@@ -333,7 +333,7 @@ public class DungeonGenerator : MonoBehaviour
             RemoveRedudantDoors();
             return;
         }
-          
+
         if (deadEnds != null && deadEnds.Count > 0)
         {
             StartCoroutine(RemoveRoomsOverTime(deadEnds));

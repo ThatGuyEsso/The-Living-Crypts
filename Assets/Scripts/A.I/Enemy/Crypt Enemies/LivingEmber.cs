@@ -55,9 +55,38 @@ public class LivingEmber : BaseEnemy
         }
     }
 
+    protected override void EvaluateNewGameplayEvent(GameplayEvents newEvent)
+    {
+        base.EvaluateNewGameplayEvent(newEvent);
+
+        switch (newEvent)
+        {
+            case GameplayEvents.PlayerDied:
+
+                IsActive = false;
+                break;
+
+            case GameplayEvents.PlayerRespawnBegun:
+
+                if (ObjectPoolManager.instance)
+                {
+                    ObjectPoolManager.Recycle(gameObject);
+
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+                break;
+        }
+    }
 
     protected override void ProcessAI()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         switch (CurrentState)
         {
             case EnemyState.Idle:
@@ -96,6 +125,10 @@ public class LivingEmber : BaseEnemy
 
     private void Update()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         switch (CurrentState)
         {
             case EnemyState.Idle:
@@ -141,6 +174,10 @@ public class LivingEmber : BaseEnemy
 
     private void OnCollisionEnter(Collision other)
     {
+        if (!IsActive)
+        {
+            return;
+        }
         Iteam otherTeam = other.gameObject.GetComponent<Iteam>();
         if (otherTeam != null){
 
@@ -161,8 +198,9 @@ public class LivingEmber : BaseEnemy
         OnEnemyStateChange(EnemyState.Chase);
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (_hManager)
         {
             _hManager.OnHurt -= OnHurt;
@@ -171,8 +209,9 @@ public class LivingEmber : BaseEnemy
         }
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         if (_hManager)
         {
             _hManager.OnHurt -= OnHurt;

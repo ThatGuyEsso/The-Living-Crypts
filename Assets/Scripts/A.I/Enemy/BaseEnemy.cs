@@ -63,9 +63,10 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
 
     protected float _currentTimeBtwnAttacks;
 
+    protected bool IsActive;
     
     protected bool _canAttack;
-
+    protected GameManager _gameManager;
     public System.Action OnInit;
 
 
@@ -83,14 +84,45 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
         _currentPath = new NavMeshPath();
         _hManager = GetComponent<CharacterHealthManager>();
         InvokeRepeating("ProcessAI", randValue, TickRate);
-
+        if (!_gameManager)
+        {
+            if(GameStateManager.instance && GameStateManager.instance.GameManager)
+            {
+                _gameManager = GameStateManager.instance.GameManager;
+            }
+        }
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent += EvaluateNewGameplayEvent;
+        }
+        IsActive = true;
         OnInit?.Invoke();
     }
 
+    public virtual void OnEnable()
+    {
+        IsActive = true;
+
+        if (!_gameManager)
+        {
+            if (GameStateManager.instance && GameStateManager.instance.GameManager)
+            {
+                _gameManager = GameStateManager.instance.GameManager;
+            }
+        }
 
 
-
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent += EvaluateNewGameplayEvent;
+        }
+    }
     protected abstract void ProcessAI();
+
+    virtual protected void EvaluateNewGameplayEvent( GameplayEvents newEvent)
+    {
+        //
+    }
 
     protected virtual void DrawPathToTarget()
     {
@@ -154,4 +186,19 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     {
         return Team.Enviroment;
     }
+    virtual protected void OnDisable()
+    {
+        if(_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent -= EvaluateNewGameplayEvent;
+        }
+    }
+    virtual protected void OnDestroy()
+    {
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent -= EvaluateNewGameplayEvent;
+        }
+    }
+
 }

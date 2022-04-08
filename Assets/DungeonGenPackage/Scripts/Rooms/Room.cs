@@ -179,7 +179,13 @@ public class Room : MonoBehaviour
                     door.OpenDoor();
                 }
                 break;
+            case RoomType.LootCrypt:
+                foreach (Door door in _doors)
+                {
 
+                    door.OpenDoor();
+                }
+                break;
             case RoomType.BossCrypt:
                 foreach (Door door in _doors)
                 {

@@ -15,6 +15,7 @@ public class DebugController : MonoBehaviour {
     public static DebugCommand SPAWN_SOUTH_DUNGEON;
     public static DebugCommand SPAWN_WEST_DUNGEON;
     public static DebugCommand SPAWN_EAST_DUNGEON;
+    public static DebugCommand KILL_PLAYER;
     public List<object> commandList;
     private RoomManager _roomManager;
     private DungeonGenerator _dungeonGenerator;
@@ -26,17 +27,21 @@ public class DebugController : MonoBehaviour {
         inputAction.Console.ToggleConsole.performed += ToggleConsole;
         inputAction.Console.Return.performed += OnReturn;
 
+        //Dungeon generation
         SPAWN_NORTH_DUNGEON = new DebugCommand("/Spawn_North_Dungeon", "Spawns North Dungeon","/Spawn_N_Dungeon",() => GenNorthDungeon());
         SPAWN_SOUTH_DUNGEON = new DebugCommand("/Spawn_South_Dungeon", "Spawns south Dungeon", "/Spawn_S_Dungeon", () => GenSouthDungeon());
         SPAWN_WEST_DUNGEON = new DebugCommand("/Spawn_West_Dungeon", "Spawns West Dungeon", "/Spawn_W_Dungeon", () => GenWestDungeon());
         SPAWN_EAST_DUNGEON = new DebugCommand("/Spawn_East_Dungeon", "Spawns East Dungeon", "/Spawn_E_Dungeon", () => GenEastDungeon());
 
+
+        KILL_PLAYER = new DebugCommand("/Kill_Player", "Kills Player character", "/Kill_Player", () => KillPlayerCharacter());
         commandList = new List<object>
         {
             SPAWN_NORTH_DUNGEON,
             SPAWN_SOUTH_DUNGEON,
             SPAWN_WEST_DUNGEON,
-            SPAWN_EAST_DUNGEON
+            SPAWN_EAST_DUNGEON,
+            KILL_PLAYER
         };
     }
 
@@ -44,8 +49,20 @@ public class DebugController : MonoBehaviour {
     public void ToggleConsole(InputAction.CallbackContext context)
     {
 
-        if(context.performed) showConsole = !showConsole;
+        if (context.performed)
+        {
+            showConsole = !showConsole;
+            Cursor.visible = showConsole;
+            if (showConsole)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
    
+        }
     }
 
     private void OnGUI()
@@ -235,5 +252,17 @@ public class DebugController : MonoBehaviour {
     }
 
 
- 
+    public void KillPlayerCharacter()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player)
+        {
+            IDamage damage = player.GetComponent<IDamage>();
+            if(damage != null)
+            {
+                damage.OnDamage(1000f, Vector3.zero, 0f, null, player.transform.position);
+            }
+        }
+    }
 }

@@ -12,6 +12,7 @@ public class WeaponManager : MonoBehaviour,IInitialisable
     [SerializeField] private Transform _weaponEquipPoint;
     [SerializeField] private FPSMovement _ownerMovement;
     private Controls _input;
+    private PlayerBehaviour _playerBehaviour;
 
     public System.Action<string> OnWeaponEquipped;
    
@@ -30,6 +31,18 @@ public class WeaponManager : MonoBehaviour,IInitialisable
             _ownerMovement = GetComponentInParent<FPSMovement>();
             _ownerMovement.OnWalk += OnOwnerMove;
             _ownerMovement.OnStop += OnOwnerStop;
+
+            if (!_playerBehaviour)
+            {
+                _playerBehaviour = GetComponentInParent<PlayerBehaviour>();
+            }
+
+            if (_playerBehaviour)
+            {
+                _playerBehaviour.OnPlayerDied += OnPlayerDeath;
+            }
+
+
         }
         else
         {
@@ -76,6 +89,21 @@ public class WeaponManager : MonoBehaviour,IInitialisable
    
     }
 
+    public void OnPlayerDeath()
+    {
+        if (_equippedWeapon)
+        {
+            OnStopPrimaryAttack();
+            OnStopSecondaryAttack();
+            DisableInput();
+        }
+    }
+
+    public void ResetManager()
+    {
+        UnequipWeapon();
+        EnableInput();
+    }
     public void OnPrimaryAttack()
     {
         if (_equippedWeapon)
@@ -126,7 +154,14 @@ public class WeaponManager : MonoBehaviour,IInitialisable
         if (_input != null) _input.Enable();
     }
 
-
+    private void OnDisable()
+    {
+        if (_playerBehaviour)
+        {
+            _playerBehaviour.OnPlayerDied -= OnPlayerDeath;
+        }
+        DisableInput();
+    }
     public bool IsWeaponEquipped { get { return _isWeaponEquipped; } }
 
     public GameObject Getowner()
