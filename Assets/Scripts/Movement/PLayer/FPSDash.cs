@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
+public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, ICharacterComponents
 {
     [SerializeField] private bool _inDebug;
     [Header("Components")]
@@ -141,4 +141,31 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions
         ResetDash();
     }
 
+    public void EnableComponent()
+    {
+        StopAllCoroutines();
+        ResetDash();
+        if (_input != null)
+        {
+            _input.Enable();
+        }
+    }
+
+
+    public void DisableComponent()
+    {
+        EndDash();
+        StopAllCoroutines();
+        _canDash = false;
+    
+        if (_input != null)
+        {
+            _input.Disable();
+        }
+    }
+
+    public void ResetComponent()
+    {
+       
+    }
 }

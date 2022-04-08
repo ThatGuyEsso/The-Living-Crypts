@@ -41,6 +41,7 @@ public class LivingEmber : BaseEnemy
             _hManager.OnDie += KillEnemy;
         }
 
+
     }
 
     protected override void DoAttack(GameObject target, Vector3 point)
@@ -60,6 +61,10 @@ public class LivingEmber : BaseEnemy
         switch (CurrentState)
         {
             case EnemyState.Idle:
+                if (CurrentTarget)
+                {
+                    OnEnemyStateChange(EnemyState.Chase);
+                }
                 break;
             case EnemyState.Chase:
 
@@ -98,6 +103,7 @@ public class LivingEmber : BaseEnemy
             case EnemyState.Chase:
                 //Abort cases
                 if (!CurrentTarget||!PathFinder) return;
+                if (_currentPath == null) return;
                 if (_currentPath.corners.Length <= 0) return;
                 //evaluate path
                 if(!PathFollower.EvaluatePath(_currentPath,transform.position)) return;

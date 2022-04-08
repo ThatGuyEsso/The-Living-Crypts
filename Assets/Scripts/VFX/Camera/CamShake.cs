@@ -40,7 +40,6 @@ public class CamShake : MonoBehaviour
     //Component of shake noise
     private CinemachineBasicMultiChannelPerlin shakeNoise;
 
-    public CinemachineConfiner bounds;
     public static CamShake instance;
     public void Awake()
     {

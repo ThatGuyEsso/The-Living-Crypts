@@ -56,6 +56,7 @@ public class PathFinder : MonoBehaviour, IInitialisable
     }
     private void Update()
     {
+        if (_path == null) return;
         if (!_isInitialised || _path.corners.Length <= 0) return;
 
     }

@@ -88,6 +88,10 @@ public class StrafeTilt : MonoBehaviour,IInitialisable
             else if(moveDir.x>0)_isTitlingRight = true;
             _isTitling = true;
         }
+        else
+        {
+            OnStopped();
+        }
     }
     public void OnStopped( )
     {

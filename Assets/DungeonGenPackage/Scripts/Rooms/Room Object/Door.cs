@@ -300,6 +300,10 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         {
             _animator.enabled = false;
         }
+        if (_entryTrigger)
+        {
+            _entryTrigger.OnTargetEntered -= PlayerEnteredRoom;
+        }
         _isOpen = false;
         OnDoorClosed?.Invoke();
     }
@@ -310,11 +314,19 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         {
             NothInUseMesh.SetActive(true);
         }
-
-        foreach(GameObject inUse in InUseMeshes)
+        foreach (GameObject inUse in InUseMeshes)
         {
             inUse.SetActive(false);
         }
+        if (_entryTrigger)
+        {
+            _entryTrigger.OnTargetEntered -= PlayerEnteredRoom;
+        }
+        if (_animator)
+        {
+            Destroy(_animator);
+        }
+   
 
         Destroy(this);
     }

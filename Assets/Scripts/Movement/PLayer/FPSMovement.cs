@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 [RequireComponent(typeof(Rigidbody))]
-public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisable
+public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisable, ICharacterComponents
 {
     [SerializeField] private bool inDebug;
     [Header("Movement Settings")]

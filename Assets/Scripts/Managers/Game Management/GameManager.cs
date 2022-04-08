@@ -244,6 +244,10 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         _HUDManager = FindObjectOfType<HUDManager>();
         _sceneManager.OnSceneAdded -= OnWaitComplete;
 
+        if (_HUDManager &&_player)
+        {
+            _HUDManager.Init(_player,this);
+        }
         GameStateManager.instance.BeginNewState(GameState.GameSceneSetUpComplete);
     }
 
@@ -291,4 +295,6 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         }
         _generationManager.OnDungeonComplete -= OnDungeonoCompleted;
     }
+
+    public GameObject Player { get { return _player; } }
 }

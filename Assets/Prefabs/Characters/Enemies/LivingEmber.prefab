@@ -92,8 +92,8 @@ MonoBehaviour:
   CharacterSettings:
     AttackRange: 2
     AttackRate: 3
-    MaxDamage: 30
-    MinDamage: 25
+    MaxDamage: 10
+    MinDamage: 5
     MaxKnockBack: 5
     MinKnockBack: 2
   CurrentState: 1
@@ -214,8 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inDebug: 1
   _healthData:
-    _maxDefaultHealth: 40
-    _minDefaultHealth: 60
+    _maxDefaultHealth: 20
+    _minDefaultHealth: 15
     _maxHurtTime: 0.5
 --- !u!114 &951077903895921030
 MonoBehaviour:

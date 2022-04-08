@@ -22,7 +22,11 @@ public class HazardVolume : MonoBehaviour
         if (owner)
         {
             Iteam ourTeam = _owner.GetComponent<Iteam>();
-            Team = ourTeam.GetTeam();
+            if (ourTeam != null)
+            {
+                Team = ourTeam.GetTeam();
+            }
+        
         }
  
         _isAlive = true;
@@ -79,10 +83,9 @@ public class HazardVolume : MonoBehaviour
         if (otherTeam == null)
         {
             return;
-        }
-        Iteam ourTeam = _owner.GetComponent<Iteam>();
 
-        if (ourTeam == null || !otherTeam.IsOnTeam(Team))
+        }
+        if (otherTeam.IsOnTeam(Team))
         {
             if (_objectsToAttack.Count == 0)
             {

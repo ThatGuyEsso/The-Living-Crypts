@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterHealthManager : MonoBehaviour, IDamage
+public class CharacterHealthManager : MonoBehaviour, IDamage,IInitialisable
 {
     [SerializeField] private bool _inDebug;
     [SerializeField] private HealthData _healthData;
@@ -15,6 +15,7 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
     private bool _isAlive;
 
     public System.Action<float ,float , float , Vector3,Vector3 > OnDamageReceived;
+    public System.Action<float> OnHealthUpdated;
     public System.Action OnHurt;
     public System.Action OnNotHurt;
     public System.Action OnDie;
@@ -38,13 +39,18 @@ public class CharacterHealthManager : MonoBehaviour, IDamage
             if (_currentHealth <= 0f)
             {
                 _isAlive = false;
+                OnHealthUpdated?.Invoke(CurrentHealth);
                 OnDie?.Invoke();
+                Debug.Log("Player Died");
             }
             else
             {
 
-                OnDamageReceived?.Invoke(_maxHealth,dmg,kBackMag,kBackDir,point);
+                OnDamageReceived?.Invoke(_maxHealth, dmg,kBackMag,kBackDir,point);
+                OnHealthUpdated?.Invoke(CurrentHealth);
+                Debug.Log("Player Hurt: " + _currentHealth);
                 OnHurt?.Invoke();
+             
             }
 
 

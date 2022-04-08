@@ -34,7 +34,7 @@ public struct EnemySettings
     }
 }
     [RequireComponent(typeof(PathFinder))]
-public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable
+public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
 {
     [Header("Debug Settings")]
     [SerializeField] protected bool InDebug;

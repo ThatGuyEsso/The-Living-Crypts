@@ -224,8 +224,8 @@ public class CryptEnemyManager : MonoBehaviour
 
     public bool SpawnEnemy(GameObject EnemyPrefab)
     {
-        int randomX = Random.Range(-_owner.GetRoomHalfExtents().x, _owner.GetRoomHalfExtents().x);
-        int randomY = Random.Range(-_owner.GetRoomHalfExtents().y, _owner.GetRoomHalfExtents().y);
+        int randomX = Random.Range(-_owner.GetRoomHalfExtents().x+2, _owner.GetRoomHalfExtents().x-2);
+        int randomY = Random.Range(-_owner.GetRoomHalfExtents().y+2, _owner.GetRoomHalfExtents().y-2);
         Vector3 pointInSpace = _owner.transform.position + new Vector3(randomX, randomY, 0f);
 
         RaycastHit hit;

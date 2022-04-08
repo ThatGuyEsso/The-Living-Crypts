@@ -115,7 +115,17 @@ public class CharacterSpawner : MonoBehaviour
         {
              Instantiate(SpawnExplosionVFXPrefab, spawnPoint, Quaternion.identity);
         }
-        OnEnemySpawned?.Invoke(this, enemyObject);
+
+        IEnemy enemy = enemyObject.GetComponent<IEnemy>();
+        if (enemy!=null)
+        {
+            if(!GameStateManager.instance || !GameStateManager.instance.GameManager || !GameStateManager.instance.GameManager.Player)
+            {
+                return;
+            }
+            enemy.SetTarget(GameStateManager.instance.GameManager.Player.transform);
+            OnEnemySpawned?.Invoke(this, enemyObject);
+        }
     }
 
 }
