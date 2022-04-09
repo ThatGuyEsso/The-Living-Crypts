@@ -222,7 +222,8 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
         }
         _player.transform.position = _spawnPoint.position;
-        PlayerBehaviour player = GetComponent<PlayerBehaviour>();
+        _player.transform.rotation = _spawnPoint.rotation;
+        PlayerBehaviour player = _player.GetComponent<PlayerBehaviour>();
         if (player)
         {
             player.ResetCharacter();
@@ -235,6 +236,10 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         if (_gameVolume)
         {
             _gameVolume.profile = GameProfile;
+        }
+        if (WeaponManager._instance)
+        {
+            WeaponManager._instance.OnWeaponEquipped += OnPlayerHasEquippedWeapon;
         }
         BeginNewGameplayEvent(GameplayEvents.PlayerRespawned);
         GameStateManager.instance.LoadingScreenManager.BeginFadeOut();
@@ -257,7 +262,7 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         if (_generationManager)
         {
             _generationManager.Init();
-            _generationManager.OnDungeonComplete += OnDungeonoCompleted;
+            _generationManager.OnDungeonComplete += OnDungeonCompleted;
             _generationManager.BeginDungeonGeneration(_hubRoom, Direction.North,_roomManager);
             BeginNewGameplayEvent(GameplayEvents.DungeonBegunGenerating);
             
@@ -440,14 +445,14 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
     public GameplayEvents Event { get {return _currentGameplayEvent; } }
 
-    public void OnDungeonoCompleted()
+    public void OnDungeonCompleted()
     {
         BeginNewGameplayEvent(GameplayEvents.DungeonGenComplete);
         if (!_generationManager)
         {
             return;
         }
-        _generationManager.OnDungeonComplete -= OnDungeonoCompleted;
+        _generationManager.OnDungeonComplete -= OnDungeonCompleted;
     }
 
     public GameObject Player { get { return _player; } }

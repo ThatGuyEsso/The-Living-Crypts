@@ -27,6 +27,7 @@ public class DisplayRoomManager : MonoBehaviour, Controls.IInteractActions
 
     //Input
     private Controls _input;
+    private bool _isInitialised;
     private void Awake()
     {
         if (GameStateManager.instance)
@@ -62,6 +63,18 @@ public class DisplayRoomManager : MonoBehaviour, Controls.IInteractActions
             case GameplayEvents.PlayerDied:
                 break;
             case GameplayEvents.PlayerRespawned:
+                DungeonEntrance.CloseDoor();
+
+                foreach (WeaponPickUp pickup in _pickUps)
+                {
+                 
+                    if (!pickup.IsEnabled())
+                    {
+                        pickup.EnablePickUp();
+                    }
+                  
+                }
+              
                 break;
         }
     }
@@ -82,14 +95,23 @@ public class DisplayRoomManager : MonoBehaviour, Controls.IInteractActions
     }
     public void Init()
     {
-        _pickUps.Add(TheLegacyPickUp);
-        _pickUps.Add(LeavateinnPickUp);
-        _pickUps.Add(TheBalancePickUp);
-
-        if (WeaponManager._instance)
+        if (!_isInitialised)
         {
-            WeaponManager._instance.OnWeaponEquipped += EvalauteWeaponSelected;
+            _isInitialised = true;
+            if (_pickUps.Count == 0)
+            {
+                _pickUps.Add(TheLegacyPickUp);
+                _pickUps.Add(LeavateinnPickUp);
+                _pickUps.Add(TheBalancePickUp);
+            }
+
+
+            if (WeaponManager._instance)
+            {
+                WeaponManager._instance.OnWeaponEquipped += EvalauteWeaponSelected;
+            }
         }
+    
 
         _rangeTrigger.enabled = true;
     }

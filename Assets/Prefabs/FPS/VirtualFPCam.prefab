@@ -88,7 +88,8 @@ MonoBehaviour:
   _inDebug: 1
   _targetPosition: {fileID: 0}
   _characterTransform: {fileID: 0}
-  _sensitivity: 7
+  _sensitivity: 12
+  _viewBob: {fileID: 1799222598754567830}
 --- !u!114 &1799222598754567830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,9 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b422200c7e7a1794ca9ee91270f4cff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inDebug: 1
+  inDebug: 0
   targetPoint: {fileID: 0}
   moveController: {fileID: 0}
+  _camera: {fileID: 1799222598754567831}
   _bobFreq: 3
   _bobHorizAmp: 0.2
   _bobVertAmp: 0.018
@@ -122,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brain: {fileID: 0}
-  bounds: {fileID: 0}
 --- !u!1 &1799222599713276005
 GameObject:
   m_ObjectHideFlags: 0

@@ -211,7 +211,8 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
 
     public void ResetComponent()
     {
-        Stop();
+        _input.Enable();
+        _canMove = true;
     }
 
     public void SetCanMove(bool canMove)

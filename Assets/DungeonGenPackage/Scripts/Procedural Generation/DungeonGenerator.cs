@@ -36,7 +36,7 @@ public class DungeonGenerator : MonoBehaviour
       
         
         _canSpawnDungeon = true;
-
+        _buildersCompleteCount = 0;
         //Set random seed
         Random.InitState(System.DateTime.Now.Hour * 365000 + System.DateTime.Now.Minute * 60000 + System.DateTime.Now.Second * 1000 + System.DateTime.Now.Millisecond);
      
@@ -425,6 +425,21 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
+        CleanUpBuilders();
+    }
+
+    public void CleanUpBuilders()
+    {
+        if (_builders.Count > 0)
+        {
+            foreach(DungeonBuilder builder in _builders)
+            {
+                if (builder)
+                {
+                    Destroy(builder.gameObject);
+                }
+            }
+        }
         OnDungeonComplete?.Invoke();
     }
 }

@@ -28,6 +28,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     private Vector3 _currentOffset;
     private Rigidbody _playerRB;
 
+    private bool _canLook;
     private PlayerBehaviour _player;
     private void Awake()
     {
@@ -43,11 +44,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         {
             _isFollowing = true;
 
-            _player =_characterTransform.GetComponent<PlayerBehaviour>();
-            if (_player)
-            {
-                _player.OnPlayerDied += OnPlayerKilled;
-            }
+            
         }
 
         if (_viewBob)
@@ -62,6 +59,14 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         _input.Enable();
         _playerRB = _characterTransform.GetComponent<Rigidbody>();
         _isInitialised = true;
+        _canLook =true;
+
+        _player = _characterTransform.GetComponent<PlayerBehaviour>();
+        if (_player)
+        {
+            _player.OnPlayerDied += OnPlayerKilled;
+            _player.OnPlayerReset += OnPlayerReset;
+        }
         //_xRot = transform.localRotation..x;
         //_yRot = transform.localRotation.eulerAngles.y;
     }
@@ -70,7 +75,10 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
 
     private void Update()
     {
-
+        if (!_canLook)
+        {
+            return;
+        }
         float mousePosX = _sensitivity * Time.deltaTime * _xMove;
         float mousePosY = _sensitivity * Time.deltaTime * _yMove;
 
@@ -122,12 +130,13 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         if (_player)
         {
             _player.OnPlayerDied -= OnPlayerKilled;
+            _player.OnPlayerDied -= OnPlayerReset;
         }
     }
 
     private void OnDestroy()
     {
-        if (_isInitialised)
+        if (_input != null)
         {
             _input.Disable();
          
@@ -136,6 +145,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         if (_player)
         {
             _player.OnPlayerDied -= OnPlayerKilled;
+            _player.OnPlayerDied -= OnPlayerReset;
         }
     }
 
@@ -144,6 +154,17 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         if (_input != null)
         {
             _input.Disable();
+            _canLook = false;
+        }
+
+    }
+
+    public void OnPlayerReset()
+    {
+        if (_input != null)
+        {
+            _input.Enable();
+            _canLook = true;
         }
 
     }

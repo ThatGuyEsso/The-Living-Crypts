@@ -166,6 +166,6 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
 
     public void ResetComponent()
     {
-       
+        EnableComponent();
     }
 }

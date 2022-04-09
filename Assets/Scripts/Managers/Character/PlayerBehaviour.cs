@@ -144,17 +144,8 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
             }
         }
 
-        if (ManagerToInit.Length > 0)
-        {
-            foreach (GameObject comp in ManagerToInit)
-            {
-                IInitialisable initComp = comp.GetComponent<IInitialisable>();
-                if (initComp != null)
-                {
-                    initComp.Init();
-                }
-
-            }
-        }
+        _healthManager.ResetHealth();
+      
+        OnPlayerReset?.Invoke();
     }
 }

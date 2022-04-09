@@ -20,25 +20,19 @@ public class CharacterHealthManager : MonoBehaviour, IDamage,IInitialisable
     public System.Action OnNotHurt;
     public System.Action OnDie;
 
-    private bool _isInitialised;
+
    
     public void Init()
     {
-        if (_isInitialised)
-        {
-            _isInitialised = true;
-            _maxHealth = Random.Range(_healthData._minDefaultHealth, _healthData._maxDefaultHealth);
-            _currentHealth = _maxHealth;
-            _canBeHurt = true;
-            _isAlive = true;
-        }
-        else
-        {
-            _currentHealth = _maxHealth;
-            _canBeHurt = true;
-            _isAlive = true;
-            OnHealthUpdated?.Invoke(CurrentHealth);
-        }
+       
+
+        _maxHealth = Random.Range(_healthData._minDefaultHealth, _healthData._maxDefaultHealth);
+        _currentHealth = _maxHealth;
+        _canBeHurt = true;
+        _isAlive = true;
+        
+       
+       
      
     }
     public void OnDamage(float dmg, Vector3 kBackDir, float kBackMag, GameObject attacker, Vector3 point)
@@ -83,6 +77,13 @@ public class CharacterHealthManager : MonoBehaviour, IDamage,IInitialisable
                 _currentHurtTime -= Time.deltaTime;
             }
         }
+    }
+    public void ResetHealth()
+    {
+        _currentHealth = _maxHealth;
+        _canBeHurt = true;
+        _isAlive = true;
+        OnHealthUpdated?.Invoke(CurrentHealth);
     }
 
     public bool IsHurt { get { return !_canBeHurt; } }

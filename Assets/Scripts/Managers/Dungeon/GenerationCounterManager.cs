@@ -70,6 +70,7 @@ public class GenerationCounterManager : MonoBehaviour
             case GameplayEvents.PlayerDied:
                 break;
             case GameplayEvents.PlayerRespawned:
+                OnOff();
                 break;
         }
     }
@@ -115,6 +116,23 @@ public class GenerationCounterManager : MonoBehaviour
 
 
     }
+    public void OnOff()
+    {
+        CurrentPorgressIndex = 0;
+        foreach (MeshRenderer renderer in ProgressCounters)
+        {
+
+            renderer.material = OffMaterial;
+
+        }
+        foreach (Light light in ProgressCounterLights)
+        {
+            light.enabled = false;
+            light.intensity = 0;
+       
+        }
+    }
+
     public void OnStandby()
     {
         foreach (MeshRenderer renderer in ProgressCounters)
