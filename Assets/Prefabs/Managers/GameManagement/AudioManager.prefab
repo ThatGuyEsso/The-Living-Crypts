@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7687356236475029073}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.848781, y: 2.5294018, z: 5.771074}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +43,191 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9f1c290dfd0c94cb3a6b35c1a61525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: ButtonSelectSFX
+    clip: {fileID: 8300000, guid: 873edd3c129862c429b0ec8ba62107b1, type: 3}
+    volume: 0.4
+    pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e62b2e17eabac76408f7f778e8283de0, type: 2}
+    pitchChange: 0.08
+  - name: ButtonHoverSFX
+    clip: {fileID: 8300000, guid: a013833a48cebf54e9efcd2e333caf9c, type: 3}
+    volume: 0.4
+    pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e62b2e17eabac76408f7f778e8283de0, type: 2}
+    pitchChange: 0.08
+  - name: TransitionSFX
+    clip: {fileID: 8300000, guid: fca269198edb31f4cb58c193e5687e80, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e62b2e17eabac76408f7f778e8283de0, type: 2}
+    pitchChange: 0.08
+  - name: DungeonEchoSFX
+    clip: {fileID: 8300000, guid: 527424b0d98a2c34f94eca9849845428, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.08
+  - name: RoomLoadCompleteSFX
+    clip: {fileID: 8300000, guid: 35f39f3740414fe4a9d6813ae0e70657, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: PlayerSpawnSFX
+    clip: {fileID: 8300000, guid: e948017dc90bfac44b367b3c9c763889, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.08
+  - name: DoorSlidingSFX
+    clip: {fileID: 8300000, guid: cb17036528d89e5419d910abd8adadd5, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.08
+  - name: DunngeonEchoSong
+    clip: {fileID: 8300000, guid: f3a9eb820b5c6d645ae8d628e0e68a5e, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: b7025277e16ee26458e057c50bb77b4d, type: 2}
+    pitchChange: 0.08
+  - name: SwordSwingSFX_1
+    clip: {fileID: 8300000, guid: ddeda8f754b55c147b87215e73de6362, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: SwordSwingSFX_2
+    clip: {fileID: 8300000, guid: e045eea389aef86498623921ac3f9bb4, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: SwordThrustSFX
+    clip: {fileID: 8300000, guid: c77dce9ec3d9eb24a81bf8efda9f1998, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: InitBeamSFX
+    clip: {fileID: 8300000, guid: 40fe939707576cc41acfdb75841ed240, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.05
+  - name: BeamSustainSFX
+    clip: {fileID: 8300000, guid: 232cfa44f69097648b19188faa115fd7, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: ShieldOnSFX
+    clip: {fileID: 8300000, guid: 5c275f262ed1e414a8c1b190fc6b0de0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: ShieldOffSFX
+    clip: {fileID: 8300000, guid: cdc26a8fd1459fe4781ce328bbe7ec17, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: ShieldHItSFX
+    clip: {fileID: 8300000, guid: 52813cd7526b90942a626a63160c15de, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: PlayerHitSFX
+    clip: {fileID: 8300000, guid: aafb03a043e45fb448d95da530a000df, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: PlayerStepSFX
+    clip: {fileID: 8300000, guid: a3f7922f275360047b66c0cbeb64b48b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: DodgeSFX
+    clip: {fileID: 8300000, guid: e030a61dcbf72b449b2767b83a1aa83b, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: HeartBeatSFX
+    clip: {fileID: 8300000, guid: 60097a2f47ea9454e9bc19593efde38f, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: PlayerDeathSFX
+    clip: {fileID: 8300000, guid: 4d8a83a155324f54ab54dec0f2c0515e, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  - name: PickUpSFX
+    clip: {fileID: 8300000, guid: 99fa5e87233aafb4985b3c029955d3b4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.06
+  - name: WeaponPickUpSFX
+    clip: {fileID: 8300000, guid: 53ec97bb9d9159545936dca38dac89e6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.06
   soundGroups: []
   uiGroup: {fileID: 24300002, guid: e62b2e17eabac76408f7f778e8283de0, type: 2}
   soundEffectGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}

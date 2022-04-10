@@ -126,6 +126,8 @@ public class CharacterSpawner : MonoBehaviour
             enemy.SetTarget(GameStateManager.instance.GameManager.Player.transform);
             OnEnemySpawned?.Invoke(this, enemyObject);
         }
+
+      
     }
 
 }

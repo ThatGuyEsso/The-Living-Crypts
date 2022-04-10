@@ -72,8 +72,20 @@ public class CryptEnemyManager : MonoBehaviour
                 spawnerToRemove.OnEnemySpawned -= OnEnemySpawned;
                 _enemySpawners.Remove(spawnerToRemove);
             }
-
+            if (spawnerToRemove.gameObject)
+            {
+                if (ObjectPoolManager.instance)
+                {
+                    ObjectPoolManager.Recycle(spawnerToRemove.gameObject);
+                }
+                else
+                {
+                    Destroy(spawnerToRemove.gameObject);
+                }
+            }
         }
+
+   
 
         if (enemy)
         {
