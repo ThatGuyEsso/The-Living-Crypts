@@ -11,13 +11,12 @@ public class MusicManager : MonoBehaviour,IInitialisable,IManager
 
     [SerializeField] private AudioSource primarySource;
     [SerializeField] private AudioSource secondarySource;
-    [SerializeField] private List<Sound> tracks;
+    [SerializeField] private Dictionary<string,List<Sound>> Tracks;
 
     [SerializeField] private float crossFadeRate;
     [SerializeField] private float fadeInRate;
     [SerializeField] private float fadeOutRate;
-    [SerializeField] private float minTimeToNextSong;
-    [SerializeField] private float maxTimeToNextSong;
+
 
     [SerializeField] private AudioMixerGroup musicAudioGroup;
     public Sound[] music;
@@ -110,8 +109,7 @@ public class MusicManager : MonoBehaviour,IInitialisable,IManager
         {
             fadeInRate = fadeRate;
             currentTimeToNextSong = UnityEngine.Random.Range(minTimeNext, maxTimeNext);
-            minTimeToNextSong = minTimeNext;
-            maxTimeToNextSong = maxTimeNext;
+          
             if (primarySource.isPlaying)
             {
                 StopCoroutine(WaitToPrimarySongFinish(newSong));
@@ -133,8 +131,6 @@ public class MusicManager : MonoBehaviour,IInitialisable,IManager
         {
             fadeInRate = fadeRate;
             currentTimeToNextSong = UnityEngine.Random.Range(minTimeNext, maxTimeNext);
-            minTimeToNextSong = minTimeNext;
-            maxTimeToNextSong = maxTimeNext;
             if (primarySource.isPlaying)
             {
                 StopCoroutine(WaitToPrimarySongFinish(newSong));
