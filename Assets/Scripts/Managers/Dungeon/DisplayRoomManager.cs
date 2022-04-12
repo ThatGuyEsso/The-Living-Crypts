@@ -57,6 +57,7 @@ public class DisplayRoomManager : MonoBehaviour, Controls.IInteractActions
                 break;
             case GameplayEvents.DungeonGenComplete:
                 DungeonEntrance.OpenDoor();
+                DungeonEntrance.PlayDoorSlideSFX();
                 break;
             case GameplayEvents.GameComplete:
                 break;

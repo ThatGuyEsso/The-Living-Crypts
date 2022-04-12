@@ -192,6 +192,30 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
         return null;
     }
 
+    /// <summary>
+    /// Creates a new audio player set up with specific sound
+    /// </summary>
+    /// <param name="name"></sfx name>
+    /// <param name="targetTransform"></owner's transform>
+    /// <returns></returns>
+    public AudioPlayer CreateAudioPlayer(string name, Transform targetTransform) 
+    {
+        if (name == string.Empty)
+        {
+            return null;
+        }
+        if (ObjectPoolManager.instance) //check instance of object pool
+        {
+            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, targetTransform).GetComponent<AudioPlayer>(); //Gets the audioplayer
+            if (audio)
+            {
+                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                return audio;
+            }
+        }
+        return null;
+    }
+
     public AudioPlayer PlayGroupThroughAudioPlayer(string name, Vector3 pos) //Function Spawns Audio player then players the sound
     {
         if (name == string.Empty)

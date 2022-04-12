@@ -26,7 +26,7 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
     private bool _isInitialised;
     private bool _isStopping;
     private bool _canMove;
-
+    
     //Events
     public Action OnWalk;
     public Action OnStop;
@@ -218,6 +218,14 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
     public void SetCanMove(bool canMove)
     {
         _canMove = canMove;
-        OnStop?.Invoke();
+        if (_isMoving&&_canMove)
+        {
+            OnWalk?.Invoke();
+        }
+        else
+        {
+            OnStop?.Invoke();
+        }
+  
     }
 }

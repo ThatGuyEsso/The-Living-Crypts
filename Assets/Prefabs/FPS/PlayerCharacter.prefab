@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponEquipPoint: {fileID: 2971435629315405120}
   _ownerMovement: {fileID: 0}
+  EquipSFX: WeaponPickUpSFX
 --- !u!1 &3370732970680565395
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +63,7 @@ GameObject:
   - component: {fileID: 3370732970680565402}
   - component: {fileID: 197090928}
   - component: {fileID: 197090929}
+  - component: {fileID: 2782804495305431557}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -203,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ManagerToInit:
   - {fileID: 163429901}
+  - {fileID: 0}
   DamageShake:
     _duration: 0.3
     _magnitude: 5
@@ -226,6 +229,24 @@ MonoBehaviour:
     _maxDefaultHealth: 100
     _minDefaultHealth: 100
     _maxHurtTime: 1.5
+--- !u!114 &2782804495305431557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3370732970680565395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5649bc96ddc9f4080d25f1f7f4b6bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHitSFX: PlayerHitSFX
+  PlayerDashSFX: DodgeSFX
+  PlayerFootStepSFX: PlayerStepSFX
+  PlayerHeartBeatSFX: HeartBeatSFX
+  MaxTimeBetweenFootSteps: 0.5
+  MinHealthToPlayHeartBeatSFX: 15
 --- !u!1 &3370732970782629264
 GameObject:
   m_ObjectHideFlags: 0

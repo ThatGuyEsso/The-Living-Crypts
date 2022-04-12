@@ -195,7 +195,7 @@ public class Door : MonoBehaviour, Controls.IInteractActions
             }
             AM = GameStateManager.instance.AudioManager;
         }
-        DoorSlideSoundPlayer= AM.PlayGroupThroughAudioPlayer(DoorSlideSFX, transform.position);
+        DoorSlideSoundPlayer= AM.PlayThroughAudioPlayer(DoorSlideSFX, transform.position,true);
     }
 
     private void OnTriggerExit(Collider other)
