@@ -35,28 +35,67 @@ public class AttackCollider : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         if (!IsEnabled) return;
+
+
         if (other.transform.root != _owner)
         {
-            OnObjectHit?.Invoke(other.gameObject);
             IDamage damage = other.gameObject.GetComponent<IDamage>();
-
-            if (damage != null)
+            if (damage == null)
             {
-                IAttacker attacker = _owner.GetComponent<IAttacker>();
-                if (attacker != null)
-                {
-                    AttackData aDAta = attacker.GetAttackData();
-                    float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
-                    float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
-                    damage.OnDamage(dmg, _owner.transform.forward,
-                            kBack, _owner, other.ClosestPoint(transform.position));
-                    OnEnemyHit?.Invoke(_owner);
-                    OnAttackPerfomed?.Invoke();
-                }
-
-
-
+                return;
             }
+            Iteam ownerTeam = _owner.GetComponent<Iteam>();
+            if(ownerTeam == null)
+            {
+                return;
+            }
+            Iteam otherTeam = other.GetComponent<Iteam>();
+            if (ownerTeam == null)
+            {
+                if (damage != null)
+                {
+                    IAttacker attacker = _owner.GetComponent<IAttacker>();
+                    if (attacker != null)
+                    {
+                        AttackData aDAta = attacker.GetAttackData();
+                        float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
+                        float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
+                        damage.OnDamage(dmg, _owner.transform.forward,
+                                kBack, _owner, other.ClosestPoint(transform.position));
+                       
+                    }
+
+
+
+                }
+             
+            }else if (!ownerTeam.IsOnTeam(otherTeam.GetTeam()))
+            {
+                if (damage != null)
+                {
+                    IAttacker attacker = _owner.GetComponent<IAttacker>();
+                    if (attacker != null)
+                    {
+                        AttackData aDAta = attacker.GetAttackData();
+                        float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
+                        float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
+                        damage.OnDamage(dmg, _owner.transform.forward,
+                                kBack, _owner, other.ClosestPoint(transform.position));
+          
+                        OnAttackPerfomed?.Invoke();
+                    }
+
+
+
+                }
+            }
+            OnObjectHit?.Invoke(other.gameObject);
+            OnEnemyHit?.Invoke(_owner);
+            OnAttackPerfomed?.Invoke();
+        
+            
+
+  
         }
     }
 

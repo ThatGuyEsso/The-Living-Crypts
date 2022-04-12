@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IAudio 
 {
-    void SetUpAudioSource(Sound sound);
+    void SetUpAudioSource(Sound sound, AudioManager AM);
     void Play();
 
     void PlayAtRandomPitch();

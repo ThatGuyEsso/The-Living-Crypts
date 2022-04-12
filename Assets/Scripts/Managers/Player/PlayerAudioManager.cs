@@ -16,7 +16,7 @@ public class PlayerAudioManager : MonoBehaviour
     private CharacterHealthManager _health;
 
     //Audio 
-    private AudioManager AM;
+    [SerializeField] private AudioManager AM;
     private AudioPlayer _closeToDeathAudioPlayer;
     bool _isWalking;
     float _currentTimeBtwnFootSteps =0f;

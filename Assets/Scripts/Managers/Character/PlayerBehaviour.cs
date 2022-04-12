@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterHealthManager))]
 public class PlayerBehaviour : MonoBehaviour,Iteam
 {
+    [SerializeField] private bool InDebug;
 
     [SerializeField] private IInitialisable[] ComponentsToInit;
     [SerializeField] private ICharacterComponents[] ICharacterComponents;
@@ -20,6 +21,13 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
     public System.Action OnPlayerDied;
 
     public System.Action OnPlayerReset;
+    private void Awake()
+    {
+        if (InDebug)
+        {
+            Init();
+        }
+    }
     public void Init()
     {
         ComponentsToInit = GetComponents<IInitialisable>();

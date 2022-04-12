@@ -166,7 +166,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
             if (audio)
             {
-                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                audio.SetUpAudioSource(GetSound(name),this); //set the Audio up
                 audio.Play(); //Then play 
                 return audio;
             }
@@ -184,7 +184,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, targetTransform).GetComponent<AudioPlayer>(); //Gets the audioplayer
             if (audio)
             {
-                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                audio.SetUpAudioSource(GetSound(name),this); //set the Audio up
                 audio.Play(); //Then play 
                 return audio;
             }
@@ -209,7 +209,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, targetTransform).GetComponent<AudioPlayer>(); //Gets the audioplayer
             if (audio)
             {
-                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                audio.SetUpAudioSource(GetSound(name), this); //set the Audio up
                 return audio;
             }
         }
@@ -233,7 +233,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
             if (audio)
             {
-                audio.SetUpAudioSource(groupMemeber); //set the Audio up
+                audio.SetUpAudioSource(groupMemeber,this); //set the Audio up
                 audio.Play(); //Then play 
                 return audio;
             }
@@ -258,7 +258,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
             if (audio)
             {
-                audio.SetUpAudioSource(groupMemeber); //set the Audio up
+                audio.SetUpAudioSource(groupMemeber,this); //set the Audio up
                 audio.PlaySoundAtRandomPitch(); //Then play 
                 return audio;
             }
@@ -279,7 +279,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             if (audio)
             {
                 Sound sound = GetSound(name);
-                audio.SetUpAudioSource(GetSound(name), sound.pitch + pitchShift); //set the Audio up
+                audio.SetUpAudioSource(GetSound(name), sound.pitch + pitchShift,this); //set the Audio up
                 audio.Play(); //Then play 
                 return audio;
             }
@@ -295,11 +295,11 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
         }
         if (ObjectPoolManager.instance) //check instance of object pool
         {
-            AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
+             AudioPlayer audio = ObjectPoolManager.Spawn(audioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
 
             if (audio)
             {
-                audio.SetUpAudioSource(GetSound(name)); //set the Audio up
+                audio.SetUpAudioSource(GetSound(name),this); //set the Audio up
                 if (randPitch) audio.PlayAtRandomPitch();
                 else
                     audio.Play(); //Then play 
@@ -323,7 +323,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             AudioPlayer audio = ObjectPoolManager.Spawn(uiAudioPlayer, pos, Quaternion.identity).GetComponent<AudioPlayer>(); //Gets the audioplayer
             if (audio)
             {
-                audio.SetUpAudioSource(GetSound(name));
+                audio.SetUpAudioSource(GetSound(name), this);
                 audio.Play();
                 return audio;
             }
@@ -343,7 +343,7 @@ public class AudioManager : MonoBehaviour,IManager,IInitialisable
             IAudio audio = ObjectPoolManager.Spawn(uiAudioPlayer, pos, Quaternion.identity).GetComponent<IAudio>(); //Get interface from spawned gameobject
             if (audio != null)
             {
-                audio.SetUpAudioSource(GetSound(name));
+                audio.SetUpAudioSource(GetSound(name), this);
                 if (randPitch)
                     audio.PlayAtRandomPitch();
                 else

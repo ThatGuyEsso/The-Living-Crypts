@@ -10,6 +10,7 @@ public class AudioPlayer : MonoBehaviour, IAudio
     Sound currentSound;
     bool isFadingOut;
     float fadeOutRate = 2f;
+    private AudioManager AM;
     public void Awake()
     {
         isFadingOut = false;
@@ -17,7 +18,7 @@ public class AudioPlayer : MonoBehaviour, IAudio
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SetUpAudioSource(Sound sound)
+    public void SetUpAudioSource(Sound sound, AudioManager manager)
     {
         isFadingOut = false;
         currentSound = sound;
@@ -27,9 +28,10 @@ public class AudioPlayer : MonoBehaviour, IAudio
         source.pitch = sound.pitch;
         source.loop = sound.loop;
         source.outputAudioMixerGroup = sound.mixerGroup;
+        AM = manager;
     }
 
-    public void SetUpAudioSource(Sound sound, float pitch)
+    public void SetUpAudioSource(Sound sound, float pitch, AudioManager manager)
     {
         if (sound!=null)
         {
@@ -41,6 +43,7 @@ public class AudioPlayer : MonoBehaviour, IAudio
             source.pitch = pitch;
             source.loop = sound.loop;
             source.outputAudioMixerGroup = sound.mixerGroup;
+            AM = manager;
         }
       
     }
@@ -81,10 +84,17 @@ public class AudioPlayer : MonoBehaviour, IAudio
     }
     public void PlayAtRandomPitch()
     {
-        if (!GameStateManager.instance.AudioManager) return;
+        if (!AM)
+        {
+            if (!GameStateManager.instance)
+            {
+                return;
+            }
+            AM = GameStateManager.instance.AudioManager;
+        }
+    
 
-        AudioManager manager = GameStateManager.instance.AudioManager;
-        float randPitch = manager.GetRandomPitchOfSound(manager.GetSound(currentName));
+        float randPitch = AM.GetRandomPitchOfSound(AM.GetSound(currentName));
         source.pitch = randPitch;
         StartCoroutine(ListiningToFinish());
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseWeapon : MonoBehaviour
+public abstract class BaseWeapon : MonoBehaviour, Iteam
 {
     [Header("Weapon Settings")]
     [SerializeField] protected string _weaponName;
@@ -15,7 +15,7 @@ public abstract class BaseWeapon : MonoBehaviour
     protected bool _isPrimaryAttacking, _isSecondaryAttacking;
     protected float _primaryCurrentCooldownTime, _secondaryCurrentCooldownTime;
     protected Vector3 _equipOffset;
-
+    protected AudioManager AM;
     [Header("Weapon Animation")]
     [SerializeField] protected WeaponAnimController _animController;
     public virtual void StopTryToPrimaryAttack()
@@ -121,6 +121,32 @@ public abstract class BaseWeapon : MonoBehaviour
     public void SetIsMoving(bool isMoving)
     {
         _isOwnerMoving = isMoving;
+    }
+
+    protected void PlaySFX(string SFX, bool randPitch)
+    {
+        if (!AM)
+        {
+            if(!GameStateManager.instance|| !GameStateManager.instance.AudioManager)
+            {
+                return;
+            }
+            AM = GameStateManager.instance.AudioManager;
+        }
+
+        AM.PlayThroughAudioPlayer(SFX, transform.position, randPitch);
+    }
+
+ 
+    public Team GetTeam()
+    {
+       return Team.Player; 
+    }
+
+    public bool IsOnTeam(Team team)
+    {
+        return team == Team.Player;
+     
     }
 
     public string WeaponName { get { return _weaponName; } }
