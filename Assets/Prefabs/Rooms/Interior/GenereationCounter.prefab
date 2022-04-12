@@ -225,16 +225,23 @@ MonoBehaviour:
   OffMaterial: {fileID: 2100000, guid: 69561553b86bde34da494d1ffed3ba45, type: 2}
   StandByMaterial: {fileID: 2100000, guid: 7b1f80275b548384b8da0c74f3698874, type: 2}
   PendingMaterial: {fileID: 2100000, guid: ce440e20ccd5f924c86af1c9bb2cb6d6, type: 2}
-  CompleteMaterial: {fileID: 0}
+  CompleteMaterial: {fileID: 2100000, guid: 9d05820ff2abff04dacc65cbd942d2a6, type: 2}
   StandByColour: {r: 0.8867924, g: 0.41795912, b: 0.28025985, a: 1}
   PendingColour: {r: 0.9528302, g: 0.90923, b: 0.4988875, a: 1}
   CompleteColour: {r: 0.5577914, g: 1, b: 0.504717, a: 1}
+  DungeonGenEventVFX:
+    _duration: 0.25
+    _magnitude: 2
+    _timeSmoothIn: 0.05
+    _timeSmoothOut: 0.1
+    _frequency: 2
   LightIntensity: 0.5
   ProgressCounters:
   - {fileID: 5316353426735684475}
   - {fileID: 4411149367908317995}
   - {fileID: 3642957774934437534}
   ProgressCounterLights: []
+  DungeonGenEventSFX: RoomLoadCompleteSFX
 --- !u!1 &3830424072276698120
 GameObject:
   m_ObjectHideFlags: 0

@@ -178,6 +178,10 @@ public class GenerationCounterManager : MonoBehaviour
 
     public void OnPending()
     {
+        if (CamShake.instance)
+        {
+            CamShake.instance.DoScreenShake(DungeonGenEventVFX);
+        }
         foreach (MeshRenderer renderer in ProgressCounters)
         {
 

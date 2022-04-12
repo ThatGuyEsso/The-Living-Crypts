@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: ButtonSelectSFX
-    clip: {fileID: 8300000, guid: 873edd3c129862c429b0ec8ba62107b1, type: 3}
+    clip: {fileID: 8300000, guid: 041d0ef21fd468a489337ecca6c9a465, type: 3}
     volume: 0.4
     pitch: 0.7
     loop: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
     mixerGroup: {fileID: 24300002, guid: e62b2e17eabac76408f7f778e8283de0, type: 2}
     pitchChange: 0.08
   - name: ButtonHoverSFX
-    clip: {fileID: 8300000, guid: a013833a48cebf54e9efcd2e333caf9c, type: 3}
+    clip: {fileID: 8300000, guid: 6e6939bccb12e6d45b2025d4be784475, type: 3}
     volume: 0.4
     pitch: 0.7
     loop: 0
@@ -86,19 +86,11 @@ MonoBehaviour:
     pitchChange: 0.08
   - name: DoorSlidingSFX
     clip: {fileID: 8300000, guid: cb17036528d89e5419d910abd8adadd5, type: 3}
-    volume: 0.8
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}
     mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
-    pitchChange: 0.08
-  - name: DunngeonEchoSong
-    clip: {fileID: 8300000, guid: f3a9eb820b5c6d645ae8d628e0e68a5e, type: 3}
-    volume: 0.2
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-    mixerGroup: {fileID: 24300002, guid: b7025277e16ee26458e057c50bb77b4d, type: 2}
     pitchChange: 0.08
   - name: SwordSwingSFX_1
     clip: {fileID: 8300000, guid: ddeda8f754b55c147b87215e73de6362, type: 3}
@@ -214,7 +206,7 @@ MonoBehaviour:
     pitchChange: 0.06
   - name: WeaponPickUpSFX
     clip: {fileID: 8300000, guid: 53ec97bb9d9159545936dca38dac89e6, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -223,6 +215,6 @@ MonoBehaviour:
   soundGroups: []
   uiGroup: {fileID: 24300002, guid: e62b2e17eabac76408f7f778e8283de0, type: 2}
   soundEffectGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
-  audioPlayer: {fileID: 7687356236475029073}
+  audioPlayer: {fileID: 7269974362316107315, guid: c8601855c91402d4d809838d5eb77b65, type: 3}
   uiAudioPlayer: {fileID: 5046229521099731773, guid: 8f4a6e498a378bf48b3de81c79cc48e0, type: 3}
   inDebug: 0

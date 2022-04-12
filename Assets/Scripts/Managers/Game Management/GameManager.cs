@@ -18,37 +18,50 @@ public enum GameplayEvents
 
 public class GameManager : MonoBehaviour, IManager, IInitialisable
 {
-
+    [Header("Prefabs")]
     [SerializeField] private GameObject RoomManagerPrefab;
     [SerializeField] private GameObject DungeonGenerationManagerPrefab;
+    [Header("Skybox")]
     [SerializeField] private Material SkyBox;
+    [Header("Lighting settings")]
     [SerializeField] private LightingSettings lightSettings;
-
+    [Header("Post processing profiles")]
     [SerializeField] private VolumeProfile DeathProfile, GameProfile;
+    private Volume _gameVolume;
+
+    [Header("Timers")]
     [SerializeField] private float TimeToRespawn =3f;
 
-    private Volume _gameVolume;
-    // Start is called before the first frame update
+    [Header("SFX")]
+    [SerializeField] private string SpawnSFX,DeathSFX,InvokeDungeonSFX;
 
-    public System.Action<GameplayEvents> OnNewGamplayEvent;
+    [Header("Music")]
+    [SerializeField] private string DungeonAmbience;
 
-    private bool _isWaiting;
-
+    //Manager References
     private MusicManager _musicManager;
     private AudioManager _audioManager;
     private RoomManager _roomManager;
     private DungeonGenerator _generationManager;
     private HUDManager _HUDManager;
     private SceneTransitionManager _sceneManager;
-    private Transform _spawnPoint;
-    private GameObject _player;
-    private GameplayEvents _currentGameplayEvent;
 
+    //Scene references
+    private Transform _spawnPoint;
+
+    //Player references
+    private GameObject _player;
+
+    //States
+    private bool _isWaiting;
+
+    //Events
+    private GameplayEvents _currentGameplayEvent;
+    public System.Action<GameplayEvents> OnNewGamplayEvent;
     private Room _hubRoom;
     public void BindToGameStateManager()
     {
         GameStateManager.instance.OnNewGameState += EvaluateGameState;
-
 
     }
 
@@ -75,15 +88,25 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         switch (_currentGameplayEvent)
         {
             case GameplayEvents.DungeonInvoked:
+                PlaySFX(InvokeDungeonSFX);
                 InitDungeonGeneration();
                 break;
             case GameplayEvents.PlayerDied:
-                PlayDeathVFX();
+                if (_musicManager)
+                {
+                    _musicManager.StopMusic();
+                }
+                PlayDeathSequence();
                 Invoke("InitRespawn", TimeToRespawn);
                 break;
 
             case GameplayEvents.PlayerRespawnBegun:
                 StartCoroutine(DoPlayerRespawn());
+                break;
+
+            case GameplayEvents.PlayerRespawned:
+
+                   PlaySong(DungeonAmbience);
                 break;
         }
     }
@@ -114,7 +137,30 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         StartCoroutine(SetUpGameScene());
     }
 
-    public void PlayDeathVFX()
+    private void PlaySFX(string sfx)
+    {
+        if (!_audioManager)
+        {
+            _audioManager = AudioManager;
+        }
+        if (_audioManager)
+        {
+            _audioManager.PlayThroughAudioPlayer(sfx, _player.transform.position);
+        }
+    }
+
+    private void PlaySong(string song)
+    {
+        if (!_musicManager)
+        {
+            _musicManager = MusicManager;
+        }
+        if (_musicManager)
+        {
+            _musicManager.BeginSongFadeIn(song, 4, 6, 8);
+        }
+    }
+    public void PlayDeathSequence()
     {
         if (!_gameVolume)
         {
@@ -126,6 +172,9 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         {
             _gameVolume.profile = DeathProfile;
         }
+
+        PlaySFX(DeathSFX);
+    
     }
 
 
@@ -243,7 +292,11 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         {
             WeaponManager._instance.OnWeaponEquipped += OnPlayerHasEquippedWeapon;
         }
+
+
         BeginNewGameplayEvent(GameplayEvents.PlayerRespawned);
+        PlaySFX(SpawnSFX);
+     
         GameStateManager.instance.LoadingScreenManager.BeginFadeOut();
 
     }
@@ -389,7 +442,7 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
         }
         _player.transform.position = _spawnPoint.position;
-
+        _player.transform.rotation = _spawnPoint.rotation;
         _player.GetComponent<PlayerBehaviour>().Init();
         if (WeaponManager._instance)
         {
@@ -409,6 +462,8 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         {
             _HUDManager.Init(_player,this);
         }
+        PlaySFX(SpawnSFX);
+        PlaySong(DungeonAmbience);
         GameStateManager.instance.BeginNewState(GameState.GameSceneSetUpComplete);
     }
 

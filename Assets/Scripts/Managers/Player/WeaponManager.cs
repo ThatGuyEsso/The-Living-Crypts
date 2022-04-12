@@ -8,11 +8,16 @@ public class WeaponManager : MonoBehaviour,IInitialisable
 
     public static BaseWeapon _equippedWeapon;
     private bool _isWeaponEquipped;
-
+    //references
+    private PlayerBehaviour _playerBehaviour;
     [SerializeField] private Transform _weaponEquipPoint;
     [SerializeField] private FPSMovement _ownerMovement;
+
+    [Header("SFX")]
+    [SerializeField] private string EquipSFX;
+
     private Controls _input;
-    private PlayerBehaviour _playerBehaviour;
+    private AudioManager _audioManager;
 
     public System.Action<string> OnWeaponEquipped;
    
@@ -78,6 +83,7 @@ public class WeaponManager : MonoBehaviour,IInitialisable
             _equippedWeapon.transform.position = _weaponEquipPoint.position;
             _equippedWeapon.SetEquipPoint(_weaponEquipPoint);
             _equippedWeapon.Init();
+            PlayEquipSFX();
         }
         else
         {
@@ -88,7 +94,21 @@ public class WeaponManager : MonoBehaviour,IInitialisable
 
    
     }
+    private void PlayEquipSFX()
+    {
+        if (!_audioManager)
+        {
+            _audioManager = GetAudioManager();
+        }
 
+        if (!_audioManager)
+        {
+            return;
+        }
+
+        _audioManager.PlayThroughAudioPlayer(EquipSFX, _playerBehaviour.transform.position, true);
+
+    }
     public void OnPlayerDeath()
     {
         if (_equippedWeapon)
@@ -167,5 +187,24 @@ public class WeaponManager : MonoBehaviour,IInitialisable
     public GameObject Getowner()
     {
         return _ownerMovement.gameObject;
+    }
+
+    private AudioManager GetAudioManager()
+    {
+        if (_audioManager)
+        {
+            return _audioManager;
+        }
+        else
+        {
+            if (!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+            {
+                return null;
+            }
+            else
+            {
+                return GameStateManager.instance.AudioManager;
+            }
+        }
     }
 }

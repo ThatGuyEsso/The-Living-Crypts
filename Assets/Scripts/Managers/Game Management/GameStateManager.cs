@@ -110,7 +110,7 @@ public class GameStateManager : MonoBehaviour
             case GameState.GameSceneSetUpComplete:
                 if (LoadingScreenManager.IsLoadingScreenOn())
                 {
-
+                    LoadingScreenManager.OnFadeComplete += GameBegun;
                     LoadingScreenManager.BeginFadeOut();
                  
                 }
@@ -121,5 +121,14 @@ public class GameStateManager : MonoBehaviour
                 break;
         }
         OnNewGameState?.Invoke(currentState);
+    }
+
+    public void GameBegun()
+    {
+        if (LoadingScreenManager)
+        {
+            LoadingScreenManager.OnFadeComplete -= GameBegun;
+        }
+        BeginNewState(GameState.GameRunning);
     }
 }

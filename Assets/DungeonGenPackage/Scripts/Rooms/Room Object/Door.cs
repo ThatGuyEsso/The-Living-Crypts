@@ -31,6 +31,8 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     private Controls _input;
     [Header("Door Animations")]
     [SerializeField] private string OpenAnimName, CloseAnimName;
+    [Header("Door SFX")]
+    [SerializeField] private string DoorSlideSFX;
     //Events
     public System.Action OnDoorOpened;
     public System.Action OnDoorUnlocked;
@@ -50,7 +52,8 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     private EntryTrigger _entryTrigger;
     private HUDPrompt Prompt;
     private Animator _animator;
-
+    private AudioManager AM;
+    private AudioPlayer DoorSlideSoundPlayer;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -169,12 +172,30 @@ public class Door : MonoBehaviour, Controls.IInteractActions
             }
             else
             {
-                OpenDoor();
+                if (!_isOpen)
+                {
+                    PlayDoorSlideSFX();
+                    OpenDoor();
+                }
+              
             }
   
 
 
         }
+    }
+
+    public void PlayDoorSlideSFX()
+    {
+        if (!AM)
+        {
+            if(!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+            {
+                return;
+            }
+            AM = GameStateManager.instance.AudioManager;
+        }
+        DoorSlideSoundPlayer= AM.PlayGroupThroughAudioPlayer(DoorSlideSFX, transform.position);
     }
 
     private void OnTriggerExit(Collider other)
@@ -228,6 +249,7 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         if (context.performed && _isInRange)
         {
             _canOpen = false;
+            PlayDoorSlideSFX();
             OnDoorTriggered?.Invoke();
             OpenDoor();
         }
@@ -292,6 +314,11 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         }
 
         _isOpen = true;
+        if (DoorSlideSoundPlayer && DoorSlideSoundPlayer.IsPlaying())
+        {
+            DoorSlideSoundPlayer.BeginFadeOut();
+            DoorSlideSoundPlayer = null;
+        }
         OnDoorOpened?.Invoke();
     }
     public void OnDoorCloseComplete()
@@ -305,6 +332,12 @@ public class Door : MonoBehaviour, Controls.IInteractActions
             _entryTrigger.OnTargetEntered -= PlayerEnteredRoom;
         }
         _isOpen = false;
+
+        if(DoorSlideSoundPlayer && DoorSlideSoundPlayer.IsPlaying())
+        {
+            DoorSlideSoundPlayer.BeginFadeOut();
+            DoorSlideSoundPlayer = null;
+        }
         OnDoorClosed?.Invoke();
     }
 
@@ -326,8 +359,11 @@ public class Door : MonoBehaviour, Controls.IInteractActions
         {
             Destroy(_animator);
         }
-   
 
+        if (DoorSlideSoundPlayer && DoorSlideSoundPlayer.IsPlaying())
+        {
+            DoorSlideSoundPlayer.BeginFadeOut();
+        }
         Destroy(this);
     }
 
