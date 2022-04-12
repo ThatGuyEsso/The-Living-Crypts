@@ -10,6 +10,8 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private DungeonGenData _genData;
     [SerializeField] private List<DungeonBuilder> _builders = new List<DungeonBuilder>();
 
+    [Header("Perfromance settings")]
+    [SerializeField] private float TimeBetweenSteps=0.05f;
 
     [SerializeField] private RoomManager _roomManager;
     [SerializeField] private Room _debugStartingRoom;
@@ -20,7 +22,7 @@ public class DungeonGenerator : MonoBehaviour
     private Direction _initDirection;
     RoomInfo _initRoomInfo;
 
-
+    public System.Action OnFirstBuilderDone;
     public System.Action OnDungeonGenerationComplete;
     public System.Action OnBossRoomBuilt;
     public System.Action OnBossRoomFailedToBuild;
@@ -154,7 +156,12 @@ public class DungeonGenerator : MonoBehaviour
     public void GenComplete()
     {
         _buildersCompleteCount++;
-        Debug.Log("Builder Complete"+ _buildersCompleteCount);
+
+        if(_buildersCompleteCount == 1)
+        {
+            OnFirstBuilderDone?.Invoke();
+        }
+        //Debug.Log("Builder Complete"+ _buildersCompleteCount);
         if (_buildersCompleteCount >= _builders.Count)
         {
             OnDungeonGenerationComplete?.Invoke();
@@ -167,7 +174,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         else
         {
-            Debug.Log("Builder"+ _currentBuilderIndex + "Done building but process is not");
+            //Debug.Log("Builder"+ _currentBuilderIndex + "Done building but process is not");
             EvaluateCanBuild();
         }
     }
@@ -232,8 +239,15 @@ public class DungeonGenerator : MonoBehaviour
         if(_buildersCompleteCount < _builders.Count)
         {
             IncrementCurrentBuilderIndex();
-            BuilderNTakeStep();
-            //Invoke("BuilderNTakeStep", 0.1f);
+            if (TimeBetweenSteps > 0f)
+            {
+                StartCoroutine(WaitBuilderNTakeStep());
+            }
+            else
+            {
+                BuilderNTakeStep();
+            }
+          
         }
         else Debug.Log("All builders complete");
     }
@@ -248,7 +262,16 @@ public class DungeonGenerator : MonoBehaviour
         _builders.Clear();
     }
 
+    private IEnumerator WaitBuilderNTakeStep()
+    {
+        yield return new WaitForSeconds(TimeBetweenSteps);
+        if (!_builders[_currentBuilderIndex].IsWalking())
+        {
+            Debug.Log("Take step " + _builders[_currentBuilderIndex].gameObject);
+            _builders[_currentBuilderIndex].TakeStep();
 
+        }
+    }
     public void PlaceBossRoom()
     {
         if (_builders[_currentBuilderIndex])

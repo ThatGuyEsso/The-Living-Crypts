@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
     private bool _isWaiting;
 
+    private MusicManager _musicManager;
+    private AudioManager _audioManager;
     private RoomManager _roomManager;
     private DungeonGenerator _generationManager;
     private HUDManager _HUDManager;
@@ -456,4 +458,48 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
     }
 
     public GameObject Player { get { return _player; } }
+
+    public AudioManager AudioManager {
+        get
+        {
+            if (_audioManager)
+            {
+                return _audioManager;
+            }
+            else
+            {
+                if(!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+                {
+                    return null;
+                }
+                else
+                {
+                    return GameStateManager.instance.AudioManager;
+                }
+            }
+        }
+    }
+
+
+    public MusicManager MusicManager
+    {
+        get
+        {
+            if (_musicManager)
+            {
+                return _musicManager;
+            }
+            else
+            {
+                if (!GameStateManager.instance || !GameStateManager.instance.MusicManager)
+                {
+                    return null;
+                }
+                else
+                {
+                    return GameStateManager.instance.MusicManager;
+                }
+            }
+        }
+    }
 }

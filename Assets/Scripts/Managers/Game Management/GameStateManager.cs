@@ -13,6 +13,8 @@ public class GameStateManager : MonoBehaviour
     [HideInInspector]
     public AudioManager AudioManager;
     [HideInInspector]
+    public MusicManager MusicManager;
+    [HideInInspector]
     public LoadingScreen LoadingScreenManager;
 
     [HideInInspector]

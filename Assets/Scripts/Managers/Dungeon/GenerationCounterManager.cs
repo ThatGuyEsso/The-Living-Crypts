@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class GenerationCounterManager : MonoBehaviour
 {
+    [Header("VFX")]
     [SerializeField] private Material OffMaterial, StandByMaterial, PendingMaterial, CompleteMaterial;
     [SerializeField] private Color StandByColour, PendingColour, CompleteColour;
+    [SerializeField] private CamShakeSetting DungeonGenEventVFX;
+
+    [Header("VFX Settings")]
     [SerializeField] private float LightIntensity;
     [SerializeField] private List<MeshRenderer> ProgressCounters;
     [SerializeField] private List<Light> ProgressCounterLights;
+    [Header("SFX Settings")]
+    [SerializeField] private string DungeonGenEventSFX;
+
+
     private int CurrentPorgressIndex = 0;
     private DungeonGenerator _dungeonGenerator;
-
+    private GameManager GM;
+    private AudioManager AM;
     private void Awake()
     {
-        if (GameStateManager.instance)
+        if(!GM)
         {
-            if (GameStateManager.instance.GameManager)
+            if (GameStateManager.instance)
             {
-                GameStateManager.instance.GameManager.OnNewGamplayEvent += EvaluateGameplayEvent;
+                if (GameStateManager.instance.GameManager)
+                {
+                    GM = GameStateManager.instance.GameManager;
+                    GameStateManager.instance.GameManager.OnNewGamplayEvent += EvaluateGameplayEvent;
+                }
             }
         }
+       
 
 
         if (ProgressCounters.Count == 0)
@@ -85,8 +99,8 @@ public class GenerationCounterManager : MonoBehaviour
             _dungeonGenerator = GameStateManager.instance.GameManager.GetGenerationManager();
         }
 
+        _dungeonGenerator.OnFirstBuilderDone += OnNewProgress;
         _dungeonGenerator.OnDungeonGenerationComplete += OnNewProgress;
-        _dungeonGenerator.OnSpecialRoomsBuilt += OnNewProgress;
         _dungeonGenerator.OnDungeonComplete += OnNewProgress;
         _dungeonGenerator.OnDungeonComplete += OnGenerationComplete;
     }
@@ -98,13 +112,26 @@ public class GenerationCounterManager : MonoBehaviour
             return;
         }
 
+        _dungeonGenerator.OnFirstBuilderDone -= OnNewProgress;
         _dungeonGenerator.OnDungeonGenerationComplete -= OnNewProgress;
-        _dungeonGenerator.OnSpecialRoomsBuilt -= OnNewProgress;
         _dungeonGenerator.OnDungeonComplete -= OnNewProgress;
         _dungeonGenerator.OnDungeonComplete -= OnGenerationComplete;
     }
     public void OnNewProgress()
     {
+        if (!AM && GM)
+        {
+            AM = GM.AudioManager;
+        }
+
+        if (AM)
+        {
+            AM.PlayThroughAudioPlayer(DungeonGenEventSFX, transform.position, true);
+        }
+        if(CamShake.instance )
+        {
+            CamShake.instance.DoScreenShake(DungeonGenEventVFX);
+        }
         ProgressCounters[CurrentPorgressIndex].material = CompleteMaterial;
         ProgressCounterLights[CurrentPorgressIndex].color = CompleteColour;
 

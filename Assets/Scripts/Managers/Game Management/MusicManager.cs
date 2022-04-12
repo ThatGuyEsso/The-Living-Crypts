@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class MusicManager : MonoBehaviour,IInitialisable,IManager
+public class MusicManager : MonoBehaviour,IInitialisable
 {
-    public static MusicManager instance;
-
 
     [SerializeField] private AudioSource primarySource;
     [SerializeField] private AudioSource secondarySource;
@@ -21,30 +19,23 @@ public class MusicManager : MonoBehaviour,IInitialisable,IManager
     [SerializeField] private AudioMixerGroup musicAudioGroup;
     public Sound[] music;
 
+    private GameManager GM;
+
     private Sound currentSongPlaying;
     private float currentTimeToNextSong;
+
     bool isInitialised;
+
     bool isFadingIn;
     bool isFadingOut;
 
     bool isMusicOff;
 
-
     public Action OnSongEnd;
-
     public Action OnFadeComplete;
     public void Init()
     {
 
-        if (instance == false)
-        {
-            instance = this;
-
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         DontDestroyOnLoad(gameObject);
 
         primarySource.clip = null;
@@ -52,23 +43,22 @@ public class MusicManager : MonoBehaviour,IInitialisable,IManager
         primarySource.Stop();
         secondarySource.Stop();
         //Initialise variables
-        BindToGameStateManager();
-
+        if (GameStateManager.instance)
+        {
+            GameStateManager.instance.MusicManager = this;
+        }
         //Subscribe to intiation manager
     }
 
-    public void BindToGameStateManager()
+
+    public void SetUpGameManager(GameManager GameManager)
     {
-        if (GameStateManager.instance)
-        {
-            isInitialised = true;
-            GameStateManager.instance.OnNewGameState += EvaluateGameState;
-        }
+        GM = GameManager;
     }
 
-    public void EvaluateGameState(GameState newState)
+    private void EvaluateGameplayEvent(GameplayEvents newEvent)
     {
-   
+        
     }
 
     public void Update()
@@ -234,9 +224,9 @@ public class MusicManager : MonoBehaviour,IInitialisable,IManager
 
     private void OnDestroy()
     {
-        if(isInitialised && GameStateManager.instance)
+        if(GM)
         {
-            GameStateManager.instance.OnNewGameState -= EvaluateGameState;
+            GM.OnNewGamplayEvent -= EvaluateGameplayEvent;
         }
     }
 
