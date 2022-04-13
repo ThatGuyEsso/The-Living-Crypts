@@ -13,7 +13,37 @@ public struct GunShotData
     public float _bulletLifeTime;
     public float _knockBack;
     public GameObject _bulletPrefab;
-} 
+}
+[System.Serializable]
+public struct GunHitScanData
+{
+    public int nShots;
+    [Range(0f, 1f)]
+    public float Spread;
+    public float ScanRange;
+    public LayerMask BlockingLayers;
+}
+
+public struct HitScanTarget
+{
+    public GameObject Target;
+    public float CurrentDamage;
+    public float CurrentKnockBack;
+    public Vector3 Direction;
+    public Vector3 HitPoint;
+
+    public HitScanTarget(GameObject target, float damage,float knockback,Vector3 direction,Vector3 hitPoint)
+    {
+        Target = target;
+        CurrentDamage = damage;
+        CurrentKnockBack = knockback;
+        Direction = direction;
+        HitPoint = hitPoint;
+    }
+
+ 
+
+}
 public class ShotGun : BaseWeapon
 {
 
@@ -22,16 +52,18 @@ public class ShotGun : BaseWeapon
     [SerializeField] private float _primaryRecoilAmount;
     [SerializeField] private float _secondaryRecoilAmount;
     [SerializeField] private GameObject _secondaryAttackExplosion;
-    [SerializeField] private GunShotData _gunShotData;
+    [SerializeField] private GunHitScanData GunScanData;
     [SerializeField] private ExplosionData _explosionAttackData;
     [SerializeField] private GameObject _explosionPrefab;
     [Header("Gun Settings")]
     [SerializeField] private float _maxRecoilOffset;
     [SerializeField] private Transform _fp;
-
+    [SerializeField] private float BulletRange;
     [Header("VFX Settings")]
+    [SerializeField] private GameObject MuzzleFlashPrefab;
     [SerializeField] private CamShakeSetting _primaryShotScreenShake;
     [SerializeField] private CamShakeSetting _secondaryShotScreenShake;
+    [SerializeField] private float MuzzleDuration;
     [Tooltip("How far the gun raycast to set current aim target")]
     [SerializeField] private float _aimingDistance;
     [SerializeField] private float _aimSpeed;
@@ -39,11 +71,12 @@ public class ShotGun : BaseWeapon
     [SerializeField] private float _timeBeforeRecoilRecovery;
     [SerializeField] private float _recoilRecoveryRate;
 
-
+    private GameObject _muzzleFlash;
     private Camera _fovCam;
     private bool _canRecover;
     private float _currentTimeBeforeRecoilRecovery;
     private Vector3 _currentRecoilOffset = Vector3.zero;
+    
     private void Update()
     {
         //if (!_isOwnerMoving)
@@ -152,27 +185,122 @@ public class ShotGun : BaseWeapon
 
     public void FirePrimaryRound()
     {
+      
+        RaycastHit hitInfo;
 
-        for (int i=0; i< _gunShotData.nShots; i++)
+        List<HitScanTarget> targetsHit = new List<HitScanTarget>();
+        for (int i=0; i< GunScanData.nShots; i++)
         {
-            Vector3 targetDir =_fp.forward + new Vector3( Random.Range(-_gunShotData._bulletSpread, _gunShotData._bulletSpread),
-                Random.Range(-_gunShotData._bulletSpread, _gunShotData._bulletSpread), Random.Range(-_gunShotData._bulletSpread, _gunShotData._bulletSpread)) ;
+            Vector3 targetDir = _fp.forward +_fp.right *Random.Range(-GunScanData.Spread, GunScanData.Spread)+ _fp.up * Random.Range(-GunScanData.Spread, GunScanData.Spread);
 
-
-            IProjectile bullet = Instantiate(_gunShotData._bulletPrefab, _fp.position, Quaternion.identity).GetComponent<IProjectile>();
-
-
-            if (bullet != null)
+            if(Physics.Raycast(_fp.position,targetDir,out hitInfo, GunScanData.ScanRange, GunScanData.BlockingLayers))
             {
-                ProjectileData bulletData = new ProjectileData(Random.Range(_primaryMinDamage, _primaryMaxDamage), targetDir.normalized
-                    , _gunShotData._bulletSpeed, _gunShotData._bulletLifeTime, _gunShotData._knockBack, WeaponManager._instance.Getowner());
-                bullet.SetUpProjectile(bulletData);
+                Debug.DrawLine(_fp.position, hitInfo.point , Color.red, 10f);
+                if (targetsHit.Count==0)
+                {
+                    float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
+                    float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
 
+                    targetsHit.Add(new HitScanTarget(hitInfo.collider.gameObject, dmg, kBack,targetDir,hitInfo.point));
+                }
+                else
+                {
+                    int indexToUpdate =0;
+                    bool valueFound =false;
+                    for(int j =0; j< targetsHit.Count; j++)
+                    {
+                        if(targetsHit[j].Target == hitInfo.collider.gameObject)
+                        {
+                            valueFound=true;
+                            indexToUpdate = j;
+                            break;
+                        }
+                    }
+                  
 
-                bullet.ShootProjectile();
+                    if (valueFound)
+                    {
+                        float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
+                        float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
+
+                        HitScanTarget newTargetValue = new HitScanTarget(hitInfo.collider.gameObject, targetsHit[indexToUpdate].CurrentDamage + dmg,
+                            targetsHit[indexToUpdate].CurrentKnockBack + kBack, (targetDir + targetsHit[indexToUpdate].Direction).normalized, hitInfo.point);
+
+                        targetsHit[indexToUpdate] = newTargetValue;
+                    }
+                    else
+                    {
+                        float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
+                        float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
+
+                        targetsHit.Add(new HitScanTarget(hitInfo.collider.gameObject, dmg, kBack,targetDir,hitInfo.point));
+                    }
+                }
             }
+            Debug.DrawLine(_fp.position, _fp.position + targetDir.normalized * GunScanData.ScanRange, Color.red, 10f);
 
-            Debug.DrawRay(_fp.position, targetDir.normalized, Color.green, 10f);
+        }
+
+        if (!_muzzleFlash&& MuzzleFlashPrefab)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                _muzzleFlash = ObjectPoolManager.Spawn(MuzzleFlashPrefab, _fp.position, Quaternion.identity);
+                Invoke("RemoveMuzzleFlash", MuzzleDuration);
+            }
+            else
+            {
+                _muzzleFlash = Instantiate(MuzzleFlashPrefab, _fp.position, Quaternion.identity);
+                Invoke("RemoveMuzzleFlash", MuzzleDuration);
+            }
+            if (targetsHit.Count > 0)
+            {
+                foreach(HitScanTarget target in targetsHit)
+                {
+                    Iteam otherTeam = target.Target.GetComponent<Iteam>();
+
+                    if (otherTeam == null)
+                    {
+                        return;
+                    }
+
+
+                    if (!otherTeam.IsOnTeam(Team.Player))
+                    {
+
+      
+                     
+                        IDamage damage = target.Target.GetComponent<IDamage>();
+
+                        if (damage != null)
+                        {
+                            damage.OnDamage(target.CurrentDamage, target.Direction,target.CurrentKnockBack,WeaponManager._instance.Getowner(),
+                                target.HitPoint);
+                        }
+
+                         
+                      
+                    }
+                }
+            }
+        }
+       
+    }
+
+    public void RemoveMuzzleFlash()
+    {
+        if (_muzzleFlash)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(_muzzleFlash);
+            }
+            else
+            {
+               Destroy(_muzzleFlash);
+
+            }
+            _muzzleFlash = null;
         }
     }
     public void FireSecondaryExplosion()
@@ -185,8 +313,17 @@ public class ShotGun : BaseWeapon
         {
             targetpoint = hitInfo.point;
         }
+        IExplosion explosion =null;
+        if (ObjectPoolManager.instance)
+        {
+            explosion = ObjectPoolManager.Spawn(_explosionPrefab, targetpoint, Quaternion.identity).GetComponent<IExplosion>();
+        }
+        else
+        {
+            explosion = Instantiate(_explosionPrefab, targetpoint, Quaternion.identity).GetComponent<IExplosion>();
 
-        IExplosion explosion = Instantiate(_explosionPrefab, targetpoint, Quaternion.identity).GetComponent<IExplosion>();
+        }
+    
         if(explosion != null)
         {
             explosion.InitExplosion(_explosionAttackData);

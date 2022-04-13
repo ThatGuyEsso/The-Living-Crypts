@@ -76,29 +76,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponName: "L\xE6vateinn "
-  _primaryMinDamage: 30
-  _primaryMaxDamage: 40
+  _primaryMinDamage: 5
+  _primaryMaxDamage: 7
   _secondaryMinDamage: 50
   _secondaryMaxDamage: 70
-  _primaryMinKnockback: 0
-  _primaryMaxKnockback: 0
+  _primaryMinKnockback: 2
+  _primaryMaxKnockback: 3
   _secondaryMinKnockback: 0
   _secondaryMaxKnockback: 0
   _equipTransform: {fileID: 0}
-  _primaryFireRate: 1
+  _primaryFireRate: 0.75
   _secondaryFireRate: 2.5
   _followEquipSpeed: 20
   _animController: {fileID: 0}
   _primaryRecoilAmount: 0.2
   _secondaryRecoilAmount: 0.75
   _secondaryAttackExplosion: {fileID: 0}
-  _gunShotData:
+  GunScanData:
     nShots: 6
-    _bulletSpread: 0.1
-    _bulletSpeed: 20000
-    _bulletLifeTime: 1
-    _knockBack: 5
-    _bulletPrefab: {fileID: 2786322439654314940, guid: 4e1fb3f759ca4f745a674c4a9dfb467c, type: 3}
+    Spread: 0.2
+    ScanRange: 10
+    BlockingLayers:
+      serializedVersion: 2
+      m_Bits: 19713
   _explosionAttackData:
     _owner: {fileID: 0}
     _size: 5
@@ -109,6 +109,8 @@ MonoBehaviour:
   _explosionPrefab: {fileID: 5704790286927349349, guid: b0f05e71b404f4f4c84cbee5d31048eb, type: 3}
   _maxRecoilOffset: 1
   _fp: {fileID: 370482370}
+  BulletRange: 0
+  MuzzleFlashPrefab: {fileID: 4155177434486859058, guid: ab78725a181a8344cb7b27ebdad11a24, type: 3}
   _primaryShotScreenShake:
     _duration: 0.25
     _magnitude: 1
@@ -121,11 +123,12 @@ MonoBehaviour:
     _timeSmoothIn: 0.05
     _timeSmoothOut: 0.2
     _frequency: 1
+  MuzzleDuration: 0.25
   _aimingDistance: 15
   _aimSpeed: 10
   _aimableLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 20225
   _timeBeforeRecoilRecovery: 1
   _recoilRecoveryRate: 5
 --- !u!54 &9029335345023035937
