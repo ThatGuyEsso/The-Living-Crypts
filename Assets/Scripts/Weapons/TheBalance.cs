@@ -19,7 +19,7 @@ public class TheBalance : BaseWeapon
     [SerializeField] private BeamSettings _beamSettings;
     [SerializeField] private float _primaryAttackCooldown;
     [SerializeField] private LineManager _beamLineManager;
-    [SerializeField] private GameObject _beamOriginVFXPrefab;
+    //[SerializeField] private GameObject _beamOriginVFXPrefab;
     [SerializeField] private GameObject _beamHitVFXPrefab;
     private GameObject _beamOriginVFX;
 
@@ -79,6 +79,7 @@ public class TheBalance : BaseWeapon
         _animController.OnAttackAnimEnd += BeginBeam;
         _animController.PlayPrimaryAttackAnimation(0);
         ResetIdleTimers();
+        OnAttackStarted?.Invoke();
     }
 
     public void BeginBeam()
@@ -105,8 +106,8 @@ public class TheBalance : BaseWeapon
   
     public void DrawBeam()
     {
-        if (!_beamOriginVFX&&_beamOriginVFXPrefab) _beamOriginVFX = Instantiate(_beamOriginVFXPrefab, Vector3.zero, _beamSettings._firePoint.rotation);
-        if (_beamOriginVFX) _beamOriginVFX.transform.position = _beamSettings._firePoint.position;
+        //if (!_beamOriginVFX&&_beamOriginVFXPrefab) _beamOriginVFX = Instantiate(_beamOriginVFXPrefab, Vector3.zero, _beamSettings._firePoint.rotation);
+        //if (_beamOriginVFX) _beamOriginVFX.transform.position = _beamSettings._firePoint.position;
         Vector3 dir = EssoUtility.GetCameraLookAtPoint(_fovCam, _beamSettings._distance, _beamSettings._targetLayers) - _beamSettings._firePoint.position;
         List<Vector3> points = new List<Vector3>();
         Vector3 aimPoint = _beamSettings._firePoint.position +dir.normalized  * _beamSettings._distance;
@@ -157,15 +158,53 @@ public class TheBalance : BaseWeapon
 
 
     }
+    public void CancelBeam()
+    {
+        _beamLineManager.ClearLine();
+        _isCastingBeam = false;
+        if (_beamOriginVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(_beamOriginVFX);
+            }
+            else
+            {
+                Destroy(_beamOriginVFX);
+            }
 
+        }
+        _currentBeamCooldown = _primaryAttackCooldown;
+        _primCurrTimeToIdle = 0;
+        _isAttacking = false;
+
+        _animController.StopAnimating();
+        if (_idleReset)
+        {
+            _idleReset.ResetChild(_idleResetRate);
+        }
+    }
     public void StopBeam()
     {
         _beamLineManager.ClearLine();
         _isCastingBeam = false;
-        if (_beamOriginVFX) Destroy(_beamOriginVFX);
+        if (_beamOriginVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(_beamOriginVFX);
+            }
+            else
+            {
+                Destroy(_beamOriginVFX);
+            }
+          
+        }
         _currentBeamCooldown = _primaryAttackCooldown;
         _primCurrTimeToIdle = _primaryTimeToIdle;
         _isAttacking = false;
+
+        OnAttackEnded?.Invoke();
     }
     public void SpawnHitVFX(Vector3 point)
     {
@@ -183,6 +222,7 @@ public class TheBalance : BaseWeapon
     protected override void DoSecondaryAttack()
     {
         if (_idleReset) _idleReset.Stop();
+        OnAttackStarted?.Invoke();
         _canSecondaryAttack = false;
         _isAttacking = true;
         _animController.OnAttackAnimEnd += SummonShield;
@@ -196,16 +236,20 @@ public class TheBalance : BaseWeapon
         _animController.OnAttackAnimEnd -= SummonShield;
 
         AttackBubbleShield shield = Instantiate(_shieldPrefab,
-            WeaponManager._instance.Getowner().transform.position + _shieldSettings._followOffset,
-            Quaternion.identity).GetComponent<AttackBubbleShield>();
+            WeaponManager._instance.Getowner().transform.position + WeaponManager._instance.Getowner().transform.forward,
+            WeaponManager._instance.Getowner().transform.rotation).GetComponent<AttackBubbleShield>();
+        shield.transform.SetParent(WeaponManager._instance.Getowner().transform);
+
+
         if (shield)
         {
-            shield.Init(_shieldSettings, WeaponManager._instance.Getowner().transform);
+            shield.Init(_shieldSettings, null);
         }
 
         _secondaryCurrentCooldownTime = _secondaryFireRate;
         _secCurrTimeToIdle = _secondaryTimeToIdle;
         _isAttacking = false;
+    
     }
 
     public override void ValidatePrimaryAttack()
@@ -239,7 +283,11 @@ public class TheBalance : BaseWeapon
     
         if (_isCastingBeam)
         {
-
+            if (!_isPrimaryAttacking)
+            {
+                CancelBeam();
+                return;
+            }
             Vector3 offset = Vector3.zero;
             if (_shaker) offset = _shaker.GetShakeOffset();
 
@@ -312,7 +360,7 @@ public class TheBalance : BaseWeapon
             _secCurrTimeToIdle -= Time.deltaTime;
             if (_secCurrTimeToIdle <= 0f)
             {
-
+                OnAttackEnded?.Invoke();
                 _animController.StopAnimating();
                 if (_idleReset) _idleReset.ResetChild(_idleResetRate);
             }

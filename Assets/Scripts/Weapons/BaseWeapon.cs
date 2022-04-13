@@ -16,6 +16,10 @@ public abstract class BaseWeapon : MonoBehaviour, Iteam
     protected float _primaryCurrentCooldownTime, _secondaryCurrentCooldownTime;
     protected Vector3 _equipOffset;
     protected AudioManager AM;
+
+
+    public System.Action OnAttackStarted;
+    public System.Action OnAttackEnded;
     [Header("Weapon Animation")]
     [SerializeField] protected WeaponAnimController _animController;
     public virtual void StopTryToPrimaryAttack()

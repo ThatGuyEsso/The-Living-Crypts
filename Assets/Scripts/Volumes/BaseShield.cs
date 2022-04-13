@@ -26,7 +26,7 @@ public struct ShieldSettings
     }
 
 }
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(Collider))]
 public abstract class BaseShield : MonoBehaviour
 {
     protected bool _isInitialised;
@@ -36,7 +36,7 @@ public abstract class BaseShield : MonoBehaviour
     [SerializeField] protected ShieldSettings _settings;
     public virtual void Init(ShieldSettings settings,Transform followTarget)
     {
-        GetComponent<SphereCollider>().isTrigger = true;
+        GetComponent<Collider>().isTrigger = true;
         _settings = settings;
         _followTarget = followTarget;
         if (settings._lifeTime > 0)
@@ -84,6 +84,7 @@ public abstract class BaseShield : MonoBehaviour
         if (!_isInitialised) return;
         if (_followTarget)
         {
+
             transform.position = _followTarget.position + _settings._followOffset;
         }
     }

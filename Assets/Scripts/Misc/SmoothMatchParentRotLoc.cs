@@ -58,4 +58,11 @@ public class SmoothMatchParentRotLoc : MonoBehaviour
 
         isActive = false;
     }
+
+    public bool IsActive
+    { get 
+        {
+            return IsActive;
+        }
+    }
 }
