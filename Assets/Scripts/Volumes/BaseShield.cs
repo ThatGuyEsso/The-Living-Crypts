@@ -90,7 +90,19 @@ public abstract class BaseShield : MonoBehaviour
     }
     protected virtual void DestroyShield()
     {
-        Destroy(gameObject);
+
+        if (ObjectPoolManager._instance)
+        {
+            if (gameObject)
+            {
+                ObjectPoolManager.Recycle(gameObject);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+       
     }
 }
 

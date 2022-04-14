@@ -23,6 +23,9 @@ public class TheBalance : BaseWeapon
     [SerializeField] private GameObject _beamHitVFXPrefab;
     private GameObject _beamOriginVFX;
 
+    [Header("SFX")]
+    [SerializeField] private string InitBeamSFX, BeamSustainSFX, ShieldSpawnSFX;
+    private AudioPlayer BeamSustainSFXPlayer;
     [Header("Shield Settings")]
     [SerializeField] private ShieldSettings _shieldSettings;
     [SerializeField] private GameObject _shieldPrefab;
@@ -90,9 +93,45 @@ public class TheBalance : BaseWeapon
         _animController.StopAnimating();
         _meshTranform.rotation = _meshTranform.rotation;
 
-
+        PlaySFX(InitBeamSFX,true);
         _currentBeamDuration = _beamSettings._maxDuration;
         _primCurrentTickRate = 0f;
+        PlayBeamSFX();
+    }
+
+    public void PlayBeamSFX()
+    {
+        if (!BeamSustainSFXPlayer)
+        {
+            if (!AM)
+            {
+                if (!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+                {
+                    return;
+                }
+                AM = GameStateManager.instance.AudioManager;
+            }
+            if (AM)
+            {
+                BeamSustainSFXPlayer = AM.PlayThroughAudioPlayer(BeamSustainSFX, transform.position, false);
+                BeamSustainSFXPlayer.transform.SetParent(WeaponManager._instance.Getowner().transform);
+            }
+
+
+        }
+        else
+        {
+            BeamSustainSFXPlayer.Play();
+        }
+    }
+
+    public void StopBeamSFX()
+    {
+        if (BeamSustainSFXPlayer)
+        {
+            BeamSustainSFXPlayer.KillAudio();
+            BeamSustainSFXPlayer = null;
+        }
     }
     public void RotateInAimDirectionOverTime()
     {
@@ -160,6 +199,7 @@ public class TheBalance : BaseWeapon
     }
     public void CancelBeam()
     {
+        StopBeamSFX();
         _beamLineManager.ClearLine();
         _isCastingBeam = false;
         if (_beamOriginVFX)
@@ -186,6 +226,7 @@ public class TheBalance : BaseWeapon
     }
     public void StopBeam()
     {
+        StopBeamSFX();
         _beamLineManager.ClearLine();
         _isCastingBeam = false;
         if (_beamOriginVFX)
@@ -240,7 +281,7 @@ public class TheBalance : BaseWeapon
             WeaponManager._instance.Getowner().transform.rotation).GetComponent<AttackBubbleShield>();
         shield.transform.SetParent(WeaponManager._instance.Getowner().transform);
 
-
+        PlaySFX(ShieldSpawnSFX,true);
         if (shield)
         {
             shield.Init(_shieldSettings, null);
