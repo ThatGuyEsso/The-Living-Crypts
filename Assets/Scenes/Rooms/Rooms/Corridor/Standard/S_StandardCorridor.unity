@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.01612867, g: 0.01612867, b: 0.01612867, a: 1}
+  m_IndirectSpecularColor: {r: 0.04211288, g: 0.04211288, b: 0.04211288, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2487,6 +2487,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4322228292585421305, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494385253668, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1.873554e-39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494385253668, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 3.57e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494385253668, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: -0.0000008793577
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494385253668, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: -8.583733e+15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494395854439, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 3.9825098e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494395854439, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 2.453621
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494395854439, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 2.979824e-29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595542494395854439, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.8848365e-29
+      objectReference: {fileID: 0}
     - target: {fileID: 5960138505698152601, guid: dd9510e72b12d184288059f79c8785ee, type: 3}
       propertyPath: m_Mesh
       value: 

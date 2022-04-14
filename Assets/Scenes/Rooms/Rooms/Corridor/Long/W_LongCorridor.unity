@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.01612867, g: 0.01612867, b: 0.01612867, a: 1}
+  m_IndirectSpecularColor: {r: 0.04211288, g: 0.04211288, b: 0.04211288, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1824,6 +1824,71 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1662917663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1662917665}
+  - component: {fileID: 1662917664}
+  m_Layer: 15
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!220 &1662917664
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662917663}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 5.25, y: 3.25, z: 27.5}
+  - {x: 5.25, y: -4.214466, z: 27.5}
+  - {x: -5, y: 3.25, z: 27.5}
+  - {x: -5, y: -4.214466, z: 27.5}
+  - {x: 5.25, y: -4.214466, z: -1}
+  - {x: -5, y: -4.214466, z: -1}
+  - {x: 5.25, y: 3.25, z: -1}
+  - {x: -5, y: 3.25, z: -1}
+  - {x: 5.25, y: -4.214466, z: 5.75}
+  - {x: -5, y: -4.214466, z: 5.75}
+  - {x: 5.25, y: 3.25, z: 5.75}
+  - {x: -5, y: 3.25, z: 5.75}
+  - {x: 5.25, y: -4.214466, z: 10.75}
+  - {x: -5, y: -4.214466, z: 10.75}
+  - {x: 5.25, y: 3.25, z: 10.75}
+  - {x: -5, y: 3.25, z: 10.75}
+  - {x: 5.25, y: -4.214466, z: 16.75}
+  - {x: -5, y: -4.214466, z: 16.75}
+  - {x: 5.25, y: 3.25, z: 16.75}
+  - {x: -5, y: 3.25, z: 16.75}
+  - {x: 5.25, y: -4.214466, z: 20.75}
+  - {x: -5, y: -4.214466, z: 20.75}
+  - {x: 5.25, y: 3.25, z: 20.75}
+  - {x: -5, y: 3.25, z: 20.75}
+  m_Dering: 1
+--- !u!4 &1662917665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662917663}
+  m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -1.7500001, y: 4.5, z: -0.24999988}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!43 &1669662159
 Mesh:
   m_ObjectHideFlags: 0
@@ -2487,6 +2552,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 612703479591054983, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 4.97576e-39
+      objectReference: {fileID: 0}
+    - target: {fileID: 612703479591054983, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 612703479591054983, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 4.210516e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 612703479591054983, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 4.757186e+30
+      objectReference: {fileID: 0}
+    - target: {fileID: 612703479946112452, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 4.8987727e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 612703479946112452, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 612703479946112452, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 4.210516e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 612703479946112452, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 4.757186e+30
+      objectReference: {fileID: 0}
     - target: {fileID: 1698196488745653050, guid: ed4de299390ea3047a107cf186bb80a9, type: 3}
       propertyPath: m_Mesh
       value: 

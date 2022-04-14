@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.01612867, g: 0.01612867, b: 0.01612867, a: 1}
+  m_IndirectSpecularColor: {r: 0.04211288, g: 0.04211288, b: 0.04211288, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1271,6 +1271,71 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1205809498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1205809500}
+  - component: {fileID: 1205809499}
+  m_Layer: 15
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!220 &1205809499
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205809498}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 5.25, y: 3.25, z: 27.5}
+  - {x: 5.25, y: -4.214466, z: 27.5}
+  - {x: -5, y: 3.25, z: 27.5}
+  - {x: -5, y: -4.214466, z: 27.5}
+  - {x: 5.25, y: -4.214466, z: -1}
+  - {x: -5, y: -4.214466, z: -1}
+  - {x: 5.25, y: 3.25, z: -1}
+  - {x: -5, y: 3.25, z: -1}
+  - {x: 5.25, y: -4.214466, z: 5.75}
+  - {x: -5, y: -4.214466, z: 5.75}
+  - {x: 5.25, y: 3.25, z: 5.75}
+  - {x: -5, y: 3.25, z: 5.75}
+  - {x: 5.25, y: -4.214466, z: 10.75}
+  - {x: -5, y: -4.214466, z: 10.75}
+  - {x: 5.25, y: 3.25, z: 10.75}
+  - {x: -5, y: 3.25, z: 10.75}
+  - {x: 5.25, y: -4.214466, z: 16.75}
+  - {x: -5, y: -4.214466, z: 16.75}
+  - {x: 5.25, y: 3.25, z: 16.75}
+  - {x: -5, y: 3.25, z: 16.75}
+  - {x: 5.25, y: -4.214466, z: 20.75}
+  - {x: -5, y: -4.214466, z: 20.75}
+  - {x: 5.25, y: 3.25, z: 20.75}
+  - {x: -5, y: 3.25, z: 20.75}
+  m_Dering: 1
+--- !u!4 &1205809500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205809498}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.5, z: -28.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1326859066
 Mesh:
   m_ObjectHideFlags: 0
@@ -2759,5 +2824,33 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1630839716}
+    - target: {fileID: 3788827250318382492, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 6.8923876e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788827250318382492, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788827250318382492, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 7.1e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788827250778101471, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 5.4240602e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788827250778101471, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788827250778101471, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 4.0058793e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788827250778101471, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 4.7537043e+30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0705a7d4c34a15f47a638e2c36717141, type: 3}

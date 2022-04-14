@@ -22,7 +22,7 @@ public class RoomManager : MonoBehaviour
     {
         if (_isLoadingRoom)
         {
-            Debug.Log("Already building room");
+            //Debug.Log("Already building room");
             return;
         }
         StartCoroutine(LoadRoom(roomIndex, position));
@@ -31,7 +31,7 @@ public class RoomManager : MonoBehaviour
 
     public IEnumerator LoadRoom(SceneIndex roomIndex, Vector3 position)
     {
-        Debug.Log("loading room");
+        //Debug.Log("loading room");
         _isLoadingRoom = true;
 
         AsyncOperation loadingRoom = SceneManager.LoadSceneAsync((int)(roomIndex), LoadSceneMode.Additive);
@@ -39,7 +39,7 @@ public class RoomManager : MonoBehaviour
         {
             yield return null;
         }
-        Debug.Log("Finished loading room");
+        //Debug.Log("Finished loading room");
         if (_loadedRooms.Count > 1)
         {
             if (_loadedRooms[_loadedRooms.Count - 1].transform.parent)

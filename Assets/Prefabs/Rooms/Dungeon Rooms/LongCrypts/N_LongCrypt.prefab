@@ -59,7 +59,172 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: d9c7524bf044b214a823f9ae735b2574, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 4692abf8937ab2c488384c943f7ec382, type: 2}
+--- !u!1 &1877655258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1877655259}
+  - component: {fileID: 1877655260}
+  m_Layer: 15
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1877655259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877655258}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: -28.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8098731893975534528}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &1877655260
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877655258}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 9.5, y: 3.25, z: 57}
+  - {x: 9.5, y: -4.214466, z: 57}
+  - {x: -13.5, y: 3.25, z: 20}
+  - {x: -13.5, y: -4.214466, z: 20}
+  - {x: 5.25, y: -4.214466, z: 27}
+  - {x: 14.1572695, y: -4.214466, z: -1}
+  - {x: 5.25, y: 3.25, z: 27}
+  - {x: 14.1572695, y: 3.25, z: -1}
+  - {x: 5.25, y: -4.214466, z: 33.75}
+  - {x: -5, y: -4.214466, z: 33.75}
+  - {x: 5.25, y: 3.25, z: 33.75}
+  - {x: -5, y: 3.25, z: 33.75}
+  - {x: 14.25, y: -4.214466, z: 51}
+  - {x: -5, y: -4.214466, z: 38.75}
+  - {x: 14.25, y: 3.25, z: 51}
+  - {x: -5, y: 3.25, z: 38.75}
+  - {x: 14.25, y: -4.214466, z: 57}
+  - {x: -5, y: -4.214466, z: 44.75}
+  - {x: 14.25, y: 3.25, z: 57}
+  - {x: -5, y: 3.25, z: 44.75}
+  - {x: 9.5, y: -4.214466, z: 50.25}
+  - {x: -13.5, y: -4.214466, z: 13.25}
+  - {x: 9.5, y: 3.25, z: 50.25}
+  - {x: -13.5, y: 3.25, z: 13.25}
+  - {x: -5, y: -4.214466, z: 27}
+  - {x: -5, y: 3.25, z: 27}
+  - {x: -2.8427305, y: -4.214466, z: 27}
+  - {x: -2.8427305, y: -0.5, z: 27}
+  - {x: -8.0927305, y: -4.214466, z: 27}
+  - {x: -8.0927305, y: 3.25, z: 27}
+  - {x: -14.3427305, y: -4.214466, z: 27}
+  - {x: -14.3427305, y: 3.25, z: 27}
+  - {x: 2.6572695, y: -4.214466, z: 27}
+  - {x: 2.6572695, y: -0.5, z: 27}
+  - {x: 7.6572695, y: -4.214466, z: 27}
+  - {x: 7.6572695, y: 3.25, z: 27}
+  - {x: 5.25, y: -4.214466, z: 38.75}
+  - {x: 5.25, y: 3.25, z: 38.75}
+  - {x: 5.25, y: -4.214466, z: 44.75}
+  - {x: 5.25, y: 3.25, z: 16.75}
+  - {x: 14.25, y: -4.214466, z: 4.75}
+  - {x: 14.25, y: 3.25, z: 4.75}
+  - {x: 14.25, y: -4.214466, z: 10.75}
+  - {x: 14.25, y: 3.25, z: 10.75}
+  - {x: 14.25, y: -4.214466, z: 13.75}
+  - {x: 14.25, y: 3.25, z: 13.75}
+  - {x: 10.75, y: -4.214466, z: 19.75}
+  - {x: 10.75, y: 3.25, z: 19.75}
+  - {x: 14.25, y: -4.214466, z: 13.75}
+  - {x: 14.25, y: 3.25, z: 13.75}
+  - {x: 10.75, y: -4.214466, z: 19.75}
+  - {x: 10.75, y: 3.25, z: 19.75}
+  - {x: 10.75, y: -4.214466, z: 25}
+  - {x: 10.75, y: 3.25, z: 25}
+  - {x: 10.75, y: -4.214466, z: 31}
+  - {x: 10.75, y: 3.25, z: 31}
+  - {x: 10.75, y: -4.214466, z: 36.75}
+  - {x: 10.75, y: 3.25, z: 36.75}
+  - {x: 14.25, y: -4.214466, z: 42.75}
+  - {x: 14.25, y: 3.25, z: 42.75}
+  - {x: -13.5, y: -0.25, z: 36.5}
+  - {x: -13.5, y: -4.214466, z: 36.5}
+  - {x: -13.5, y: -4.214466, z: 24.5}
+  - {x: -13.5, y: -0.25, z: 24.5}
+  - {x: -13.5, y: 3.25, z: 36.5}
+  - {x: -13.5, y: 3.25, z: 24.5}
+  - {x: -2.8427305, y: 3.25, z: 27}
+  - {x: 2.6572695, y: 3.25, z: 27}
+  - {x: -13.888679, y: -4.214466, z: 57.25}
+  - {x: -13.888679, y: 3.25, z: 57.25}
+  - {x: -13.888679, y: -4.214466, z: 50.5}
+  - {x: -13.888679, y: 3.25, z: 50.5}
+  - {x: 14.25, y: -4.214466, z: 19.75}
+  - {x: 14.25, y: 3.25, z: 19.75}
+  - {x: 14.25, y: -4.214466, z: 19.75}
+  - {x: 14.25, y: 3.25, z: 19.75}
+  - {x: 14.25, y: -4.214466, z: 25}
+  - {x: 14.25, y: 3.25, z: 25}
+  - {x: 14.25, y: -4.214466, z: 31}
+  - {x: 14.25, y: 3.25, z: 31}
+  - {x: 14.25, y: -4.214466, z: 36.75}
+  - {x: 14.25, y: 3.25, z: 36.75}
+  - {x: 3, y: -4.214466, z: 57}
+  - {x: 3, y: 3.25, z: 57}
+  - {x: 3, y: -4.214466, z: 50.25}
+  - {x: 3, y: 3.25, z: 50.25}
+  - {x: -2.75, y: -4.214466, z: 57}
+  - {x: -2.75, y: 3.25, z: 57}
+  - {x: -2.75, y: -4.214466, z: 50.25}
+  - {x: -2.75, y: 3.25, z: 50.25}
+  - {x: -8.388679, y: -4.214466, z: 57}
+  - {x: -8.388679, y: 3.25, z: 57}
+  - {x: -8.388679, y: -4.214466, z: 50.25}
+  - {x: -8.388679, y: 3.25, z: 50.25}
+  - {x: -13.5, y: -0.25, z: 31.25}
+  - {x: -13.5, y: -4.214466, z: 31.25}
+  - {x: -13.5, y: 3.25, z: 31.25}
+  - {x: 5.25, y: -4.214466, z: -1}
+  - {x: 5.25, y: 3.25, z: -1}
+  - {x: 5.25, y: -4.214466, z: 5.75}
+  - {x: -5, y: -4.214466, z: 5.75}
+  - {x: 5.25, y: 3.25, z: 5.75}
+  - {x: -5, y: 3.25, z: 5.75}
+  - {x: -5, y: -4.214466, z: 10.75}
+  - {x: -5, y: 3.25, z: 10.75}
+  - {x: -5, y: -4.214466, z: 16.75}
+  - {x: -5, y: 3.25, z: 16.75}
+  - {x: -5, y: -4.214466, z: -1}
+  - {x: -5, y: 3.25, z: -1}
+  - {x: -2.8427305, y: -4.214466, z: -1}
+  - {x: -2.8427305, y: -0.5, z: -1}
+  - {x: -8.0927305, y: -4.214466, z: -1}
+  - {x: -8.0927305, y: 3.25, z: -1}
+  - {x: -14.3427305, y: -4.214466, z: -1}
+  - {x: -14.3427305, y: 3.25, z: -1}
+  - {x: 2.6572695, y: -4.214466, z: -1}
+  - {x: 2.6572695, y: -0.5, z: -1}
+  - {x: 7.6572695, y: -4.214466, z: -1}
+  - {x: 7.6572695, y: 3.25, z: -1}
+  - {x: 5.25, y: -4.214466, z: 10.75}
+  - {x: 5.25, y: 3.25, z: 10.75}
+  - {x: 5.25, y: -4.214466, z: 16.75}
+  - {x: -2.8427305, y: 3.25, z: -1}
+  - {x: 2.6572695, y: 3.25, z: -1}
+  m_Dering: 1
 --- !u!1 &8098731893550514830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1165,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 769
+  m_VersionIndex: 772
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2035,7 +2200,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1610
+  m_VersionIndex: 1613
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3070,7 +3235,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1613
+  m_VersionIndex: 1616
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3212,6 +3377,7 @@ Transform:
   - {fileID: 3550769925389222515}
   - {fileID: 3550769925610942498}
   - {fileID: 525839944}
+  - {fileID: 1877655259}
   m_Father: {fileID: 8098731894523641644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4208,7 +4374,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 772
+  m_VersionIndex: 775
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4550,7 +4716,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 694
+  m_VersionIndex: 697
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4891,7 +5057,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 691
+  m_VersionIndex: 694
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4992,6 +5158,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 4.0058797e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 13.562554
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch (1)
@@ -5068,7 +5246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145759432, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 1661
+      value: 1664
       objectReference: {fileID: 0}
     - target: {fileID: 432590252, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5084,7 +5262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432590256, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 475
+      value: 478
       objectReference: {fileID: 0}
     - target: {fileID: 1258078418, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5100,7 +5278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1258078422, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 1895
+      value: 1898
       objectReference: {fileID: 0}
     - target: {fileID: 3466019102964994593, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5112,7 +5290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3733741922751575882, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 826
+      value: 829
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_RootOrder
@@ -5192,6 +5370,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1.2926333e+22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.2960505e+10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 3.0266152e+24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.90508e+31
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch
@@ -5268,7 +5462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145759432, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 1658
+      value: 1661
       objectReference: {fileID: 0}
     - target: {fileID: 432590252, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5284,7 +5478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432590256, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 472
+      value: 475
       objectReference: {fileID: 0}
     - target: {fileID: 1258078418, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5300,7 +5494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1258078422, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 1892
+      value: 1895
       objectReference: {fileID: 0}
     - target: {fileID: 3466019102964994593, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5312,7 +5506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3733741922751575882, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 823
+      value: 826
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_RootOrder
@@ -5396,6 +5590,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 145759432, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
+      propertyPath: m_VersionIndex
+      value: 1835
+      objectReference: {fileID: 0}
     - target: {fileID: 432590252, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5407,6 +5605,10 @@ PrefabInstance:
     - target: {fileID: 432590256, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 432590256, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
+      propertyPath: m_VersionIndex
+      value: 649
       objectReference: {fileID: 0}
     - target: {fileID: 1258078418, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5420,6 +5622,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1258078422, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2069
+      objectReference: {fileID: 0}
     - target: {fileID: 3466019102964994593, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5427,6 +5633,10 @@ PrefabInstance:
     - target: {fileID: 3733741922751575882, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733741922751575882, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
+      propertyPath: m_VersionIndex
+      value: 997
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_RootOrder
@@ -5502,6 +5712,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 8.5e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 6.47e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 6.444432e+35
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch (3)
@@ -5564,6 +5786,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 6.4445233e+35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 4.0286167e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 6.7e-44
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch (4)
@@ -5640,7 +5878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145759432, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 1658
+      value: 1661
       objectReference: {fileID: 0}
     - target: {fileID: 432590252, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5656,7 +5894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432590256, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 472
+      value: 475
       objectReference: {fileID: 0}
     - target: {fileID: 1258078418, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5672,7 +5910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1258078422, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 1892
+      value: 1895
       objectReference: {fileID: 0}
     - target: {fileID: 3466019102964994593, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_Mesh
@@ -5684,7 +5922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3733741922751575882, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_VersionIndex
-      value: 823
+      value: 826
       objectReference: {fileID: 0}
     - target: {fileID: 3981040180314930492, guid: 30fb4af4742d9e6499acdbf58927ab89, type: 3}
       propertyPath: m_RootOrder
@@ -5764,6 +6002,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 4.97576e-39
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 4.210516e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 4.757186e+30
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch (6)
@@ -5826,6 +6080,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 2.84e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.8062693e+28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1.7029364e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 6.49e-43
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch (2)
@@ -5888,6 +6158,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 4.165041e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 12.000047
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch (7)
@@ -5950,6 +6232,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8098731893975534528}
     m_Modifications:
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 3.0266152e+24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.05e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 6.3370736e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238841125513737025, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 8.602565e+9
+      objectReference: {fileID: 0}
     - target: {fileID: 4693498276919351245, guid: 436437fee8a9e984581ac074f5eae6fd, type: 3}
       propertyPath: m_Name
       value: Torch (5)

@@ -6,7 +6,7 @@ public class DoorStateDisplay : MonoBehaviour
 {
     [SerializeField] private Material OpenMaterial, ClosedMaterial;
     [SerializeField] private Color OpenColour, ClosedColour;
-    private MeshRenderer _meshRenderer;
+    [SerializeField] private MeshRenderer _meshRenderer;
     private Light _light;
     private Door _parentDoor;
 
@@ -15,7 +15,11 @@ public class DoorStateDisplay : MonoBehaviour
     {
         _parentDoor = GetComponentInParent<Door>();
         _light = GetComponentInChildren<Light>();
-        _meshRenderer = GetComponent<MeshRenderer>();
+        if (!_meshRenderer)
+        {
+
+             _meshRenderer = GetComponent<MeshRenderer>();
+        }
 
         if (_parentDoor)
         {

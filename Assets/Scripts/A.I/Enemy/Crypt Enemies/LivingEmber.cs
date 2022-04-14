@@ -70,12 +70,20 @@ public class LivingEmber : BaseEnemy
 
                 if (ObjectPoolManager.instance)
                 {
-                    ObjectPoolManager.Recycle(gameObject);
+                    if (gameObject)
+                    {
+                        ObjectPoolManager.Recycle(gameObject);
+                    }
+                 
 
                 }
                 else
                 {
-                    Destroy(gameObject);
+                    if (gameObject)
+                    {
+                        Destroy(gameObject);
+                    }
+              
                 }
                 break;
         }

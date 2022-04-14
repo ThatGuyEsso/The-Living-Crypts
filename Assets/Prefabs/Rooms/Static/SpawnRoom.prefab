@@ -162,6 +162,7 @@ Transform:
   - {fileID: 2047213920}
   - {fileID: 2276209608172667823}
   - {fileID: 509680987249823260}
+  - {fileID: 8819039818420399962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -177,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad28c17fc9cafe548a8073394790cab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inDebug: 0
   _width: 11
   _length: 8
   _height: 8
@@ -185,6 +187,7 @@ MonoBehaviour:
   _connectingPoint: {fileID: 7087416594859958364}
   _useGridOffset: 0
   _nCrawlersPresent: 0
+  EnemySpawnManagerPrefab: {fileID: 0}
 --- !u!1 &2200952774245891292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,6 +2933,59 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &3948818292116587852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8819039818420399962}
+  - component: {fileID: 774697271261574625}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8819039818420399962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948818292116587852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2200952774133924362}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &774697271261574625
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948818292116587852}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 4.75, y: 3.5, z: 3.5}
+  - {x: 4.5, y: 3.25, z: -1.5}
+  - {x: 4.6923885, y: -1.9674983, z: 3.3191667}
+  - {x: 4.2387314, y: -1.7963035, z: -1.3097849}
+  - {x: -5, y: 3.5, z: 3.577227}
+  - {x: -4.5, y: 3.5, z: -1.6334367}
+  - {x: -5, y: -2.25, z: 3.75}
+  - {x: -4.25, y: -1.75, z: -1.75}
+  - {x: 4.5, y: 3.25, z: -2.75}
+  - {x: -4.25, y: -1.75, z: -3}
+  - {x: -4.5, y: 3.5, z: -2.8834367}
+  - {x: 4.2387314, y: -1.7963035, z: -2.559785}
+  m_Dering: 1
 --- !u!1 &7334083487835802741
 GameObject:
   m_ObjectHideFlags: 0
