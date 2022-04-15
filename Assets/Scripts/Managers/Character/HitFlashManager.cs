@@ -23,7 +23,16 @@ public class HitFlashManager : MonoBehaviour
         if(_hurtFlashVFX)
             _hurtFlashVFX.Init();
     }
+    private void OnEnable()
+    {
+        if (!_hManager)
+        {
+            return;
+        }
 
+        _hManager.OnHurt += BeginFlash;
+        _hManager.OnNotHurt += EndFlash;
+    }
     private void BeginFlash()
     {
         if (_hurtFlashVFX)
