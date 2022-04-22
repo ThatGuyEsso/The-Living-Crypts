@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(JumpMovement))]
 [RequireComponent(typeof(CryptCharacterManager))]
+[RequireComponent(typeof(SquashAndStretch))]
 public class LivingEmber : BaseEnemy
 {
     [Header("Enemy Character Settings")]
@@ -12,11 +13,15 @@ public class LivingEmber : BaseEnemy
     [SerializeField] private float MinimumSplitSize;
     [SerializeField] private int MaxSplitCount;
     [SerializeField] private GameObject LivingEmberPrefab;
+
+    private SquashAndStretch _squashAndStretch;
     private JumpMovement _jumpMovement;
   
     private RandomSizeInRange _randomSize;
 
     private CryptCharacterManager _cryptCharacter;
+
+    private bool IsChargingJump = false;
 
     protected override void Awake()
     {
@@ -27,9 +32,20 @@ public class LivingEmber : BaseEnemy
     {
         base.Init();
         _randomSize = GetComponent<RandomSizeInRange>();
-        if (_randomSize) _randomSize.SetRandomSize();
-        if (!_jumpMovement) _jumpMovement = GetComponent<JumpMovement>();
-
+        if (_randomSize)
+        {
+            _randomSize.SetRandomSize();
+         
+        }
+        if (!_jumpMovement)
+        {
+            _jumpMovement = GetComponent<JumpMovement>();
+        }
+        if(!_squashAndStretch)
+        {
+            _squashAndStretch = GetComponent<SquashAndStretch>();
+            _squashAndStretch.Init();
+        }
         BoostStatsWithSize();
         if (!_hManager) Destroy(this);
         else
@@ -151,16 +167,30 @@ public class LivingEmber : BaseEnemy
                 FaceCurrentPathPoint();
                 if (EssoUtility.InSameDirection(transform.forward, (PathFollower.GetCurrentPathPoint() - transform.position).normalized, 0.1f))
                 {
-                    _jumpMovement.DoJump((transform.forward).normalized);
+                    if (!IsChargingJump&&_squashAndStretch&&!_squashAndStretch.Animating)
+                    {
+                        IsChargingJump = true;
+                        _squashAndStretch.DoSquash();
+                        _squashAndStretch.OnAnimComplete += DoJump;
+                    }
+                 
                 }
                 
                 break;
             case EnemyState.Attack:
                 FaceCurrentTarget();
-          
-          
-                if(_canAttack)
-                    _jumpMovement.DoJump((transform.forward).normalized,AttackJumpSettings);
+
+
+                if (_canAttack)
+                {
+                    if (!IsChargingJump && _squashAndStretch)
+                    {
+                        IsChargingJump = true;
+                        _squashAndStretch.DoSquash();
+                        _squashAndStretch.OnAnimComplete += DoJumpAttackJump;
+                    }
+                }
+                   
            
                 break;
             case EnemyState.Flee:
@@ -186,6 +216,17 @@ public class LivingEmber : BaseEnemy
         {
             return;
         }
+
+
+        if (AttackJumpSettings.GroundedLayers == (AttackJumpSettings.GroundedLayers | (1 << other.gameObject.layer)))
+        {
+            if (_squashAndStretch)
+            {
+                _squashAndStretch.ReturnToNormal();
+            }
+
+        }
+
         Iteam otherTeam = other.gameObject.GetComponent<Iteam>();
         if (otherTeam != null){
 
@@ -194,6 +235,18 @@ public class LivingEmber : BaseEnemy
             {
                 DoAttack(other.gameObject,other.collider.ClosestPoint(transform.position));
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (AttackJumpSettings.GroundedLayers == (AttackJumpSettings.GroundedLayers | (1 << other.gameObject.layer)))
+        {
+            if (_squashAndStretch)
+            {
+                _squashAndStretch.DoStretch();
+            }
+
         }
     }
 
@@ -226,8 +279,12 @@ public class LivingEmber : BaseEnemy
             _hManager.OnNotHurt -= OnNotHurt;
             _hManager.OnDie -= KillEnemy;
         }
+        if (_squashAndStretch)
+        {
+            _squashAndStretch.OnAnimComplete -= DoJump;
+            _squashAndStretch.OnAnimComplete -= DoJumpAttackJump;
+        }
     }
-
     protected override void KillEnemy()
     {
         if (transform.localScale.x > MinimumSplitSize)
@@ -310,6 +367,31 @@ public class LivingEmber : BaseEnemy
      
     }
 
+    private void DoJump()
+    {
+        if (_squashAndStretch)
+        {
+            _squashAndStretch.OnAnimComplete -= DoJump;
+       
+   
+        }
+        IsChargingJump = false;
+        _jumpMovement.DoJump((transform.forward).normalized);
+
+    }
+
+    private void DoJumpAttackJump()
+    {
+        if (_squashAndStretch)
+        {
+            _squashAndStretch.OnAnimComplete -= DoJumpAttackJump;
+           
+
+        }
+        IsChargingJump = false;
+        _jumpMovement.DoJump((transform.forward).normalized, AttackJumpSettings);
+
+    }
 
     public void BoostStatsWithSize()
     {

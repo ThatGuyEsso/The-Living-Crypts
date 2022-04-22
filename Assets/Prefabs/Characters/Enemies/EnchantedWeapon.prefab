@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7519904098750499278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7519904098750499267}
+  - component: {fileID: 7519904098750499264}
+  - component: {fileID: 7519904098750499265}
+  - component: {fileID: 7519904098750499266}
+  - component: {fileID: 1919299544}
+  m_Layer: 0
+  m_Name: EnchantedWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7519904098750499267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519904098750499278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7519904098750499264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519904098750499278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e94ea2492e34240b5ced4c8f148147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InDebug: 1
+--- !u!114 &7519904098750499265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519904098750499278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d71ac13a3bcc743813fda2d043b75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InDebug: 1
+  TickRate: 0.5
+  MaxTickOffset: 0.3
+  CurrentTarget: {fileID: 0}
+  CharacterSettings:
+    AttackRange: -1
+    AttackRate: 0
+    MaxDamage: 0
+    MinDamage: 0
+    MaxKnockBack: 0
+    MinKnockBack: 0
+  CurrentState: 0
+  PathFinder: {fileID: 0}
+  PathFollower: {fileID: 0}
+  FaceDirection: {fileID: 0}
+  WeaponDatas:
+  - {fileID: 11400000, guid: 666067addeff1174cbe28da6ce9c1500, type: 2}
+  - {fileID: 11400000, guid: 0a00ec50bd6662a47b266f8620ed10d5, type: 2}
+  - {fileID: 11400000, guid: fa7f87800c1b6064b950e2f2cfbbbdd7, type: 2}
+  - {fileID: 11400000, guid: 0faa599d34748e04495a23303cc133bb, type: 2}
+  MinIdleTime: 3
+  MaxIdleTime: 5
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  TicketManager: {fileID: 0}
+--- !u!114 &7519904098750499266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519904098750499278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3de057180189f4eaa80eb9103d7a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inDebug: 0
+  _healthData:
+    _maxDefaultHealth: 30
+    _minDefaultHealth: 25
+    _maxHurtTime: 0.2
+--- !u!114 &1919299544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519904098750499278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a29badbbd510b4e9b10a93f5a08bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentCornerIndex: 0
+  InDebug: 1
+  _minDistanceToPoint: 0.5
