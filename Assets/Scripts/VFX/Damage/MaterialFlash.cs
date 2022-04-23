@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 
 public class MaterialFlash : MonoBehaviour, IInitialisable
 {
-    [SerializeField] private Material _flashMat;
-    [SerializeField] private float _flashRate = 0.2f;
-    private Material[] _defaultMaterials;
-    private MeshRenderer[] _meshRenderers;
-    private bool _shouldFlash = false;
-    private bool _isFlashing;
-    private float _currentTimeToFlash;
-    public void Init()
+    [SerializeField] protected Material _flashMat;
+    [SerializeField] protected float _flashRate = 0.2f;
+    [SerializeField] protected Material[] _defaultMaterials;
+    protected MeshRenderer[] _meshRenderers;
+    protected bool _shouldFlash = false;
+    protected bool _isFlashing;
+    protected float _currentTimeToFlash;
+    public virtual void Init()
     {
        
         _meshRenderers = GetComponentsInChildren<MeshRenderer>();
@@ -31,7 +31,7 @@ public class MaterialFlash : MonoBehaviour, IInitialisable
         _currentTimeToFlash = _flashRate;
         FlashOn();
     }
-    public void FlashOn()
+    public virtual void FlashOn()
     {
         foreach (MeshRenderer mr in _meshRenderers)
         {
@@ -45,7 +45,7 @@ public class MaterialFlash : MonoBehaviour, IInitialisable
         _shouldFlash = false;
         FlashOff();
     }
-    public void FlashOff()
+    public virtual void FlashOff()
     {
         for (int i = 0; i < _meshRenderers.Length; i++)
         {
@@ -57,7 +57,7 @@ public class MaterialFlash : MonoBehaviour, IInitialisable
     }
    
 
-    private void Update()
+    protected void Update()
     {
 
         if(_shouldFlash)

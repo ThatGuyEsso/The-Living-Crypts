@@ -6,7 +6,7 @@ public class EnemyTicketManager : MonoBehaviour
 {
     [SerializeField] private int MaxTickets;
 
-    private int _nCurrentTickets;
+    [SerializeField] private int _nCurrentTickets;
 
 
 

@@ -253,6 +253,7 @@ public class LivingEmber : BaseEnemy
     public void OnHurt()
     {
         OnEnemyStateChange(EnemyState.Idle);
+        PlaySFX(HurtSFX,true);
     }
     public void OnNotHurt()
     {
@@ -287,6 +288,7 @@ public class LivingEmber : BaseEnemy
     }
     protected override void KillEnemy()
     {
+        PlaySFX(KilledSFX, true);
         if (transform.localScale.x > MinimumSplitSize)
         {
 

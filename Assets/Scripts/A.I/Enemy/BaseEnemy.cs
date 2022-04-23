@@ -48,7 +48,14 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
 
     [Header("Enemy Character Settings")]
     [SerializeField] protected EnemySettings CharacterSettings;
-  
+
+    [Header("SFX")]
+    [SerializeField] protected string HurtSFX;
+    [SerializeField] protected string KilledSFX;
+    [SerializeField] protected AudioManager AM;
+
+    [Header("VFX")]
+    [SerializeField] protected GameObject DeathVFX;
     [Header("Enemy States")]
     [SerializeField] protected EnemyState CurrentState;
 
@@ -56,6 +63,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     [SerializeField] protected PathFinder PathFinder;
     [SerializeField] protected PathFollower PathFollower;
     protected NavMeshPath _currentPath;
+
     [Header("UX")]
     [SerializeField] protected FaceDirection FaceDirection;
     protected CharacterHealthManager _hManager;
@@ -201,4 +209,26 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
         }
     }
 
+    public virtual void SetTicketManager(EnemyTicketManager ticketManager)
+    {
+       //
+    }
+
+    public virtual AudioPlayer PlaySFX(string sfxName,bool randPitch)
+    {
+        if (AM)
+        {
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
+        }
+        else
+        {
+            if(!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+            {
+                return null;
+            }
+
+            AM = GameStateManager.instance.AudioManager;
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
+        }
+    }
 }

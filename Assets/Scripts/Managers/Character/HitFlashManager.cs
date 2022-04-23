@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HitFlashManager : MonoBehaviour
 {
-    private MaterialFlash _hurtFlashVFX;
-    private CharacterHealthManager _hManager;
-    private void Awake()
+    protected MaterialFlash _hurtFlashVFX;
+    protected CharacterHealthManager _hManager;
+    protected virtual void Awake()
     {
         Init();
     }
-    public void Init()
+    public virtual void Init()
     {
         _hManager = GetComponent<CharacterHealthManager>();
         if (!_hManager) Destroy(this);
@@ -33,18 +33,18 @@ public class HitFlashManager : MonoBehaviour
         _hManager.OnHurt += BeginFlash;
         _hManager.OnNotHurt += EndFlash;
     }
-    private void BeginFlash()
+    public virtual void BeginFlash()
     {
         if (_hurtFlashVFX)
             _hurtFlashVFX.BeginFlash();
     }
-    private void EndFlash()
+    public virtual void EndFlash()
     {
         if (_hurtFlashVFX)
             _hurtFlashVFX.EndFlash();
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         if (_hManager)
         {
@@ -53,7 +53,7 @@ public class HitFlashManager : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    protected  virtual void OnDisable()
     {
         if (_hManager)
         {

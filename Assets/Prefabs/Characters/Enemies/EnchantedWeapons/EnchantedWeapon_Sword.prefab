@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 4630350998723995098}
   - component: {fileID: 4630350998723995096}
   - component: {fileID: 4630350998723995097}
-  m_Layer: 0
+  - component: {fileID: 8213073689042740607}
+  - component: {fileID: 95876459546806689}
+  m_Layer: 10
   m_Name: EnchantedWeapon_Sword
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +64,34 @@ MonoBehaviour:
   _length: 0.45
   _height: 1.5
   _offset: {x: 0, y: 0.6, z: 0}
+--- !u!114 &8213073689042740607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4630350998723995101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59ec627bfe2854448099846545f1e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: {fileID: 0}
+  EnableOnAwake: 0
+  IsEnabled: 0
+--- !u!114 &95876459546806689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4630350998723995101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66830fd4e5ea0e445a96c96c7ad8fdf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthManager: {fileID: 0}
 --- !u!64 &4630350999220173221
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -76,6 +106,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4469100493174395254, guid: 0cf6e3fc9f3600044abde61e69595d70, type: 3}
+--- !u!114 &55810133344528844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513292573762487543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66830fd4e5ea0e445a96c96c7ad8fdf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthManager: {fileID: 0}
+--- !u!114 &5995911726347634023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513292573762487543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9505c5a7ada425e4d802d263f895d004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashMat: {fileID: 2100000, guid: 9b05cca13e47e674d8e72a8438b96cc8, type: 2}
+  _flashRate: 0.2
 --- !u!1001 &4630350999220173222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,6 +199,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0cf6e3fc9f3600044abde61e69595d70, type: 3}
       propertyPath: m_Name
       value: SM_GreatSword
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0cf6e3fc9f3600044abde61e69595d70, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cf6e3fc9f3600044abde61e69595d70, type: 3}

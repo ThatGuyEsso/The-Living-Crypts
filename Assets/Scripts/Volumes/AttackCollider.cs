@@ -49,8 +49,8 @@ public class AttackCollider : MonoBehaviour
             {
                 return;
             }
-            Iteam otherTeam = other.GetComponent<Iteam>();
-            if (ownerTeam == null)
+            Iteam otherTeam = other.GetComponentInParent<Iteam>();
+            if (otherTeam == null)
             {
                 if (damage != null)
                 {

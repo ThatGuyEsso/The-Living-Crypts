@@ -11,6 +11,8 @@ public class Rotator : MonoBehaviour
     [SerializeField] private bool ShouldAccelerate;
     private Vector3 _rotationDirection;
     private float CurrentSpeed;
+
+    private bool IsSpinning;
     private void Awake()
     {
         if (UseRandomRotation)
@@ -25,7 +27,25 @@ public class Rotator : MonoBehaviour
             _rotationDirection = StartRotation;
         }
     }
+    public void Begin()
+    {
+        if (ShouldAccelerate)
+        {
+            CurrentSpeed = 0f;
+        }
+        IsSpinning = true;
+    
+    }
+    public void Begin(float delay)
+    {
+        Invoke("Begin", delay);
+    }
 
+
+    public void Stop()
+    {
+        IsSpinning = false;
+    }
     public void SetSpeed(float speed)
     {
         RotationtionSpeed = speed;
@@ -33,6 +53,10 @@ public class Rotator : MonoBehaviour
 
     private void Update()
     {
+        if (!IsSpinning)
+        {
+            return;
+        }
         if (ShouldAccelerate)
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, RotationtionSpeed, Time.deltaTime * Acceleration);
@@ -42,10 +66,14 @@ public class Rotator : MonoBehaviour
             }
 
             transform.Rotate(_rotationDirection, Time.deltaTime * CurrentSpeed * RotationtionSpeed);
+      
         }
         else{
 
             transform.Rotate(_rotationDirection, Time.deltaTime * RotationtionSpeed * RotationtionSpeed);
+           
         }
     }
+
+    public bool IsRotating { get { return IsSpinning; } }
 }

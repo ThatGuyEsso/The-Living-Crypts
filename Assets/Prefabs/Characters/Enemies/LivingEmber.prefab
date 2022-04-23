@@ -20,12 +20,11 @@ GameObject:
   - component: {fileID: 951077903895921024}
   - component: {fileID: 951077903895921025}
   - component: {fileID: 951077903895921030}
-  - component: {fileID: 951077903895921026}
-  - component: {fileID: 951077903895921027}
   - component: {fileID: 1924905420}
   - component: {fileID: 753587019200014727}
   - component: {fileID: 3982368686327892857}
   - component: {fileID: 4643414923761552731}
+  - component: {fileID: 273581729731280348}
   m_Layer: 10
   m_Name: LivingEmber
   m_TagString: Enemy
@@ -97,6 +96,10 @@ MonoBehaviour:
     MinDamage: 5
     MaxKnockBack: 5
     MinKnockBack: 2
+  HurtSFX: EmberHurt
+  KilledSFX: 
+  AM: {fileID: 0}
+  DeathVFX: {fileID: 0}
   CurrentState: 1
   PathFinder: {fileID: 0}
   PathFollower: {fileID: 0}
@@ -234,32 +237,6 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 1
   m_AffectedAgents: ffffffff
---- !u!114 &951077903895921026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951077903895921039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5d770e1392dd04f91eb29fbddc5883, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &951077903895921027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951077903895921039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d3960b63ac9f494095a9ed9807f6211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flashMat: {fileID: 2100000, guid: 9b05cca13e47e674d8e72a8438b96cc8, type: 2}
-  _flashRate: 0.2
 --- !u!114 &1924905420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,6 +267,7 @@ MonoBehaviour:
   _width: 0.5
   _length: 0.4
   _height: 0.6
+  _offset: {x: 0, y: 0, z: 0}
 --- !u!114 &3982368686327892857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +297,33 @@ MonoBehaviour:
   StretchRate: 9
   SquashRate: 6
   ReturnToNormalRate: 10
+--- !u!114 &273581729731280348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951077903895921039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b048430128497014b97c459cd61b5e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5830728186482552110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646191004410258321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9505c5a7ada425e4d802d263f895d004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashMat: {fileID: 2100000, guid: 9b05cca13e47e674d8e72a8438b96cc8, type: 2}
+  _flashRate: 0.2
+  _defaultMaterials: []
 --- !u!1 &6224557237450538315
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +486,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992f4379d3b00642834113dc6c85b78, type: 3}
+--- !u!1 &3646191004410258321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f992f4379d3b00642834113dc6c85b78, type: 3}
+  m_PrefabInstance: {fileID: 4492541527898463936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4166409969482692907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f992f4379d3b00642834113dc6c85b78, type: 3}
