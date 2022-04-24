@@ -99,7 +99,48 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         SetNewMoveTIme();
 
     }
+    protected override void EvaluateNewGameplayEvent(GameplayEvents newEvent)
+    {
+        base.EvaluateNewGameplayEvent(newEvent);
 
+        switch (newEvent)
+        {
+            case GameplayEvents.PlayerDied:
+
+                IsActive = false;
+                if (_floatMovement)
+                {
+                    _floatMovement.StopAndDrop();
+                }
+
+                if (_rotator)
+                {
+                    _rotator.Stop();
+                }
+                break;
+
+            case GameplayEvents.PlayerRespawnBegun:
+
+                if (ObjectPoolManager.instance)
+                {
+                    if (gameObject)
+                    {
+                        ObjectPoolManager.Recycle(gameObject);
+                    }
+
+
+                }
+                else
+                {
+                    if (gameObject)
+                    {
+                        Destroy(gameObject);
+                    }
+
+                }
+                break;
+        }
+    }
     public void SetUpWeapon()
     {
         if (!currentWeaponData)

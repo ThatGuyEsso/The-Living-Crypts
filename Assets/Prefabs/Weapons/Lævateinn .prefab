@@ -96,8 +96,8 @@ MonoBehaviour:
   _secondaryAttackExplosion: {fileID: 0}
   GunScanData:
     nShots: 6
-    Spread: 0.2
-    ScanRange: 10
+    Spread: 0.1
+    ScanRange: 20
     BlockingLayers:
       serializedVersion: 2
       m_Bits: 19713
@@ -112,6 +112,8 @@ MonoBehaviour:
   _maxRecoilOffset: 1
   _fp: {fileID: 370482370}
   BulletRange: 0
+  PrimaryBlastSFX: GunPrimaryBlast
+  SecondaryBlastSFX: GunSecondaryBlast
   MuzzleFlashPrefab: {fileID: 4155177434486859058, guid: ab78725a181a8344cb7b27ebdad11a24, type: 3}
   _primaryShotScreenShake:
     _duration: 0.25
@@ -126,7 +128,7 @@ MonoBehaviour:
     _timeSmoothOut: 0.2
     _frequency: 1
   MuzzleDuration: 0.25
-  _aimingDistance: 15
+  _aimingDistance: 20
   _aimSpeed: 10
   _aimableLayers:
     serializedVersion: 2

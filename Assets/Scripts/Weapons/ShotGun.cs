@@ -59,6 +59,12 @@ public class ShotGun : BaseWeapon
     [SerializeField] private float _maxRecoilOffset;
     [SerializeField] private Transform _fp;
     [SerializeField] private float BulletRange;
+
+    [Header("Shotgun SFX")]
+    [SerializeField] private string PrimaryBlastSFX;
+    [SerializeField] private string SecondaryBlastSFX;
+  
+
     [Header("VFX Settings")]
     [SerializeField] private GameObject MuzzleFlashPrefab;
     [SerializeField] private CamShakeSetting _primaryShotScreenShake;
@@ -174,7 +180,11 @@ public class ShotGun : BaseWeapon
         FirePrimaryRound();
         AddRecoil(_primaryRecoilAmount);
         _primaryCurrentCooldownTime = _primaryFireRate;
+<<<<<<< HEAD
         OnNewPrimaryCooldown?.Invoke(_primaryCurrentCooldownTime);
+=======
+        PlaySFX(PrimaryBlastSFX, true);
+>>>>>>> NewMain
         if (CamShake.instance)
             CamShake.instance.DoScreenShake(_primaryShotScreenShake);
     }
@@ -182,6 +192,7 @@ public class ShotGun : BaseWeapon
     {
         FireSecondaryExplosion();
         AddRecoil(_secondaryRecoilAmount);
+              PlaySFX(SecondaryBlastSFX, true);
         _secondaryCurrentCooldownTime = _secondaryFireRate;
         OnNewSecondaryCooldown?.Invoke(_secondaryCurrentCooldownTime);
         if (CamShake.instance)
@@ -199,37 +210,37 @@ public class ShotGun : BaseWeapon
         {
             Vector3 targetDir = _fp.forward +_fp.right *Random.Range(-GunScanData.Spread, GunScanData.Spread)+ _fp.up * Random.Range(-GunScanData.Spread, GunScanData.Spread);
 
-            if(Physics.Raycast(_fp.position,targetDir,out hitInfo, GunScanData.ScanRange, GunScanData.BlockingLayers))
+            if (Physics.Raycast(_fp.position, targetDir, out hitInfo, GunScanData.ScanRange, GunScanData.BlockingLayers))
             {
-                Debug.DrawLine(_fp.position, hitInfo.point , Color.red, 10f);
-                if (targetsHit.Count==0)
+                Debug.DrawLine(_fp.position, hitInfo.point, Color.red, 10f);
+                if (targetsHit.Count == 0)
                 {
                     float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                     float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
 
-                    targetsHit.Add(new HitScanTarget(hitInfo.collider.gameObject, dmg, kBack,targetDir,hitInfo.point));
+                    targetsHit.Add(new HitScanTarget(hitInfo.collider.transform.root.gameObject, dmg, kBack, targetDir, hitInfo.point));
                 }
                 else
                 {
-                    int indexToUpdate =0;
-                    bool valueFound =false;
-                    for(int j =0; j< targetsHit.Count; j++)
+                    int indexToUpdate = 0;
+                    bool valueFound = false;
+                    for (int j = 0; j < targetsHit.Count; j++)
                     {
-                        if(targetsHit[j].Target == hitInfo.collider.gameObject)
+                        if (targetsHit[j].Target == hitInfo.collider.transform.root.gameObject)
                         {
-                            valueFound=true;
+                            valueFound = true;
                             indexToUpdate = j;
                             break;
                         }
                     }
-                  
+
 
                     if (valueFound)
                     {
                         float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                         float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
 
-                        HitScanTarget newTargetValue = new HitScanTarget(hitInfo.collider.gameObject, targetsHit[indexToUpdate].CurrentDamage + dmg,
+                        HitScanTarget newTargetValue = new HitScanTarget(hitInfo.collider.transform.root.gameObject, targetsHit[indexToUpdate].CurrentDamage + dmg,
                             targetsHit[indexToUpdate].CurrentKnockBack + kBack, (targetDir + targetsHit[indexToUpdate].Direction).normalized, hitInfo.point);
 
                         targetsHit[indexToUpdate] = newTargetValue;
@@ -239,11 +250,15 @@ public class ShotGun : BaseWeapon
                         float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                         float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
 
-                        targetsHit.Add(new HitScanTarget(hitInfo.collider.gameObject, dmg, kBack,targetDir,hitInfo.point));
+                        targetsHit.Add(new HitScanTarget(hitInfo.collider.transform.root.gameObject, dmg, kBack, targetDir, hitInfo.point));
                     }
                 }
             }
-            Debug.DrawLine(_fp.position, _fp.position + targetDir.normalized * GunScanData.ScanRange, Color.red, 10f);
+            else
+            {
+                Debug.DrawLine(_fp.position, _fp.position + targetDir.normalized * GunScanData.ScanRange, Color.red, 10f);
+            }
+          
 
         }
 
@@ -315,7 +330,7 @@ public class ShotGun : BaseWeapon
         Vector3 targetpoint = _fp.position + _fp.forward *( (_explosionAttackData._size / 2.0f) - 1f);
 
 
-        if (Physics.Raycast(_fp.position, _fp.forward, out hitInfo, (_explosionAttackData._size / 2.0f)-1f, _aimableLayers))
+        if (Physics.Raycast(_fp.position, _fp.forward, out hitInfo, (_explosionAttackData._size / 2.0f)-1f, GunScanData.BlockingLayers))
         {
             targetpoint = hitInfo.point;
         }
@@ -349,7 +364,7 @@ public class ShotGun : BaseWeapon
     public void UpdateWeaponAim()
     {
         if (!_fovCam) return;
-        Vector3 aimDir = EssoUtility.GetCameraLookAtPoint(_fovCam,_aimingDistance,_aimableLayers)- _fp.position;
+        Vector3 aimDir = EssoUtility.GetCameraLookAtPoint(_fovCam,_aimingDistance,_aimableLayers)- transform.position;
 
         Debug.DrawRay(_fp.position, aimDir, Color.yellow);
         Quaternion q=  Quaternion.LookRotation(aimDir + _currentRecoilOffset);

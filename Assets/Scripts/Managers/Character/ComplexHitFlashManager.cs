@@ -5,10 +5,17 @@ using UnityEngine;
 public class ComplexHitFlashManager : HitFlashManager
 {
     protected MaterialFlash[] _flashVFXs;
+<<<<<<< HEAD
     [SerializeField] protected bool _EnableOnAwake;
     protected override void Awake()
     {
         if (_EnableOnAwake)
+=======
+    [SerializeField] protected bool EnableonAwake;
+    protected override void Awake()
+    {
+        if (EnableonAwake)
+>>>>>>> NewMain
         {
             Init();
         }

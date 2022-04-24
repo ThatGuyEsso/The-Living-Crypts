@@ -85,12 +85,26 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     public virtual void Init()
     {
         float randValue = Random.Range(0f, MaxTickOffset);
-   
-        if (!PathFinder) PathFinder = GetComponent<PathFinder>();
-        if (!PathFollower) PathFollower = GetComponent<PathFollower>();
-        if (!FaceDirection) FaceDirection = GetComponent<FaceDirection>();
+
+        if (!PathFinder)
+        {
+            PathFinder = GetComponent<PathFinder>();
+         
+        }
+        if (!PathFollower)
+        {
+            PathFollower = GetComponent<PathFollower>();
+          
+        }
+        if (!FaceDirection)
+        {
+            FaceDirection = GetComponent<FaceDirection>();
+        }
+
         _currentPath = new NavMeshPath();
+
         _hManager = GetComponent<CharacterHealthManager>();
+
         InvokeRepeating("ProcessAI", randValue, TickRate);
         if (!_gameManager)
         {
@@ -142,7 +156,8 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     {
 
         if (!CurrentTarget) return false;
-        return Vector2.Distance(CurrentTarget.position, transform.position) <= CharacterSettings.AttackRange;
+        float dist = Vector3.Distance(CurrentTarget.position, transform.position);
+        return dist <= CharacterSettings.AttackRange;
 
     }
 

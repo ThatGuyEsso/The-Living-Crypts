@@ -26,7 +26,11 @@ public class LivingEmber : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
-        _cryptCharacter = GetComponent<CryptCharacterManager>();
+        if (!_cryptCharacter)
+        {
+            _cryptCharacter = GetComponent<CryptCharacterManager>();
+        }
+      
     }
     public override void Init()
     {
@@ -121,7 +125,11 @@ public class LivingEmber : BaseEnemy
                 break;
             case EnemyState.Chase:
 
-                if (!CurrentTarget) OnEnemyStateChange(EnemyState.Idle);
+                if (!CurrentTarget)
+                {
+                    OnEnemyStateChange(EnemyState.Idle);
+                    break;
+                }
                 if (!InRange())
                 {
                     DrawPathToTarget();
@@ -268,6 +276,11 @@ public class LivingEmber : BaseEnemy
             _hManager.OnHurt -= OnHurt;
             _hManager.OnNotHurt -= OnNotHurt;
             _hManager.OnDie -= KillEnemy;
+        }
+        if (_squashAndStretch)
+        {
+            _squashAndStretch.OnAnimComplete -= DoJump;
+            _squashAndStretch.OnAnimComplete -= DoJumpAttackJump;
         }
     }
 

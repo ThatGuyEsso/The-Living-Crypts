@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DamageTypes
+{
+    Default,
+    Fire,
+    Poison
+};
+
 public class HazardVolume : MonoBehaviour
 {
     [SerializeField] private float LifeTime;
