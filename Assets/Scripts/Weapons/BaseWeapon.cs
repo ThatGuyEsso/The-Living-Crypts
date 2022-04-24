@@ -17,9 +17,13 @@ public abstract class BaseWeapon : MonoBehaviour, Iteam
     protected Vector3 _equipOffset;
     protected AudioManager AM;
 
+    [Header("Weapon UI")]
+    [SerializeField] protected Sprite _primaryAttackUISprite, _secondaryAttackUISprite;
 
     public System.Action OnAttackStarted;
     public System.Action OnAttackEnded;
+    public System.Action<float> OnNewPrimaryCooldown;
+    public System.Action<float> OnNewSecondaryCooldown;
     [Header("Weapon Animation")]
     [SerializeField] protected WeaponAnimController _animController;
     public virtual void StopTryToPrimaryAttack()
@@ -154,4 +158,11 @@ public abstract class BaseWeapon : MonoBehaviour, Iteam
     }
 
     public string WeaponName { get { return _weaponName; } }
+
+
+    public Sprite PrimaryUISprite { get { return _primaryAttackUISprite; } }
+    public Sprite SecondaryUISprite { get { return _secondaryAttackUISprite; } }
+
+    public virtual float MaxPrimaryCooldown { get { return _primaryFireRate; } }
+    public virtual float MaxSecondaryCooldown { get { return _secondaryFireRate; } }
 }

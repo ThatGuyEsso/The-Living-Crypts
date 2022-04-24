@@ -18,7 +18,7 @@ public class WeaponManager : MonoBehaviour,IInitialisable
 
     private Controls _input;
     private AudioManager _audioManager;
-
+    private HUDManager _hudManager;
     public System.Action<string> OnWeaponEquipped;
    
     public void Init()
@@ -72,6 +72,26 @@ public class WeaponManager : MonoBehaviour,IInitialisable
         }
     }
 
+ 
+    public void SetUpUIBinds(BaseWeapon weapon)
+    {
+        if (weapon.gameObject)
+        {
+            weapon.OnNewPrimaryCooldown += UpdatePrimaryAttackCoolDown;
+            weapon.OnNewSecondaryCooldown += UpdateSecondaryAttackCoolDown;
+        }
+      
+    }
+    public void RemoveUIBinds(BaseWeapon weapon)
+    {
+        if (weapon.gameObject)
+        {
+            weapon.OnNewPrimaryCooldown -= UpdatePrimaryAttackCoolDown;
+            weapon.OnNewSecondaryCooldown -= UpdateSecondaryAttackCoolDown;
+        }
+
+    }
+
     public void EquipWeapon(BaseWeapon weapon)
     {
        
@@ -84,6 +104,8 @@ public class WeaponManager : MonoBehaviour,IInitialisable
             _equippedWeapon.SetEquipPoint(_weaponEquipPoint);
             _equippedWeapon.Init();
             PlayEquipSFX();
+            UpdateWeaponDisplayed();
+            SetUpUIBinds(_equippedWeapon);
         }
         else
         {
@@ -119,6 +141,43 @@ public class WeaponManager : MonoBehaviour,IInitialisable
         }
     }
 
+    public void UpdateWeaponDisplayed()
+    {
+        if (!_hudManager)
+        {
+            _hudManager = GetHUDManager();
+        }
+
+        if (_hudManager)
+        {
+            _hudManager.WeaponDisplayManager.SetUp(_equippedWeapon.PrimaryUISprite,
+                _equippedWeapon.SecondaryUISprite, _equippedWeapon.MaxPrimaryCooldown, _equippedWeapon.MaxSecondaryCooldown);
+        }
+    }
+    public void UpdatePrimaryAttackCoolDown(float newCooldown)
+    {
+        if (!_hudManager)
+        {
+            _hudManager = GetHUDManager();
+        }
+
+        if (_hudManager)
+        {
+            _hudManager.WeaponDisplayManager.UpdatePrimaryCooldown(newCooldown);
+        }
+    }
+    public void UpdateSecondaryAttackCoolDown(float newCooldown)
+    {
+        if (!_hudManager)
+        {
+            _hudManager = GetHUDManager();
+        }
+
+        if (_hudManager)
+        {
+            _hudManager.WeaponDisplayManager.UpdateSecondaryCooldown(newCooldown);
+        }
+    }
     public void ResetManager()
     {
         UnequipWeapon();
@@ -160,6 +219,7 @@ public class WeaponManager : MonoBehaviour,IInitialisable
         if (_equippedWeapon)
         {
             _isWeaponEquipped = false;
+            RemoveUIBinds(_equippedWeapon);
             Destroy(_equippedWeapon.gameObject);
             _equippedWeapon = null;
         }
@@ -204,6 +264,25 @@ public class WeaponManager : MonoBehaviour,IInitialisable
             else
             {
                 return GameStateManager.instance.AudioManager;
+            }
+        }
+    }
+
+    private HUDManager GetHUDManager()
+    {
+        if (_hudManager)
+        {
+            return _hudManager;
+        }
+        else
+        {
+            if (!GameStateManager.instance || !GameStateManager.instance.GameManager || !GameStateManager.instance.GameManager.HUDManager)
+            {
+                return null;
+            }
+            else
+            {
+                return GameStateManager.instance.GameManager.HUDManager;
             }
         }
     }

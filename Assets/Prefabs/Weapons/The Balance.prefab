@@ -63,6 +63,8 @@ MonoBehaviour:
   _primaryFireRate: 0.25
   _secondaryFireRate: 4
   _followEquipSpeed: 20
+  _primaryAttackUISprite: {fileID: 21300000, guid: 1a518f86aac143f4e91326168f69207b, type: 3}
+  _secondaryAttackUISprite: {fileID: 21300000, guid: b30ba79a2c735ec4d8e193bfe783d86f, type: 3}
   _animController: {fileID: 1202694935927088203}
   _beamSettings:
     _distance: 20
@@ -431,9 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7d198a639ae7145862a80a9236ec93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseRandomRotatation: 1
+  UseRandomRotation: 1
   StartRotation: {x: 0, y: 0, z: 0}
   RotationtionSpeed: 5
+  Acceleration: 0
+  ShouldAccelerate: 0
 --- !u!114 &4300885724885585015
 MonoBehaviour:
   m_ObjectHideFlags: 0

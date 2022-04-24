@@ -7,11 +7,11 @@ public class ScalingProgressBar : MonoBehaviour
 {
     [SerializeField] public Image frame;
     [SerializeField] public Image fill;
-    [SerializeField] private float maxValue;
-    [SerializeField] private float value;
+    [SerializeField] protected float maxValue;
+    [SerializeField] protected float value;
 
-    [SerializeField] private float scaleRate=0.5f;
-    float targetPercent;
+    [SerializeField] protected float scaleRate=0.5f;
+    protected float targetPercent;
     public Action ScalingBegun;
 
 
@@ -37,7 +37,7 @@ public class ScalingProgressBar : MonoBehaviour
        
     }
 
-    public void UpdateFill()
+    public virtual void UpdateFill()
     {
     
         

@@ -79,6 +79,7 @@ public class TheBalance : BaseWeapon
         if (_idleReset) _idleReset.Stop();
         _canPrimaryAttack = false;
         _isAttacking =true;
+        OnNewPrimaryCooldown?.Invoke(_primaryAttackCooldown);
         _animController.OnAttackAnimEnd += BeginBeam;
         _animController.PlayPrimaryAttackAnimation(0);
         ResetIdleTimers();
@@ -267,6 +268,7 @@ public class TheBalance : BaseWeapon
         _canSecondaryAttack = false;
         _isAttacking = true;
         _animController.OnAttackAnimEnd += SummonShield;
+        OnNewSecondaryCooldown?.Invoke(_secondaryFireRate);
         _animController.PlaySecondaryAttackAnimation(0);
         ResetIdleTimers();
     }
@@ -310,13 +312,14 @@ public class TheBalance : BaseWeapon
     }
     protected override void ResetPrimaryAttack()
     {
-
+        OnNewPrimaryCooldown?.Invoke(0f);
         _canPrimaryAttack = true;
 
 
     }
     protected override void ResetSecondaryAttack()
     {
+        OnNewSecondaryCooldown?.Invoke(0f);
         _canSecondaryAttack = true;
     }
     private void Update()
@@ -369,6 +372,7 @@ public class TheBalance : BaseWeapon
         if (!_canPrimaryAttack && _currentBeamCooldown > 0)
         {
             _currentBeamCooldown -= Time.deltaTime;
+            OnNewPrimaryCooldown?.Invoke(_currentBeamCooldown);
             if (_currentBeamCooldown <= 0f)
             {
 
@@ -379,6 +383,7 @@ public class TheBalance : BaseWeapon
         if (!_canSecondaryAttack && _secondaryCurrentCooldownTime > 0)
         {
             _secondaryCurrentCooldownTime -= Time.deltaTime;
+            OnNewSecondaryCooldown?.Invoke(_secondaryCurrentCooldownTime);
             if (_secondaryCurrentCooldownTime <= 0f)
             {
 
@@ -431,4 +436,5 @@ public class TheBalance : BaseWeapon
         _secCurrTimeToIdle = 0f;
     }
 
+    public override float MaxPrimaryCooldown { get { return _primaryAttackCooldown; } }
 }

@@ -103,6 +103,7 @@ public class ShotGun : BaseWeapon
         if (!_canPrimaryAttack && _primaryCurrentCooldownTime > 0)
         {
             _primaryCurrentCooldownTime -= Time.deltaTime;
+            OnNewPrimaryCooldown?.Invoke(_primaryCurrentCooldownTime);
             if (_primaryCurrentCooldownTime <= 0f)
             {
 
@@ -116,6 +117,7 @@ public class ShotGun : BaseWeapon
         if (!_canSecondaryAttack && _secondaryCurrentCooldownTime > 0)
         {
             _secondaryCurrentCooldownTime -= Time.deltaTime;
+            OnNewSecondaryCooldown?.Invoke(_secondaryCurrentCooldownTime);
             if (_secondaryCurrentCooldownTime <= 0f)
             {
 
@@ -158,11 +160,13 @@ public class ShotGun : BaseWeapon
 
     protected override void ResetPrimaryAttack()
     {
+        OnNewPrimaryCooldown?.Invoke(0f);
         _canPrimaryAttack = true;
     }
 
     protected override void ResetSecondaryAttack()
     {
+        OnNewSecondaryCooldown?.Invoke(0f);
         _canSecondaryAttack = true;
     }
     private void PrimaryShot()
@@ -170,6 +174,7 @@ public class ShotGun : BaseWeapon
         FirePrimaryRound();
         AddRecoil(_primaryRecoilAmount);
         _primaryCurrentCooldownTime = _primaryFireRate;
+        OnNewPrimaryCooldown?.Invoke(_primaryCurrentCooldownTime);
         if (CamShake.instance)
             CamShake.instance.DoScreenShake(_primaryShotScreenShake);
     }
@@ -178,6 +183,7 @@ public class ShotGun : BaseWeapon
         FireSecondaryExplosion();
         AddRecoil(_secondaryRecoilAmount);
         _secondaryCurrentCooldownTime = _secondaryFireRate;
+        OnNewSecondaryCooldown?.Invoke(_secondaryCurrentCooldownTime);
         if (CamShake.instance)
             CamShake.instance.DoScreenShake(_secondaryShotScreenShake);
     }

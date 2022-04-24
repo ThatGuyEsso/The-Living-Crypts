@@ -73,7 +73,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon, IAttacker
         if (_idleReset) _idleReset.Stop();
         _canPrimaryAttack = false;
         _isAttacking = true;
-
+        OnNewPrimaryCooldown?.Invoke(_primaryFireRate);
         if (_animController)
         {
           
@@ -161,9 +161,11 @@ public class Sword_Legacy : BaseWeapon, IWeapon, IAttacker
             _animController.OnAttackAnimEnd += OnSecondaryAttackEnd;
 
         }
+
         if (_idleReset) _idleReset.Stop();
         _canSecondaryAttack = false;
         _isAttacking = true;
+        OnNewSecondaryCooldown?.Invoke(_secondaryFireRate);
         PlaySFX(ThrustSFX, true);
         _animController.PlaySecondaryAttackAnimation(0);
         ResetIdleTimers();
@@ -179,7 +181,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon, IAttacker
     }
     protected override void ResetPrimaryAttack()
     {
-  
+        OnNewPrimaryCooldown?.Invoke(0f);
         _canPrimaryAttack = true;
 
     }
@@ -213,6 +215,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon, IAttacker
 
     protected override void ResetSecondaryAttack()
     {
+        OnNewSecondaryCooldown?.Invoke(0f);
         _canSecondaryAttack = true;
    
     }
@@ -229,6 +232,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon, IAttacker
         if (!_canPrimaryAttack && _primaryCurrentCooldownTime > 0)
         {
             _primaryCurrentCooldownTime -= Time.deltaTime;
+            OnNewPrimaryCooldown?.Invoke(_primaryCurrentCooldownTime);
             if (_primaryCurrentCooldownTime <= 0f)
             {
 
@@ -242,6 +246,7 @@ public class Sword_Legacy : BaseWeapon, IWeapon, IAttacker
         if (!_canSecondaryAttack&& _secondaryCurrentCooldownTime>0)
         {
             _secondaryCurrentCooldownTime -= Time.deltaTime;
+            OnNewSecondaryCooldown?.Invoke(_secondaryCurrentCooldownTime);
             if (_secondaryCurrentCooldownTime <= 0f)
             {
                 

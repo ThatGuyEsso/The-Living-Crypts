@@ -13,7 +13,8 @@ public enum GameplayEvents
     PlayerDied,
     PlayerRespawned,
     PlayerRespawnBegun,
-
+    EnteredCombat,
+    LeftCombat
 };
 
 public class GameManager : MonoBehaviour, IManager, IInitialisable
