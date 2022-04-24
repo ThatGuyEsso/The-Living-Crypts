@@ -6,6 +6,8 @@ public class HitFlashManager : MonoBehaviour
 {
     protected MaterialFlash _hurtFlashVFX;
     protected CharacterHealthManager _hManager;
+
+
     protected virtual void Awake()
     {
         Init();

@@ -180,11 +180,10 @@ public class ShotGun : BaseWeapon
         FirePrimaryRound();
         AddRecoil(_primaryRecoilAmount);
         _primaryCurrentCooldownTime = _primaryFireRate;
-<<<<<<< HEAD
+
         OnNewPrimaryCooldown?.Invoke(_primaryCurrentCooldownTime);
-=======
         PlaySFX(PrimaryBlastSFX, true);
->>>>>>> NewMain
+
         if (CamShake.instance)
             CamShake.instance.DoScreenShake(_primaryShotScreenShake);
     }
