@@ -62,9 +62,47 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
             _healthManager.OnHurt += OnDamageScreenShake;
             _healthManager.OnDie += OnPlayerKilled;
         }
+        if (!_gameManager)
+        {
+            _gameManager = GetGameManager();
+        }
+
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent += EvaluateGameplayEvents;
+        }
     }
 
+    public void EvaluateGameplayEvents(GameplayEvents newState)
+    {
+        switch (newState)
+        {
+      
+            case GameplayEvents.Restart:
+                DisablePlayerComponents();
+                break;
+            case GameplayEvents.ExitLevel:
+                DisablePlayerComponents();
+                break;
+            case GameplayEvents.Quit:
+                DisablePlayerComponents();
+                break;
+        }
+    }
 
+    public void EvaluateNewGameState(GameState newState)
+    {
+        switch (newState)
+        {
+      
+            case GameState.GamePaused:
+                DisablePlayerComponents();
+                break;
+            case GameState.GameRunning:
+                EnablePlayerComponents();
+                break;
+        }
+    }
     public void OnDamageScreenShake()
     {
         if (CamShake.instance)
@@ -72,7 +110,29 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
             CamShake.instance.DoScreenShake(DamageShake);
         }
     }
+    public void DisablePlayerComponents()
+    {
+        if (ICharacterComponents.Length > 0)
+        {
+            foreach (ICharacterComponents comp in ICharacterComponents)
+            {
+                comp.DisableComponent();
+            }
+        }
 
+    }
+
+    public void EnablePlayerComponents()
+    {
+        if (ICharacterComponents.Length > 0)
+        {
+            foreach (ICharacterComponents comp in ICharacterComponents)
+            {
+                comp.DisableComponent();
+            }
+        }
+
+    }
     private void OnPlayerKilled()
     {
         OnPlayerDied?.Invoke();
@@ -86,7 +146,7 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
 
         if (!_gameManager)
         {
-            GetGameManager();
+            _gameManager =GetGameManager();
         }
 
         if (_gameManager)
@@ -99,17 +159,17 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
         }
     }
 
-    public void GetGameManager()
+    public GameManager GetGameManager()
     {
         if (!GameStateManager.instance)
         {
-            return;
+            return null;
         }
         if (!GameStateManager.instance.GameManager)
         {
-            return;
+            return null;
         }
-        _gameManager = GameStateManager.instance.GameManager;
+        return  GameStateManager.instance.GameManager;
     }
 
    
@@ -120,6 +180,10 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
             _healthManager.OnHurt -= OnDamageScreenShake;
             _healthManager.OnDie -= OnPlayerKilled;
         }
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent -= EvaluateGameplayEvents;
+        }
     }
 
     private void OnDestroy()
@@ -128,6 +192,10 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
         {
             _healthManager.OnHurt -= OnDamageScreenShake;
             _healthManager.OnDie -= OnPlayerKilled;
+        }
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent -= EvaluateGameplayEvents;
         }
     }
 
@@ -156,4 +224,9 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
       
         OnPlayerReset?.Invoke();
     }
+
+
+
+
+
 }

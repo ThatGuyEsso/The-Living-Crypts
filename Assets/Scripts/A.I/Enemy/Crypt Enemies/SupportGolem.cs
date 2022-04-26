@@ -301,7 +301,7 @@ public class SupportGolem : BaseEnemy , IAttacker
 
                 if (ObjectPoolManager.instance)
                 {
-                    if (gameObject)
+                    if (gameObject && gameObject.activeInHierarchy)
                     {
                         ObjectPoolManager.Recycle(gameObject);
                     }
@@ -368,6 +368,10 @@ public class SupportGolem : BaseEnemy , IAttacker
 
     public void OnCollisionEnter(Collision other)
     {
+        if (!CurrentTarget)
+        {
+            return;
+        }
         if(other.transform.root.gameObject == CurrentTarget.gameObject)
         {
             OnEnemyStateChange(EnemyState.Attack);

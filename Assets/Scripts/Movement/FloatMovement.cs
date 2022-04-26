@@ -10,12 +10,13 @@ public class FloatMovement : MonoBehaviour
     [SerializeField] private float Acceleration;
     [SerializeField] private float Deceleration;
     [SerializeField] private bool ReachMaxHeightBeforeMovememt;
-
+   
     private Rigidbody _rb;
     //Movement
     private Vector3 MovementDirection;
     private bool _shouldMove;
     private float _currentSpeed;
+    private bool _canMoveToTarget;
     public void Init()
     {
         _rb = GetComponent<Rigidbody>();
@@ -29,13 +30,21 @@ public class FloatMovement : MonoBehaviour
         MaxFloatHeight = MaxHeight;
         MaxFloatSpeed = MaxSpeed;
         ReachMaxHeightBeforeMovememt = UseMaxHeight;
-        MaxFloatHeight = transform.position.y + MaxFloatHeight;
+        
+        
 
+
+    }
+
+    public void SetRelativeTargetHeight(float relativeHeight )
+    {
+        MaxFloatHeight = relativeHeight + MaxFloatHeight;
     }
     public void OnMove(Vector3 direction)
     {
         MovementDirection = new Vector3(direction.x,0f, direction.z);
         _rb.useGravity = false;
+
         _shouldMove = true;
     }
 
@@ -43,10 +52,13 @@ public class FloatMovement : MonoBehaviour
     {
         _shouldMove = false;
         _rb.useGravity = true;
+ 
+
     }
     public void Stop()
     {
         _shouldMove = false;
+
    
     }
 
@@ -59,31 +71,37 @@ public class FloatMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!_shouldMove)
         {
             return;
         }
         Accelerate();
+
         if (ReachMaxHeightBeforeMovememt)
         {
-            if(transform.position.y < MaxFloatHeight)
+            _canMoveToTarget = false;
+            if (_rb.position.y < MaxFloatHeight)
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, MaxFloatHeight,transform.position.z), _currentSpeed*Time.deltaTime );
-
-                if (Mathf.Abs(transform.position.y - MaxFloatHeight) < 0.01f)
-                {
-                    transform.position = new Vector3(transform.position.x, MaxFloatHeight, transform.position.z);
-                }
+                _rb.velocity = Vector3.up * _currentSpeed * Time.deltaTime;
             }
+            else
+            {
+                _canMoveToTarget = true;
+            }
+
+
+        }
+        else
+        {
+            _canMoveToTarget = true;
         }
 
-
-
-        transform.position += MovementDirection * _currentSpeed * Time.deltaTime;
-
-
+        if (_canMoveToTarget)
+        {
+            _rb.velocity = MovementDirection *_currentSpeed * Time.deltaTime;
+        }
     }
 
 

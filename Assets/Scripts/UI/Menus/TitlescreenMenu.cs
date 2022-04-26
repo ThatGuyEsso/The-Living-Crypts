@@ -15,6 +15,8 @@ public class TitlescreenMenu : MonoBehaviour
     {
         graphicRaycaster = GetComponent<GraphicRaycaster>();
         PlayAmbience();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 

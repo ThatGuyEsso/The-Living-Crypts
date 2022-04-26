@@ -14,7 +14,10 @@ public enum GameplayEvents
     PlayerRespawned,
     PlayerRespawnBegun,
     EnteredCombat,
-    LeftCombat
+    LeftCombat,
+    Restart,
+    ExitLevel,
+    Quit
 };
 
 public class GameManager : MonoBehaviour, IManager, IInitialisable
@@ -109,9 +112,53 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
                    PlaySong(DungeonAmbience);
                 break;
+            case GameplayEvents.Restart:
+
+                if (_musicManager)
+                {
+                    _musicManager.StopMusic();
+                }
+                InitRespawn();
+                break;
+            case GameplayEvents.ExitLevel:
+
+                if (_musicManager)
+                {
+                    _musicManager.StopMusic();
+                }
+                if (_sceneManager)
+                {
+                    _sceneManager.BeginLoadMenuScreen(SceneIndex.TitleScreen);
+                }
+                break;
+            case GameplayEvents.Quit:
+
+                if (_musicManager)
+                {
+                    _musicManager.StopMusic();
+                }
+                if (!GameStateManager.instance || !GameStateManager.instance.LoadingScreenManager)
+                {
+                    Debug.LogError("No loading screen");
+                    Application.Quit();
+                    break;
+                }
+                GameStateManager.instance.LoadingScreenManager.OnFadeComplete += OnQuitGame;
+                GameStateManager.instance.LoadingScreenManager.BeginFadeIn();
+                break;
         }
     }
-
+    public void OnQuitGame()
+    {
+        if (!GameStateManager.instance)
+        {
+            Debug.LogError("Can't quit from gamestatemanager");
+            Application.Quit();
+            return;
+        }
+        GameStateManager.instance.LoadingScreenManager.OnFadeComplete -= OnQuitGame;
+        GameStateManager.instance.QuitGame();
+    }
     public void Init()
     {
         if (GameStateManager.instance)
@@ -191,6 +238,7 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
         GameStateManager.instance.LoadingScreenManager.BeginFadeIn();
     }
+
 
     private void BeginRespawn()
     {
@@ -462,6 +510,12 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
         if (_HUDManager &&_player)
         {
             _HUDManager.Init(_player,this);
+        }
+
+        _sceneManager.AddNewScene(SceneIndex.PauseScreen);
+        while (_isWaiting)
+        {
+            yield return null;
         }
         PlaySFX(SpawnSFX);
         PlaySong(DungeonAmbience);

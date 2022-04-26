@@ -39,7 +39,7 @@ public class AttackCollider : MonoBehaviour
 
         if (other.transform.root != _owner)
         {
-            IDamage damage = other.gameObject.GetComponent<IDamage>();
+            IDamage damage = other.transform.root.GetComponent<IDamage>();
             if (damage == null)
             {
                 return;
@@ -49,7 +49,7 @@ public class AttackCollider : MonoBehaviour
             {
                 return;
             }
-            Iteam otherTeam = other.GetComponentInParent<Iteam>();
+            Iteam otherTeam = other.transform.root.GetComponentInParent<Iteam>();
             if (otherTeam == null)
             {
                 if (damage != null)

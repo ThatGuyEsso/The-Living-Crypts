@@ -204,6 +204,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4152691363855285188, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152691363855285188, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152691363855285188, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152691363855285188, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152691363855285188, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520255199630820348, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520255199630820348, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520255199630820348, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520255199630820348, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520255199630820348, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6817888905533612833, guid: c57c599f1138eb34e90d544a5f5eb539, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -577,7 +617,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh104792
+  m_Name: pb_Mesh138174
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1580,7 +1620,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh104704
+  m_Name: pb_Mesh138086
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2739,6 +2779,10 @@ PrefabInstance:
       propertyPath: _targetCamera
       value: 
       objectReference: {fileID: 1139223717}
+    - target: {fileID: 2691887569142289000, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2691887569142289005, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -3083,7 +3127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-343616
+  m_Name: pb_Mesh-741860
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3370,58 +3414,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -735469889535580181, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: Acceleration
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -735469889535580181, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: Deceleration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -735469889535580181, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: ReachMaxHeightBeforeMovememt
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1757543194965956079, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: Acceleration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4099901494016647116, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: UseRandomRotation
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6244903797901376966, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: Acceleration
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6244903797901376966, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
+    - target: {fileID: 1986114457, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
       propertyPath: StartRotation.y
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 6244903797901376966, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: ShouldAccelerate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6244903797901376966, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: RotationtionSpeed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7089029154863821578, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: m_Constraints
+    - target: {fileID: 1986114457, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
+      propertyPath: UseRandomRotation
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7519904098750499265, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
       propertyPath: AM
       value: 
       objectReference: {fileID: 1204077867}
-    - target: {fileID: 7519904098750499265, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: DeathVFX
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7519904098750499265, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: LaunchForce
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 7519904098750499265, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
       propertyPath: CurrentTarget
       value: 
@@ -3477,10 +3481,6 @@ PrefabInstance:
     - target: {fileID: 7519904098750499278, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
       propertyPath: m_Name
       value: EnchantedWeapon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7519904098750499278, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c4bc751297624a4aab695bcb30f8bb2, type: 3}

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
-    [SerializeField] private bool UseRandomRotation =true;
-    [SerializeField] private Vector3 StartRotation;
-    [SerializeField] private float RotationtionSpeed;
-    [SerializeField] private float Acceleration;
-    [SerializeField] private bool ShouldAccelerate;
-    private Vector3 _rotationDirection;
-    private float CurrentSpeed;
+    [SerializeField] protected bool UseRandomRotation =true;
+    [SerializeField] protected Vector3 StartRotation;
+    [SerializeField] protected float RotationtionSpeed;
+    [SerializeField] protected float Acceleration;
+    [SerializeField] protected bool ShouldAccelerate;
+    protected Vector3 _rotationDirection;
+    protected float CurrentSpeed;
 
-    private bool IsSpinning;
-    private void Awake()
+    [SerializeField] protected bool IsSpinning;
+    protected virtual void Awake()
     {
         if (UseRandomRotation)
         {
@@ -42,16 +42,16 @@ public class Rotator : MonoBehaviour
     }
 
 
-    public void Stop()
+    public virtual void Stop()
     {
         IsSpinning = false;
     }
-    public void SetSpeed(float speed)
+    public virtual void SetSpeed(float speed)
     {
         RotationtionSpeed = speed;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (!IsSpinning)
         {

@@ -181,7 +181,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
         CurrentState = newState;
     }
 
-    public void SetTarget(Transform target)
+    public virtual void SetTarget(Transform target)
     {
         CurrentTarget = target;
     }

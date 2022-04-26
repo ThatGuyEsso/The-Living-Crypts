@@ -68,6 +68,10 @@ public class JumpMovement : MonoBehaviour,IInitialisable
             if (JumpSettings.MaxJumpCooldown <= 0f) _canJump = true;
             else {
                 if (_isResetting) return;
+                if (!gameObject.activeInHierarchy)
+                {
+                    return;
+                }
                 StopAllCoroutines();
                 StartCoroutine(ResetJumpTimer());
             }

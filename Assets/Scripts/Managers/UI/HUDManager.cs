@@ -105,6 +105,13 @@ public class HUDManager : MonoBehaviour
                     MiniMap.SetActive(true);
                 }
                 break;
+            case GameplayEvents.Restart:
+                if (WeaponDisplayManager)
+                {
+                    WeaponDisplayManager.gameObject.SetActive(false);
+                }
+                PlayerHealthBar.gameObject.SetActive(false);
+                break;
         }
     }
     public void Init(GameObject player, GameManager manager)

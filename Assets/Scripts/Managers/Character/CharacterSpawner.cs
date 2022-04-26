@@ -76,7 +76,7 @@ public class CharacterSpawner : MonoBehaviour
 
         if (bounds)
         {
-            enemyObject.transform.position = spawnPoint + Vector3.up * bounds.GetHalfExtents().y;
+            enemyObject.transform.position = spawnPoint + Vector3.up * bounds.GetHalfExtents().y + Vector3.up * bounds.GetOffset().y;
 
             //raycast each direction to see if chracter is in a wall
             RaycastHit hit;

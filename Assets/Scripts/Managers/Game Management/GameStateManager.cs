@@ -116,8 +116,10 @@ public class GameStateManager : MonoBehaviour
                 }
                 break;
             case GameState.GamePaused:
+                Time.timeScale = 0f;
                 break;
             case GameState.GameRunning:
+                Time.timeScale = 1f;
                 break;
         }
         OnNewGameState?.Invoke(currentState);
@@ -130,5 +132,12 @@ public class GameStateManager : MonoBehaviour
             LoadingScreenManager.OnFadeComplete -= GameBegun;
         }
         BeginNewState(GameState.GameRunning);
+    }
+
+    public GameState CurrentState { get { return currentState; } }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Rotator))]
+[RequireComponent(typeof(PhysicsRotator))]
 [RequireComponent(typeof(CryptCharacterManager))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Rotator))]
@@ -29,7 +29,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
     private EnchantedWeaponData currentWeaponData;
     private AttackCollider _weaponCollider;
     //Component Refrences
-    private Rotator _rotator;
+    private PhysicsRotator _rotator;
     private FloatMovement _floatMovement;
     private Rigidbody _rb;
     private FaceTarget _faceTarget;
@@ -76,7 +76,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         }
         if (!_rotator)
         {
-            _rotator = GetComponent<Rotator>();
+            _rotator = GetComponent<PhysicsRotator>();
         }
         if (!_rb)
         {
@@ -95,9 +95,19 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         {
             _complexHitFlash = GetComponent<ComplexHitFlashManager>();
         }
+
+  
         SetUpWeapon();
         SetNewMoveTIme();
 
+    }
+    public override void SetTarget(Transform target)
+    {
+        base.SetTarget(target);
+        if (_floatMovement)
+        {
+            _floatMovement.SetRelativeTargetHeight(CurrentTarget.position.y);
+        }
     }
     protected override void EvaluateNewGameplayEvent(GameplayEvents newEvent)
     {
@@ -138,6 +148,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
                     }
 
                 }
+
                 break;
         }
     }
@@ -169,6 +180,13 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
             _floatMovement.Init(currentWeaponData.GetFloatHeight(), currentWeaponData.MovementSpeed, true);
         }
 
+        if (CurrentTarget)
+        {
+            if (_floatMovement)
+            {
+                _floatMovement.SetRelativeTargetHeight(CurrentTarget.position.y);
+            }
+        }
         _weaponCollider = _weaponGO.GetComponent<AttackCollider>();
         if (_weaponCollider)
         {
