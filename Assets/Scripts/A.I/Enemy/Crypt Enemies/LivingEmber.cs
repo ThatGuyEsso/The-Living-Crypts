@@ -442,4 +442,24 @@ public class LivingEmber : BaseEnemy
    
 
     }
+
+    public override void ResetEnemy()
+    {
+        BoostStatsWithSize();
+        if (_randomSize)
+        {
+            _randomSize.SetRandomSize();
+
+        }
+        if (!_hManager) Destroy(this);
+        else
+        {
+
+            _hManager.Init();
+            _hManager.OnHurt += OnHurt;
+            _hManager.OnNotHurt += OnNotHurt;
+            _hManager.OnDie += KillEnemy;
+        }
+        IsChargingJump = false;
+    }
 }

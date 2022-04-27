@@ -10,7 +10,7 @@ public class PathFollower : MonoBehaviour
     private int _currentMaxCorners;
     private NavMeshPath _currentPath;
 
-    private void Awake()
+    private void OnEnable()
     {
         _currentPath = new NavMeshPath();
     }

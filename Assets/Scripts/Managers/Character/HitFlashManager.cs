@@ -7,7 +7,7 @@ public class HitFlashManager : MonoBehaviour
     protected MaterialFlash _hurtFlashVFX;
     protected CharacterHealthManager _hManager;
 
-
+    protected bool _isInitialised;
     protected virtual void Awake()
     {
         Init();
@@ -24,16 +24,22 @@ public class HitFlashManager : MonoBehaviour
         _hurtFlashVFX = GetComponent<MaterialFlash>();
         if(_hurtFlashVFX)
             _hurtFlashVFX.Init();
+        _isInitialised = true;
     }
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        if (!_hManager)
+        if (_isInitialised)
         {
-            return;
-        }
+            if (!_hManager)
+            {
+                return;
+            }
 
-        _hManager.OnHurt += BeginFlash;
-        _hManager.OnNotHurt += EndFlash;
+            _hManager.OnHurt += BeginFlash;
+            _hManager.OnNotHurt += EndFlash;
+
+        }
+  
     }
     public virtual void BeginFlash()
     {

@@ -19,7 +19,6 @@ public class SupportGolem : BaseEnemy , IAttacker
     public override void Init()
     {
         base.Init();
-
         if (_hManager)
         {
             _hManager.Init();
@@ -27,6 +26,7 @@ public class SupportGolem : BaseEnemy , IAttacker
             _hManager.OnNotHurt += OnNotHurt;
             _hManager.OnDie += KillEnemy;
         }
+
         if (!_walkMovement)
         {
             _walkMovement = GetComponent<WalkMovement>();
@@ -58,6 +58,8 @@ public class SupportGolem : BaseEnemy , IAttacker
         }
 
     }
+
+
     protected override void DoAttack(GameObject target, Vector3 point)
     {
         if(!_isAttacking && _animController && !_animController.IsPlayingAttackAnimation())
@@ -383,5 +385,17 @@ public class SupportGolem : BaseEnemy , IAttacker
         AttackData data = new AttackData(CharacterSettings.MinDamage,
             CharacterSettings.MaxDamage, CharacterSettings.MinDamage, CharacterSettings.MaxDamage);
         return data;
+    }
+
+    public override void ResetEnemy()
+    {
+        if (_hManager)
+        {
+            _hManager.Init();
+            _hManager.OnHurt += OnHurt;
+            _hManager.OnNotHurt += OnNotHurt;
+            _hManager.OnDie += KillEnemy;
+        }
+
     }
 }

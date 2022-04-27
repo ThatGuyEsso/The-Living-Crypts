@@ -76,6 +76,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     protected bool _canAttack;
     protected GameManager _gameManager;
     public System.Action OnInit;
+    protected bool _isInitialised;
 
 
     protected virtual void Awake()
@@ -105,20 +106,13 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
 
         _hManager = GetComponent<CharacterHealthManager>();
 
-        InvokeRepeating("ProcessAI", randValue, TickRate);
-        if (!_gameManager)
-        {
-            if(GameStateManager.instance && GameStateManager.instance.GameManager)
-            {
-                _gameManager = GameStateManager.instance.GameManager;
-            }
-        }
-        if (_gameManager)
-        {
-            _gameManager.OnNewGamplayEvent += EvaluateNewGameplayEvent;
-        }
+
+        Invoke("StartAITick", randValue);
+  
         IsActive = true;
+        _isInitialised = true;
         OnInit?.Invoke();
+
     }
 
     public virtual void OnEnable()
@@ -138,6 +132,14 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
         {
             _gameManager.OnNewGamplayEvent += EvaluateNewGameplayEvent;
         }
+        if (_isInitialised)
+        {
+            ResetEnemy();
+            float randValue = Random.Range(0f, MaxTickOffset);
+            Invoke("StartAITick", randValue);
+        }
+
+
     }
     protected abstract void ProcessAI();
 
@@ -245,5 +247,19 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
             AM = GameStateManager.instance.AudioManager;
             return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
         }
+    }
+
+    public abstract void ResetEnemy();
+
+    public virtual void StartAITick()
+    {
+        StartCoroutine(DoAITick());
+    }
+    public virtual IEnumerator DoAITick()
+    {
+        ProcessAI();
+
+        yield return new WaitForSeconds(TickRate);
+        StartCoroutine(DoAITick());
     }
 }

@@ -22,6 +22,13 @@ public class PathFinder : MonoBehaviour, IInitialisable
         _isInitialised = true;
     }
 
+    private void OnEnable()
+    {
+        if (_isInitialised)
+        {
+            _path = new NavMeshPath();
+        }
+    }
     public NavMeshPath GetPathToTarget(Vector3 origin, Vector3 targetPoint, int areaMask)
     {
         NavMesh.CalculatePath(origin, targetPoint, areaMask, _path);

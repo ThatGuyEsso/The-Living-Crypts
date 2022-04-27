@@ -147,5 +147,9 @@ public class ForgeGolem : BaseBoss
         
     }
 
+    public override void ResetEnemy()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

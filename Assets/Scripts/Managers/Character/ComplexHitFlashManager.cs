@@ -30,6 +30,7 @@ public class ComplexHitFlashManager : HitFlashManager
         {
             flash.Init();
         }
+        _isInitialised = true;
 
     }
 

@@ -154,6 +154,10 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
     }
     public void SetUpWeapon()
     {
+        if (_weaponGO)
+        {
+            return;
+        }
         if (!currentWeaponData)
         {
             Debug.LogError("No Weapon Data");
@@ -235,10 +239,18 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
       
         if (ObjectPoolManager.instance)
         {
+            if (_weaponGO)
+            {
+                ObjectPoolManager.Recycle(_weaponGO);
+            }
             ObjectPoolManager.Recycle(gameObject);
         }
         else
         {
+            if (_weaponGO)
+            {
+                Destroy(_weaponGO);
+            }
             Destroy(gameObject);
         }
     }
@@ -406,6 +418,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
             _hManager.OnDie -= KillEnemy;
         }
 
+     
         if (_weaponGO)
         {
             if (ObjectPoolManager.instance)
@@ -417,6 +430,18 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
                 Destroy(_weaponGO);
             }
             _weaponGO = null;
+        }
+        if (gameObject)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+           
         }
     }
 
@@ -441,7 +466,20 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
             }
             _weaponGO = null;
         }
+        if (gameObject)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+           
+        }
     }
+
 
     protected override void DrawPathToTarget()
     {
@@ -550,5 +588,32 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         }
    
     
+    }
+
+    public override void ResetEnemy()
+    {
+        if (WeaponDatas.Count == 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        SetNewIdleTime();
+
+
+
+        int randIndex = Random.Range(0, WeaponDatas.Count);
+        currentWeaponData = WeaponDatas[randIndex];
+
+        if (!_hManager)
+        {
+            Destroy(this);
+            return;
+        }
+        _hManager.Init();
+        _hManager.OnHurt += OnHurt;
+        _hManager.OnDie += KillEnemy;
+
+        SetUpWeapon();
+        SetNewMoveTIme();
     }
 }
