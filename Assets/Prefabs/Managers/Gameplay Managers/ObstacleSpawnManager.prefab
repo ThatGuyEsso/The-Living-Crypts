@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5681466425711385387
+--- !u!1 &3985637388499391847
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5681466425711385385}
-  - component: {fileID: 5681466425711385384}
+  - component: {fileID: 3985637388499391845}
+  - component: {fileID: 3985637388499391846}
   m_Layer: 0
-  m_Name: DungeonGenerationManager
+  m_Name: ObstacleSpawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5681466425711385385
+--- !u!4 &3985637388499391845
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5681466425711385387}
+  m_GameObject: {fileID: 3985637388499391847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5596299, y: -2.606759, z: 10.862654}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5681466425711385384
+--- !u!114 &3985637388499391846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5681466425711385387}
+  m_GameObject: {fileID: 3985637388499391847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 668321fa46fd65549b20a4edd137eb0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 59bb254d78670e640b218b6345c79a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inDebug: 0
-  ObstacleManagers: {fileID: 3985637388499391847, guid: 104b182e2873a4148b504cab9ddcf5cc, type: 3}
-  DecorationManagers: {fileID: 0}
-  _genData: {fileID: 11400000, guid: d49ce8d51f9674f4081d725862d3680c, type: 2}
-  _builders: []
-  TimeBetweenSteps: 0.05
-  _roomManager: {fileID: 0}
-  _debugStartingRoom: {fileID: 0}
+  AvailableSpawnPatterns:
+  - {fileID: 11400000, guid: 17bdb83e68966eb429f22a21a394b28e, type: 2}
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  MaxWeight: 10
+  MinWeight: 1
+  EnemySpawnAttempts: 5
+  ObjectSpawnerPrefab: {fileID: 3399945901465046602, guid: 421c5d7d18be5c14ca05d5bd6d2d699f, type: 3}

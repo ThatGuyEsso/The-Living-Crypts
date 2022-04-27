@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleGenerationManager : MonoBehaviour
+public class PropGenerationManager : MonoBehaviour
 {
     [SerializeField] private ObjectSpawnPattern[] AvailableSpawnPatterns;
 
@@ -23,6 +23,7 @@ public class ObstacleGenerationManager : MonoBehaviour
     {
         RoomsToPopulate = rooms;
         _currentSpawnPattern = GetSpawnPattern(Random.Range(MinWeight, MaxWeight + 1));
+        StartCoroutine(FillRooms());
     }
 
     public ObjectSpawnPattern GetSpawnPattern(int weight)

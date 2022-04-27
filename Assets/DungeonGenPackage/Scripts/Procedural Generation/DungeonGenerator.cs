@@ -6,6 +6,10 @@ public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] private bool _inDebug;
 
+
+    [Header("Prefab ")]
+    [SerializeField] private GameObject ObstacleManagerPrefab;
+    [SerializeField] private GameObject DecorationManagerPrefab;
     [Header("Cached References")]
     [SerializeField] private DungeonGenData _genData;
     [SerializeField] private List<DungeonBuilder> _builders = new List<DungeonBuilder>();
@@ -15,6 +19,7 @@ public class DungeonGenerator : MonoBehaviour
 
     [SerializeField] private RoomManager _roomManager;
     [SerializeField] private Room _debugStartingRoom;
+    [SerializeField] private PropGenerationManager _obstacleGenerator;
     private bool _canSpawnDungeon;
     private bool _isWaitingForRoom;
     private int _buildersCompleteCount = 0;
@@ -451,6 +456,41 @@ public class DungeonGenerator : MonoBehaviour
         CleanUpBuilders();
     }
 
+    public void SpawnObstacles()
+    {
+        if (!_obstacleGenerator)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                _obstacleGenerator = ObjectPoolManager.Spawn(ObstacleManagerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PropGenerationManager>();
+            }
+            else
+            {
+                _obstacleGenerator = Instantiate(ObstacleManagerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PropGenerationManager>();
+            }
+        }
+
+
+        if (_obstacleGenerator)
+        {
+            List<Room> rooms = _roomManager.GetRoomsOfType(RoomType.Crypt);
+            if (rooms.Count == 0)
+            {
+                return;
+            }
+            _obstacleGenerator.OnObstaclesSpawned += OnObstacleSpawnComplete;
+            _obstacleGenerator.BeginFillRooms(rooms);
+
+        }
+    }
+    public void OnObstacleSpawnComplete()
+    {
+        if (_obstacleGenerator)
+        {
+            _obstacleGenerator.OnObstaclesSpawned -= OnObstacleSpawnComplete;
+        }
+        OnDungeonComplete?.Invoke();
+    }
     public void CleanUpBuilders()
     {
         if (_builders.Count > 0)
@@ -463,6 +503,6 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-        OnDungeonComplete?.Invoke();
+        SpawnObstacles();
     }
 }
