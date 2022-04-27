@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseObstacle : MonoBehaviour
+public class BaseObstacle : MonoBehaviour, Iteam
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float MaxSize, MinSize;
+
+    private CharacterHealthManager _healthManager;
+
+    public Team GetTeam()
     {
-        
+        return Team.Neutral;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Init()
     {
-        
+
+    }
+
+    public bool IsOnTeam(Team team)
+    {
+        return team == Team.Neutral;
     }
 }

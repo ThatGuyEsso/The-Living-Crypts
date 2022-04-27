@@ -21,7 +21,13 @@ public class CharacterHealthManager : MonoBehaviour, IDamage,IInitialisable
     public System.Action OnDie;
 
 
-   
+    private void Awake()
+    {
+        if (_inDebug)
+        {
+            Init();
+        }
+    }
     public void Init()
     {
        
