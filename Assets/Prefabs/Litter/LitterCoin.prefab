@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2871802513175053389}
   m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: -0.067, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0619, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 2871802513809004464}
@@ -92,6 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2871802513809004464}
   - component: {fileID: 2871802513809004465}
+  - component: {fileID: 2272025473108351191}
+  - component: {fileID: 3640210802993703758}
   m_Layer: 0
   m_Name: LitterCoin
   m_TagString: Untagged
@@ -126,7 +128,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffbf2a7db79e4c47912d8ef93655851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 0.3
-  _length: 0.3
-  _height: 0.15
+  _width: 0.24
+  _length: 0.24
+  _height: 0.12
   _offset: {x: 0, y: 0, z: 0}
+--- !u!114 &2272025473108351191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871802513809004466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c32b99f6ec654a43b9e69682a621ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sizer: {fileID: 3640210802993703758}
+  UseRandomSize: 1
+  UseRandomRotation: 1
+--- !u!114 &3640210802993703758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871802513809004466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff5ff2998048b34ca6fd86ec5956624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 0.8
+  MaxSize: 1.4
+  ResizeOnAwake: 0

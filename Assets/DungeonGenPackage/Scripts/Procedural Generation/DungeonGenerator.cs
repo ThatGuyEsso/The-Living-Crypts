@@ -20,6 +20,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private RoomManager _roomManager;
     [SerializeField] private Room _debugStartingRoom;
     [SerializeField] private PropGenerationManager _obstacleGenerator;
+    [SerializeField] private PropGenerationManager _litterGenerator;
     private bool _canSpawnDungeon;
     private bool _isWaitingForRoom;
     private int _buildersCompleteCount = 0;
@@ -483,11 +484,57 @@ public class DungeonGenerator : MonoBehaviour
 
         }
     }
+
+    public void SpawnLitter()
+    {
+        if (!_litterGenerator)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                _litterGenerator = ObjectPoolManager.Spawn(DecorationManagerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PropGenerationManager>();
+            }
+            else
+            {
+                _litterGenerator = Instantiate(DecorationManagerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PropGenerationManager>();
+            }
+        }
+
+
+        if (_litterGenerator)
+        {
+            List<Room> lootRooms = _roomManager.GetRoomsOfType(RoomType.LootCrypt);
+            List<Room> corridors = _roomManager.GetRoomsOfType(RoomType.Corridor);
+            List<Room> rooms = _roomManager.GetRoomsOfType(RoomType.Crypt);
+            foreach(Room corridor in corridors)
+            {
+                rooms.Add(corridor);
+            }
+            foreach (Room loot in lootRooms)
+            {
+                rooms.Add(loot);
+            }
+            if (rooms.Count == 0)
+            {
+                return;
+            }
+            _litterGenerator.OnObstaclesSpawned += OnLitterSpawnComplete;
+            _litterGenerator.BeginFillRooms(rooms);
+
+        }
+    }
     public void OnObstacleSpawnComplete()
     {
         if (_obstacleGenerator)
         {
             _obstacleGenerator.OnObstaclesSpawned -= OnObstacleSpawnComplete;
+        }
+        SpawnLitter();
+    }
+    public void OnLitterSpawnComplete()
+    {
+        if (_litterGenerator)
+        {
+            _litterGenerator.OnObstaclesSpawned -= OnLitterSpawnComplete;
         }
         OnDungeonComplete?.Invoke();
     }

@@ -49,26 +49,8 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
     public override void Init()
     {
         base.Init();
-        if (WeaponDatas.Count == 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        SetNewIdleTime();
 
 
-
-        int randIndex = Random.Range(0, WeaponDatas.Count);
-        currentWeaponData = WeaponDatas[randIndex];
-
-        if (!_hManager)
-        {
-            Destroy(this);
-            return;
-        }
-        _hManager.Init();
-        _hManager.OnHurt += OnHurt;
-        _hManager.OnDie += KillEnemy;
 
         if (!_floatMovement)
         {
@@ -96,9 +78,8 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
             _complexHitFlash = GetComponent<ComplexHitFlashManager>();
         }
 
-  
-        SetUpWeapon();
-        SetNewMoveTIme();
+        ResetEnemy();
+   
 
     }
     public override void SetTarget(Transform target)

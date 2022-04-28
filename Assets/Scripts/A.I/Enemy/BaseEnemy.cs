@@ -132,12 +132,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
         {
             _gameManager.OnNewGamplayEvent += EvaluateNewGameplayEvent;
         }
-        if (_isInitialised)
-        {
-            ResetEnemy();
-            float randValue = Random.Range(0f, MaxTickOffset);
-            Invoke("StartAITick", randValue);
-        }
+      
 
 
     }

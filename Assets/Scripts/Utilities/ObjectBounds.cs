@@ -8,7 +8,7 @@ public class ObjectBounds : MonoBehaviour
     [SerializeField] private Vector3 _offset;
     public Vector3 GetHalfExtents()
     {
-        return new Vector3(_width* transform.localScale.x, _height * transform.localScale.y, _length * transform.localScale.z);
+        return new Vector3(_width* transform.localScale.x, _height * transform.localScale.y, _length * transform.localScale.z)/2f;
     }
 
     public Vector3 GetOffset()

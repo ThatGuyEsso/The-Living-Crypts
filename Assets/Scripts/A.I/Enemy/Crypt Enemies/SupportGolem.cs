@@ -19,14 +19,6 @@ public class SupportGolem : BaseEnemy , IAttacker
     public override void Init()
     {
         base.Init();
-        if (_hManager)
-        {
-            _hManager.Init();
-            _hManager.OnHurt += OnHurt;
-            _hManager.OnNotHurt += OnNotHurt;
-            _hManager.OnDie += KillEnemy;
-        }
-
         if (!_walkMovement)
         {
             _walkMovement = GetComponent<WalkMovement>();
@@ -56,7 +48,7 @@ public class SupportGolem : BaseEnemy , IAttacker
             _animController = GetComponent<GolemAnimationController>();
             _animController.Init();
         }
-
+        ResetEnemy();
     }
 
 

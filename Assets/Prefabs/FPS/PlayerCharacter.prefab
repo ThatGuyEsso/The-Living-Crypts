@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4c4b05a00c4984a8a00ff698154456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 2
+  gravityScale: 4
 --- !u!114 &3370732970680565397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb7c4ba0d082de4c9cd362f720cd2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InDebug: 0
   ManagerToInit:
   - {fileID: 163429901}
   - {fileID: 0}
@@ -247,6 +248,7 @@ MonoBehaviour:
   PlayerHeartBeatSFX: HeartBeatSFX
   MaxTimeBetweenFootSteps: 0.5
   MinHealthToPlayHeartBeatSFX: 15
+  AM: {fileID: 0}
 --- !u!1 &3370732970782629264
 GameObject:
   m_ObjectHideFlags: 0

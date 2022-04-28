@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2999228920923189977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2999228920923189979}
+  - component: {fileID: 2999228920923189976}
+  m_Layer: 0
+  m_Name: LitterSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2999228920923189979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2999228920923189977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2999228920923189976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2999228920923189977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59bb254d78670e640b218b6345c79a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AvailableSpawnPatterns:
+  - {fileID: 11400000, guid: df48b6527e9a6b04985f5c5fd5879750, type: 2}
+  - {fileID: 11400000, guid: 909a93a8d5628e54d8e69f318d56cdd1, type: 2}
+  - {fileID: 11400000, guid: 7836b7cf049e0b048a7ec72b478d2b7a, type: 2}
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  MaxWeight: 10
+  MinWeight: 1
+  EnemySpawnAttempts: 5
+  ObjectSpawnerPrefab: {fileID: 3399945901465046602, guid: 421c5d7d18be5c14ca05d5bd6d2d699f, type: 3}

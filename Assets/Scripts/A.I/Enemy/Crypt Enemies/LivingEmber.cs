@@ -35,12 +35,11 @@ public class LivingEmber : BaseEnemy
     public override void Init()
     {
         base.Init();
-        _randomSize = GetComponent<RandomSizeInRange>();
-        if (_randomSize)
+        if (!_randomSize)
         {
-            _randomSize.SetRandomSize();
-         
+            _randomSize = GetComponent<RandomSizeInRange>();
         }
+   
         if (!_jumpMovement)
         {
             _jumpMovement = GetComponent<JumpMovement>();
@@ -50,18 +49,8 @@ public class LivingEmber : BaseEnemy
             _squashAndStretch = GetComponent<SquashAndStretch>();
             _squashAndStretch.Init();
         }
-        BoostStatsWithSize();
-        if (!_hManager) Destroy(this);
-        else
-        {
-
-            _hManager.Init();
-            _hManager.OnHurt += OnHurt;
-            _hManager.OnNotHurt += OnNotHurt;
-            _hManager.OnDie += KillEnemy;
-        }
-
-
+   
+        ResetEnemy();
     }
 
     protected override void DoAttack(GameObject target, Vector3 point)
@@ -461,5 +450,9 @@ public class LivingEmber : BaseEnemy
             _hManager.OnDie += KillEnemy;
         }
         IsChargingJump = false;
+        if (_jumpMovement)
+        {
+            _jumpMovement.Init();
+        }
     }
 }

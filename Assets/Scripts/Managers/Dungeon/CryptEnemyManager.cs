@@ -238,7 +238,7 @@ public class CryptEnemyManager : MonoBehaviour
     {
         int randomX = Random.Range(-_owner.GetRoomHalfExtents().x+2, _owner.GetRoomHalfExtents().x-2);
         int randomZ = Random.Range(-_owner.GetRoomHalfExtents().y+2, _owner.GetRoomHalfExtents().y-2);
-        Vector3 pointInSpace = _owner.transform.position + new Vector3(randomX, _owner.transform.position.y , randomZ);
+        Vector3 pointInSpace = _owner.transform.position + new Vector3(randomX, 0f , randomZ);
 
         RaycastHit hit;
         CharacterSpawner spawner;

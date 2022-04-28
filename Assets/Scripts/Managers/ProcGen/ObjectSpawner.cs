@@ -15,7 +15,18 @@ public class ObjectSpawner : MonoBehaviour
         Vector3 spawnPoint = point;
         if (!ObjectToSpawn)
         {
-            Destroy(gameObject);
+            if (ObjectPoolManager.instance)
+            {
+                if (gameObject)
+                {
+                    ObjectPoolManager.Recycle(gameObject);
+                }
+            }
+            else
+            {
+
+                Destroy(gameObject);
+            }
             return;
         }
 
@@ -35,12 +46,28 @@ public class ObjectSpawner : MonoBehaviour
         {
             ObjToInit.Init();
         }
+        if(NewObject && !NewObject.activeInHierarchy)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                if (gameObject)
+                {
+                    ObjectPoolManager.Recycle(gameObject);
+                }
+            }
+            else
+            {
+
+                Destroy(gameObject);
+            }
+            return;
+        }
 
         ObjectBounds bounds = NewObject.GetComponent<ObjectBounds>();
 
         if (bounds)
         {
-            NewObject.transform.position = spawnPoint + Vector3.up * bounds.GetHalfExtents().y  *NewObject.transform.localScale.y + Vector3.up * bounds.GetOffset().y;
+            NewObject.transform.position = spawnPoint + Vector3.up * bounds.GetHalfExtents().y + Vector3.up * bounds.GetOffset().y;
 
             //raycast each direction to see if chracter is in a wall
             RaycastHit hit;
@@ -48,26 +75,27 @@ public class ObjectSpawner : MonoBehaviour
             //Right
             if (Physics.Raycast(NewObject.transform.position, Vector3.right, out hit, bounds.GetHalfExtents().x, BlockingLayers))
             {
-                NewObject.transform.position += Vector3.left * bounds.GetHalfExtents().x * NewObject.transform.localScale.x;
+                NewObject.transform.position += Vector3.left * bounds.GetHalfExtents().x;
             }
 
 
             //left
             if (Physics.Raycast(NewObject.transform.position, Vector3.left, out hit, bounds.GetHalfExtents().x, BlockingLayers))
             {
-                NewObject.transform.position += Vector3.right * bounds.GetHalfExtents().x * NewObject.transform.localScale.x;
+                NewObject.transform.position += Vector3.right * bounds.GetHalfExtents().x;
 
-                //forward
-                if (Physics.Raycast(NewObject.transform.position, Vector3.forward, out hit, bounds.GetHalfExtents().z, BlockingLayers))
-                {
-                    NewObject.transform.position += Vector3.back * bounds.GetHalfExtents().z * NewObject.transform.localScale.z;
-                }
+         
+            }
+            //forward
+            if (Physics.Raycast(NewObject.transform.position, Vector3.forward, out hit, bounds.GetHalfExtents().z, BlockingLayers))
+            {
+                NewObject.transform.position += Vector3.back * bounds.GetHalfExtents().z;
+            }
 
-                //Right
-                if (Physics.Raycast(NewObject.transform.position, Vector3.back, out hit, bounds.GetHalfExtents().z, BlockingLayers))
-                {
-                    NewObject.transform.position += Vector3.forward * bounds.GetHalfExtents().z * NewObject.transform.localScale.z;
-                }
+            //Right
+            if (Physics.Raycast(NewObject.transform.position, Vector3.back, out hit, bounds.GetHalfExtents().z, BlockingLayers))
+            {
+                NewObject.transform.position += Vector3.forward * bounds.GetHalfExtents().z;
             }
         }
         OnObjectSpawned?.Invoke(NewObject);

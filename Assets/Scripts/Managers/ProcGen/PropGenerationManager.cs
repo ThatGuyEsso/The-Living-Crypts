@@ -75,9 +75,9 @@ public class PropGenerationManager : MonoBehaviour
 
         for(int i =0; i < nIteration; i++)
         {
-            int randomX = Random.Range(-RoomToFill.GetRoomHalfExtents().x + 2, RoomToFill.GetRoomHalfExtents().x - 2);
-            int randomZ = Random.Range(-RoomToFill.GetRoomHalfExtents().y + 2, RoomToFill.GetRoomHalfExtents().y - 2);
-            Vector3 pointInSpace = RoomToFill.transform.position + new Vector3(randomX, RoomToFill.transform.position.y, randomZ);
+            int randomX = Random.Range(-RoomToFill.GetRoomHalfExtents().x + 1, RoomToFill.GetRoomHalfExtents().x - 1);
+            int randomZ = Random.Range(-RoomToFill.GetRoomHalfExtents().y + 1, RoomToFill.GetRoomHalfExtents().y - 1);
+            Vector3 pointInSpace = RoomToFill.transform.position + new Vector3(randomX, 0f, randomZ);
 
             RaycastHit hit;
             ObjectSpawner spawner;

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55ba9651f6590442a7b9a06da83665c, type: 3}
+  m_Name: ObstaclesMix
+  m_EditorClassIdentifier: 
+  Weight: 10
+  MinObstacles: 5
+  MaxObstacles: 20
+  AvailableObjects:
+  - Weight: 3
+    Object: {fileID: 4960233772130175310, guid: e748ebde41008d94081e1af78085089a, type: 3}
+  - Weight: 6
+    Object: {fileID: 4342365854655862999, guid: 6609d4f967a43bb40a9cfe239620abd4, type: 3}
+  - Weight: 7
+    Object: {fileID: 8937893618027976592, guid: ea16318dae92930428ab7b3896755a08, type: 3}
+  - Weight: 3
+    Object: {fileID: 1561663620704694935, guid: 1f21e1eb96fe3c144981948eac0f961b, type: 3}

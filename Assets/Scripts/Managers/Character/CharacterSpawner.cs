@@ -76,33 +76,33 @@ public class CharacterSpawner : MonoBehaviour
 
         if (bounds)
         {
-            enemyObject.transform.position = spawnPoint + Vector3.up * bounds.GetHalfExtents().y * enemyObject.transform.localScale.y + Vector3.up * bounds.GetOffset().y ;
+            enemyObject.transform.position = spawnPoint + Vector3.up * bounds.GetHalfExtents().y * bounds.GetOffset().y ;
 
             //raycast each direction to see if chracter is in a wall
             RaycastHit hit;
 
             //Right
             if(Physics.Raycast(enemyObject.transform.position, Vector3.right,out hit, bounds.GetHalfExtents().x, BlockingLayers)){
-                enemyObject.transform.position += Vector3.left * bounds.GetHalfExtents().x * enemyObject.transform.localScale.x ;
+                enemyObject.transform.position += Vector3.left * bounds.GetHalfExtents().x;
             }
 
 
             //left
             if (Physics.Raycast(enemyObject.transform.position, Vector3.left, out hit, bounds.GetHalfExtents().x, BlockingLayers))
             {
-                enemyObject.transform.position += Vector3.right * bounds.GetHalfExtents().x * enemyObject.transform.localScale.x;
+                enemyObject.transform.position += Vector3.right * bounds.GetHalfExtents().x;
             }
 
             //forward
             if (Physics.Raycast(enemyObject.transform.position, Vector3.forward, out hit, bounds.GetHalfExtents().z, BlockingLayers))
             {
-                enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z * enemyObject.transform.localScale.z ;
+                enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z ;
             }
 
             //Right
             if (Physics.Raycast(enemyObject.transform.position, Vector3.back, out hit, bounds.GetHalfExtents().z, BlockingLayers))
             {
-                enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z * enemyObject.transform.localScale.z;
+                enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z ;
             }
 
         }
