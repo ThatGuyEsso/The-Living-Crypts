@@ -1,123 +1,126 @@
 Using pre-set license
 Built from '2021.1/staging' branch; Version is '2021.1.17f1 (03b40fe07a36) revision 242703'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 Home; OS build 22000.613; Version 2009; 64bit' Language: 'en' Physical Memory: 16173 MB
+OS: 'Windows 10 Enterprise; OS build 19044.1645; Version 2009; 64bit' Language: 'en' Physical Memory: 32512 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity\Hub\Editor\2021.1.17f1\Editor\Unity.exe
+C:\Program Files\Unity 2021.1.17f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/esewi/Documents/Unity Projects/The Living Crypts
+C:/Users/e010103j/Documents/GitHub/The-Living-Crypts
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-55252
-Successfully changed project path to: C:/Users/esewi/Documents/Unity Projects/The Living Crypts
-C:/Users/esewi/Documents/Unity Projects/The Living Crypts
+55717
+Successfully changed project path to: C:/Users/e010103j/Documents/GitHub/The-Living-Crypts
+C:/Users/e010103j/Documents/GitHub/The-Living-Crypts
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 77.35 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 62.23 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.17f1 (03b40fe07a36)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/esewi/Documents/Unity Projects/The Living Crypts/Assets
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity 2021.1.17f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/e010103j/Documents/GitHub/The-Living-Crypts/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 1660 Ti (ID=0x2191)
+    Renderer: NVIDIA GeForce RTX 3080 (ID=0x2206)
     Vendor:   NVIDIA
-    VRAM:     5991 MB
-    Driver:   27.21.14.6230
+    VRAM:     10078 MB
+    Driver:   30.0.15.1165
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
-Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56684
+Mono path[0] = 'C:/Program Files/Unity 2021.1.17f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity 2021.1.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity 2021.1.17f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56148
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001119 seconds.
+Register platform support module: C:/Program Files/Unity 2021.1.17f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity 2021.1.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001156 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 76.25 ms, found 2 plugins.
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 65.09 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.416 seconds
+- Completed reload, in  0.896 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1417ms)
-		BeginReloadAssembly (56ms)
+	ReloadAssembly (896ms)
+		BeginReloadAssembly (55ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (407ms)
-			LoadAssemblies (54ms)
+		EndReloadAssembly (384ms)
+			LoadAssemblies (53ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (141ms)
+			SetupTypeCache (122ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (26ms)
-			SetupLoadedEditorAssemblies (202ms)
+			RebuildScriptCaches (24ms)
+			SetupLoadedEditorAssemblies (199ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (76ms)
-				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (92ms)
-				ProcessInitializeOnLoadMethodAttributes (26ms)
+				RefreshPlugins (65ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (101ms)
+				ProcessInitializeOnLoadMethodAttributes (25ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.005304 seconds.
+Registered in 0.004072 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 80.71 ms, found 2 plugins.
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 62.28 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.870 seconds
+- Completed reload, in  1.406 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1870ms)
-		BeginReloadAssembly (138ms)
+	ReloadAssembly (1406ms)
+		BeginReloadAssembly (118ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
+			DisableScriptedObjects (3ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (18ms)
-		EndReloadAssembly (1679ms)
-			LoadAssemblies (97ms)
+		EndReloadAssembly (1240ms)
+			LoadAssemblies (89ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (343ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (61ms)
-			SetupLoadedEditorAssemblies (1080ms)
+			SetupTypeCache (275ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (49ms)
+			SetupLoadedEditorAssemblies (756ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (3ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (81ms)
-				BeforeProcessingInitializeOnLoad (78ms)
-				ProcessInitializeOnLoadAttributes (909ms)
-				ProcessInitializeOnLoadMethodAttributes (4ms)
-				AfterProcessingInitializeOnLoad (4ms)
+				RefreshPlugins (62ms)
+				BeforeProcessingInitializeOnLoad (79ms)
+				ProcessInitializeOnLoadAttributes (604ms)
+				ProcessInitializeOnLoadMethodAttributes (3ms)
+				AfterProcessingInitializeOnLoad (3ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.76 ms, found 2 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4120 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 184.3 MB.
-System memory in use after: 184.6 MB.
+System memory in use before: 183.5 MB.
+System memory in use after: 183.6 MB.
 
-Unloading 173 unused Assets to reduce memory usage. Loaded Objects now: 4564.
-Total: 5.076900 ms (FindLiveObjects: 0.304700 ms CreateObjectMapping: 0.193800 ms MarkObjects: 4.351000 ms  DeleteObjects: 0.226800 ms)
+Unloading 174 unused Assets to reduce memory usage. Loaded Objects now: 4556.
+Total: 3.787200 ms (FindLiveObjects: 0.232900 ms CreateObjectMapping: 0.115600 ms MarkObjects: 3.263800 ms  DeleteObjects: 0.174000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -131,313 +134,595 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Prefabs/Models/Forge GOlem
-  artifactKey: Guid(c46e07f0486adf046896a14065d5e6fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem using Guid(c46e07f0486adf046896a14065d5e6fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e5dc1cc69c7d2ad53bc1eb4dabd7aa7') in 0.005073 seconds 
+  path: Assets/Readme.asset
+  artifactKey: Guid(83c2ed844a8c74b779a4c823d16594b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Readme.asset using Guid(83c2ed844a8c74b779a4c823d16594b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fb41f273abda735d4fc10c3ad0935a1') in 0.016521 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 12.684278 seconds.
+  Time since last request: 91.628096 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Gate.fbx
   artifactKey: Guid(1cd58979b47da0f49aa1edc628e29eb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Gate.fbx using Guid(1cd58979b47da0f49aa1edc628e29eb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a5eb52cbbf4ea794746ec44740efe5b') in 0.285363 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Gate.fbx using Guid(1cd58979b47da0f49aa1edc628e29eb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b7bf9ee047ab1617f1444acf95bc5fa') in 0.186482 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000229 seconds.
+  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Leg.fbx
+  artifactKey: Guid(b6819b3e2fe7c4b4aa0586531d85671c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Leg.fbx using Guid(b6819b3e2fe7c4b4aa0586531d85671c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63744879a1f6a4777e156b2d4cb623e2') in 0.025857 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000146 seconds.
+  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Arm.fbx
+  artifactKey: Guid(e71b3b71b32eb3944b92298a723ebde0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Arm.fbx using Guid(e71b3b71b32eb3944b92298a723ebde0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a20b99c9c250ae2d382f5ceee87d4476') in 0.032641 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000134 seconds.
+  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Arm.fbx
+  artifactKey: Guid(83ef1da60714f2842956888e544d7e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Arm.fbx using Guid(83ef1da60714f2842956888e544d7e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a18f82f3570461d7941beae98d14277b') in 0.022572 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000187 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Leg.fbx
-  artifactKey: Guid(b6819b3e2fe7c4b4aa0586531d85671c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Leg.fbx using Guid(b6819b3e2fe7c4b4aa0586531d85671c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c03ceef89a4c715388828749228d8a94') in 0.025345 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000206 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Arm.fbx
-  artifactKey: Guid(e71b3b71b32eb3944b92298a723ebde0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Arm.fbx using Guid(e71b3b71b32eb3944b92298a723ebde0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed6aaf678e38d8cede9710fc6d3f6a24') in 0.038337 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000217 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Arm.fbx
-  artifactKey: Guid(83ef1da60714f2842956888e544d7e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Arm.fbx using Guid(83ef1da60714f2842956888e544d7e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b64aed6d5ea49d59ca741d706c33d007') in 0.025844 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000313 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Whole.fbx
   artifactKey: Guid(f62e38c44634d63418062b171a71b84f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Whole.fbx using Guid(f62e38c44634d63418062b171a71b84f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11cccdd9d577e8adb5fd6c26144f2675') in 0.012236 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Whole.fbx using Guid(f62e38c44634d63418062b171a71b84f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '740064737ad3a6c0e9d3832030d2062c') in 0.012870 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000344 seconds.
+  Time since last request: 0.000139 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Leg.fbx
   artifactKey: Guid(0267b1d40c0c3aa4aa6e364f67cbb285) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Leg.fbx using Guid(0267b1d40c0c3aa4aa6e364f67cbb285) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7ba5465aa2174a8bdb0739449b9464c') in 0.020497 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Leg.fbx using Guid(0267b1d40c0c3aa4aa6e364f67cbb285) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1564827c62991a85163fdde7bb35bf1c') in 0.021792 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000312 seconds.
+  Time since last request: 0.000219 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Foot.fbx
   artifactKey: Guid(0fc4be7cf6fc29448a53da305d3c6bdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Foot.fbx using Guid(0fc4be7cf6fc29448a53da305d3c6bdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dcede99c05828e5fdc9b27405039184b') in 0.013008 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Foot.fbx using Guid(0fc4be7cf6fc29448a53da305d3c6bdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f11371deb6259acbb0a90647d75f2fd') in 0.016723 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000228 seconds.
+  Time since last request: 0.000210 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Pelvis.fbx
   artifactKey: Guid(84396fc454baaa646a187c8d9b5e9a48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Pelvis.fbx using Guid(84396fc454baaa646a187c8d9b5e9a48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1cceba8a41176e61db76e45a2f60ce4') in 0.014756 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Pelvis.fbx using Guid(84396fc454baaa646a187c8d9b5e9a48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e6e137742759997d3a4f6fded858ecb') in 0.017219 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000254 seconds.
+  Time since last request: 0.000223 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Inside.fbx
   artifactKey: Guid(a9759ff95e3f42d48b3dc3a035b2b9c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Inside.fbx using Guid(a9759ff95e3f42d48b3dc3a035b2b9c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65a388651cea0fdd123c6e28e6455e43') in 0.003375 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Inside.fbx using Guid(a9759ff95e3f42d48b3dc3a035b2b9c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '423769be0f7293218a35d75e55a25a92') in 0.004928 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000266 seconds.
+  Time since last request: 0.000195 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Head.fbx
   artifactKey: Guid(61e46f6f85e0b3d48878d42e982f19d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Head.fbx using Guid(61e46f6f85e0b3d48878d42e982f19d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '182d824cf1770483698229025952fd49') in 0.019965 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Head.fbx using Guid(61e46f6f85e0b3d48878d42e982f19d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d2847301330384244b4a70bfd6f8817') in 0.022400 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000180 seconds.
+  Time since last request: 0.000144 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Torso.fbx
   artifactKey: Guid(eca7490601055c14d92a15448b4e619b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Torso.fbx using Guid(eca7490601055c14d92a15448b4e619b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ca3dfc7315249c17f579f5fbc8d1e87') in 0.014283 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Torso.fbx using Guid(eca7490601055c14d92a15448b4e619b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '763985c39fdae5de87204545e589495b') in 0.018572 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000197 seconds.
+  Time since last request: 0.000162 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Arm.fbx
   artifactKey: Guid(242efca599db7bf4ead19b247cf7d70b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Arm.fbx using Guid(242efca599db7bf4ead19b247cf7d70b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8bd81241d04e890dfba1cfb41f4b178e') in 0.020449 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000228 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Upper_Arm.fbx
-  artifactKey: Guid(1ad29272f9d710a46806325a8e37152f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Upper_Arm.fbx using Guid(1ad29272f9d710a46806325a8e37152f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae1fd926afd7da35f96f934be24f12e8') in 0.015170 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000291 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Leg.fbx
-  artifactKey: Guid(4c23e639bda61f846becf415151d0679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Leg.fbx using Guid(4c23e639bda61f846becf415151d0679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f13140a32cb2d099e6622ce45dbdbb29') in 0.018096 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000235 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Joints.fbx
-  artifactKey: Guid(1fa35f43a17f66647bf833108acdf07a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Joints.fbx using Guid(1fa35f43a17f66647bf833108acdf07a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8d7facc06447630586e17eb6c44072d') in 0.013690 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000232 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Helmet.fbx
-  artifactKey: Guid(66df00711213ceb4daacc7dc855fec8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Helmet.fbx using Guid(66df00711213ceb4daacc7dc855fec8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c77481d10acbcdd6f427cab61b13dab1') in 0.015550 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000193 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Foot.fbx
-  artifactKey: Guid(efd3671b79f39ec4a8119b9ea10bc60d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Foot.fbx using Guid(efd3671b79f39ec4a8119b9ea10bc60d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06de9a0655bbb0ed2c7f4ffcbcb6962a') in 0.014009 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 83.369843 seconds.
-  path: Assets/Prefabs/Rooms/Corridors/L_Right/W_Long_Right Variant.prefab
-  artifactKey: Guid(d1bdf85338659d047a0a36e7e30e9db5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Rooms/Corridors/L_Right/W_Long_Right Variant.prefab using Guid(d1bdf85338659d047a0a36e7e30e9db5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6fb2b55eb62f5371c5ce85ddd31cdd4') in 0.057625 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000300 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Arm.fbx
-  artifactKey: Guid(e71b3b71b32eb3944b92298a723ebde0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Arm.fbx using Guid(e71b3b71b32eb3944b92298a723ebde0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '58920db0ea18cc3209a4b70c6571530f') in 0.053696 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000225 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Foot.fbx
-  artifactKey: Guid(0fc4be7cf6fc29448a53da305d3c6bdd) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Foot.fbx using Guid(0fc4be7cf6fc29448a53da305d3c6bdd) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'e30bc199332c9445d9162b14cbe349dd') in 0.008847 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000150 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem
-  artifactKey: Guid(c46e07f0486adf046896a14065d5e6fa) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem using Guid(c46e07f0486adf046896a14065d5e6fa) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'e480a49e27c73ec527b05caaf8faad53') in 0.004339 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000242 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Upper_Arm.fbx
-  artifactKey: Guid(1ad29272f9d710a46806325a8e37152f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Upper_Arm.fbx using Guid(1ad29272f9d710a46806325a8e37152f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '2927f089f11c66b142493214f571bcc1') in 0.008673 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000209 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Leg.fbx
-  artifactKey: Guid(4c23e639bda61f846becf415151d0679) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Leg.fbx using Guid(4c23e639bda61f846becf415151d0679) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'd89146ea303a3d91d9e8b114a27400a3') in 0.008929 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000193 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Head.fbx
-  artifactKey: Guid(61e46f6f85e0b3d48878d42e982f19d4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Head.fbx using Guid(61e46f6f85e0b3d48878d42e982f19d4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '2c811f5505d10b6523af7a72d526359d') in 0.007655 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000428 seconds.
-  path: Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity
-  artifactKey: Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity using Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '1ff4a2f2f5f2eed4f50dec2787a2d3bc') in 0.004675 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000348 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Helmet.fbx
-  artifactKey: Guid(66df00711213ceb4daacc7dc855fec8e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Helmet.fbx using Guid(66df00711213ceb4daacc7dc855fec8e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '9936b8f2f479b4bfd1b1fb3bfef5cece') in 0.005722 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000268 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Inside.fbx
-  artifactKey: Guid(a9759ff95e3f42d48b3dc3a035b2b9c3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Inside.fbx using Guid(a9759ff95e3f42d48b3dc3a035b2b9c3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '6ea54b0fd09df541b9371939454d5b27') in 0.009158 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000206 seconds.
-  path: Assets/Prefabs/Rooms/Dungeon Rooms/HorseShoeCrypt/W_HorseShoe Variant.prefab
-  artifactKey: Guid(4bb3cff998332c04eb77df7eaabc7ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Rooms/Dungeon Rooms/HorseShoeCrypt/W_HorseShoe Variant.prefab using Guid(4bb3cff998332c04eb77df7eaabc7ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6334fd204fe13d2524f19ff75d0ac98b') in 0.090395 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000246 seconds.
-  path: Assets/Sound/SFX/Enemies/Enchanted Blade/WeaponHurt.wav
-  artifactKey: Guid(9a5bced99bd5ccd48a027ffb0b5214cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sound/SFX/Enemies/Enchanted Blade/WeaponHurt.wav using Guid(9a5bced99bd5ccd48a027ffb0b5214cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2240ffce7c5884c717977366a88b460') in 0.024219 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000196 seconds.
-  path: Assets/Unity/ConstraintSamples/Scenes/2BoneIK.unity
-  artifactKey: Guid(3386751cfe75d49a09170550b86eb26c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Unity/ConstraintSamples/Scenes/2BoneIK.unity using Guid(3386751cfe75d49a09170550b86eb26c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '5451dfa138032a45c8cde28d78eeb56e') in 0.006095 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000267 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Torso.fbx
-  artifactKey: Guid(eca7490601055c14d92a15448b4e619b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Torso.fbx using Guid(eca7490601055c14d92a15448b4e619b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '9692cec8785b3133dcfb87aec4bdfc9f') in 0.006675 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000379 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Joints.fbx
-  artifactKey: Guid(1fa35f43a17f66647bf833108acdf07a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Joints.fbx using Guid(1fa35f43a17f66647bf833108acdf07a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'd0475fd0f4344276e2d0612a7e8e817b') in 0.008410 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000319 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Pelvis.fbx
-  artifactKey: Guid(84396fc454baaa646a187c8d9b5e9a48) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Pelvis.fbx using Guid(84396fc454baaa646a187c8d9b5e9a48) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '388d8bcfd0db8bcfebe047c6f06007d2') in 0.007142 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000270 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Leg.fbx
-  artifactKey: Guid(b6819b3e2fe7c4b4aa0586531d85671c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Lower_Leg.fbx using Guid(b6819b3e2fe7c4b4aa0586531d85671c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '78153fee4b647c279fc0d56ecf971760') in 0.007814 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000374 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Arm.fbx
-  artifactKey: Guid(242efca599db7bf4ead19b247cf7d70b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Arm.fbx using Guid(242efca599db7bf4ead19b247cf7d70b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '0e9f1cecc1a8161f3ba1e2faffff057d') in 0.008292 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000297 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Gate.fbx
-  artifactKey: Guid(1cd58979b47da0f49aa1edc628e29eb6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Gate.fbx using Guid(1cd58979b47da0f49aa1edc628e29eb6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'd5a64f59341d1b4983d03e6779d839f5') in 0.005932 seconds 
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Arm.fbx using Guid(242efca599db7bf4ead19b247cf7d70b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16b5633feab205cf82d5301db3f79549') in 0.025356 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000155 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Leg.fbx
-  artifactKey: Guid(0267b1d40c0c3aa4aa6e364f67cbb285) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Upper_Leg.fbx using Guid(0267b1d40c0c3aa4aa6e364f67cbb285) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '1b455a8e670ca8220556c278e2a2a4c7') in 0.010665 seconds 
+  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Upper_Arm.fbx
+  artifactKey: Guid(1ad29272f9d710a46806325a8e37152f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Left_Upper_Arm.fbx using Guid(1ad29272f9d710a46806325a8e37152f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbe6db588697566c4db2f52b9e289ce9') in 0.020306 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000295 seconds.
+  Time since last request: 0.000137 seconds.
+  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Leg.fbx
+  artifactKey: Guid(4c23e639bda61f846becf415151d0679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Leg.fbx using Guid(4c23e639bda61f846becf415151d0679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f4433918bec97d45eca82e25d5c1117') in 0.021158 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000181 seconds.
+  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Joints.fbx
+  artifactKey: Guid(1fa35f43a17f66647bf833108acdf07a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Grating_Joints.fbx using Guid(1fa35f43a17f66647bf833108acdf07a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b39c14f2d8954c5ecffa968efd0a3407') in 0.014710 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000163 seconds.
+  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Helmet.fbx
+  artifactKey: Guid(66df00711213ceb4daacc7dc855fec8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Helmet.fbx using Guid(66df00711213ceb4daacc7dc855fec8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b46a1b82d7d4d1b35087423d92c21179') in 0.019001 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000140 seconds.
   path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Foot.fbx
-  artifactKey: Guid(efd3671b79f39ec4a8119b9ea10bc60d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Foot.fbx using Guid(efd3671b79f39ec4a8119b9ea10bc60d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '87ee0a3ad9b8b2e0da0aa42700a7c0eb') in 0.007299 seconds 
+  artifactKey: Guid(efd3671b79f39ec4a8119b9ea10bc60d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Foot.fbx using Guid(efd3671b79f39ec4a8119b9ea10bc60d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '747df026ba1462f4b05a5293b390a9f4') in 0.016190 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000287 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Whole.fbx
-  artifactKey: Guid(f62e38c44634d63418062b171a71b84f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Whole.fbx using Guid(f62e38c44634d63418062b171a71b84f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '8006cfb7d10a166fbf0ef27549566213') in 0.005538 seconds 
+  Time since last request: 340.076527 seconds.
+  path: Assets/Material
+  artifactKey: Guid(cde23face6b255d42b8f0c5ed8eb1502) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material using Guid(cde23face6b255d42b8f0c5ed8eb1502) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcba1fde9b8c377e8cdeb1e3f15c42e4') in 0.005070 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.071753 seconds.
+  path: Assets/Material/DungeonSkyBox.mat
+  artifactKey: Guid(52fcefd712182d743a781fde12426775) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/DungeonSkyBox.mat using Guid(52fcefd712182d743a781fde12426775) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff93d756f4383f289283bc04c42a448f') in 0.026001 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000317 seconds.
+  path: Assets/Material/M_Metal.mat
+  artifactKey: Guid(59eb37a3c11e4fd458c4b983797a5bfb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_Metal.mat using Guid(59eb37a3c11e4fd458c4b983797a5bfb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e1bc18443e59ba0afca3b48bbad0fb3') in 0.010506 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000329 seconds.
+  path: Assets/Material/M_Dummy.mat
+  artifactKey: Guid(f5db838abc4d9134d93cd81c96aa8fc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_Dummy.mat using Guid(f5db838abc4d9134d93cd81c96aa8fc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c715a167b895301a9ed48d4f331e2d2') in 0.009708 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000254 seconds.
+  path: Assets/Material/M_WeaponTemp.mat
+  artifactKey: Guid(118f8d13e10ee5e4580ada754f28dae6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_WeaponTemp.mat using Guid(118f8d13e10ee5e4580ada754f28dae6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d3bd2c6b3f9ca9c3b239cd05ac2e1a9') in 0.015742 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000271 seconds.
+  path: Assets/Material/M_RoughPaleBrown 1.mat
+  artifactKey: Guid(a88d6afdafedffd479d2fff1c463820a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_RoughPaleBrown 1.mat using Guid(a88d6afdafedffd479d2fff1c463820a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fab936ac741d4fcb479ac080b429bdb') in 0.012315 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000248 seconds.
+  path: Assets/Material/M_White.mat
+  artifactKey: Guid(8f52b68dd7ed89f4398df3b09008b74e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_White.mat using Guid(8f52b68dd7ed89f4398df3b09008b74e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0bc0c080d0e28962248f7b81da40a836') in 0.012803 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000189 seconds.
+  path: Assets/Material/M_Gold.mat
+  artifactKey: Guid(d950f0f5edc1e904690a6862ea759f6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_Gold.mat using Guid(d950f0f5edc1e904690a6862ea759f6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bce7123d32c5b62e7db33cb3119b6834') in 0.012533 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000315 seconds.
+  path: Assets/Material/M_DungeonGrey.mat
+  artifactKey: Guid(513ea04f996765449abd36b8d4c8d32f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_DungeonGrey.mat using Guid(513ea04f996765449abd36b8d4c8d32f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7c0c590321b563d0a0e6ae648faeb07') in 0.009629 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000188 seconds.
+  path: Assets/Material/M_Wood.mat
+  artifactKey: Guid(59ced26a5e3d52c4597ab07ea64f1efc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_Wood.mat using Guid(59ced26a5e3d52c4597ab07ea64f1efc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8ff3bbc2d51b01b0f89700a831268bc') in 0.008423 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000237 seconds.
+  path: Assets/Material/M_Plantinum.mat
+  artifactKey: Guid(1638a3491f3c10c459be9543a4f7882f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_Plantinum.mat using Guid(1638a3491f3c10c459be9543a4f7882f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a26e33ac2124cb1d11a69d3307580526') in 0.012417 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000246 seconds.
+  path: Assets/Material/M_DungeonGreen.mat
+  artifactKey: Guid(ab0cb41afc108da4083da68867a2ccac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_DungeonGreen.mat using Guid(ab0cb41afc108da4083da68867a2ccac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9133f5c7284cab25c6bd761cc19c9350') in 0.008064 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000223 seconds.
+  path: Assets/Material/M_Rock.mat
+  artifactKey: Guid(00c8afd9a2d2326469e40cb13301262a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_Rock.mat using Guid(00c8afd9a2d2326469e40cb13301262a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd92b52ff070ae357e61d79101b7e5bb1') in 0.008243 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000219 seconds.
+  path: Assets/Material/M_RoughBrown.mat
+  artifactKey: Guid(23db27e28cab37b4abe412ecbc4d5e86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/M_RoughBrown.mat using Guid(23db27e28cab37b4abe412ecbc4d5e86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1df41404e27a2de040c57cf754d0396') in 0.011517 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.272523 seconds.
+  path: Assets/Material/ForgeGolem
+  artifactKey: Guid(d40bf53d675133649be7c52752b41ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/ForgeGolem using Guid(d40bf53d675133649be7c52752b41ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b42cd242da0dd174f16c36e46fe77b76') in 0.005268 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 24.143572 seconds.
+  path: Assets/Material/ForgeGolem/M_.mat
+  artifactKey: Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/ForgeGolem/M_.mat using Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63d741054669bea8c2ede33f9adab61d') in 0.011491 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 22.442974 seconds.
+  path: Assets/Material/ForgeGolem/M_Body.mat
+  artifactKey: Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/ForgeGolem/M_Body.mat using Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30c140965ecf322f67c3ed38a76fd26f') in 0.009849 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 82.335602 seconds.
+  path: Assets/Material/ForgeGolem/M_Body.mat
+  artifactKey: Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/ForgeGolem/M_Body.mat using Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10a411e4625a6b33bcbfef01b6196d45') in 0.008743 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 84.681324 seconds.
+  path: Assets/Prefabs/Characters
+  artifactKey: Guid(92c14e8c613962342a7aa06148ccf875) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Characters using Guid(92c14e8c613962342a7aa06148ccf875) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf4894cab9c1e3b4cc09b838f342a9a9') in 0.008950 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.024561 seconds.
+  path: Assets/Prefabs/Characters/Dummy.prefab
+  artifactKey: Guid(e90b51ee90a916249b5274647dd1851f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Characters/Dummy.prefab using Guid(e90b51ee90a916249b5274647dd1851f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6914480138fdcb5d627a766b3d43d123') in 0.048288 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.633832 seconds.
+  path: Assets/Prefabs/Characters/Enemies
+  artifactKey: Guid(0798bc668a438c441a5d773c98ff5685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Characters/Enemies using Guid(0798bc668a438c441a5d773c98ff5685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ae03e32b181821d5907fca5bed8a6d8') in 0.005128 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.100235 seconds.
+  path: Assets/Prefabs/Characters/Enemies/EnchantedWeapon.prefab
+  artifactKey: Guid(8c4bc751297624a4aab695bcb30f8bb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Characters/Enemies/EnchantedWeapon.prefab using Guid(8c4bc751297624a4aab695bcb30f8bb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '467e902251aeba89f3165fc251e16d68') in 0.013561 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.747922 seconds.
+  path: Assets/Prefabs/Characters/Enemies/Bosses
+  artifactKey: Guid(2db2f8e3b8a020d4e8124cfafa664e1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Characters/Enemies/Bosses using Guid(2db2f8e3b8a020d4e8124cfafa664e1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51ab24b4e1dada0db51ae7662784b548') in 0.005191 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.076293 seconds.
+  path: Assets/Prefabs/Characters/Enemies/Bosses/ForgeGolem.prefab
+  artifactKey: Guid(3e7ef8a465958d5448534b1c8ca98f08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Characters/Enemies/Bosses/ForgeGolem.prefab using Guid(3e7ef8a465958d5448534b1c8ca98f08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0799b25e37e3a258ba49c455358579cb') in 0.046901 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.077984 seconds.
+  path: Assets/Prefabs/Characters/Enemies/Bosses/ForgeGolemComplete.prefab
+  artifactKey: Guid(82f022ac6a77bed498764fc20cd36552) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Characters/Enemies/Bosses/ForgeGolemComplete.prefab using Guid(82f022ac6a77bed498764fc20cd36552) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd35454836caffc48bd130f0f620e7eba') in 0.012027 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 323.693497 seconds.
+  path: Assets/Material/Dynamic/M_Explosion.mat
+  artifactKey: Guid(9b05cca13e47e674d8e72a8438b96cc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Dynamic/M_Explosion.mat using Guid(9b05cca13e47e674d8e72a8438b96cc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19a3e381065b29b18a7529d28df97a4a') in 0.013137 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/Material/Static/M_GREENEmiision.mat
+  artifactKey: Guid(58653444a9eec3f4cb1c429a76105073) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Static/M_GREENEmiision.mat using Guid(58653444a9eec3f4cb1c429a76105073) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74cc6af471818d83b8f25bc2ec70a222') in 0.018281 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000180 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/M_Gold.mat
+  artifactKey: Guid(cd5be32c8b6973a42a7febb1ff1632c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/M_Gold.mat using Guid(cd5be32c8b6973a42a7febb1ff1632c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3bb67040a8f0821f4a56d34992ca0dd7') in 0.009247 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000170 seconds.
+  path: Assets/Prefabs/Models/Enemies/SM_LivingEmber.fbx
+  artifactKey: Guid(f992f4379d3b00642834113dc6c85b78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enemies/SM_LivingEmber.fbx using Guid(f992f4379d3b00642834113dc6c85b78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21b29ed440849706b306eb0f81d51191') in 0.030847 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.292345 seconds.
+  path: Assets/Material/Dynamic/M_MildGoldEmmision.mat
+  artifactKey: Guid(ce440e20ccd5f924c86af1c9bb2cb6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Dynamic/M_MildGoldEmmision.mat using Guid(ce440e20ccd5f924c86af1c9bb2cb6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3d39f6f35deaad162a8914d360d831e') in 0.009437 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000200 seconds.
+  path: Assets/Material/Dynamic/M_RedEmmisive.mat
+  artifactKey: Guid(7b1f80275b548384b8da0c74f3698874) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Dynamic/M_RedEmmisive.mat using Guid(7b1f80275b548384b8da0c74f3698874) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e5086e9668344aa1d426b2ec44dee19') in 0.009789 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000306 seconds.
+  path: Assets/Material/Dynamic/M_OrangeEmmisive.mat
+  artifactKey: Guid(2b0f295a8d698c34698b4e1dd4c15361) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Dynamic/M_OrangeEmmisive.mat using Guid(2b0f295a8d698c34698b4e1dd4c15361) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1fc078db89238c576a0c33b83efa4f5') in 0.012184 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.088328 seconds.
+  path: Assets/Prefabs/Models/Weapon Props/M_Shaft.mat
+  artifactKey: Guid(be80e00e04858fa45a60a87b39f91170) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Weapon Props/M_Shaft.mat using Guid(be80e00e04858fa45a60a87b39f91170) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7451b7a74d98115e9d23a0e1fe34f249') in 0.014068 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000271 seconds.
+  path: Assets/Prefabs/Models/Player Weapons/Weapon Materials/M_StaffCage.mat
+  artifactKey: Guid(4a7235f5511d1ee49beab447e6103424) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Player Weapons/Weapon Materials/M_StaffCage.mat using Guid(4a7235f5511d1ee49beab447e6103424) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ce5d739f3f834dae7c2337b1d04ca34') in 0.013871 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000230 seconds.
+  path: Assets/Prefabs/Models/Player Weapons/Weapon Materials/M_ShieldMaterial.mat
+  artifactKey: Guid(d5d94e1d5b55e4f4f87adc803264104e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Player Weapons/Weapon Materials/M_ShieldMaterial.mat using Guid(d5d94e1d5b55e4f4f87adc803264104e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f89310157acf44790879843d0449b2a0') in 0.018358 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000183 seconds.
+  path: Assets/Prefabs/Models/Weapon Props/M_SpearTip.mat
+  artifactKey: Guid(bac30b69dc9384645be2aabf59cb811d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Weapon Props/M_SpearTip.mat using Guid(bac30b69dc9384645be2aabf59cb811d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48438f99b39dc54f503ce17582611565') in 0.011728 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000145 seconds.
+  path: Assets/Prefabs/Models/Player Weapons/Weapon Materials/M_StaffBase.mat
+  artifactKey: Guid(ef4e3392364de6345a1adfc47f973b1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Player Weapons/Weapon Materials/M_StaffBase.mat using Guid(ef4e3392364de6345a1adfc47f973b1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52756287012d0d16e9393003494642c9') in 0.014038 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.873060 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/M_AltarBase.mat
+  artifactKey: Guid(998e93a46083fbf40b6b760382428f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/M_AltarBase.mat using Guid(998e93a46083fbf40b6b760382428f86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9dbcbc09d89719bfc857fb28b21bf860') in 0.016857 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000255 seconds.
+  path: Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Right_Arm.fbx
+  artifactKey: Guid(d0762e0972a9873418320654dfb137f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Right_Arm.fbx using Guid(d0762e0972a9873418320654dfb137f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '649f2c4ec8a98c600513db965355cafe') in 0.023981 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000172 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/M_AltarMarble.mat
+  artifactKey: Guid(a7ab35a50a1eab7418d9d92862442808) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/M_AltarMarble.mat using Guid(a7ab35a50a1eab7418d9d92862442808) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7299561379edf40e598f7aa4e1f5a66e') in 0.016447 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000147 seconds.
+  path: Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Left_Arm.fbx
+  artifactKey: Guid(0e1b8eb8c944e94418d58b541ce32414) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Left_Arm.fbx using Guid(0e1b8eb8c944e94418d58b541ce32414) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c44585634cd9ea483c0ee8e7dd0b276e') in 0.031014 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.605822 seconds.
+  path: Assets/Prefabs/Models/Weapon Props/M_DaggerHilt.mat
+  artifactKey: Guid(fef6bd96ec39af346a12a57af00bbe0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Weapon Props/M_DaggerHilt.mat using Guid(fef6bd96ec39af346a12a57af00bbe0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3c7526e299076d9ce3e6c92196f54a3') in 0.015888 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 51.309103 seconds.
+  path: Assets/Textures
+  artifactKey: Guid(12fd406446e796645b20b534e615ed42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures using Guid(12fd406446e796645b20b534e615ed42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8cb260abcc8b266dc0b69f0b95e5cc5') in 0.004817 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21.371848 seconds.
+  path: Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Left_Leg.fbx
+  artifactKey: Guid(7fdd049498c37e44d8b69924dbbd1f25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Left_Leg.fbx using Guid(7fdd049498c37e44d8b69924dbbd1f25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58fe5c8416c77c4fa9554024af0d5069') in 0.018502 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000234 seconds.
+  path: Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Right_Leg.fbx
+  artifactKey: Guid(482fb88e31cc93e46bb0a800fea37205) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Right_Leg.fbx using Guid(482fb88e31cc93e46bb0a800fea37205) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4faf3095fb85c3b6d9baa3fe1a51b57') in 0.015810 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.038819 seconds.
+  path: Assets/Customizable Skybox/Model/Materials/Material.003.mat
+  artifactKey: Guid(0b82edc333f454f4fab3b93e8ececd1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Model/Materials/Material.003.mat using Guid(0b82edc333f454f4fab3b93e8ececd1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf34501678fec904eea538aa1eddd0ba') in 0.014081 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000150 seconds.
+  path: Assets/Customizable Skybox/Stylized Sky/Materials/Morning1.mat
+  artifactKey: Guid(8fc56946a1b593c4d8e3e0e94483338e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Stylized Sky/Materials/Morning1.mat using Guid(8fc56946a1b593c4d8e3e0e94483338e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b35979553763ebcd41a37dfabd8b0ecb') in 0.012082 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000148 seconds.
+  path: Assets/Customizable Skybox/Materials/Material.003.mat
+  artifactKey: Guid(a4b1c9205184ab7479ebcb6d01e9bdaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Materials/Material.003.mat using Guid(a4b1c9205184ab7479ebcb6d01e9bdaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0509728a2a8176ad118ff0d6ce9b86c5') in 0.011556 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000145 seconds.
+  path: Assets/Customizable Skybox/Stylized Sky/Materials/Morning3.mat
+  artifactKey: Guid(022e71752654d3f4fa0cbe71b312ad20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Stylized Sky/Materials/Morning3.mat using Guid(022e71752654d3f4fa0cbe71b312ad20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '636d5c15c2816836b3ec6ae5d3fd3429') in 0.012554 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000190 seconds.
+  path: Assets/Customizable Skybox/Stylized Sky/Materials/Morning2.mat
+  artifactKey: Guid(5464c15ff9c6ca04cb5790c1773e76fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Stylized Sky/Materials/Morning2.mat using Guid(5464c15ff9c6ca04cb5790c1773e76fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a88dd3486430b14cdf5c1274b5edcf1f') in 0.012329 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 16.909898 seconds.
+  path: Assets/Material/Static/M_RedEmmsive(Static).mat
+  artifactKey: Guid(acf440de32d446447bba6cb5223d6627) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Static/M_RedEmmsive(Static).mat using Guid(acf440de32d446447bba6cb5223d6627) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8230092e59fce036d4c3dc9f0bebd8a4') in 0.017456 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.830912 seconds.
+  path: Assets/PathCreator/Examples/Materials/Black.mat
+  artifactKey: Guid(69561553b86bde34da494d1ffed3ba45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PathCreator/Examples/Materials/Black.mat using Guid(69561553b86bde34da494d1ffed3ba45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b19c20d5140b9ab15aee9254583dc4df') in 0.010201 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000253 seconds.
+  path: Assets/FastIK/Materials/Blue.mat
+  artifactKey: Guid(fa90469962b931942a75625f15e8b8d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FastIK/Materials/Blue.mat using Guid(fa90469962b931942a75625f15e8b8d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '910d458dbed7241742742b41e3d68d83') in 0.013153 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000241 seconds.
+  path: Assets/PathCreator/Examples/Materials/Blue.mat
+  artifactKey: Guid(5c270a73328a99e439fec44a0cf3a17d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PathCreator/Examples/Materials/Blue.mat using Guid(5c270a73328a99e439fec44a0cf3a17d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a2c34b391239cc222666836f1238bc4') in 0.012528 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000258 seconds.
+  path: Assets/Customizable Skybox/Model/Materials/dark trunk.mat
+  artifactKey: Guid(b50f1c4e199dc3b47b56b0880d757857) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Model/Materials/dark trunk.mat using Guid(b50f1c4e199dc3b47b56b0880d757857) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5743c8ee7d55a69cd653fc7f2cae68a5') in 0.012836 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000173 seconds.
+  path: Assets/Customizable Skybox/Materials/Clouds.mat
+  artifactKey: Guid(b2fcea6c7d9dbab4ca781825705d50be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Materials/Clouds.mat using Guid(b2fcea6c7d9dbab4ca781825705d50be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3dc199702baee1e1d59cfabdbccd10e') in 0.012782 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000176 seconds.
+  path: Assets/PathCreator/Examples/Materials/Brown.mat
+  artifactKey: Guid(d5b3a558a1e7f4a4182b166bb2f27cf7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PathCreator/Examples/Materials/Brown.mat using Guid(d5b3a558a1e7f4a4182b166bb2f27cf7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f732aeb3632c2078486aadf416fee58a') in 0.012087 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000196 seconds.
+  path: Assets/Customizable Skybox/Materials/dark trunk.mat
+  artifactKey: Guid(7c7f7e923f30d8b4193dfc9a7eb33ea9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Customizable Skybox/Materials/dark trunk.mat using Guid(7c7f7e923f30d8b4193dfc9a7eb33ea9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12270ce053775b3e8fa8858c9b56d9d0') in 0.011515 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/PathCreator/Examples/Materials/Dark Grey.mat
+  artifactKey: Guid(407e3de4fbbcf4a99b17bf5aac2d28d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PathCreator/Examples/Materials/Dark Grey.mat using Guid(407e3de4fbbcf4a99b17bf5aac2d28d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '187eb47d16443f8ff3b274f2f155a900') in 0.012319 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.476374 seconds.
+  path: Assets/DungeonGenPackage/Materials/DoorMat.mat
+  artifactKey: Guid(fd795b71ce9044e45832398bdfab9c76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DungeonGenPackage/Materials/DoorMat.mat using Guid(fd795b71ce9044e45832398bdfab9c76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2816569be774838ff86c1e2fec29715') in 0.015588 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000336 seconds.
+  path: Assets/Fonts/odins spear.TTF
+  artifactKey: Guid(feb553ee860bc22408e7272e0f872875) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/odins spear.TTF using Guid(feb553ee860bc22408e7272e0f872875) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05d3d1767a63f1cdc071b8743148c391') in 0.028364 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000235 seconds.
+  path: Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+  artifactKey: Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Fonts/LiberationSans.ttf using Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95723773f3a7cf3e2855b18291712773') in 0.022353 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000329 seconds.
+  path: Assets/Fonts/PR Viking.ttf
+  artifactKey: Guid(0b7bea584a4295743ae171922b761144) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/PR Viking.ttf using Guid(0b7bea584a4295743ae171922b761144) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55f2e38d1d8dc61b189919498451c38d') in 0.013843 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000183 seconds.
+  path: Assets/Material/Static/GoldEmmision(Static).mat
+  artifactKey: Guid(d76ae8e7edb4c6f4ca50e188c731c595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Static/GoldEmmision(Static).mat using Guid(d76ae8e7edb4c6f4ca50e188c731c595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '035720227dcfedf745dedd367c71f6af') in 0.012420 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000467 seconds.
+  path: Assets/Fonts/Odins Spear Ragged Hollow.TTF
+  artifactKey: Guid(fe980604610b86e458a1c89db8da5a19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/Odins Spear Ragged Hollow.TTF using Guid(fe980604610b86e458a1c89db8da5a19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2097969d321830376cba5b416837ab82') in 0.016096 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000256 seconds.
+  path: Assets/Material/Dynamic/GoldEmmision(dynamic).mat
+  artifactKey: Guid(289afe0cffa48164c990f450d424eec1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/Dynamic/GoldEmmision(dynamic).mat using Guid(289afe0cffa48164c990f450d424eec1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f6db7bee273d982f89328573a9e9e69') in 0.012763 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000152 seconds.
+  path: Assets/Fonts/PR Viking Alternates.ttf
+  artifactKey: Guid(619d9436dba1c964f97e685793bb7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/PR Viking Alternates.ttf using Guid(619d9436dba1c964f97e685793bb7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a154b6e4b6ce0554ead4ad4f7eaea49') in 0.020792 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 117.731616 seconds.
+  path: Assets/Prefabs/Models/Weapon Props/SM_GreatSword.fbx
+  artifactKey: Guid(0cf6e3fc9f3600044abde61e69595d70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Weapon Props/SM_GreatSword.fbx using Guid(0cf6e3fc9f3600044abde61e69595d70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f56ad3921f2abe140030ca801a7f22b') in 0.020554 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000181 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/SM_LargeRock.fbx
+  artifactKey: Guid(582e41aa86f96214695997b579514b83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_LargeRock.fbx using Guid(582e41aa86f96214695997b579514b83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '173ac4b7018cfb136bb6532a36f58453') in 0.014107 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.798029 seconds.
+  path: Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Whole.fbx
+  artifactKey: Guid(d01f01c545934ec4a920ee8ec23d860d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enemies/Support Golem/SM_SupportGolem_Whole.fbx using Guid(d01f01c545934ec4a920ee8ec23d860d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28c84f5dbdd62c603baaf6a1564aefba') in 0.016105 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000207 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/SM_Torch.fbx
+  artifactKey: Guid(6d52f938d0e857a4bb2c2c31edca0b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_Torch.fbx using Guid(6d52f938d0e857a4bb2c2c31edca0b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0852d1497b4ae60f434f2c9e8850d8e2') in 0.013353 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.529724 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/SM_CounterGem.fbx
+  artifactKey: Guid(38d7aa2912242c443b09da09e07b957e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_CounterGem.fbx using Guid(38d7aa2912242c443b09da09e07b957e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd21e1961f95d24f6d80b5248478726b9') in 0.022952 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.318365 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/SM_Altar.fbx
+  artifactKey: Guid(f075bbe29d3189147a489459a03ab264) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_Altar.fbx using Guid(f075bbe29d3189147a489459a03ab264) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96a56f480decb77b1336d1eaf2192b39') in 0.014223 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000215 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/SM_Crate.fbx
+  artifactKey: Guid(d01422e844e31ce4cbcbb48d67e28f95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_Crate.fbx using Guid(d01422e844e31ce4cbcbb48d67e28f95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c8fd109ee3837aacaa884240c03793c') in 0.015492 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000300 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/SM_Barrel.fbx
+  artifactKey: Guid(ba13f84da9aa2c44cb3b10fc242f95b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_Barrel.fbx using Guid(ba13f84da9aa2c44cb3b10fc242f95b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d91d18acbf25ebb08da2619416dd39d') in 0.024692 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000186 seconds.
-  path: Assets/Sound/SFX/Weapons/Sword/SwordThrust.wav
-  artifactKey: Guid(c77dce9ec3d9eb24a81bf8efda9f1998) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Sound/SFX/Weapons/Sword/SwordThrust.wav using Guid(c77dce9ec3d9eb24a81bf8efda9f1998) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c52d3b6c6d7c376699a5f275f2767ec4') in 0.007392 seconds 
+  path: Assets/Prefabs/Models/Enviroment Props/SM_LeftLock.fbx
+  artifactKey: Guid(8cedd0da90047c249ad7d1fd53bb31a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_LeftLock.fbx using Guid(8cedd0da90047c249ad7d1fd53bb31a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f185a30ea150dffff7e6dc64b4c8682') in 0.013597 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000257 seconds.
-  path: Assets/Unity/ConstraintSamples/Scenes/2BoneIKSettings.lighting
-  artifactKey: Guid(8a6f5f11671bb544ea8d0d9d7aa9a194) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Unity/ConstraintSamples/Scenes/2BoneIKSettings.lighting using Guid(8a6f5f11671bb544ea8d0d9d7aa9a194) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '3dbb980d7054161d69cf4610d85830cc') in 0.007045 seconds 
+  Time since last request: 0.000170 seconds.
+  path: Assets/Prefabs/Models/Weapon Props/SM_BattleAxe.fbx
+  artifactKey: Guid(388fdb27288438b40b3b0aebc245b9e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Weapon Props/SM_BattleAxe.fbx using Guid(388fdb27288438b40b3b0aebc245b9e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60c4d95ea9ad52981f47c54d91d71987') in 0.012559 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000228 seconds.
-  path: Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Arm.fbx
-  artifactKey: Guid(83ef1da60714f2842956888e544d7e4d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Prefabs/Models/Forge GOlem/SM_ForgeGolem_Right_Lower_Arm.fbx using Guid(83ef1da60714f2842956888e544d7e4d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '891be9d2f60483a5a6861c2159c5bda7') in 0.007551 seconds 
+  Time since last request: 0.000246 seconds.
+  path: Assets/Prefabs/Models/Enviroment Props/SM_Coin.fbx
+  artifactKey: Guid(5d64f4083975d5a4a9b9f9e9208fedcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Enviroment Props/SM_Coin.fbx using Guid(5d64f4083975d5a4a9b9f9e9208fedcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77686c20b08710068ab5e3e271fd5d12') in 0.012556 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 52.489799 seconds.
-  path: Assets/Prefabs/Rooms/Interior/Doors/DungeonDoor.prefab
-  artifactKey: Guid(30fb4af4742d9e6499acdbf58927ab89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Rooms/Interior/Doors/DungeonDoor.prefab using Guid(30fb4af4742d9e6499acdbf58927ab89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c570e2a3781e674fa69b9f923cd31ade') in 0.011440 seconds 
+  Time since last request: 0.000181 seconds.
+  path: Assets/Prefabs/Models/Weapon Props/SM_Dagger.fbx
+  artifactKey: Guid(668acb3ebc34156409413206c1cc1c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Models/Weapon Props/SM_Dagger.fbx using Guid(668acb3ebc34156409413206c1cc1c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b50f7563260ac326c0562537d78074c1') in 0.013578 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 13.964206 seconds.
-  path: Assets/Scenes/Demo scenes/EnemyDemoScene/NavMesh-nAV.asset
-  artifactKey: Guid(4f362ae32a12a6c4b972f53a065ee49f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/EnemyDemoScene/NavMesh-nAV.asset using Guid(4f362ae32a12a6c4b972f53a065ee49f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c9254f03502087b4bddc54089d50a23') in 0.004031 seconds 
+  Time since last request: 105.443467 seconds.
+  path: Assets/Material/ForgeGolem/M_Body.mat
+  artifactKey: Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/ForgeGolem/M_Body.mat using Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8428794d7d9a9ec442aa71e238ea987') in 0.009705 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000123 seconds.
-  path: Assets/Scenes/Demo scenes/EnemyDemoScene/NavMesh-NavMesh.asset
-  artifactKey: Guid(e3c0d649263e88948942c453491b7575) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/EnemyDemoScene/NavMesh-NavMesh.asset using Guid(e3c0d649263e88948942c453491b7575) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '184df2b1e4338f025881235592e57863') in 0.002390 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000279 seconds.
-  path: Assets/Scenes/Demo scenes/EnemyDemoScene/NavMesh-Navmesh 1.asset
-  artifactKey: Guid(0b230eec1b66a2f49afb3c7a4b2d8f22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/EnemyDemoScene/NavMesh-Navmesh 1.asset using Guid(0b230eec1b66a2f49afb3c7a4b2d8f22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3dceabc01c9b13168de1ab7868620b4') in 0.003060 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 42.080635 seconds.
-  path: Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity
-  artifactKey: Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity using Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '0854de5a4733b3f8ac6cb43d1ba1e232') in 0.006467 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.419288 seconds.
-  path: Assets/Scenes/Demo scenes/ObstacleDemo.unity
-  artifactKey: Guid(ba10f79997b49664ebc12a9646efa323) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/ObstacleDemo.unity using Guid(ba10f79997b49664ebc12a9646efa323) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8f06c081264dfc0563b692336e7b708') in 0.002614 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.757689 seconds.
-  path: Assets/Scenes/Demo scenes/DemoDungeonGen.unity
-  artifactKey: Guid(fa3497b844a003a40b521d26b2d09272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/DemoDungeonGen.unity using Guid(fa3497b844a003a40b521d26b2d09272) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45928aab190af90ee44d3c2abb725f19') in 0.002790 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 32.836809 seconds.
-  path: Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity
-  artifactKey: Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity using Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31323a9a4346026e2e4b8d15c2993e26') in 0.003327 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 205.778593 seconds.
-  path: Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity
-  artifactKey: Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
-Start importing Assets/Scenes/Demo scenes/Boss ForgeGolem Demo.unity using Guid(610393b5f009b0749a271bbd3a4c94f2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '631477f1d3a495f0e0ea2f07bbca5f48') in 0.004510 seconds 
+  Time since last request: 987.408785 seconds.
+  path: Assets/Material/ForgeGolem/M_Body.mat
+  artifactKey: Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Material/ForgeGolem/M_Body.mat using Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfac52f6427e05f665fcadd2a4365144') in 0.010796 seconds 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
