@@ -13,6 +13,7 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
     private CharacterHealthManager _healthManager;
     private Vector3 _initialSize;
     private ObjectBounds _bounds;
+    protected GameManager _gameManager;
     private void Awake()
     {
         if (InDebug)
@@ -20,6 +21,46 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
             Init();
         }
     }
+
+    public virtual void OnEnable()
+    {
+
+        if (!_gameManager)
+        {
+            if (GameStateManager.instance && GameStateManager.instance.GameManager)
+            {
+                _gameManager = GameStateManager.instance.GameManager;
+            }
+        }
+
+
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent += EvaluateNewGameplayEvent;
+        }
+
+
+
+    }
+    virtual protected void EvaluateNewGameplayEvent(GameplayEvents newEvent)
+    {
+        switch (newEvent)
+        {
+  
+            case GameplayEvents.PlayerRespawnBegun:
+                OnKilled();
+                break;
+     
+            case GameplayEvents.Restart:
+                OnKilled();
+                break;
+            case GameplayEvents.ExitLevel:
+                OnKilled();
+                break;
+      
+        }
+    }
+
     public void Init()
     {
         _initialSize = transform.localScale;
@@ -156,6 +197,10 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
         }
         transform.localScale = _initialSize;
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent -= EvaluateNewGameplayEvent;
+        }
     }
 
     protected void OnDestroy()
@@ -166,5 +211,10 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
             _healthManager.OnDie -= OnKilled;
         }
         transform.localScale = _initialSize;
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        if (_gameManager)
+        {
+            _gameManager.OnNewGamplayEvent -= EvaluateNewGameplayEvent;
+        }
     }
 }
