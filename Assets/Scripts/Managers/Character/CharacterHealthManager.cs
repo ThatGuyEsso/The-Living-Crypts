@@ -68,7 +68,12 @@ public class CharacterHealthManager : MonoBehaviour, IDamage,IInitialisable
 
         }
     }
-
+    public void KillCharacter()
+    {
+        _currentHealth = 0;
+        OnHealthUpdated?.Invoke(CurrentHealth);
+        OnDie?.Invoke();
+    }
     private void Update()
     {
         if (!_canBeHurt)
