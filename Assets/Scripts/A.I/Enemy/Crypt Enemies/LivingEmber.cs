@@ -47,7 +47,7 @@ public class LivingEmber : BaseEnemy
         if(!_squashAndStretch)
         {
             _squashAndStretch = GetComponent<SquashAndStretch>();
-            _squashAndStretch.Init();
+          
         }
    
         ResetEnemy();
@@ -453,6 +453,11 @@ public class LivingEmber : BaseEnemy
         if (_jumpMovement)
         {
             _jumpMovement.Init();
+        }
+
+        if (_squashAndStretch)
+        {
+            _squashAndStretch.Init();
         }
     }
 }
