@@ -474,7 +474,12 @@ public class DungeonGenerator : MonoBehaviour
 
         if (_obstacleGenerator)
         {
+            List<Room> BossRooms = _roomManager.GetRoomsOfType(RoomType.BossCrypt);
             List<Room> rooms = _roomManager.GetRoomsOfType(RoomType.Crypt);
+            foreach (Room BossRoom in BossRooms)
+            {
+                rooms.Add(BossRoom);
+            }
             if (rooms.Count == 0)
             {
                 return;
@@ -502,10 +507,15 @@ public class DungeonGenerator : MonoBehaviour
 
         if (_litterGenerator)
         {
+            List<Room> BossRooms = _roomManager.GetRoomsOfType(RoomType.BossCrypt);
             List<Room> lootRooms = _roomManager.GetRoomsOfType(RoomType.LootCrypt);
             List<Room> corridors = _roomManager.GetRoomsOfType(RoomType.Corridor);
             List<Room> rooms = _roomManager.GetRoomsOfType(RoomType.Crypt);
-            foreach(Room corridor in corridors)
+            foreach (Room BossRoom in BossRooms)
+            {
+                rooms.Add(BossRoom);
+            }
+            foreach (Room corridor in corridors)
             {
                 rooms.Add(corridor);
             }

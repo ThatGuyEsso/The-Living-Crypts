@@ -56,6 +56,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
 
     [Header("VFX")]
     [SerializeField] protected GameObject DeathVFX;
+
     [Header("Enemy States")]
     [SerializeField] protected EnemyState CurrentState;
 
@@ -257,4 +258,6 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
         yield return new WaitForSeconds(TickRate);
         StartCoroutine(DoAITick());
     }
+
+    public AudioManager AudioManager { set { AM = value; } }
 }

@@ -33,7 +33,7 @@ public class Room : MonoBehaviour
     [SerializeField] private bool _useGridOffset = false;
 
     private bool _drawDebug;
-    private RoomInfo _roomInfo;
+    [SerializeField] private RoomInfo _roomInfo;
 
     [SerializeField] private int _nCrawlersPresent = 0;
 
@@ -42,7 +42,7 @@ public class Room : MonoBehaviour
 
     private CryptEnemyManager enemyManager;
 
- 
+    public System.Action OnBossRoomTriggered;
 
     private void OnDrawGizmos()
     {
@@ -84,6 +84,9 @@ public class Room : MonoBehaviour
 
                 BeginLootEcounter();
                 break;
+            case RoomType.BossCrypt:
+                BeginBossEnounter();
+                break;
         }
     }
 
@@ -112,6 +115,13 @@ public class Room : MonoBehaviour
         }
     }
 
+    public void BeginBossEnounter()
+    {
+        LockDoors();
+        OnBossRoomTriggered?.Invoke();
+
+
+    }
     public void OnRoomCleared()
     {
         if (enemyManager)
@@ -144,6 +154,10 @@ public class Room : MonoBehaviour
                 _doors.Add(doors[i]);
                 doors[i].Init();
                 doors[i].OnPlayerEnteredRoom += BeginRoomEncounter;
+                if (_inDebug)
+                {
+                    doors[i].OpenDoor();
+                }
             }
 
 

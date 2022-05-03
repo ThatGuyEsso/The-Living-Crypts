@@ -5,11 +5,22 @@ using UnityEngine;
 public class ForgeGolem : BaseBoss
 {
     private WalkMovement _walkMovement;
+    [Header("Animation")]
+    [SerializeField] protected BossAnimationManager AnimManager;
     public override void Init()
     {
         base.Init();
         if(_hManager) _hManager.IsAlive = false;
-        _walkMovement = GetComponent<WalkMovement>();
+        if (!_walkMovement)
+        {
+            _walkMovement = GetComponent<WalkMovement>();
+        }
+
+        if (!AnimManager)
+        {
+            AnimManager = GetComponent<BossAnimationManager>();
+        }
+      
     }
 
   
@@ -59,6 +70,8 @@ public class ForgeGolem : BaseBoss
     {
         base.StartBossFight();
         _walkMovement.Init();
+        AnimManager.Init();
+        AnimManager.PlayIdleAnimation();
     }
     protected override void ProcessAI()
     {
@@ -147,6 +160,22 @@ public class ForgeGolem : BaseBoss
         
     }
 
+    public override void OnEnemyStateChange(EnemyState newState)
+    {
+        base.OnEnemyStateChange(newState);
+
+        switch (newState)
+        {
+            case EnemyState.Chase:
+                AnimManager.PlayWalkAnimation();
+                break;
+
+            case EnemyState.Idle:
+                AnimManager.PlayIdleAnimation();
+
+                break;
+        }
+    }
     public override void ResetEnemy()
     {
         throw new System.NotImplementedException();

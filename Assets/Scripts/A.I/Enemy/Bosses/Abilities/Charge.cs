@@ -12,10 +12,9 @@ public class Charge : BaseBossAbility
     [SerializeField] private float ChargeSpeed;
     private Animator _animator;
 
-    private LimbTargetManager _limbTargetManager;
     private WalkMovement _movement;
     private AttackAnimManager _attackAnimManager;
-    private SmoothMatchParentRotLoc[] _smoothMatchParentRots;
+   
     private FaceDirection _faceDirection;
     private Vector3 ChargePoint;
     private float _defaultSpeed;
@@ -30,20 +29,14 @@ public class Charge : BaseBossAbility
             _animator = _owner.GetComponent<Animator>();
         }
 
-        if (!_limbTargetManager)
-        {
-            _limbTargetManager = _owner.GetComponent<LimbTargetManager>();
-        }
+   
         if (!_attackAnimManager)
         {
             _attackAnimManager = _owner.GetComponent<AttackAnimManager>();
 
 
         }
-        if (_smoothMatchParentRots == null)
-        {
-            _smoothMatchParentRots = _owner.GetComponentsInChildren<SmoothMatchParentRotLoc>();
-        }
+  
         if (!_movement)
         {
             _movement = _owner.GetComponent<WalkMovement>();
@@ -184,9 +177,9 @@ public class Charge : BaseBossAbility
         {
           
             _canAttack = false;
-            if (_limbTargetManager && _attackAnimManager && _animator)
+            if (  _attackAnimManager && _animator)
             {
-                _limbTargetManager.UseSelfAsTarget();
+               
                 _animator.enabled = true;
                 _attackAnimManager.OnReadyUpBegin += OnReadyUpBegin;
                 _attackAnimManager.OnReadyUpComplete += OnReadyUpComplete;
@@ -204,12 +197,9 @@ public class Charge : BaseBossAbility
 
     public override void Terminate()
     {
-        _animator.enabled = false;
-        _limbTargetManager.UseInitialTarget();
-        foreach (SmoothMatchParentRotLoc rotloc in _smoothMatchParentRots)
-        {
-            rotloc.ResetChild(5f);
-        }
+        
+       
+   
 
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();

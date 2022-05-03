@@ -51,6 +51,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
             _hManager.OnHurt += OnHurt;
             _hManager.OnDie += EndBossFight;
         }
+
     }
     virtual protected void SetUpNewAbilities()
     {     
@@ -165,6 +166,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     {
         PathFinder.Init();
         _bossFightRunning = true;
+ 
         _canUseAttack = true;
         BeginNewStage(BossStage.First);
 

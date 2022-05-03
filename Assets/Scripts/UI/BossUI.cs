@@ -11,6 +11,9 @@ public class BossUI : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private UIElementShake uiShaker;
     [SerializeField] private ResizeToFitText displayRefit;
+    [SerializeField] private AudioManager AM;
+
+    [SerializeField] private string HealthSpawnSFX;
 
     public Action OnUISpawned;
     public void InitialiseUI(string bossName,float maxHealth)
@@ -35,9 +38,9 @@ public class BossUI : MonoBehaviour
 
     public void PlaySFX()
     {
-        if (GameStateManager.instance.AudioManager)
+        if (AM)
         {
-            //AudioManager.instance.PlayUISound("RoomSpawn",transform.position);
+            AM.PlayUISound(HealthSpawnSFX, transform.position);
         }
     }
     public void DoHurtUpdate(float newHealth)
@@ -46,5 +49,7 @@ public class BossUI : MonoBehaviour
         uiShaker.BeginViewBob();
 
     }
+
+    public AudioManager AudioManager { set { AM = value; } }
  
 }

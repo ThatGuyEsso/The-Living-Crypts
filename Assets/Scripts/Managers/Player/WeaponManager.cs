@@ -17,7 +17,7 @@ public class WeaponManager : MonoBehaviour,IInitialisable
     [SerializeField] private string EquipSFX;
 
     private Controls _input;
-    private AudioManager _audioManager;
+    [SerializeField]  private AudioManager _audioManager;
     private HUDManager _hudManager;
     public System.Action<string> OnWeaponEquipped;
    
@@ -98,6 +98,7 @@ public class WeaponManager : MonoBehaviour,IInitialisable
         if (!_equippedWeapon)
         {
             _equippedWeapon = weapon;
+
             OnWeaponEquipped?.Invoke(weapon.WeaponName);
             _isWeaponEquipped = true;
             _equippedWeapon.transform.position = _weaponEquipPoint.position;
@@ -106,6 +107,10 @@ public class WeaponManager : MonoBehaviour,IInitialisable
             PlayEquipSFX();
             UpdateWeaponDisplayed();
             SetUpUIBinds(_equippedWeapon);
+            if (_audioManager)
+            {
+                _equippedWeapon.AudioManager = _audioManager;
+            }
         }
         else
         {

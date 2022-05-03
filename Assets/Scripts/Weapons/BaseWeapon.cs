@@ -165,4 +165,17 @@ public abstract class BaseWeapon : MonoBehaviour, Iteam
 
     public virtual float MaxPrimaryCooldown { get { return _primaryFireRate; } }
     public virtual float MaxSecondaryCooldown { get { return _secondaryFireRate; } }
+
+    public AudioManager AudioManager
+    {
+        get
+        {
+            return AM;
+        }
+
+        set
+        {
+            AM = value;
+        }
+    }
 }
