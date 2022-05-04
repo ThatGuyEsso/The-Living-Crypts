@@ -18,6 +18,7 @@ public abstract class BaseBossAbility : MonoBehaviour
     public System.Action OnAbilityFinished;
     protected bool _isInitialised;
     protected float currentCoolDown = 0;
+    protected float currentTimeToSkip = 0;
     protected bool IsActive;
     virtual  public void Init()
     {
@@ -96,5 +97,15 @@ public abstract class BaseBossAbility : MonoBehaviour
     virtual public void PerformAttack()
     {
 
+    }
+
+    virtual protected void OnDestroy()
+    {
+        CancelAttack();
+    }
+
+    virtual protected void OnDisable()
+    {
+        CancelAttack();
     }
 }

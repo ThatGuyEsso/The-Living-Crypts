@@ -2810,7 +2810,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1155
+  m_VersionIndex: 1389
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3152,7 +3152,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1226
+  m_VersionIndex: 1460
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3494,7 +3494,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2538
+  m_VersionIndex: 2772
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15090,7 +15090,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5887
+  m_VersionIndex: 6121
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15432,7 +15432,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1223
+  m_VersionIndex: 1457
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15774,7 +15774,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1166
+  m_VersionIndex: 1400
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -16117,7 +16117,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 916
+  m_VersionIndex: 1150
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -16571,7 +16571,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 0aa2f067e6b53cb4e8837a025f83ad3c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: aafb943f17de2274bb548eef348f7914, type: 2}
 --- !u!1 &5827980808482587127
 GameObject:
   m_ObjectHideFlags: 0
@@ -16877,7 +16877,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1267
+  m_VersionIndex: 1501
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -19255,7 +19255,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 988
+  m_VersionIndex: 1222
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -19919,7 +19919,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 982
+  m_VersionIndex: 1216
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -20583,7 +20583,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 985
+  m_VersionIndex: 1219
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -21247,7 +21247,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 979
+  m_VersionIndex: 1213
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -21863,7 +21863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].IsPriority
@@ -21871,11 +21871,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[0].AttackRange
-      value: -1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].AttackRange
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[0].IsCloseRange
@@ -21891,23 +21891,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].IsCloseRange
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
+      propertyPath: FirstStageAttackPattern.Abillities.Array.data[2].IsCloseRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[0].AbilityPrefab
       value: 
-      objectReference: {fileID: 6314538820140613839, guid: 06ee4d638e8099f4aa82e6fa9bd6db5a, type: 3}
+      objectReference: {fileID: 2962948923133960699, guid: d08e91ea401f3914d8d3b63b583ad4a7, type: 3}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].AbilityPrefab
       value: 
-      objectReference: {fileID: 2962948923133960699, guid: d08e91ea401f3914d8d3b63b583ad4a7, type: 3}
+      objectReference: {fileID: 6314538820140613839, guid: 06ee4d638e8099f4aa82e6fa9bd6db5a, type: 3}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[0].AttackCooldown
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].AttackCooldown
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[0].MaxAttackDamage
@@ -21919,19 +21923,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].AbilityCooldown
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].MaxAttackDamage
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].MinAttackDamage
-      value: 15
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
+      propertyPath: FirstStageAttackPattern.Abillities.Array.data[0].MaxTimeToAttempt
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: FirstStageAttackPattern.Abillities.Array.data[1].MaxTimeToAttempt
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245415164990759513, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
+      propertyPath: FirstStageAttackPattern.Abillities.Array.data[2].MaxTimeToAttempt
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4245415164990759514, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
       propertyPath: InDebug
@@ -22103,6 +22115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4245415164990759519, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
+    - {fileID: 5637547244211765682, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 82f022ac6a77bed498764fc20cd36552, type: 3}
 --- !u!114 &5708662820412585934 stripped
 MonoBehaviour:

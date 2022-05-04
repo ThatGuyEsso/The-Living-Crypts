@@ -7,6 +7,8 @@ public class ForgeGolem : BaseBoss
 
     [Header("Layers")]
     [SerializeField] private LayerMask GroundLayers;
+    [Header("Collision")]
+    [SerializeField] private CapsuleCollider MainCollider;
     private WalkMovement _walkMovement;
     [Header("Animation")]
     [SerializeField] protected BossAnimationManager AnimManager;
@@ -14,8 +16,10 @@ public class ForgeGolem : BaseBoss
     [Header("SFX")]
     [SerializeField] protected string AwakenSFX;
     [Header("VFX")]
+    protected float MinTimeBetweenBreaks=0.25f,MaxTimeBetweenBreaks=1f;
     protected MaterialSwitch[] MaterialSwitches;
     protected ComplexHitFlashManager HitVFXs;
+    [SerializeField] protected CreateFreeRigidBBody[] BreakJoints;
     public override void Init()
     {
         base.Init();
@@ -29,8 +33,9 @@ public class ForgeGolem : BaseBoss
         {
             AnimManager = GetComponent<BossAnimationManager>();
         }
-      
-   
+        MainCollider = GetComponent<CapsuleCollider>();
+
+
     }
 
   
@@ -40,11 +45,67 @@ public class ForgeGolem : BaseBoss
     
     }
 
+    public override void EndBossFight()
+    {
+        base.EndBossFight();
+        KillEnemy();
+    }
     protected override void KillEnemy()
     {
+        _bossFightRunning = false;
+        _walkMovement.BeginStop();
+        
+        ClearEquippedAbilities();
+        if (AnimManager)
+        {
+            AnimManager.PlayIdleAnimation();
+            AnimManager.StopAnimating();
+        }
+        if (MaterialSwitches.Length > 0)
+        {
+
+
+            foreach (MaterialSwitch MatSwitch in MaterialSwitches)
+            {
+                MatSwitch.SwitchOff();
+            }
+        }
+
+
+        Collider[] childColliders = GetComponentsInChildren<Collider>();
+        foreach (Collider collider in childColliders)
+        {
+            collider.isTrigger = false;
+        }
+
+        if (MainCollider)
+        {
+            MainCollider.enabled = false;
+        }
+
+        if (BreakJoints.Length > 0)
+        {
+            StartCoroutine(BreakJointsOverTime(BreakJoints));
+
+        }
+
+       
+
+
+     
+       
+
+    }
+    private IEnumerator BreakJointsOverTime( CreateFreeRigidBBody[] jointsToBreak)
+    {
+
+        for (int i= 0;i < jointsToBreak.Length; i++)
+        {
+            yield return new WaitForSeconds(Random.Range(MinTimeBetweenBreaks,MaxTimeBetweenBreaks));
+            jointsToBreak[i].Init(); ;
+        }
         
     }
-
 
     protected override void BeginNewStage(BossStage newStage)
     {

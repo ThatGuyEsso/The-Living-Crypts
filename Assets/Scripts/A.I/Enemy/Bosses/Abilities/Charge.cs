@@ -58,7 +58,7 @@ public class Charge : BaseBossAbility
         }
         else
         {
-            ChargePoint = _owner.transform.forward * MaxChargeDistance;
+            ChargePoint = _owner.transform.position+ _owner.transform.forward * MaxChargeDistance;
         }
 
         Debug.DrawLine(_owner.transform.position, ChargePoint, Color.yellow, 10f);
@@ -194,6 +194,7 @@ public class Charge : BaseBossAbility
             Init();
         }
         IsActive = true;
+      
         if (_canAttack)
         {
           
@@ -219,7 +220,7 @@ public class Charge : BaseBossAbility
     public override void Terminate()
     {
 
-
+      
         IsActive = false;
         OnAttackEnd();
         _currentCooldown = _abilityData.AbilityCooldown;
@@ -227,11 +228,35 @@ public class Charge : BaseBossAbility
     }
     public override void CancelAttack()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         IsActive = false;
         StopAllCoroutines();
+        AttackCollider[] colliders = _owner.GetBodyAttackColliders();
+        _owner.ToggleBodyAttackColliders(false);
+        if (colliders.Length > 0)
+        {
+            foreach (AttackCollider collider in colliders)
+            {
+
+                collider.OnObjectHit -= EvaluateObjectHit;
+                collider.OnAttackPerfomed -= OnAttackEnd;
+            }
+
+        }
+        if (_movement)
+        {
+            _movement.SetMaxSpeed(_defaultSpeed);
+            _movement.SetStoppingDistance(_defaultStoppingDistance);
+            _movement.SetAcceleration(_defaultAcceleration);
+            _movement.BeginStop();
+        }
+    
         if (_attackAnimManager)
         {
-            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
             _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
             _attackAnimManager.OnAttackEnd -= OnAttackEnd;
     

@@ -40,6 +40,8 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     protected bool _canUseAttack;
     protected bool _bossFightRunning;
 
+    protected float TimeToSkip=0;
+
     
     virtual public void InitBossUI(BossUI UI)
     {
@@ -181,6 +183,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         Debug.Log("End Boss fight");
         _bossUI.DoHurtUpdate(0.0f);
         _bossUI.HideUI();
+        PlaySFX(KilledSFX,false);
     }
 
     public virtual void EvaluateStageTrigger()
@@ -216,6 +219,10 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     {
         CurrentStageAbility[_curentAttackIndex].OnAbilityStarted += OnAttackStarted;
         CurrentStageAbility[_curentAttackIndex].OnAbilityFinished += OnAttackComplete;
+        if (!CurrentStageAbility[_curentAttackIndex].GetAbilityData().IsPriority)
+        {
+            TimeToSkip = CurrentStageAbility[_curentAttackIndex].GetAbilityData().MaxTimeToAttempt;
+        }
     }
 
     virtual protected void InitTransitionAbility()
@@ -278,12 +285,21 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     }
     virtual protected bool InAbilityRange()
     {
+        
         if (!CurrentTarget) return false;
+        if(CurrentStageAbility.Count == 0)
+        {
+            return false;
+        }
         return (CurrentStageAbility[_curentAttackIndex].InAttackRange(CurrentTarget.position));
     }
     virtual protected bool CanUseAbility()
     {
         if (!CurrentTarget) return false;
+        if (CurrentStageAbility.Count == 0)
+        {
+            return false;
+        }
         return (CurrentStageAbility[_curentAttackIndex].CanAttack());
     }
     public void EndTransitionStage()
@@ -317,6 +333,17 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
             else 
             {
                 _canUseAttack = true;
+                NextAttack();
+            }
+        }
+        if (!_isUsingAttack && !CurrentStageAbility[_curentAttackIndex].GetAbilityData().IsPriority)
+        {
+            if (TimeToSkip > 0)
+            {
+                TimeToSkip -= Time.deltaTime;
+            }
+            else
+            {
                 NextAttack();
             }
         }

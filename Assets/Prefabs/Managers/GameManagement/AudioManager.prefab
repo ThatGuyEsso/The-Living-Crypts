@@ -260,7 +260,25 @@ MonoBehaviour:
     source: {fileID: 0}
     mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
     pitchChange: 0.1
-  soundGroups: []
+  - name: ForgeGolemDeathSFX
+    clip: {fileID: 8300000, guid: 95c9a45f849575f4ca0cde6006f4b60c, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
+    pitchChange: 0.1
+  soundGroups:
+  - name: ForgeGolemStep
+    clips:
+    - {fileID: 8300000, guid: ac7911414530a6d40884fe6e84646f02, type: 3}
+    - {fileID: 8300000, guid: 60c1743fdcf61d34f84c40df49ccaca4, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixerGroup: {fileID: 0}
+    pitchChange: 0.08
   uiGroup: {fileID: 24300002, guid: e62b2e17eabac76408f7f778e8283de0, type: 2}
   soundEffectGroup: {fileID: 24300002, guid: e9a226f0d2ed44e4eb93c824c5f228f4, type: 2}
   audioPlayer: {fileID: 7269974362316107315, guid: c8601855c91402d4d809838d5eb77b65, type: 3}

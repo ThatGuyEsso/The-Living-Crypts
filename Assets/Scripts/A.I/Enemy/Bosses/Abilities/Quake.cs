@@ -46,7 +46,11 @@ public class Quake : BaseBossAbility
             {
                 _canAttack = true;
             }
+
+
         }
+
+    
     }
 
     public override void Execute()
@@ -54,6 +58,10 @@ public class Quake : BaseBossAbility
         if (!_isInitialised)
         {
             Init();
+        }
+        if (!_abilityData.IsPriority)
+        {
+            currentTimeToSkip = _abilityData.MaxTimeToAttempt;
         }
         IsActive = true;
         if (_canAttack)
@@ -80,6 +88,8 @@ public class Quake : BaseBossAbility
 
     override protected void OnReadyUpBegin()
     {
+
+   
         if (_attackAnimManager)
         {
             _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
@@ -91,7 +101,7 @@ public class Quake : BaseBossAbility
     {
         if (_attackAnimManager)
         {
-            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
         }
         StartCoroutine(WaitToExecuteAttack(MaxPoseTime));
 
@@ -135,9 +145,16 @@ public class Quake : BaseBossAbility
 
     public override void Terminate()
     {
+
+  
         IsActive = false;
-        _attackAnimManager.OnAnimEnd -= Terminate;
-        _currentCooldown = _abilityData.AbilityCooldown;
+        if (_attackAnimManager)
+        {
+            _attackAnimManager.OnAnimEnd -= Terminate;
+            _currentCooldown = _abilityData.AbilityCooldown;
+
+        }
+
         OnAbilityFinished?.Invoke();
 
     }
@@ -148,7 +165,7 @@ public class Quake : BaseBossAbility
         StopAllCoroutines();
         if (_attackAnimManager)
         {
-            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
             _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
             _attackAnimManager.OnAttackEnd -= OnAttackEnd;
             _attackAnimManager.OnAnimEnd -= Terminate;
@@ -156,4 +173,7 @@ public class Quake : BaseBossAbility
    
         _currentCooldown = _abilityData.AbilityCooldown;
     }
+
+
+  
 }

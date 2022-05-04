@@ -16,6 +16,7 @@ public class DebugController : MonoBehaviour {
     public static DebugCommand SPAWN_WEST_DUNGEON;
     public static DebugCommand SPAWN_EAST_DUNGEON;
     public static DebugCommand KILL_PLAYER;
+    public static DebugCommand KILL_BOSS;
     public List<object> commandList;
     private RoomManager _roomManager;
     private DungeonGenerator _dungeonGenerator;
@@ -32,6 +33,7 @@ public class DebugController : MonoBehaviour {
         SPAWN_SOUTH_DUNGEON = new DebugCommand("/Spawn_South_Dungeon", "Spawns south Dungeon", "/Spawn_S_Dungeon", () => GenSouthDungeon());
         SPAWN_WEST_DUNGEON = new DebugCommand("/Spawn_West_Dungeon", "Spawns West Dungeon", "/Spawn_W_Dungeon", () => GenWestDungeon());
         SPAWN_EAST_DUNGEON = new DebugCommand("/Spawn_East_Dungeon", "Spawns East Dungeon", "/Spawn_E_Dungeon", () => GenEastDungeon());
+        KILL_BOSS = new DebugCommand("/Kill_Boss", "Kills Current boss", "/Kill__Boss", () => StopBossFight());
 
 
         KILL_PLAYER = new DebugCommand("/Kill_Player", "Kills Player character", "/Kill_Player", () => KillPlayerCharacter());
@@ -41,7 +43,8 @@ public class DebugController : MonoBehaviour {
             SPAWN_SOUTH_DUNGEON,
             SPAWN_WEST_DUNGEON,
             SPAWN_EAST_DUNGEON,
-            KILL_PLAYER
+            KILL_PLAYER,
+            KILL_BOSS
         };
     }
 
@@ -263,6 +266,17 @@ public class DebugController : MonoBehaviour {
             {
                 damage.OnDamage(1000f, Vector3.zero, 0f, null, player.transform.position);
             }
+        }
+    }
+
+
+    public void StopBossFight()
+    {
+        BaseBoss boss = GameObject.FindObjectOfType<BaseBoss>();
+
+        if (boss)
+        {
+            boss.EndBossFight();
         }
     }
 }

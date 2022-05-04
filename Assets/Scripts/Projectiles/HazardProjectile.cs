@@ -92,8 +92,13 @@ public class HazardProjectile : BaseProjectile
 
                         if (damage != null)
                         {
-                            damage.OnDamage(_projectileData._damage, _rb.velocity.normalized,
-                                _projectileData._knockback, _projectileData._owner, other.ClosestPoint(transform.position));
+                             damage = other.GetComponentInParent<IDamage>();
+                            if (damage != null)
+                            {
+                                damage.OnDamage(_projectileData._damage, _rb.velocity.normalized,
+                              _projectileData._knockback, _projectileData._owner, other.ClosestPoint(transform.position));
+                            }
+                          
                         }
 
                         if (AlwaysSpawnHazardZone)
@@ -107,8 +112,7 @@ public class HazardProjectile : BaseProjectile
             }
         }
         else
-        {
-            BreakProjectile();
+        {     BreakProjectile();
 
         }
 

@@ -265,7 +265,7 @@ public class AbilityMagmaRelease : BaseBossAbility
         StopAllCoroutines();
         if (_attackAnimManager)
         {
-            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
             _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
             _attackAnimManager.OnAttackEnd -= OnAttackEnd;
             _attackAnimManager.OnAnimEnd -= Terminate;
