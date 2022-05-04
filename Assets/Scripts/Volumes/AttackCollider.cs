@@ -12,7 +12,7 @@ public class AttackCollider : MonoBehaviour
     public System.Action OnAttackPerfomed;
     Collider _attackCollider;
     public bool IsEnabled;
-    
+    Iteam _ownerTeam;
     
     public void ToggleColiider(bool isEnabled)
     {
@@ -40,69 +40,53 @@ public class AttackCollider : MonoBehaviour
     {
         if (!IsEnabled) return;
 
-
-        if (other.transform.root.gameObject != _owner)
+        Iteam otherTeam = other.GetComponent<Iteam>();
+        if (otherTeam == null)
         {
-            IDamage damage = other.transform.root.GetComponent<IDamage>();
-            if (damage == null)
-            {
-                return;
-            }
-            Iteam ownerTeam = _owner.GetComponent<Iteam>();
-            if (ownerTeam == null)
-            {
-                return;
-            }
-            Iteam otherTeam = other.transform.root.GetComponentInParent<Iteam>();
+            otherTeam = other.gameObject.GetComponentInParent<Iteam>();
             if (otherTeam == null)
             {
-                if (damage != null)
-                {
-                    IAttacker attacker = _owner.GetComponent<IAttacker>();
-                    if (attacker != null)
-                    {
-                        AttackData aDAta = attacker.GetAttackData();
-                        float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
-                        float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
-                        damage.OnDamage(dmg, _owner.transform.forward,
-                                kBack, _owner, other.ClosestPoint(transform.position));
-
-                    }
-
-
-
-                }
+                OnObjectHit?.Invoke(other.gameObject);
+                return;
 
             }
-            else if (!ownerTeam.IsOnTeam(otherTeam.GetTeam()))
-            {
-                if (damage != null)
-                {
-                    IAttacker attacker = _owner.GetComponent<IAttacker>();
-                    if (attacker != null)
-                    {
-                        AttackData aDAta = attacker.GetAttackData();
-                        float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
-                        float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
-                        damage.OnDamage(dmg, _owner.transform.forward,
-                                kBack, _owner, other.ClosestPoint(transform.position));
-
-                        OnAttackPerfomed?.Invoke();
-                    }
-
-
-
-                }
-            }
-
-
-
-            OnObjectHit?.Invoke(other.gameObject);
-            OnEnemyHit?.Invoke(_owner);
-            OnAttackPerfomed?.Invoke();
 
         }
-;
+        if (_owner && _ownerTeam==null)
+        {
+            _ownerTeam = _owner.GetComponent<Iteam>();
+
+          
+        }
+        if(_ownerTeam == null || !_ownerTeam.IsOnTeam(otherTeam.GetTeam()))
+        {
+            IDamage damage = other.GetComponent<IDamage>();
+            if (damage == null)
+            {
+                damage = other.GetComponentInParent<IDamage>();
+                if (damage == null)
+                {
+                    OnObjectHit?.Invoke(other.gameObject);
+                    return;
+
+                }
+            }
+
+            IAttacker attacker = _owner.GetComponent<IAttacker>();
+            if (attacker != null)
+            {
+                AttackData aDAta = attacker.GetAttackData();
+                float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
+                float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
+                damage.OnDamage(dmg, _owner.transform.forward,
+                        kBack, _owner, other.ClosestPoint(transform.position));
+
+                OnAttackPerfomed?.Invoke();
+
+                OnEnemyHit?.Invoke(other.gameObject);
+            }
+        }
+
     }
 
 
@@ -113,69 +97,55 @@ public class AttackCollider : MonoBehaviour
     
     public void OnCollisionEnter(Collision other)
     {
+
+
         if (!IsEnabled) return;
 
-
-        if (other.transform.root.gameObject != _owner)
+        Iteam otherTeam = other.gameObject.GetComponent<Iteam>();
+        if (otherTeam == null)
         {
-            IDamage damage = other.transform.root.GetComponent<IDamage>();
-            if (damage == null)
-            {
-                return;
-            }
-            Iteam ownerTeam = _owner.GetComponent<Iteam>();
-            if(ownerTeam == null)
-            {
-                return;
-            }
-            Iteam otherTeam = other.transform.root.GetComponentInParent<Iteam>();
+            otherTeam = other.gameObject.GetComponentInParent<Iteam>();
             if (otherTeam == null)
             {
-                if (damage != null)
-                {
-                    IAttacker attacker = _owner.GetComponent<IAttacker>();
-                    if (attacker != null)
-                    {
-                        AttackData aDAta = attacker.GetAttackData();
-                        float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
-                        float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
-                        damage.OnDamage(dmg, _owner.transform.forward,
-                                kBack, _owner, (transform.position));
-                       
-                    }
+                OnObjectHit?.Invoke(other.gameObject);
+                return;
 
-
-
-                }
-             
-            }else if (!ownerTeam.IsOnTeam(otherTeam.GetTeam()))
-            {
-                if (damage != null)
-                {
-                    IAttacker attacker = _owner.GetComponent<IAttacker>();
-                    if (attacker != null)
-                    {
-                        AttackData aDAta = attacker.GetAttackData();
-                        float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
-                        float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
-                        damage.OnDamage(dmg, _owner.transform.forward,
-                                kBack, _owner, (transform.position));
-          
-                        OnAttackPerfomed?.Invoke();
-                    }
-
-
-
-                }
-           
             }
 
-            OnObjectHit?.Invoke(other.gameObject);
-            OnEnemyHit?.Invoke(_owner);
-            OnAttackPerfomed?.Invoke();
+        }
+        if (_owner && _ownerTeam == null)
+        {
+            _ownerTeam = _owner.GetComponent<Iteam>();
 
 
+        }
+        if (_ownerTeam == null || !_ownerTeam.IsOnTeam(otherTeam.GetTeam()))
+        {
+            IDamage damage = other.gameObject.GetComponent<IDamage>();
+            if (damage == null)
+            {
+                damage = other.gameObject.GetComponentInParent<IDamage>();
+                if (damage == null)
+                {
+                    OnObjectHit?.Invoke(other.gameObject);
+                    return;
 
+                }
+            }
+
+            IAttacker attacker = _owner.GetComponent<IAttacker>();
+            if (attacker != null)
+            {
+                AttackData aDAta = attacker.GetAttackData();
+                float dmg = Random.Range(aDAta.MinDamage, aDAta.MaxDamage);
+                float kBack = Random.Range(aDAta.MinKnockBack, aDAta.MaxKnockBack);
+                damage.OnDamage(dmg, _owner.transform.forward,
+                        kBack, _owner, other.transform.position);
+
+                OnAttackPerfomed?.Invoke();
+
+                OnEnemyHit?.Invoke(other.gameObject);
+            }
         }
     }
 

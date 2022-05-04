@@ -56,9 +56,16 @@ public class HazardProjectile : BaseProjectile
 
             if(otherTeam == null)
             {
-                return;
+                otherTeam = other.GetComponentInParent<Iteam>();
+                if (otherTeam == null)
+                {
+                   
+                    return;
+                }
             }
-          
+       
+           
+
             if (other.transform.parent != _projectileData._owner)
             {
                  Iteam ourTeam = _projectileData._owner.GetComponent<Iteam>();
@@ -98,6 +105,11 @@ public class HazardProjectile : BaseProjectile
                 }
 
             }
+        }
+        else
+        {
+            BreakProjectile();
+
         }
 
     }

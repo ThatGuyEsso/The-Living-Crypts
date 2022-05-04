@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &996259746106595168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2691887568977047915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66830fd4e5ea0e445a96c96c7ad8fdf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthManager: {fileID: 836753347387585162}
 --- !u!1 &4346541944154640564
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +23,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7882662942229278983}
   - component: {fileID: 205556411395974183}
-  m_Layer: 16
+  m_Layer: 10
   m_Name: PlayerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,9 +103,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 163429901, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565395, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_Name
       value: FPSCombatCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732970680565395, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3370732970680565396, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
       propertyPath: m_RootOrder
@@ -138,10 +159,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3370732970782629264, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370732971301349032, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912507183926925923, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
 --- !u!4 &2691887569142289007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3370732970680565396, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+  m_PrefabInstance: {fileID: 836753347462081787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &836753347387585162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 197090929, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
+  m_PrefabInstance: {fileID: 836753347462081787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3de057180189f4eaa80eb9103d7a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2691887568977047915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3370732970782629264, guid: 8ded085bd1d48b3469ba63a76264494e, type: 3}
   m_PrefabInstance: {fileID: 836753347462081787}
   m_PrefabAsset: {fileID: 0}

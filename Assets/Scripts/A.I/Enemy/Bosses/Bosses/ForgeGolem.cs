@@ -123,7 +123,10 @@ public class ForgeGolem : BaseBoss
             case EnemyState.Chase:
 
                 if (!CurrentTarget) OnEnemyStateChange(EnemyState.Idle);
-                if (_isUsingAttack) return;
+                if (_isUsingAttack)
+                {
+                    return;
+                }
                 if (!InAbilityRange())
                 {
                     DrawPathToTarget();
@@ -137,7 +140,10 @@ public class ForgeGolem : BaseBoss
                 break;
             case EnemyState.Attack:
                 if (!CurrentTarget) OnEnemyStateChange(EnemyState.Idle);
-                if (_isUsingAttack) return;
+                if (_isUsingAttack)
+                {
+                    return;
+                }
                 if (!InAbilityRange())
                 {
                     OnEnemyStateChange(EnemyState.Chase);
@@ -145,7 +151,7 @@ public class ForgeGolem : BaseBoss
                 else 
                 {
                     _walkMovement.BeginStop();
-                    if (!_canUseAttack)
+                    if (_canUseAttack)
                     {
                       
                         ExecuteAbility();
@@ -182,7 +188,7 @@ public class ForgeGolem : BaseBoss
                 if (InAbilityRange())
                 {
                     OnEnemyStateChange(EnemyState.Attack);
-                    if (!_canUseAttack)
+                    if (_canUseAttack)
                     {
                       
                         ExecuteAbility();

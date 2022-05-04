@@ -113,6 +113,10 @@ public class Charge : BaseBossAbility
 
     override protected void OnReadyUpBegin()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         if (_attackAnimManager)
         {
             _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
@@ -122,18 +126,26 @@ public class Charge : BaseBossAbility
     }
     override protected void OnReadyUpComplete()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         if (_attackAnimManager)
         {
             _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
         }
         _canRotate = false;
-        GetChargePoint();
+     
         StartCoroutine(WaitToExecuteAttack(MaxPoseTime));
 
     }
     public override void PerformAttack()
     {
-
+        if (!IsActive)
+        {
+            return;
+        }
+        GetChargePoint();
         SetupAttackCollider();
         _defaultSpeed = _movement.GetMaxSpeed();
         _defaultStoppingDistance = _movement.GetStoppingDistance();
@@ -150,6 +162,10 @@ public class Charge : BaseBossAbility
 
     override protected void OnAttackEnd()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         AttackCollider[] colliders = _owner.GetBodyAttackColliders();
         _owner.ToggleBodyAttackColliders(false);
         if (colliders.Length > 0)
@@ -172,11 +188,12 @@ public class Charge : BaseBossAbility
 
     public override void Execute()
     {
+      
         if (!_isInitialised)
         {
             Init();
         }
-
+        IsActive = true;
         if (_canAttack)
         {
           
@@ -203,13 +220,14 @@ public class Charge : BaseBossAbility
     {
 
 
-
+        IsActive = false;
         OnAttackEnd();
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();
     }
     public override void CancelAttack()
     {
+        IsActive = false;
         StopAllCoroutines();
         if (_attackAnimManager)
         {

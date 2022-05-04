@@ -163,8 +163,8 @@ public class AbilityMagmaRelease : BaseBossAbility
 
     protected override void OnReset()
     {
-        _animator.Play(EndAnim, default, 0f);
         _attackAnimManager.OnAnimEnd += Terminate;
+        _animator.Play(EndAnim, default, 0f);
     }
     public override void Execute()
     {
@@ -172,7 +172,7 @@ public class AbilityMagmaRelease : BaseBossAbility
         {
             Init();
         }
-
+        IsActive = true;
         if (_canAttack)
         {
             Debug.Log("Quake is calling attack");
@@ -196,6 +196,10 @@ public class AbilityMagmaRelease : BaseBossAbility
 
     override protected void OnReadyUpBegin()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         if (_attackAnimManager)
         {
             _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
@@ -205,6 +209,10 @@ public class AbilityMagmaRelease : BaseBossAbility
     }
     override protected void OnReadyUpComplete()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         if (_attackAnimManager)
         {
             _attackAnimManager.OnReadyUpComplete -= OnReadyUpComplete;
@@ -214,6 +222,10 @@ public class AbilityMagmaRelease : BaseBossAbility
     }
     public override void PerformAttack()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         Debug.Log("Performing ember release");
         _timeToSpawnLeft = Random.Range(MinSpawnRate, MaxSpawnRate);
         _nLeftToSpawn = Random.Range(MinToSpawn, MaxToSpawn);
@@ -223,6 +235,10 @@ public class AbilityMagmaRelease : BaseBossAbility
 
     override protected void OnAttackEnd()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         _attackAnimManager.OnAttackEnd -= OnAttackEnd;
 
         StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
@@ -230,7 +246,11 @@ public class AbilityMagmaRelease : BaseBossAbility
 
     public override void Terminate()
     {
-
+        if (!IsActive)
+        {
+            return;
+        }
+        IsActive = false;
         _isAttacking = false;
         _attackAnimManager.OnAnimEnd -= Terminate;
         _currentCooldown = _abilityData.AbilityCooldown;
@@ -240,6 +260,8 @@ public class AbilityMagmaRelease : BaseBossAbility
 
     public override void CancelAttack()
     {
+
+        IsActive = false;
         StopAllCoroutines();
         if (_attackAnimManager)
         {

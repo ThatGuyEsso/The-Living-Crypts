@@ -13,7 +13,7 @@ public class Quake : BaseBossAbility
    
     private AttackAnimManager _attackAnimManager;
 
-
+    
 
     public override void Init()
     {
@@ -55,7 +55,7 @@ public class Quake : BaseBossAbility
         {
             Init();
         }
-
+        IsActive = true;
         if (_canAttack)
         {
             Debug.Log("Quake is calling attack");
@@ -99,7 +99,11 @@ public class Quake : BaseBossAbility
 
     public override void PerformAttack()
     {
-     
+        if (!IsActive)
+        {
+            return;
+        }
+
         if (_attackAnimManager)
         {
             _attackAnimManager.OnAttackEnd += OnAttackEnd;
@@ -111,6 +115,10 @@ public class Quake : BaseBossAbility
 
     override protected void OnAttackEnd()
     {
+        if (!IsActive)
+        {
+            return;
+        }
         _attackAnimManager.OnAttackEnd -= OnAttackEnd;
         _owner.ToggleLimbAttackColliders(false);
         StartCoroutine(WaitToReset(HoldFinalPoseTime));
@@ -127,6 +135,7 @@ public class Quake : BaseBossAbility
 
     public override void Terminate()
     {
+        IsActive = false;
         _attackAnimManager.OnAnimEnd -= Terminate;
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();
@@ -135,6 +144,7 @@ public class Quake : BaseBossAbility
 
     public override void CancelAttack()
     {
+        IsActive = false;
         StopAllCoroutines();
         if (_attackAnimManager)
         {

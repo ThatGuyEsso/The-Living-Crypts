@@ -15,14 +15,23 @@ public class HazardVolume : MonoBehaviour
     [SerializeField] private float TickRate;
     [SerializeField] private float MinDamage,MaxDamage;
     [SerializeField] private Team Team;
+    [SerializeField] private bool EnableOnAwake;
 
     private GameObject _owner;
     private bool _isAlive;
-    private bool _isPersistent=false;
+    [SerializeField] private bool _isPersistent=false;
     private float _timeToDamage;
     private float _currentLifeTime;
     private List<GameObject> _objectsToAttack = new List<GameObject>();
 
+    private void Awake()
+    {
+        if (EnableOnAwake)
+        {
+            _timeToDamage = TickRate;
+            _currentLifeTime = LifeTime;
+        }
+    }
     public void Init(GameObject owner)
     {
         _owner = owner;
@@ -86,13 +95,17 @@ public class HazardVolume : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Iteam otherTeam = other.GetComponent<Iteam>();
-
         if (otherTeam == null)
         {
-            return;
+            otherTeam = other.gameObject.GetComponentInParent<Iteam>();
+            if (otherTeam == null)
+            {
+                return;
+
+            }
 
         }
-        if (otherTeam.IsOnTeam(Team))
+        if (!otherTeam.IsOnTeam(Team))
         {
             if (_objectsToAttack.Count == 0)
             {
@@ -126,10 +139,15 @@ public class HazardVolume : MonoBehaviour
 
         if (otherTeam == null)
         {
-            return;
+            otherTeam = other.gameObject.GetComponentInParent<Iteam>();
+            if (otherTeam == null)
+            {
+                return;
+
+            }
 
         }
-        if (otherTeam.IsOnTeam(Team))
+        if (!otherTeam.IsOnTeam(Team))
         {
             if (_objectsToAttack.Count == 0)
             {

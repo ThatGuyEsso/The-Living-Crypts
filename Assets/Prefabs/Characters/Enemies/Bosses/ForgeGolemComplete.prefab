@@ -1339,43 +1339,7 @@ MonoBehaviour:
     AbilityCooldown: 0
   TransitionAbility: {fileID: 0}
   FirstStageAttackPattern:
-    Abillities:
-    - AbilityPrefab: {fileID: 2962948923133960699, guid: d08e91ea401f3914d8d3b63b583ad4a7, type: 3}
-      IsPriority: 1
-      IsTransitionAbility: 0
-      IsCloseRange: 0
-      AttackRange: 3
-      MaxAttackDamage: 20
-      MinAttackDamage: 20
-      MaxKnockBack: 8
-      MinKnockBack: 4
-      MaxTimeToAttempt: 5
-      AttackCooldown: 1
-      AbilityCooldown: 3
-    - AbilityPrefab: {fileID: 6314538820140613839, guid: 06ee4d638e8099f4aa82e6fa9bd6db5a, type: 3}
-      IsPriority: 1
-      IsTransitionAbility: 0
-      IsCloseRange: 0
-      AttackRange: -1
-      MaxAttackDamage: 20
-      MinAttackDamage: 10
-      MaxKnockBack: 20
-      MinKnockBack: 15
-      MaxTimeToAttempt: 0
-      AttackCooldown: 1
-      AbilityCooldown: 3
-    - AbilityPrefab: {fileID: 2962948923133960699, guid: d08e91ea401f3914d8d3b63b583ad4a7, type: 3}
-      IsPriority: 1
-      IsTransitionAbility: 0
-      IsCloseRange: 0
-      AttackRange: 3
-      MaxAttackDamage: 20
-      MinAttackDamage: 20
-      MaxKnockBack: 0
-      MinKnockBack: 0
-      MaxTimeToAttempt: 5
-      AttackCooldown: 5
-      AbilityCooldown: 3
+    Abillities: []
   SecondStageAttackPattern:
     Abillities: []
   FinalStageAttackPattern:

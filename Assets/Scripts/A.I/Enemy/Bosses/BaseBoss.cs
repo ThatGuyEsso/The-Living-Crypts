@@ -274,6 +274,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         _canUseAttack = false;
         CurrentStageAbility[_curentAttackIndex].OnAbilityFinished -= OnAttackComplete;
         _currentTimeBtwnAttacks = CurrentStageAbility[_curentAttackIndex].GetTimeBetweenAbilities();
+        OnEnemyStateChange(EnemyState.Idle);
     }
     virtual protected bool InAbilityRange()
     {
