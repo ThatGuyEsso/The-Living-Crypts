@@ -12,7 +12,7 @@ public class EmberRelease : BaseBossAbility
     [SerializeField] private float MaxInaccuracy;
     [SerializeField] private LayerMask GroundLayers;
     [Header("Attack Animation")]
-    [SerializeField] private string ReadyUpAnim;
+    [SerializeField] private string ReadyUpAnim, EndAnim;
 
 
     [Header("Boss Components")]
@@ -62,7 +62,7 @@ public class EmberRelease : BaseBossAbility
           
                 _isAttacking = false;
 
-                StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
+                StartCoroutine(WaitToReset(HoldFinalPoseTime));
             }
 
             if(_timeToSpawnLeft > 0)
@@ -190,17 +190,34 @@ public class EmberRelease : BaseBossAbility
 
         StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
     }
-
+    protected override void OnReset()
+    {
+        _animator.Play(EndAnim, default, 0f);
+        _attackAnimManager.OnAnimEnd += Terminate;
+    }
     public override void Terminate()
     {
 
         _isAttacking = false;
 
- 
-
+        
+        _attackAnimManager.OnAnimEnd -= Terminate;
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();
 
     }
 
+    public override void CancelAttack()
+    {
+        StopAllCoroutines();
+        if (_attackAnimManager)
+        {
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
+            _attackAnimManager.OnAttackEnd -= OnAttackEnd;
+            _attackAnimManager.OnAnimEnd -= Terminate;
+        }
+
+        _currentCooldown = _abilityData.AbilityCooldown;
+    }
 }

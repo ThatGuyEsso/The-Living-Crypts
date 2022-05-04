@@ -613,6 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66830fd4e5ea0e445a96c96c7ad8fdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthManager: {fileID: 0}
 --- !u!114 &1071686109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +716,10 @@ MonoBehaviour:
     MinDamage: 0
     MaxKnockBack: 0
     MinKnockBack: 0
+  HurtSFX: 
+  KilledSFX: 
+  AM: {fileID: 0}
+  DeathVFX: {fileID: 0}
   CurrentState: 1
   PathFinder: {fileID: 0}
   PathFollower: {fileID: 0}
@@ -786,6 +791,8 @@ MonoBehaviour:
     Abillities: []
   FinalStageAttackPattern:
     Abillities: []
+  AnimManager: {fileID: 0}
+  AwakenSFX: 
 --- !u!114 &5450122112803388733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,6 +849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flashMat: {fileID: 2100000, guid: 9b05cca13e47e674d8e72a8438b96cc8, type: 2}
   _flashRate: 0.2
+  _defaultMaterials: []
 --- !u!114 &1324875524479983776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,6 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66830fd4e5ea0e445a96c96c7ad8fdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthManager: {fileID: 0}
 --- !u!114 &1271503810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,6 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66830fd4e5ea0e445a96c96c7ad8fdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthManager: {fileID: 0}
 --- !u!114 &563243446
 MonoBehaviour:
   m_ObjectHideFlags: 0

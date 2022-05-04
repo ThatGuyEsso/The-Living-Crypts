@@ -13,7 +13,7 @@ public class AbilityMagmaRelease : BaseBossAbility
     [SerializeField] private float MaxInaccuracy;
     [SerializeField] private LayerMask GroundLayers;
     [Header("Attack Animation")]
-    [SerializeField] private string ReadyUpAnim;
+    [SerializeField] private string ReadyUpAnim,EndAnim;
 
 
     [Header("Boss Components")]
@@ -43,10 +43,13 @@ public class AbilityMagmaRelease : BaseBossAbility
 
     private void Update()
     {
-        if (!_canAttack && currentCoolDown > 0)
+        if (!_canAttack )
         {
-            currentCoolDown -= Time.deltaTime;
-            if (currentCoolDown <= 0)
+            if( currentCoolDown > 0)
+            {
+                currentCoolDown -= Time.deltaTime;
+            }
+            else
             {
                 _canAttack = true;
             }
@@ -60,7 +63,7 @@ public class AbilityMagmaRelease : BaseBossAbility
 
                 _isAttacking = false;
 
-                StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
+                StartCoroutine(WaitToReset(HoldFinalPoseTime));
             }
 
             if (_timeToSpawnLeft > 0)
@@ -157,6 +160,12 @@ public class AbilityMagmaRelease : BaseBossAbility
         }
 
     }
+
+    protected override void OnReset()
+    {
+        _animator.Play(EndAnim, default, 0f);
+        _attackAnimManager.OnAnimEnd += Terminate;
+    }
     public override void Execute()
     {
         if (!_isInitialised)
@@ -223,9 +232,23 @@ public class AbilityMagmaRelease : BaseBossAbility
     {
 
         _isAttacking = false;
-      
+        _attackAnimManager.OnAnimEnd -= Terminate;
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();
 
+    }
+
+    public override void CancelAttack()
+    {
+        StopAllCoroutines();
+        if (_attackAnimManager)
+        {
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
+            _attackAnimManager.OnAttackEnd -= OnAttackEnd;
+            _attackAnimManager.OnAnimEnd -= Terminate;
+        }
+
+        _currentCooldown = _abilityData.AbilityCooldown;
     }
 }

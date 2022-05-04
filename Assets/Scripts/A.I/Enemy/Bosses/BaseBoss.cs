@@ -116,7 +116,10 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         InitCurrentAttack();
 
     }
+    public virtual void AwakenBoss()
+    {
 
+    }
     public void ClearEquippedAbilities()
     {
         if (CurrentStageAbility.Count == 0) return;
@@ -180,7 +183,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         _bossUI.HideUI();
     }
 
-    public void EvaluateStageTrigger()
+    public virtual void EvaluateStageTrigger()
     {
         float healthPercentage = _hManager.CurrentHealth/_hManager.GetMaxHealth();
         switch (_currentStage)
@@ -214,6 +217,20 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         CurrentStageAbility[_curentAttackIndex].OnAbilityStarted += OnAttackStarted;
         CurrentStageAbility[_curentAttackIndex].OnAbilityFinished += OnAttackComplete;
     }
+
+    virtual protected void InitTransitionAbility()
+    {
+        CurrentStageAbility[_curentAttackIndex].OnAbilityStarted -= OnAttackStarted;
+        CurrentStageAbility[_curentAttackIndex].OnAbilityFinished -= OnAttackComplete;
+
+        CurrentStageAbility[_curentAttackIndex].CancelAttack();
+        if (TransitionAbility)
+        {
+            TransitionAbility.OnAbilityFinished += EndTransitionStage;
+            TransitionAbility.Execute();
+        }
+    }
+
     virtual protected void NextAttack()
     {
         if (CurrentStageAbility.Count == 0) return;
@@ -233,6 +250,9 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         CurrentStageAbility[_curentAttackIndex].OnAbilityFinished -= OnAttackComplete;
         NextAttack();
     }
+
+
+
     virtual protected void ExecuteAbility()
     {
         if (CanUseAbility())
@@ -267,6 +287,11 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     }
     public void EndTransitionStage()
     {
+        if (TransitionAbility)
+        {
+            TransitionAbility.OnAbilityFinished -= EndTransitionStage;
+        }
+
         if (_previousStage != BossStage.Transition)
         {
             _previousStage++;
@@ -277,10 +302,18 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
     virtual protected void Update()
     {
         if (!_bossFightRunning) return;
-        if(!_canUseAttack && _currentTimeBtwnAttacks > 0)
+        if (_currentStage == BossStage.Transition)
         {
-            _currentTimeBtwnAttacks -= Time.deltaTime;
-            if (_currentTimeBtwnAttacks <= 0)
+            return;
+        }
+        if (!_canUseAttack )
+        {
+            if( _currentTimeBtwnAttacks > 0f)
+            {
+                _currentTimeBtwnAttacks -= Time.deltaTime;
+            }
+
+            else 
             {
                 _canUseAttack = true;
                 NextAttack();

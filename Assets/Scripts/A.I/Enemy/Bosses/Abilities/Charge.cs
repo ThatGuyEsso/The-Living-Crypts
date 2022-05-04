@@ -92,10 +92,14 @@ public class Charge : BaseBossAbility
     }
     private void Update()
     {
-        if (!_canAttack && currentCoolDown > 0)
+        if (!_canAttack )
         {
-            currentCoolDown -= Time.deltaTime;
-            if (currentCoolDown <= 0)
+            if( currentCoolDown > 0)
+            {
+                currentCoolDown -= Time.deltaTime;
+            }
+            else
+
             {
                 _canAttack = true;
             }
@@ -139,7 +143,7 @@ public class Charge : BaseBossAbility
         _movement.SetStoppingDistance(0f);
         _movement.SetAcceleration(ChargeAcceleration);
 
-        _movement.MoveToPoint(ChargePoint);
+        _movement.MoveToPoint(ChargePoint,true);
         _animator.Play(AttackAnim, 0, 0f);
         OnAbilityPerformed?.Invoke();
     }
@@ -162,7 +166,7 @@ public class Charge : BaseBossAbility
         _movement.SetStoppingDistance(_defaultStoppingDistance);
         _movement.SetAcceleration(_defaultAcceleration);
         _movement.BeginStop();
-        StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
+        Terminate();
     }
 
 
@@ -197,11 +201,24 @@ public class Charge : BaseBossAbility
 
     public override void Terminate()
     {
-        
-       
-   
 
+
+
+        OnAttackEnd();
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();
+    }
+    public override void CancelAttack()
+    {
+        StopAllCoroutines();
+        if (_attackAnimManager)
+        {
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
+            _attackAnimManager.OnAttackEnd -= OnAttackEnd;
+    
+        }
+
+        _currentCooldown = _abilityData.AbilityCooldown;
     }
 }

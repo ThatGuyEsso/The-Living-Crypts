@@ -62,12 +62,13 @@ MonoBehaviour:
   HitZonePrefab: {fileID: 4855073185434294136, guid: 84a63abf4f004eb4f82cded28a64d3d1, type: 3}
   MinToSpawn: 3
   MaxToSpawn: 5
-  MinArchHeight: 4
+  MinArchHeight: 2.5
   MaxArchHeight: 8
   MinSpawnRate: 0.5
   MaxSpawnRate: 1.5
   MaxInaccuracy: 5
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 2048
-  ReadyUpAnim: EmberReleaseCharge
+    m_Bits: 264192
+  ReadyUpAnim: EmberRelease
+  EndAnim: EmberReleaseClose

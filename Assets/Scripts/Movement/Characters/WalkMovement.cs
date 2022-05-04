@@ -29,6 +29,7 @@ public class WalkMovement : MonoBehaviour
     public Action<Vector3> OnMoving;
     public Action<Vector3> OnNewMoveDirection;
 
+    private bool ShouldStopAtPoint;
 
 
     private void Awake()
@@ -53,6 +54,10 @@ public class WalkMovement : MonoBehaviour
             if (Mathf.Abs(_maxSpeed - _currentMovementSpeed) <= 0.01f) _currentMovementSpeed = _maxSpeed;
 
             Move();
+            if (ShouldStopAtPoint)
+            {
+                StopAtPoint();
+            }
         }
         else if (_isStopping)
         {
@@ -76,6 +81,15 @@ public class WalkMovement : MonoBehaviour
         Vector3 dir = (point - transform.position).normalized;
         _movementDir = new Vector3(dir.x, 0.0f, dir.z);
         _isMoving = true;
+        ShouldStopAtPoint = false;
+    }
+    public void MoveToPoint(Vector3 point, bool StopAtPoint)
+    {
+        _targetPoint = point;
+        Vector3 dir = (point - transform.position).normalized;
+        _movementDir = new Vector3(dir.x, 0.0f, dir.z);
+        _isMoving = true;
+        ShouldStopAtPoint = StopAtPoint;
     }
 
     public void BeginStop()

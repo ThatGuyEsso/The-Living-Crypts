@@ -13,6 +13,7 @@ public class ChildDamageReceiver : MonoBehaviour,IDamage
 
     private void Start()
     {
+        
         _healthManager = GetComponentInParent<CharacterHealthManager>();
         if (!_healthManager) Destroy(this);
     }

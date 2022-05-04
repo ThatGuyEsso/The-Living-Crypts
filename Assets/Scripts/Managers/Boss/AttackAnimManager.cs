@@ -11,7 +11,7 @@ public class AttackAnimManager : MonoBehaviour
 
     public System.Action OnAttackBegin;
     public System.Action OnAttackEnd;
-
+    public System.Action OnAnimEnd;
     public void AttackReadyUpStarted()
     {
         OnReadyUpBegin?.Invoke();
@@ -29,6 +29,11 @@ public class AttackAnimManager : MonoBehaviour
     public void AttackCompleted()
     {
         OnAttackEnd?.Invoke();
+    }
+
+    public void AnimEnd()
+    {
+        OnAnimEnd?.Invoke();
     }
 
 }

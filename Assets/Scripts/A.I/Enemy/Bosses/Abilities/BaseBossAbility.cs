@@ -51,6 +51,17 @@ public abstract class BaseBossAbility : MonoBehaviour
         Terminate();
     }
 
+
+    virtual protected IEnumerator WaitToReset(float time)
+    {
+        yield return new WaitForSeconds(time);
+        OnReset();
+    }
+
+    virtual protected void OnReset()
+    {
+
+    }
     virtual protected void OnReadyUpBegin()
     {
         
@@ -66,6 +77,11 @@ public abstract class BaseBossAbility : MonoBehaviour
     virtual protected void OnAttackEnd()
     {
       
+    }
+
+    public virtual void CancelAttack()
+    {
+
     }
 
     public float GetTimeBetweenAbilities()

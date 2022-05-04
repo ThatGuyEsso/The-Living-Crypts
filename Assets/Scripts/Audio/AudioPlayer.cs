@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
+using UnityEngine.Playables;
 [RequireComponent(typeof(AudioSource))]
 public class AudioPlayer : MonoBehaviour, IAudio
 {

@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class ForgeGolem : BaseBoss
 {
+
+    [Header("Layers")]
+    [SerializeField] private LayerMask GroundLayers;
     private WalkMovement _walkMovement;
     [Header("Animation")]
     [SerializeField] protected BossAnimationManager AnimManager;
+
+    [Header("SFX")]
+    [SerializeField] protected string AwakenSFX;
+    [Header("VFX")]
+    protected MaterialSwitch[] MaterialSwitches;
+    protected ComplexHitFlashManager HitVFXs;
     public override void Init()
     {
         base.Init();
@@ -21,6 +30,7 @@ public class ForgeGolem : BaseBoss
             AnimManager = GetComponent<BossAnimationManager>();
         }
       
+   
     }
 
   
@@ -44,41 +54,71 @@ public class ForgeGolem : BaseBoss
         {
             case BossStage.First:
                 _hManager.IsAlive = true;
+                OnEnemyStateChange(EnemyState.Chase);
                 SetUpNewAbilities();
                 Debug.Log("First Stage");
                 break;
             case BossStage.Second:
                 _hManager.IsAlive = true;
+                OnEnemyStateChange(EnemyState.Chase);
                 SetUpNewAbilities();
                 Debug.Log("Second Stage");
                 break;
             case BossStage.Final:
                 _hManager.IsAlive = true;
+                OnEnemyStateChange(EnemyState.Chase);
                 SetUpNewAbilities();
                 Debug.Log("Final Stage");
                 break;
             case BossStage.Transition:
-
+                AnimManager.PlayIdleAnimation();
+                _walkMovement.BeginStop();
                 _hManager.IsAlive = false;
-                Debug.Log("Transition Stage");
-                Invoke("EndTransitionStage", 4f);
+                InitTransitionAbility();
                 break;
         }
 
+    }
+    public override void AwakenBoss()
+    {
+        MaterialSwitches = GetComponentsInChildren<MaterialSwitch>();
+
+        if (MaterialSwitches.Length > 0)
+        {
+            foreach (MaterialSwitch MatSwitch in MaterialSwitches)
+            {
+                MatSwitch.SwitchOn();
+            }
+        }
+
+        HitVFXs = GetComponent<ComplexHitFlashManager>();
+        if (HitVFXs)
+        {
+            HitVFXs.Init();
+        }
+        PlaySFX(AwakenSFX, false);
     }
     public override void StartBossFight()
     {
         base.StartBossFight();
         _walkMovement.Init();
         AnimManager.Init();
-        AnimManager.PlayIdleAnimation();
+        OnEnemyStateChange(EnemyState.Idle);
     }
     protected override void ProcessAI()
     {
         if (!_bossFightRunning) return;
+        if(_currentStage == BossStage.Transition)
+        {
+            return;
+        }
         switch (CurrentState)
         {
             case EnemyState.Idle:
+                if (CurrentTarget)
+                {
+                    OnEnemyStateChange(EnemyState.Chase);
+                }
                 break;
             case EnemyState.Chase:
 
@@ -105,9 +145,9 @@ public class ForgeGolem : BaseBoss
                 else 
                 {
                     _walkMovement.BeginStop();
-                    if (_canUseAttack)
+                    if (!_canUseAttack)
                     {
-                        Debug.Log("Golem is calling attack");
+                      
                         ExecuteAbility();
                     }
                 }
@@ -119,16 +159,36 @@ public class ForgeGolem : BaseBoss
     override protected void Update()
     {
         base.Update();
+  
         switch (CurrentState)
         {
             case EnemyState.Idle:
                 break;
             case EnemyState.Chase:
                 //Abort cases
-                if (!CurrentTarget || !PathFinder) return;
-                if (_currentPath.corners.Length <= 0) return;
+                if (!CurrentTarget || !PathFinder)
+                {
+                    return;
+                }
+                if (_currentPath.corners.Length <= 0)
+                {
+                    return;
+                }
                 //evaluate path
-                if (!PathFollower.EvaluatePath(_currentPath, transform.position)) return;
+                if (!PathFollower.EvaluatePath(_currentPath, transform.position))
+                {
+                    return;
+                }
+                if (InAbilityRange())
+                {
+                    OnEnemyStateChange(EnemyState.Attack);
+                    if (!_canUseAttack)
+                    {
+                      
+                        ExecuteAbility();
+                    }
+                    return;
+                }
                 FaceCurrentPathPoint();
                 if (EssoUtility.InSameDirection(transform.forward, (PathFollower.GetCurrentPathPoint() - transform.position).normalized, 0.1f))
                 {
@@ -137,25 +197,27 @@ public class ForgeGolem : BaseBoss
 
                 break;
             case EnemyState.Attack:
-                if (_isUsingAttack) return;
-                FaceCurrentTarget();
 
+             
+                if (_isUsingAttack)
+                {
+                    return;
+                }
+                FaceCurrentTarget();
+                if (InAbilityRange())
+                {
+                    if (_canUseAttack)
+                    {
+
+                        ExecuteAbility();
+                    }
+                }
                 break;
             case EnemyState.Flee:
                 break;
         }
 
-        if (!_canAttack)
-        {
-            if (_currentTimeBtwnAttacks <= 0f)
-            {
-                _canAttack = true;
-            }
-            else
-            {
-                _currentTimeBtwnAttacks -= Time.deltaTime;
-            }
-        }
+
 
         
     }
@@ -174,11 +236,35 @@ public class ForgeGolem : BaseBoss
                 AnimManager.PlayIdleAnimation();
 
                 break;
+
+            case EnemyState.Attack:
+                AnimManager.PlayIdleAnimation();
+                _walkMovement.BeginStop();
+                break;
         }
     }
     public override void ResetEnemy()
     {
         throw new System.NotImplementedException();
+    }
+
+    protected override void OnHurt()
+    {
+        base.OnHurt();
+        PlaySFX(HurtSFX,true);
+    }
+    protected override void DrawPathToTarget()
+    {
+        if (!CurrentTarget || !PathFinder) return;
+
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, Mathf.Infinity, GroundLayers))
+        {
+
+            _currentPath = PathFinder.GetPathToTarget(hitInfo.point, CurrentTarget.position, NavMesh.AllAreas);
+        }
+
     }
 }
 

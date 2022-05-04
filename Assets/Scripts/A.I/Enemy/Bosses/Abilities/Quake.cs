@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Quake : BaseBossAbility
 {
-    [SerializeField] private string ReadyUpAnim;
+    [SerializeField] private string ReadyUpAnim,EndAnim;
     [SerializeField] private string AttackAnim;
 
 
@@ -35,10 +35,14 @@ public class Quake : BaseBossAbility
 
     private void Update()
     {
-        if(!_canAttack && currentCoolDown > 0)
+        if(!_canAttack )
         {
-            currentCoolDown -= Time.deltaTime;
-            if (currentCoolDown <= 0)
+            if( currentCoolDown > 0)
+            {
+                currentCoolDown -= Time.deltaTime;
+            }
+           
+            else 
             {
                 _canAttack = true;
             }
@@ -62,7 +66,7 @@ public class Quake : BaseBossAbility
                 _animator.enabled = true;
                 _attackAnimManager.OnReadyUpBegin += OnReadyUpBegin;
                 _attackAnimManager.OnReadyUpComplete += OnReadyUpComplete;
-                _animator.Play(ReadyUpAnim, 0, 0f);
+                _animator.Play(ReadyUpAnim, default, 0f);
             }
       
 
@@ -92,13 +96,15 @@ public class Quake : BaseBossAbility
         StartCoroutine(WaitToExecuteAttack(MaxPoseTime));
 
     }
+
     public override void PerformAttack()
     {
+     
         if (_attackAnimManager)
         {
             _attackAnimManager.OnAttackEnd += OnAttackEnd;
         }
-        _animator.Play(AttackAnim, 0, 0f);
+        _animator.Play(AttackAnim, default, 0f);
         _owner.ToggleLimbAttackColliders(true);
         OnAbilityPerformed?.Invoke();
     }
@@ -107,16 +113,37 @@ public class Quake : BaseBossAbility
     {
         _attackAnimManager.OnAttackEnd -= OnAttackEnd;
         _owner.ToggleLimbAttackColliders(false);
-        StartCoroutine(WaitToEndAttack(HoldFinalPoseTime));
+        StartCoroutine(WaitToReset(HoldFinalPoseTime));
     }
-  
+
+    override protected void OnReset()
+    {
+
+        _animator.Play(EndAnim, default, 0f);
+        _attackAnimManager.OnAnimEnd += Terminate;
+    }
+
+
+
     public override void Terminate()
     {
-     
+        _attackAnimManager.OnAnimEnd -= Terminate;
         _currentCooldown = _abilityData.AbilityCooldown;
         OnAbilityFinished?.Invoke();
 
     }
 
-
+    public override void CancelAttack()
+    {
+        StopAllCoroutines();
+        if (_attackAnimManager)
+        {
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpComplete;
+            _attackAnimManager.OnReadyUpBegin -= OnReadyUpBegin;
+            _attackAnimManager.OnAttackEnd -= OnAttackEnd;
+            _attackAnimManager.OnAnimEnd -= Terminate;
+        }
+   
+        _currentCooldown = _abilityData.AbilityCooldown;
+    }
 }

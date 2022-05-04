@@ -45,7 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityData:
     AbilityPrefab: {fileID: 0}
-    attackAnimationName: 
     IsPriority: 0
     IsTransitionAbility: 0
     IsCloseRange: 0
@@ -62,9 +61,8 @@ MonoBehaviour:
   ReadyUpAnim: ChargeReadyUp
   AttackAnim: Charge
   MaxChargeDistance: 20
-  ChargeColliderPrefab: {fileID: 9079376802994209920, guid: 8d5d27f6c0f0adc4aa466a5703ec7019, type: 3}
+  ChargeAcceleration: 10
   StopChargeLayers:
     serializedVersion: 2
-    m_Bits: 1
-  ChargeColliderOffset: {x: 0, y: 0, z: 1.5}
+    m_Bits: 16385
   ChargeSpeed: 20

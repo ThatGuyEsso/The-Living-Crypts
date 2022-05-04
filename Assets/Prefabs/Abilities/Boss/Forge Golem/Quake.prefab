@@ -45,7 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityData:
     AbilityPrefab: {fileID: 0}
-    attackAnimationName: 
     IsPriority: 0
     IsTransitionAbility: 0
     IsCloseRange: 0
@@ -57,7 +56,8 @@ MonoBehaviour:
     MaxTimeToAttempt: 0
     AttackCooldown: 0
     AbilityCooldown: 0
-  HoldFinalPoseTime: 1
+  HoldFinalPoseTime: 0.4
   MaxPoseTime: 0.25
-  ReadyUpAnim: Quake ReadyUp
-  AttackAnim: Quake
+  ReadyUpAnim: ReadyUpQuake
+  EndAnim: QuakeEnd
+  AttackAnim: QuakeCommit
