@@ -13,6 +13,11 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
     [Header("Weapon Data")]
     [SerializeField] private List<EnchantedWeaponData> WeaponDatas;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject ActiveSphere;
+    [SerializeField] private Material AttackMaterial;
+    [SerializeField] private Material DefaultMaterial;
+    private TrailRenderer _trailRenderer;
     [Header("Settings")]
     [SerializeField] private float MinIdleTime, MaxIdleTime;
     [SerializeField] private float LaunchForce;
@@ -79,7 +84,14 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         }
 
         ResetEnemy();
-   
+
+        if (ActiveSphere)
+        {
+            ActiveSphere.SetActive(false);
+        }
+
+
+
 
     }
     public override void SetTarget(Transform target)
@@ -208,6 +220,15 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
             TicketManager.TicketUsed();
             HasTicket = false;
         }
+        if (_trailRenderer)
+        {
+            _trailRenderer.material = AttackMaterial;
+        }
+        if (ActiveSphere)
+        {
+            ActiveSphere.SetActive(false);
+        }
+
     }
 
     protected override void KillEnemy()
@@ -509,9 +530,17 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
                 if (!CurrentTarget)
                 {
                     OnEnemyStateChange(EnemyState.Idle);
+
                     return;
                 }
-            
+                if (_trailRenderer)
+                {
+                    _trailRenderer.material = DefaultMaterial;
+                }
+                if (ActiveSphere)
+                {
+                    ActiveSphere.SetActive(true);
+                }
                 SetNewMoveTIme();
                 if (_currentMoveTime > 0)
                 {
@@ -541,9 +570,48 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         }
     }
 
+    public void GoToIdle()
+    {
+        if (_floatMovement)
+        {
+            _floatMovement.StopAndDrop();
+        }
+
+        if (_rotator)
+        {
+            _rotator.Stop();
+        }
+        PlaySFX(OnSwingSFX, true);
+        if (_spinAudioPlayer)
+        {
+            _spinAudioPlayer.BeginFadeOut();
+        }
+    
+        OnEnemyStateChange(EnemyState.Idle);
+        if (TicketManager)
+        {
+            TicketManager.TicketUsed();
+            HasTicket = false;
+        }
+        if (_trailRenderer)
+        {
+            _trailRenderer.material = DefaultMaterial;
+        }
+        if (ActiveSphere)
+        {
+            ActiveSphere.SetActive(false);
+        }
+    }
     public void OnHurt()
     {
         PlaySFX(HurtSFX, true);
+        if(CurrentState!= EnemyState.Idle)
+        {
+            GoToIdle();
+        }
+  
+
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -596,5 +664,6 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
 
         SetUpWeapon();
         SetNewMoveTIme();
+        _trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
 }

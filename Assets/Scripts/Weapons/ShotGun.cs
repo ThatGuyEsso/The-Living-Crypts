@@ -70,6 +70,7 @@ public class ShotGun : BaseWeapon
     [SerializeField] private CamShakeSetting _primaryShotScreenShake;
     [SerializeField] private CamShakeSetting _secondaryShotScreenShake;
     [SerializeField] private float MuzzleDuration;
+    [SerializeField] private GameObject LineVFXPrefab;
     [Tooltip("How far the gun raycast to set current aim target")]
     [SerializeField] private float _aimingDistance;
     [SerializeField] private float _aimSpeed;
@@ -207,11 +208,15 @@ public class ShotGun : BaseWeapon
         List<HitScanTarget> targetsHit = new List<HitScanTarget>();
         for (int i=0; i< GunScanData.nShots; i++)
         {
+            
             Vector3 targetDir = _fp.forward +_fp.right *Random.Range(-GunScanData.Spread, GunScanData.Spread)+ _fp.up * Random.Range(-GunScanData.Spread, GunScanData.Spread);
-
+            List<Vector3> tracePoints = new List<Vector3>();
+            tracePoints.Add(_fp.position);
             if (Physics.Raycast(_fp.position, targetDir, out hitInfo, GunScanData.ScanRange, GunScanData.BlockingLayers))
             {
                 Debug.DrawLine(_fp.position, hitInfo.point, Color.red, 10f);
+                tracePoints.Add(hitInfo.point);
+                SpawnLineVFX(tracePoints);
                 if (targetsHit.Count == 0)
                 {
                     float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
@@ -256,6 +261,8 @@ public class ShotGun : BaseWeapon
             else
             {
                 Debug.DrawLine(_fp.position, _fp.position + targetDir.normalized * GunScanData.ScanRange, Color.red, 10f);
+                tracePoints.Add(_fp.position + targetDir.normalized * GunScanData.ScanRange);
+                SpawnLineVFX(tracePoints);
             }
           
 
@@ -321,6 +328,27 @@ public class ShotGun : BaseWeapon
 
             }
             _muzzleFlash = null;
+        }
+    }
+
+    public void SpawnLineVFX(List<Vector3> points)
+    {
+        if (!LineVFXPrefab)
+        {
+            return;
+        }
+        LineVFX lineVFX;
+        if (ObjectPoolManager.instance)
+        {
+            lineVFX = ObjectPoolManager.Spawn(LineVFXPrefab, Vector3.zero, Quaternion.identity).GetComponent<LineVFX>();
+        }
+        else
+        {
+            lineVFX = Instantiate(LineVFXPrefab, Vector3.zero, Quaternion.identity).GetComponent<LineVFX>();
+        }
+        if (lineVFX)
+        {
+            lineVFX.Init(points);
         }
     }
     public void FireSecondaryExplosion()

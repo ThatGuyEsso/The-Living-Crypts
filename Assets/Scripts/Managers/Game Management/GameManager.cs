@@ -17,7 +17,11 @@ public enum GameplayEvents
     LeftCombat,
     Restart,
     ExitLevel,
-    Quit
+    Quit,
+    OnOBossSequenceBegun,
+    OnBossFightBegun,
+    OnBossKilled,
+    OnBossFightEnd
 };
 
 public class GameManager : MonoBehaviour, IManager, IInitialisable
@@ -121,6 +125,18 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                 InitRespawn();
                 break;
             case GameplayEvents.ExitLevel:
+
+                if (_musicManager)
+                {
+                    _musicManager.StopMusic();
+                }
+                if (_sceneManager)
+                {
+                    _sceneManager.BeginLoadMenuScreen(SceneIndex.TitleScreen);
+                }
+                break;
+
+            case GameplayEvents.OnBossFightEnd:
 
                 if (_musicManager)
                 {

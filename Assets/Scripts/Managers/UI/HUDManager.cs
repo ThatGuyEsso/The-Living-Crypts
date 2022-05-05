@@ -15,6 +15,67 @@ public class HUDManager : MonoBehaviour
     private WeaponDisplayManager _weaponDisplayManager;
 
     private ItemDisplayManager _itemDisplayManager;
+
+    private List<GameObject> HUDElements = new List<GameObject>();
+    private void Awake()
+    {
+        if (Prompt)
+        {
+            HUDElements.Add(Prompt.gameObject);
+
+        }
+        if (PlayerHealthBar)
+        {
+            HUDElements.Add(PlayerHealthBar.gameObject);
+
+        }
+        if (MiniMap)
+        {
+            HUDElements.Add(MiniMap.gameObject);
+
+        }
+        if (WeaponDisplayManager)
+        {
+            HUDElements.Add(_weaponDisplayManager.gameObject);
+
+        }
+        if (ItemDisplayManager)
+        {
+            HUDElements.Add(_itemDisplayManager.gameObject);
+
+        }
+
+        HideHUD();
+        Prompt.gameObject.SetActive(true);
+    }
+
+    public void HideHUD()
+    {
+        if (HUDElements.Count > 0)
+        {
+            foreach(GameObject element in HUDElements)
+            {
+                if (element)
+                {
+                    element.SetActive(false);
+                }
+            }
+        }
+    }
+
+    public void ShowHUD()
+    {
+        if (HUDElements.Count > 0)
+        {
+            foreach (GameObject element in HUDElements)
+            {
+                if (element)
+                {
+                    element.SetActive(true);
+                }
+            }
+        }
+    }
     public HUDPrompt PromptManager
     { get
         {
@@ -85,13 +146,10 @@ public class HUDManager : MonoBehaviour
             case GameplayEvents.GameComplete:
                 break;
             case GameplayEvents.PlayerDied:
-                if (WeaponDisplayManager)
-                {
-                    WeaponDisplayManager.gameObject.SetActive(false);
-                }
-                PlayerHealthBar.gameObject.SetActive(false);
+                HideHUD();
                 break;
             case GameplayEvents.PlayerRespawned:
+                Prompt.gameObject.SetActive(true);
                 break;
             case GameplayEvents.EnteredCombat:
                 if (MiniMap)
@@ -106,11 +164,14 @@ public class HUDManager : MonoBehaviour
                 }
                 break;
             case GameplayEvents.Restart:
-                if (WeaponDisplayManager)
-                {
-                    WeaponDisplayManager.gameObject.SetActive(false);
-                }
-                PlayerHealthBar.gameObject.SetActive(false);
+                HideHUD();
+                break;
+            case GameplayEvents.OnOBossSequenceBegun:
+                HideHUD();
+                break;
+            case GameplayEvents.OnBossFightBegun:
+                PlayerHealthBar.gameObject.SetActive(true);
+                _weaponDisplayManager.gameObject.SetActive(true);
                 break;
         }
     }

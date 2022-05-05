@@ -88,6 +88,27 @@ public class BaseLitter : MonoBehaviour, IInitialisable
                 }
                 break;
 
+
+            case GameplayEvents.OnBossFightEnd:
+                Invoke("Remove", 5f);
+                break;
+
+        }
+    }
+
+    public void Remove()
+    {
+        if (gameObject)
+        {
+            ObjectPoolManager.Recycle(gameObject);
+        }
+        else
+        {
+            if (gameObject)
+            {
+                Destroy(gameObject);
+
+            }
         }
     }
     public virtual void OnEnable()

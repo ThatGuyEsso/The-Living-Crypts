@@ -36,14 +36,22 @@ public class LineManager : MonoBehaviour
         int posCount = points.Count + 1;
 
         _line.positionCount = posCount;
-
-        _line.SetPosition(0, _origin.position);
+        if (_origin)
+        {
+            _line.SetPosition(0, _origin.position);
+        }
+        else
+        {
+            _line.SetPosition(0, points[0]);
+        }
+       
 
         for(int i=0; i < points.Count; i++)
         {
             _line.SetPosition(i+1, points[i]);
         }
     }
+
 
     public void ClearLine()
     {

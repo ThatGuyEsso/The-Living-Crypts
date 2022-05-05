@@ -15,6 +15,8 @@ public class BossRoomManager : MonoBehaviour
     [SerializeField] private AudioManager AM;
     [SerializeField] private Transform PlayerTransform;
 
+    [Header("VFX")]
+    [SerializeField] private CamShakeSetting ShakeVFX;
     [Header("Cutscene")]
     [SerializeField] private CinemachineVirtualCamera CutsceneCamera;
     [SerializeField] private PlayableDirector Director;
@@ -22,6 +24,7 @@ public class BossRoomManager : MonoBehaviour
     [SerializeField] private float PostCutSceneHoldTime;
     private GameObject playerCameraObject;
     private BossUI _bossUI;
+    private GameManager GM;
     private void Awake()
     {
         Director = GetComponent<PlayableDirector>();
@@ -75,6 +78,15 @@ public class BossRoomManager : MonoBehaviour
             Boss.AudioManager = AM;
         }
         StartBossIntro();
+
+        if (!GM)
+        {
+            GM = GetGameManager();
+        }
+        if (GM)
+        {
+            GM.BeginNewGameplayEvent(GameplayEvents.OnOBossSequenceBegun);
+        }
     }
 
     public void StartBossIntro()
@@ -90,10 +102,20 @@ public class BossRoomManager : MonoBehaviour
     }
     public void EndBossIntro()
     {
+        CamShake.instance.DoScreenShake(ShakeVFX);
         CutsceneCamera.gameObject.SetActive(false);
 
         playerCameraObject.SetActive(true);
         Director.enabled = false;
+
+        if (!GM)
+        {
+            GM = GetGameManager();
+        }
+        if (GM)
+        {
+            GM.BeginNewGameplayEvent(GameplayEvents.OnBossFightBegun);
+        }
     }
     public void WaitToStartBossFight()
     {
@@ -139,6 +161,25 @@ public class BossRoomManager : MonoBehaviour
             else
             {
                 return GameStateManager.instance.AudioManager;
+            }
+        }
+    }
+
+    private GameManager GetGameManager()
+    {
+        if (GM)
+        {
+            return GM;
+        }
+        else
+        {
+            if (!GameStateManager.instance || !GameStateManager.instance.GameManager)
+            {
+                return null;
+            }
+            else
+            {
+                return GameStateManager.instance.GameManager;
             }
         }
     }

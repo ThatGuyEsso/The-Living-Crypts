@@ -35,10 +35,25 @@ public class ForgeGolem : BaseBoss
         }
         MainCollider = GetComponent<CapsuleCollider>();
 
-
+      
     }
 
-  
+    protected override void EvaluateNewGameplayEvent(GameplayEvents newEvent)
+    {
+        base.EvaluateNewGameplayEvent(newEvent);
+
+        switch (newEvent)
+        {
+            case GameplayEvents.PlayerDied:
+
+                OnEnemyStateChange(EnemyState.Idle);
+                _bossFightRunning = false;
+                
+                break;
+
+        }
+    }
+
 
     protected override void DoAttack(GameObject target, Vector3 point)
     {
@@ -48,6 +63,10 @@ public class ForgeGolem : BaseBoss
     public override void EndBossFight()
     {
         base.EndBossFight();
+        if (_gameManager)
+        {
+            _gameManager.BeginNewGameplayEvent(GameplayEvents.OnBossKilled);
+        }
         KillEnemy();
     }
     protected override void KillEnemy()
@@ -104,7 +123,10 @@ public class ForgeGolem : BaseBoss
             yield return new WaitForSeconds(Random.Range(MinTimeBetweenBreaks,MaxTimeBetweenBreaks));
             jointsToBreak[i].Init(); ;
         }
-        
+        if (_gameManager)
+        {
+            _gameManager.BeginNewGameplayEvent(GameplayEvents.OnBossFightEnd);
+        }
     }
 
     protected override void BeginNewStage(BossStage newStage)

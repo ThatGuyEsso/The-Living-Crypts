@@ -186,7 +186,15 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     protected abstract void DoAttack(GameObject target, Vector3 point);
 
     protected abstract void KillEnemy();
+    protected virtual void DestroyEnemy()
+    {
 
+        SpawnDeathVFX();
+    }
+    protected virtual void SpawnDeathVFX()
+    {
+
+    }
     public void WaitToInit(float time)
     {
         Invoke("Init", time);

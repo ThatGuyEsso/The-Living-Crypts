@@ -30,6 +30,7 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
 
     private bool _canLook;
     private PlayerBehaviour _player;
+
     private void Awake()
     {
         if (_inDebug)
@@ -66,9 +67,11 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         {
             _player.OnPlayerDied += OnPlayerKilled;
             _player.OnPlayerReset += OnPlayerReset;
+            _player.OnInputChanged += ToggleInput;
         }
         //_xRot = transform.localRotation..x;
         //_yRot = transform.localRotation.eulerAngles.y;
+   
     }
 
 
@@ -119,9 +122,29 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
     }
 
     public void SetCurrentOffset(Vector3 offset) { _currentOffset = offset; }
-    private void OnDisable()
+
+    private void OnEnable()
     {
         if (_isInitialised)
+        {
+         
+        }
+
+        if (_isInitialised && _input != null)
+        {
+            _input.Enable();
+            if (_player)
+            {
+                _player.OnPlayerDied += OnPlayerKilled;
+                _player.OnPlayerReset += OnPlayerReset;
+                _player.OnInputChanged += ToggleInput;
+            }
+
+        }
+    }
+    private void OnDisable()
+    {
+        if (_isInitialised && _input!=null)
         {
             _input.Disable();
     
@@ -131,7 +154,9 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         {
             _player.OnPlayerDied -= OnPlayerKilled;
             _player.OnPlayerDied -= OnPlayerReset;
+            _player.OnInputChanged -= ToggleInput;
         }
+
     }
 
     private void OnDestroy()
@@ -146,9 +171,26 @@ public class FirstPersonCamera : MonoBehaviour,IInitialisable, Controls.IAimingA
         {
             _player.OnPlayerDied -= OnPlayerKilled;
             _player.OnPlayerDied -= OnPlayerReset;
+            _player.OnInputChanged -= ToggleInput;
         }
     }
 
+    public void ToggleInput(bool isEnabled)
+    {
+        _canLook = isEnabled;
+        if (_input != null)
+        {
+            if (isEnabled)
+            {
+                _input.Enable();
+            
+            }
+            else
+            {
+                _input.Disable();
+            }
+        }
+    }
     public void OnPlayerKilled()
     {
         if (_input != null)

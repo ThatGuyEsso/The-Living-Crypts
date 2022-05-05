@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -73,6 +74,10 @@ public class LivingEmber : BaseEnemy
             case GameplayEvents.PlayerDied:
 
                 IsActive = false;
+                break;
+            case GameplayEvents.OnBossKilled:
+
+                DestroyEnemy();
                 break;
 
             case GameplayEvents.PlayerRespawnBegun:
@@ -310,7 +315,19 @@ public class LivingEmber : BaseEnemy
         }
            
     }
-
+    protected override void DestroyEnemy()
+    {
+        base.DestroyEnemy();
+        _cryptCharacter.RemoveSelf();
+        if (ObjectPoolManager.instance)
+        {
+            ObjectPoolManager.Recycle(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void Split()
     {
@@ -336,8 +353,20 @@ public class LivingEmber : BaseEnemy
 
             for (int i = 0; i < splitCount; i++)
             {
-                LivingEmber newEmber = Instantiate(LivingEmberPrefab, transform.position, Quaternion.identity).GetComponent<LivingEmber>();
+                LivingEmber newEmber;
+                float randX = Random.Range(-1f, 1f);
+                float randZ = Random.Range(-1f, 1f);
+                Vector3 randXZ = new Vector3(randX, 0f, randZ);
+                if (ObjectPoolManager.instance)
+                {
+                     newEmber = ObjectPoolManager.Spawn(LivingEmberPrefab, transform.position+ randXZ, Quaternion.identity).GetComponent<LivingEmber>();
+                }
+                else
+                {
+                     newEmber = Instantiate(LivingEmberPrefab, transform.position, Quaternion.identity).GetComponent<LivingEmber>();
+                }
 
+                Rigidbody emberRB = newEmber.GetComponent<Rigidbody>();
                 if (newEmber)
                 {
                     RandomSizeInRange size = newEmber.gameObject.GetComponent<RandomSizeInRange>();
@@ -356,7 +385,12 @@ public class LivingEmber : BaseEnemy
                         _cryptCharacter.AddNewCharacter(cryptEmber);
                     }
 
+                    if (emberRB)
+                    {
+                        emberRB.AddForce(Vector3.up + randXZ * _jumpMovement.JumpData.JumpForce, ForceMode.Impulse);
+                    }
                 }
+
             }
             _cryptCharacter.RemoveSelf();
             if (ObjectPoolManager.instance)

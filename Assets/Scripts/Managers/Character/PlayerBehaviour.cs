@@ -19,7 +19,7 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
     private GameManager _gameManager;
 
     public System.Action OnPlayerDied;
-
+    public System.Action<bool> OnInputChanged;
     public System.Action OnPlayerReset;
     private void Awake()
     {
@@ -87,6 +87,13 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
             case GameplayEvents.Quit:
                 DisablePlayerComponents();
                 break;
+
+            case GameplayEvents.OnOBossSequenceBegun:
+                DisablePlayerComponents();
+                break;
+            case GameplayEvents.OnBossFightBegun:
+                EnablePlayerComponents();
+                break;
         }
     }
 
@@ -119,7 +126,7 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
                 comp.DisableComponent();
             }
         }
-
+        OnInputChanged?.Invoke(false);
     }
 
     public void EnablePlayerComponents()
@@ -128,9 +135,10 @@ public class PlayerBehaviour : MonoBehaviour,Iteam
         {
             foreach (ICharacterComponents comp in ICharacterComponents)
             {
-                comp.DisableComponent();
+                comp.EnableComponent();
             }
         }
+        OnInputChanged?.Invoke(true);
 
     }
     private void OnPlayerKilled()

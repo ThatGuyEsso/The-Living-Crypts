@@ -14,6 +14,7 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
     private Vector3 _initialSize;
     private ObjectBounds _bounds;
     protected GameManager _gameManager;
+
     private void Awake()
     {
         if (InDebug)
@@ -57,7 +58,10 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
             case GameplayEvents.ExitLevel:
                 OnKilled();
                 break;
-      
+            case GameplayEvents.OnBossFightEnd:
+                Invoke("OnKilled", 5f);
+                break;
+
         }
     }
 
@@ -89,21 +93,25 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
             _healthManager.OnHurt += OnHurt;
             _healthManager.OnDie += OnKilled;
         }
-
-        if (IsOverlapping(OverlapLayers)){
-            if (ObjectPoolManager.instance)
+        if (!InDebug)
+        {
+            if (IsOverlapping(OverlapLayers))
             {
-                if (gameObject)
+                if (ObjectPoolManager.instance)
                 {
-                    ObjectPoolManager.Recycle(gameObject);
+                    if (gameObject)
+                    {
+                        ObjectPoolManager.Recycle(gameObject);
+                    }
+                }
+                else
+                {
+
+                    Destroy(gameObject);
                 }
             }
-            else
-            {
-
-                Destroy(gameObject);
-            }
         }
+    
       
     }
 
