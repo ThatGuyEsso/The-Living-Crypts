@@ -20,9 +20,11 @@ public abstract class BaseBossAbility : MonoBehaviour
     protected float currentCoolDown = 0;
     protected float currentTimeToSkip = 0;
     protected bool IsActive;
+    protected AudioManager AM;
     virtual  public void Init()
     {
         _isInitialised = true;
+        AM = _owner.AudioManager;
     }
     virtual public void SetUpAbility(BossAbilityData data,BaseBoss owner)
     {

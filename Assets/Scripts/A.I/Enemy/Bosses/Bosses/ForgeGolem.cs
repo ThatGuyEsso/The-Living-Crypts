@@ -17,13 +17,28 @@ public class ForgeGolem : BaseBoss
     [SerializeField] protected string AwakenSFX;
     [Header("VFX")]
     protected float MinTimeBetweenBreaks=0.25f,MaxTimeBetweenBreaks=1f;
+    [SerializeField] protected GameObject ChestFlameVFX;
     protected MaterialSwitch[] MaterialSwitches;
     protected ComplexHitFlashManager HitVFXs;
     [SerializeField] protected CreateFreeRigidBBody[] BreakJoints;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (ChestFlameVFX)
+        {
+            ChestFlameVFX.SetActive(false);
+        }
+    }
     public override void Init()
     {
         base.Init();
-        if(_hManager) _hManager.IsAlive = false;
+        if (_hManager)
+        {
+            _hManager.IsAlive = false;
+
+            _hManager.OnDamageReceived += DamageReceived;
+        }
         if (!_walkMovement)
         {
             _walkMovement = GetComponent<WalkMovement>();
@@ -101,7 +116,10 @@ public class ForgeGolem : BaseBoss
         {
             MainCollider.enabled = false;
         }
-
+        if (ChestFlameVFX)
+        {
+            ChestFlameVFX.SetActive(false);
+        }
         if (BreakJoints.Length > 0)
         {
             StartCoroutine(BreakJointsOverTime(BreakJoints));
@@ -121,12 +139,25 @@ public class ForgeGolem : BaseBoss
         for (int i= 0;i < jointsToBreak.Length; i++)
         {
             yield return new WaitForSeconds(Random.Range(MinTimeBetweenBreaks,MaxTimeBetweenBreaks));
-            jointsToBreak[i].Init(); ;
+            jointsToBreak[i].Init();
+            if (DeathVFX)
+            {
+                if (ObjectPoolManager.instance)
+                {
+                    ObjectPoolManager.Spawn(DeathVFX, jointsToBreak[i].transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(DeathVFX, jointsToBreak[i].transform.position, Quaternion.identity);
+                }
+            }
         }
         if (_gameManager)
         {
             _gameManager.BeginNewGameplayEvent(GameplayEvents.OnBossFightEnd);
         }
+
+   
     }
 
     protected override void BeginNewStage(BossStage newStage)
@@ -180,6 +211,10 @@ public class ForgeGolem : BaseBoss
             HitVFXs.Init();
         }
         PlaySFX(AwakenSFX, false);
+        if (ChestFlameVFX)
+        {
+            ChestFlameVFX.SetActive(true);
+        }
     }
     public override void StartBossFight()
     {
@@ -318,15 +353,26 @@ public class ForgeGolem : BaseBoss
         switch (newState)
         {
             case EnemyState.Chase:
+                if (!AnimManager)
+                {
+                    return;
+                }
                 AnimManager.PlayWalkAnimation();
                 break;
-
+                if (!AnimManager)
+                {
+                    return;
+                }
             case EnemyState.Idle:
                 AnimManager.PlayIdleAnimation();
 
                 break;
 
             case EnemyState.Attack:
+                if (!AnimManager)
+                {
+                    return;
+                }
                 AnimManager.PlayIdleAnimation();
                 _walkMovement.BeginStop();
                 break;
@@ -354,6 +400,40 @@ public class ForgeGolem : BaseBoss
             _currentPath = PathFinder.GetPathToTarget(hitInfo.point, CurrentTarget.position, NavMesh.AllAreas);
         }
 
+    }
+
+    protected void DamageReceived(float maxHealh , float dmg , float kback , Vector3 kDir, Vector3 point)
+    {
+        if (HurtVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(HurtVFX, point, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(HurtVFX, point, Quaternion.identity);
+            }
+        }
+    }
+
+    override protected void OnDestroy()
+    {
+        base.OnDestroy();
+        if (_hManager)
+        {
+            _hManager.OnDamageReceived -= DamageReceived;
+         
+        }
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        if (_hManager)
+        {
+            _hManager.OnDamageReceived -= DamageReceived;
+        }
     }
 }
 

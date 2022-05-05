@@ -10,11 +10,11 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private float SpawnTime;
     [SerializeField] private LayerMask BlockingLayers;
 
-
+    [SerializeField] private string SpawnSFX;
     private GameObject spawnPrepareVFX;
     private GameObject enemyToSpawn;
     private Vector3 spawnPoint;
-
+    protected AudioManager AM;
     public System.Action<CharacterSpawner, GameObject> OnEnemySpawned;
 
     public void BeginEnemySpawn(Vector3 spawnPoint, GameObject enemy )
@@ -33,7 +33,23 @@ public class CharacterSpawner : MonoBehaviour
         Invoke("SpawnEnemy", SpawnTime);
 
     }
+    public virtual AudioPlayer PlaySFX(string sfxName, bool randPitch)
+    {
+        if (AM)
+        {
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
+        }
+        else
+        {
+            if (!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+            {
+                return null;
+            }
 
+            AM = GameStateManager.instance.AudioManager;
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
+        }
+    }
     private void SpawnEnemy()
     {
         if (!enemyToSpawn)
@@ -125,6 +141,7 @@ public class CharacterSpawner : MonoBehaviour
             }
             enemy.SetTarget(GameStateManager.instance.GameManager.Player.transform);
             OnEnemySpawned?.Invoke(this, enemyObject);
+            PlaySFX(SpawnSFX, true);
         }
 
       

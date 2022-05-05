@@ -349,11 +349,22 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         }
     }
 
-    virtual protected void OnDestroy()
+    override protected void OnDestroy()
     {
+        base.OnDestroy();
         if (_hManager)
         {
-            
+            _hManager.OnDie -= EndBossFight;
+            _hManager.OnHurt -= OnHurt;
+        }
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        if (_hManager)
+        {
+            _hManager.OnDie -= EndBossFight;
             _hManager.OnHurt -= OnHurt;
         }
     }

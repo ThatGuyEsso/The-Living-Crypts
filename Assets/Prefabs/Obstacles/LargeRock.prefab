@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a6b1be188a3de4d812155cddb8aa42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InDebug: 0
   MaxSize: 1.2
   MinSize: 0.8
   UseRandomSize: 1
@@ -183,6 +184,11 @@ MonoBehaviour:
   OverlapLayers:
     serializedVersion: 2
     m_Bits: 131200
+  DeathVFX: {fileID: 806818768627034054, guid: c099948298dd52546a3af72f0746fd9a, type: 3}
+  HurtVFX: {fileID: 389310606193605663, guid: b9fa7b680d091d547a7722e605d182af, type: 3}
+  HurtSFX: ObjectHit
+  KilledSFX: ObjectBreak
+  AM: {fileID: 0}
 --- !u!114 &4960233772130175344
 MonoBehaviour:
   m_ObjectHideFlags: 0

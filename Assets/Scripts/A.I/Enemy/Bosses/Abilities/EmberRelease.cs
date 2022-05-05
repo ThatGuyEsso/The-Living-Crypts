@@ -11,13 +11,17 @@ public class EmberRelease : BaseBossAbility
     [SerializeField] private float MinSpawnRate, MaxSpawnRate;
     [SerializeField] private float MaxInaccuracy;
     [SerializeField] private LayerMask GroundLayers;
+
     [Header("Attack Animation")]
     [SerializeField] private string ReadyUpAnim, EndAnim;
 
-
+    [Header("VFX")]
+    [SerializeField] private GameObject ShootVFX;
+    [Header("SFX")]
+    [SerializeField] private string ShootSFX;
     [Header("Boss Components")]
     private Animator _animator;
-
+ 
     private AttackAnimManager _attackAnimManager;
     private SmoothMatchParentRotLoc[] _smoothMatchParentRots;
 
@@ -40,7 +44,7 @@ public class EmberRelease : BaseBossAbility
 
 
         }
-    
+   
     }
 
     private void Update()
@@ -93,7 +97,21 @@ public class EmberRelease : BaseBossAbility
         {
             return;
         }
-       
+        if (ShootVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(ShootVFX, _firePoint.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(ShootVFX, _firePoint.position, Quaternion.identity);
+            }
+        }
+        if (AM)
+        {
+            AM.PlayThroughAudioPlayer(ShootSFX, _firePoint.position);
+        }
         Vector3 targetPoint =Random.insideUnitSphere*Random.Range(0.0f,MaxInaccuracy)+ _owner.GetTaget().position;
 
         RaycastHit hitInfo;

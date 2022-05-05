@@ -105,9 +105,10 @@ MonoBehaviour:
     MaxKnockBack: 10
     MinKnockBack: 15
   HurtSFX: EnchantedWeaponHurt
-  KilledSFX: EnchantedWeaponHurt
+  KilledSFX: ObjectBreak
   AM: {fileID: 0}
-  DeathVFX: {fileID: 0}
+  DeathVFX: {fileID: 806818768627034054, guid: ddb87d185d533a748ab94aaac9e2703b, type: 3}
+  HurtVFX: {fileID: 389310606193605663, guid: 603ecb76fc06d5e448506b5abec7701b, type: 3}
   CurrentState: 0
   PathFinder: {fileID: 0}
   PathFollower: {fileID: 0}

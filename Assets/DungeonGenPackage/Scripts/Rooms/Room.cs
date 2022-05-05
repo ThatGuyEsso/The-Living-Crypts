@@ -39,9 +39,10 @@ public class Room : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject EnemySpawnManagerPrefab;
-
+    [Header("SFX")]
+    private string RoomClearedSFX = "PlayerSpawnSFX";
     private CryptEnemyManager enemyManager;
-
+    protected AudioManager AM;
     public System.Action OnBossRoomTriggered;
 
     private void OnDrawGizmos()
@@ -128,6 +129,7 @@ public class Room : MonoBehaviour
         {
             enemyManager.OnEnemiesCleared -= OnRoomCleared;
             UnlockDoors();
+            PlaySFX(RoomClearedSFX, false);
         }
     }
     public void BeginLootEcounter()
@@ -448,6 +450,25 @@ public class Room : MonoBehaviour
                     door.OnPlayerEnteredRoom -= BeginRoomEncounter;
                 }
             }
+        }
+    }
+
+
+    public virtual AudioPlayer PlaySFX(string sfxName, bool randPitch)
+    {
+        if (AM)
+        {
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
+        }
+        else
+        {
+            if (!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+            {
+                return null;
+            }
+
+            AM = GameStateManager.instance.AudioManager;
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
         }
     }
 }

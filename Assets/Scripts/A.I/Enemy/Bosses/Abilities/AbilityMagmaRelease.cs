@@ -15,12 +15,15 @@ public class AbilityMagmaRelease : BaseBossAbility
     [Header("Attack Animation")]
     [SerializeField] private string ReadyUpAnim,EndAnim;
 
-
+    [Header("VFX")]
+    [SerializeField] private GameObject ShootVFX;
+    [Header("SFX")]
+    [SerializeField] private string ShootSFX;
     [Header("Boss Components")]
     private Animator _animator;
 
     private AttackAnimManager _attackAnimManager;
-
+  
 
     private int _nLeftToSpawn;
     private float _timeToSpawnLeft;
@@ -39,6 +42,7 @@ public class AbilityMagmaRelease : BaseBossAbility
         {
             _attackAnimManager = _owner.GetComponent<AttackAnimManager>();
         }
+  
     }
 
     private void Update()
@@ -95,6 +99,21 @@ public class AbilityMagmaRelease : BaseBossAbility
             return;
         }
 
+        if (ShootVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(ShootVFX, _firePoint.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(ShootVFX, _firePoint.position, Quaternion.identity);
+            }
+        }
+        if (AM)
+        {
+            AM.PlayThroughAudioPlayer(ShootSFX, _firePoint.position);
+        }
         Vector3 targetPoint = Random.insideUnitSphere * Random.Range(0.0f, MaxInaccuracy) + _owner.GetTaget().position;
 
         RaycastHit hitInfo;

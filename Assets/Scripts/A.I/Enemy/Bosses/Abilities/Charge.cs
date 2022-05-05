@@ -14,7 +14,8 @@ public class Charge : BaseBossAbility
 
     private WalkMovement _movement;
     private AttackAnimManager _attackAnimManager;
-   
+    [Header("SFX")]
+    [SerializeField] private string HitSFX;
     private FaceDirection _faceDirection;
     private Vector3 ChargePoint;
     private float _defaultSpeed;
@@ -87,6 +88,10 @@ public class Charge : BaseBossAbility
     {
         if(StopChargeLayers == (StopChargeLayers | (1 << other.gameObject.layer)))
         {
+            if (AM)
+            {
+                AM.PlayThroughAudioPlayer(HitSFX, transform.position);
+            }
             OnAttackEnd();
         }
     }

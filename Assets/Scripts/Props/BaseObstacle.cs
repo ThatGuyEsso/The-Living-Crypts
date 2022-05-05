@@ -10,11 +10,18 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
     [SerializeField] private bool UseRandomRotation=true;
     [SerializeField] private LayerMask OverlapLayers;
 
+    [Header("VFX")]
+    [SerializeField] protected GameObject DeathVFX;
+    [SerializeField] protected GameObject HurtVFX;
+    [Header("SFX")]
+    [SerializeField] protected string HurtSFX;
+    [SerializeField] protected string KilledSFX;
+
     private CharacterHealthManager _healthManager;
     private Vector3 _initialSize;
     private ObjectBounds _bounds;
     protected GameManager _gameManager;
-
+    [SerializeField] protected AudioManager AM;
     private void Awake()
     {
         if (InDebug)
@@ -163,6 +170,18 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
 
     public void OnKilled()
     {
+        PlaySFX(KilledSFX, true);
+        if (DeathVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(DeathVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(DeathVFX, transform.position, Quaternion.identity);
+            }
+        }
         if (ObjectPoolManager.instance)
         {
             if (gameObject)
@@ -184,7 +203,18 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
 
     public void OnHurt()
     {
-
+        PlaySFX(HurtSFX, true);
+        if (HurtVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(HurtVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(HurtVFX, transform.position, Quaternion.identity);
+            }
+        }
     }
     public Team GetTeam()
     {
@@ -223,6 +253,24 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
         if (_gameManager)
         {
             _gameManager.OnNewGamplayEvent -= EvaluateNewGameplayEvent;
+        }
+    }
+
+    public virtual AudioPlayer PlaySFX(string sfxName, bool randPitch)
+    {
+        if (AM)
+        {
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
+        }
+        else
+        {
+            if (!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+            {
+                return null;
+            }
+
+            AM = GameStateManager.instance.AudioManager;
+            return AM.PlayThroughAudioPlayer(sfxName, transform.position, randPitch);
         }
     }
 }

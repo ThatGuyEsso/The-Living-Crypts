@@ -65,6 +65,18 @@ public class SupportGolem : BaseEnemy , IAttacker
     protected override void KillEnemy()
     {
         _cryptCharacter.RemoveSelf();
+        PlaySFX(KilledSFX, true);
+        if (DeathVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(DeathVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(DeathVFX, transform.position, Quaternion.identity);
+            }
+        }
         if (ObjectPoolManager.instance)
         {
             ObjectPoolManager.Recycle(gameObject);
@@ -318,6 +330,17 @@ public class SupportGolem : BaseEnemy , IAttacker
     {
      
         PlaySFX(HurtSFX, true);
+        if (HurtVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(HurtVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(HurtVFX, transform.position, Quaternion.identity);
+            }
+        }
     }
     public void OnNotHurt()
     {

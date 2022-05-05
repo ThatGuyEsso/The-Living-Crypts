@@ -161,7 +161,11 @@ public class SceneTransitionManager : MonoBehaviour, IManager, IInitialisable
                 yield return null;
             }
         }
-        WeaponManager._instance.UnequipWeapon();
+        if (WeaponManager._instance)
+        {
+            WeaponManager._instance.UnequipWeapon();
+        }
+     
         yield return new WaitForSeconds(0.5f);
         //add and unload operations
         foreach (Scene scene in loadedScenes)

@@ -115,12 +115,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4960233772130175345, guid: e748ebde41008d94081e1af78085089a, type: 3}
+      propertyPath: HurtSFX
+      value: ObjectHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960233772130175345, guid: e748ebde41008d94081e1af78085089a, type: 3}
+      propertyPath: HurtVFX
+      value: 
+      objectReference: {fileID: 389310606193605663, guid: f4ba8ddb94f67654b8b5f3f3c5035ee2, type: 3}
+    - target: {fileID: 4960233772130175345, guid: e748ebde41008d94081e1af78085089a, type: 3}
       propertyPath: MaxSize
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4960233772130175345, guid: e748ebde41008d94081e1af78085089a, type: 3}
       propertyPath: MinSize
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960233772130175345, guid: e748ebde41008d94081e1af78085089a, type: 3}
+      propertyPath: DeathVFX
+      value: 
+      objectReference: {fileID: 806818768627034054, guid: b56f26df9492b164f95cc6a7eac406a9, type: 3}
+    - target: {fileID: 4960233772130175345, guid: e748ebde41008d94081e1af78085089a, type: 3}
+      propertyPath: KilledSFX
+      value: ObjectBreak
       objectReference: {fileID: 0}
     - target: {fileID: 4960233772130175346, guid: e748ebde41008d94081e1af78085089a, type: 3}
       propertyPath: m_RootOrder

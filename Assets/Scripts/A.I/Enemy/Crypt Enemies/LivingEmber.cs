@@ -256,6 +256,17 @@ public class LivingEmber : BaseEnemy
     {
         OnEnemyStateChange(EnemyState.Idle);
         PlaySFX(HurtSFX,true);
+        if (HurtVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(HurtVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(HurtVFX, transform.position, Quaternion.identity);
+            }
+        }
     }
     public void OnNotHurt()
     {
@@ -296,6 +307,17 @@ public class LivingEmber : BaseEnemy
     protected override void KillEnemy()
     {
         PlaySFX(KilledSFX, true);
+        if (DeathVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(DeathVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(DeathVFX, transform.position, Quaternion.identity);
+            }
+        }
         if (transform.localScale.x > MinimumSplitSize)
         {
 
@@ -319,6 +341,17 @@ public class LivingEmber : BaseEnemy
     {
         base.DestroyEnemy();
         _cryptCharacter.RemoveSelf();
+        if (DeathVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(DeathVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(DeathVFX, transform.position, Quaternion.identity);
+            }
+        }
         if (ObjectPoolManager.instance)
         {
             ObjectPoolManager.Recycle(gameObject);
@@ -327,6 +360,7 @@ public class LivingEmber : BaseEnemy
         {
             Destroy(gameObject);
         }
+     
     }
 
     public void Split()
@@ -383,12 +417,13 @@ public class LivingEmber : BaseEnemy
                     if (cryptEmber)
                     {
                         _cryptCharacter.AddNewCharacter(cryptEmber);
+                        if (emberRB)
+                        {
+                            emberRB.AddForce(Vector3.up + randXZ * _jumpMovement.JumpData.JumpForce, ForceMode.Impulse);
+                        }
                     }
 
-                    if (emberRB)
-                    {
-                        emberRB.AddForce(Vector3.up + randXZ * _jumpMovement.JumpData.JumpForce, ForceMode.Impulse);
-                    }
+              
                 }
 
             }

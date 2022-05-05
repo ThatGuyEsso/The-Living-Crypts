@@ -17,6 +17,9 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
     [SerializeField] private float _acceleration;
     [SerializeField] private float _deceleration;
     [SerializeField] private float _maxSpeed;
+    [Header("Dash VFX")]
+    [SerializeField] private GameObject DashVFX;
+    [SerializeField] private Transform FootPoint;
     private bool _canDash;
     private bool _isDashing;
     private bool _isStopping;
@@ -80,6 +83,20 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
         }
     }
 
+    public void SpawnDashVFX()
+    {
+        if (DashVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(DashVFX, FootPoint.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(DashVFX, FootPoint.position, Quaternion.identity);
+            }
+        }
+    }
     public void DoDash() {
 
         if (_fpsMove.GetCurrentSpeed() > 0f) _endDashSpeed = _fpsMove.GetMaxSpeed();
@@ -93,6 +110,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
         _isDashing = true;
         OnBeginDash?.Invoke();
         StartCoroutine(dashTimer());
+        SpawnDashVFX();
 
     }
     public void Dashing()

@@ -22,7 +22,6 @@ public class CryptEnemyManager : MonoBehaviour
 
     [SerializeField] private int _currentWaveEnemyCount;
     [SerializeField] private int _enemiesToSpawnLeft;
-
     public System.Action OnEnemiesCleared;
     public void Init(Room owner)
     {

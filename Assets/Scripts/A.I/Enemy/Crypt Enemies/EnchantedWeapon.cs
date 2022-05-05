@@ -238,7 +238,18 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         {
             _cryptCharacter.RemoveSelf();
         }
-      
+        if (DeathVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(DeathVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(DeathVFX, transform.position, Quaternion.identity);
+            }
+        }
+
         if (ObjectPoolManager.instance)
         {
             if (_weaponGO)
@@ -609,7 +620,17 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         {
             GoToIdle();
         }
-  
+        if (HurtVFX)
+        {
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Spawn(HurtVFX, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(HurtVFX, transform.position, Quaternion.identity);
+            }
+        }
 
 
     }

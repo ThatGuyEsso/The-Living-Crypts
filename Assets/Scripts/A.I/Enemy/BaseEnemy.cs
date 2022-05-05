@@ -56,7 +56,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
 
     [Header("VFX")]
     [SerializeField] protected GameObject DeathVFX;
-
+    [SerializeField] protected GameObject HurtVFX;
     [Header("Enemy States")]
     [SerializeField] protected EnemyState CurrentState;
 
@@ -267,5 +267,5 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
         StartCoroutine(DoAITick());
     }
 
-    public AudioManager AudioManager { set { AM = value; } }
+    public AudioManager AudioManager { get { return AM; } set { AM = value; } }
 }

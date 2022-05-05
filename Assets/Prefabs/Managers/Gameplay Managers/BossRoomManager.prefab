@@ -44,5 +44,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss: {fileID: 0}
+  Room: {fileID: 0}
   BossUIPrefab: {fileID: 3768981126912450485, guid: 43b75bbf5112c0c4fb1083cf70184a29, type: 3}
   InDebug: 0
+  AM: {fileID: 0}
+  PlayerTransform: {fileID: 0}
+  ShakeVFX:
+    _duration: 0.25
+    _magnitude: 1
+    _timeSmoothIn: 0.1
+    _timeSmoothOut: 0.2
+    _frequency: 0.8
+  CutsceneCamera: {fileID: 0}
+  Director: {fileID: 0}
+  BossIntro: {fileID: 0}
+  PostCutSceneHoldTime: 0
