@@ -59,7 +59,7 @@ public class HealthPickUp : BasePickUp
             {
                 return;
             }
-            healthManager.CurrentHealth = Mathf.Clamp(healthManager.CurrentHealth += HealAmount,0f, healthManager.GetMaxHealth());
+            healthManager.HealCharacter(HealAmount);
         }
 
         if (AM)

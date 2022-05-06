@@ -292,6 +292,31 @@ public class ConsumableManager : MonoBehaviour, Controls.IConsumableSlotsActions
 
     }
 
+    public void Clear()
+    {
+        if (HUD)
+        {
+            HUD.ItemDisplayManager.SetPrimaryIcon(null);
+            HUD.ItemDisplayManager.SetSecondary(null);
+        }
+
+        if (_primaryConsumable)
+        {
+           
+            _primaryConsumable.Remove();
+
+            _primaryConsumable = null;
+     
+        }
+        if (_secondaryConsumable)
+        {
+
+           
+            _secondaryConsumable.Remove();
+
+            _secondaryConsumable = null;
+        }
+    }
     private HUDManager GetHUDManager()
     {
         if (HUD)
@@ -316,6 +341,7 @@ public class ConsumableManager : MonoBehaviour, Controls.IConsumableSlotsActions
         if (_input != null)
         {
             _input.Disable();
+            Clear();
         }   
     }
 
@@ -324,6 +350,7 @@ public class ConsumableManager : MonoBehaviour, Controls.IConsumableSlotsActions
         if (_input != null)
         {
             _input.Disable();
+            Clear();
         }
     }
 }

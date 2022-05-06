@@ -94,32 +94,33 @@ public class CharacterSpawner : MonoBehaviour
         {
             enemyObject.transform.position = spawnPoint + Vector3.up * bounds.GetHalfExtents().y + Vector3.up * bounds.GetOffset().y ;
 
-            ////raycast each direction to see if chracter is in a wall
-            //RaycastHit hit;
+            //raycast each direction to see if chracter is in a wall
+            RaycastHit hit;
 
-            ////Right
-            //if(Physics.Raycast(enemyObject.transform.position, Vector3.right,out hit, bounds.GetHalfExtents().x, BlockingLayers)){
-            //    enemyObject.transform.position += Vector3.left * bounds.GetHalfExtents().x;
-            //}
+            //Right
+            if (Physics.Raycast(enemyObject.transform.position, Vector3.right, out hit, bounds.GetHalfExtents().x, BlockingLayers))
+            {
+                enemyObject.transform.position += Vector3.left * bounds.GetHalfExtents().x;
+            }
 
 
-            ////left
-            //if (Physics.Raycast(enemyObject.transform.position, Vector3.left, out hit, bounds.GetHalfExtents().x, BlockingLayers))
-            //{
-            //    enemyObject.transform.position += Vector3.right * bounds.GetHalfExtents().x;
-            //}
+            //left
+            if (Physics.Raycast(enemyObject.transform.position, Vector3.left, out hit, bounds.GetHalfExtents().x, BlockingLayers))
+            {
+                enemyObject.transform.position += Vector3.right * bounds.GetHalfExtents().x;
+            }
 
-            ////forward
-            //if (Physics.Raycast(enemyObject.transform.position, Vector3.forward, out hit, bounds.GetHalfExtents().z, BlockingLayers))
-            //{
-            //    enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z ;
-            //}
+            //forward
+            if (Physics.Raycast(enemyObject.transform.position, Vector3.forward, out hit, bounds.GetHalfExtents().z, BlockingLayers))
+            {
+                enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z;
+            }
 
-            ////Right
-            //if (Physics.Raycast(enemyObject.transform.position, Vector3.back, out hit, bounds.GetHalfExtents().z, BlockingLayers))
-            //{
-            //    enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z ;
-            //}
+            //Right
+            if (Physics.Raycast(enemyObject.transform.position, Vector3.back, out hit, bounds.GetHalfExtents().z, BlockingLayers))
+            {
+                enemyObject.transform.position += Vector3.back * bounds.GetHalfExtents().z;
+            }
 
         }
 

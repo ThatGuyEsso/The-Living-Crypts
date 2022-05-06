@@ -164,8 +164,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         {
             _weaponGO = Instantiate(currentWeaponData.EnchantedWeaponPrefab, transform);
         }
-        float randYAxis = Random.Range(0f, 360f);
-        _weaponGO.transform.localRotation = Quaternion.Euler(90f, randYAxis, 0f);
+
         CharacterSettings.MaxDamage = currentWeaponData.attackData.MaxDamage;
         CharacterSettings.MinDamage = currentWeaponData.attackData.MinDamage;
         CharacterSettings.MaxKnockBack = currentWeaponData.attackData.MaxKnockBack;
@@ -331,10 +330,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         {
             return;
         }
-        if (transform.position.y < -16f&&!InDebug)
-        {
-            KillEnemy();
-        }
+
         //if weapon doesn't have ticket don't run
         if (TicketManager && !HasTicket)
         {

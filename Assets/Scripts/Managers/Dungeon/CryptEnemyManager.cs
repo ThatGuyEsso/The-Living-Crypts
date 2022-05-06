@@ -17,7 +17,7 @@ public class CryptEnemyManager : MonoBehaviour
     private Room _owner;
 
     private List<CharacterSpawner> _enemySpawners = new List<CharacterSpawner>();
-
+    private List<GameObject> enemies = new List<GameObject>();
     private EnemySpawnPattern _currentSpawnPattern;
 
     [SerializeField] private int _currentWaveEnemyCount;
@@ -63,6 +63,7 @@ public class CryptEnemyManager : MonoBehaviour
 
     public void OnEnemySpawned(CharacterSpawner spawner, GameObject enemy)
     {
+        enemies.Add(enemy);
         if (_enemySpawners.Count > 0)
         {
             CharacterSpawner spawnerToRemove=_enemySpawners.Find(  item => item.gameObject == spawner.gameObject);
@@ -147,8 +148,10 @@ public class CryptEnemyManager : MonoBehaviour
 
     public void EvaluateWave()
     {
+        
         if(_currentWaveEnemyCount <= 0)
         {
+            enemies.Clear();
             Debug.Log("Wave complete");
             if (_enemiesToSpawnLeft>0)
             {
@@ -225,7 +228,7 @@ public class CryptEnemyManager : MonoBehaviour
 
                 yield return new WaitForSeconds(lagTime);
             }
-      
+        
         }
     
   

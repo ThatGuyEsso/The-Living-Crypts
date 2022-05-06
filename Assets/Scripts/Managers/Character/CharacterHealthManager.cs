@@ -97,6 +97,11 @@ public class CharacterHealthManager : MonoBehaviour, IDamage,IInitialisable
         OnHealthUpdated?.Invoke(CurrentHealth);
     }
 
+    public void HealCharacter(float increment)
+    {
+        _currentHealth = Mathf.Clamp(_currentHealth + increment, 0f, _maxHealth);
+        OnHealthUpdated?.Invoke(CurrentHealth);
+    }
     public bool IsHurt { get { return !_canBeHurt; } }
 
     public HealthData HealthData { set { _healthData = value; } get { return _healthData; } }

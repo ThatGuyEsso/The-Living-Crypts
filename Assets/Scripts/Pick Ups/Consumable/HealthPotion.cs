@@ -18,7 +18,7 @@ public class HealthPotion : BaseConsumable
             {
                 return false;
             }
-            healthManager.CurrentHealth = Mathf.Clamp(healthManager.CurrentHealth += HealAmount, 0f, healthManager.GetMaxHealth());
+            healthManager.HealCharacter(HealAmount);
         }
 
         if (!AM)

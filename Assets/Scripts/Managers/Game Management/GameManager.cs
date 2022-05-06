@@ -105,6 +105,11 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                 {
                     _musicManager.StopMusic();
                 }
+                InitRespawn();
+                if (ConsumableManager._instance)
+                {
+                    ConsumableManager._instance.Clear();
+                }
                 PlayDeathSequence();
                 Invoke("InitRespawn", TimeToRespawn);
                 break;
@@ -124,6 +129,10 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                     _musicManager.StopMusic();
                 }
                 InitRespawn();
+                if (ConsumableManager._instance)
+                {
+                    ConsumableManager._instance.Clear();
+                }
                 break;
             case GameplayEvents.ExitLevel:
 
@@ -138,6 +147,11 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                 if (_generationManager)
                 {
                     _generationManager.StopBuilding();
+                }
+                InitRespawn();
+                if (ConsumableManager._instance)
+                {
+                    ConsumableManager._instance.Clear();
                 }
                 break;
 
