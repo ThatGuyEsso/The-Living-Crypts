@@ -54,27 +54,37 @@ public class ExplosionArea : MonoBehaviour, IExplosion
             if (other.transform.parent != _explosionData._owner)
             {
                 IProjectile proj = other.gameObject.GetComponent<IProjectile>();
+                if (proj == null)
+                {
+                    proj = other.gameObject.GetComponentInParent<IProjectile>();
+                }
+
                 if (proj != null)
                 {
+                    proj = other.gameObject.GetComponentInParent<IProjectile>();
                     GameObject otherOwner = proj.GetOwner();
                     if (otherOwner != _explosionData._owner)
                     {
                         proj.BreakProjectile();
                     }
                 }
-
-                
+            
                 IDamage damage = other.GetComponent<IDamage>();
 
+                if (damage == null)
+                {
+                     damage = other.GetComponentInParent<IDamage>();
+              
+                    
+                }
                 if (damage != null)
                 {
                     float dmg = Random.Range(_explosionData._minDamage, _explosionData._maxDamage);
                     Vector3 kBackDir = other.transform.position - transform.position;
-                    damage.OnDamage(dmg, kBackDir.normalized, _explosionData._knockBack, _explosionData._owner,other.transform.position);
+                    damage.OnDamage(dmg, kBackDir.normalized, _explosionData._knockBack, _explosionData._owner, other.transform.position);
                 }
 
-                    
-             
+
             }
         }
 

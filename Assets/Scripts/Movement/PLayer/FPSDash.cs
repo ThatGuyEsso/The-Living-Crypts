@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, ICharacterComponents
+public class FPSDash : MonoBehaviour, IInitialisable, Controls.IDashActions, ICharacterComponents
 {
     [SerializeField] private bool _inDebug;
     [Header("Components")]
@@ -61,7 +61,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
             _currentSpeed = Mathf.Lerp(_currentSpeed, 0.0f, Time.fixedDeltaTime * _deceleration);
 
 
-            Vector3 direction = _dashDirection * _currentSpeed* Time.fixedDeltaTime;
+            Vector3 direction = _dashDirection * _currentSpeed * Time.fixedDeltaTime;
             if (_fpsMove.GetMoveDirection() == Vector3.zero)
                 _rb.velocity = new Vector3(direction.x, _rb.velocity.y, direction.z); ;
 
@@ -97,7 +97,8 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
             }
         }
     }
-    public void DoDash() {
+    public void DoDash()
+    {
 
         if (_fpsMove.GetCurrentSpeed() > 0f) _endDashSpeed = _fpsMove.GetMaxSpeed();
         else _endDashSpeed = 0f;
@@ -105,7 +106,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
 
         if (_fpsMove.GetMoveDirection() != Vector3.zero) _dashDirection = _fpsMove.GetMoveDirection().normalized;
         else _dashDirection = transform.forward.normalized;
-        if(_gravity)
+        if (_gravity)
             _gravity.GravityScale = 0f;
         _isDashing = true;
         OnBeginDash?.Invoke();
@@ -116,7 +117,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
     public void Dashing()
     {
         Vector3 velocity = _dashDirection * _currentSpeed;
-        _rb.velocity = new Vector3(velocity.x,_rb.velocity.y,velocity.z);
+        _rb.velocity = new Vector3(velocity.x, _rb.velocity.y, velocity.z);
     }
 
     public void StopDash()
@@ -175,7 +176,7 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
         EndDash();
         StopAllCoroutines();
         _canDash = false;
-    
+
         if (_input != null)
         {
             _input.Disable();
@@ -185,5 +186,21 @@ public class FPSDash : MonoBehaviour,IInitialisable,Controls.IDashActions, IChar
     public void ResetComponent()
     {
         EnableComponent();
+    }
+
+    private void OnDisable()
+    {
+        if (_input != null)
+        {
+            _input.Disable();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_input != null)
+        {
+            _input.Disable();
+        }
     }
 }

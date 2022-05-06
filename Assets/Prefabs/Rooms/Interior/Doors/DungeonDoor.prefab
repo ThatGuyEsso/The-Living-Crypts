@@ -32,8 +32,8 @@ Transform:
   m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6493049053473489873}
   - {fileID: 7293715805453199092}
-  - {fileID: 2922862458579135724}
   m_Father: {fileID: 3981040180314930492}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -376,7 +376,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6666864384875445972}
-  - {fileID: 6493049053473489873}
+  - {fileID: 2922862458579135724}
   m_Father: {fileID: 3981040180314930492}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -804,10 +804,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2434635757715626766}
   m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.75, y: -2, z: 0}
-  m_LocalScale: {x: 18.75, y: 1.5, z: 1}
+  m_LocalPosition: {x: 1.4859257, y: -2, z: 0}
+  m_LocalScale: {x: 9.375, y: 1.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 432590251}
+  m_Father: {fileID: 1903159960409538491}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &7478639376698131455
@@ -1382,11 +1382,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7446053382149881660}
   m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -3.25, y: -2, z: 0}
-  m_LocalScale: {x: 18.75, y: 1.5, z: 1}
+  m_LocalPosition: {x: -0.4859259, y: -2, z: 0}
+  m_LocalScale: {x: 9.375, y: 1.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1903159960409538491}
-  m_RootOrder: 1
+  m_Father: {fileID: 432590251}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &3420184974774821008
 SpriteRenderer:
@@ -1673,7 +1673,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 56de5e05f9954b0459f8621019f7b7e8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56de5e05f9954b0459f8621019f7b7e8, type: 3}
       propertyPath: m_LocalScale.x

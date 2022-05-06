@@ -56,17 +56,62 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
         {
   
             case GameplayEvents.PlayerRespawnBegun:
-                OnKilled();
+                if (ObjectPoolManager.instance)
+                {
+                    if (gameObject)
+                    {
+                        ObjectPoolManager.Recycle(gameObject);
+                    }
+                    else
+                    {
+                        if (gameObject)
+                        {
+                            Destroy(gameObject);
+
+                        }
+                    }
+
+                }
                 break;
      
             case GameplayEvents.Restart:
-                OnKilled();
+                if (ObjectPoolManager.instance)
+                {
+                    if (gameObject)
+                    {
+                        ObjectPoolManager.Recycle(gameObject);
+                    }
+                    else
+                    {
+                        if (gameObject)
+                        {
+                            Destroy(gameObject);
+
+                        }
+                    }
+
+                }
                 break;
             case GameplayEvents.ExitLevel:
-                OnKilled();
+                if (ObjectPoolManager.instance)
+                {
+                    if (gameObject)
+                    {
+                        ObjectPoolManager.Recycle(gameObject);
+                    }
+                    else
+                    {
+                        if (gameObject)
+                        {
+                            Destroy(gameObject);
+
+                        }
+                    }
+
+                }
                 break;
             case GameplayEvents.OnBossFightEnd:
-                Invoke("OnKilled", 5f);
+                Invoke("OnReset", 5f);
                 break;
 
         }
@@ -121,7 +166,25 @@ public class BaseObstacle : MonoBehaviour, Iteam , IInitialisable
     
       
     }
+    public void OnReset()
+    {
+        if (ObjectPoolManager.instance)
+        {
+            if (gameObject)
+            {
+                ObjectPoolManager.Recycle(gameObject);
+            }
+            else
+            {
+                if (gameObject)
+                {
+                    Destroy(gameObject);
 
+                }
+            }
+
+        }
+    }
     public bool IsOverlapping(LayerMask overLapLayers)
     {
 

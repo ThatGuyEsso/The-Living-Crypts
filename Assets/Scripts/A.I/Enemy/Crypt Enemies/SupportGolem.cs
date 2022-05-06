@@ -64,6 +64,7 @@ public class SupportGolem : BaseEnemy , IAttacker
 
     protected override void KillEnemy()
     {
+        base.KillEnemy();
         _cryptCharacter.RemoveSelf();
         PlaySFX(KilledSFX, true);
         if (DeathVFX)
@@ -166,6 +167,10 @@ public class SupportGolem : BaseEnemy , IAttacker
         if (!IsActive)
         {
             return;
+        }
+        if (transform.position.y < -16f)
+        {
+            KillEnemy();
         }
         if (_isAttacking)
         {

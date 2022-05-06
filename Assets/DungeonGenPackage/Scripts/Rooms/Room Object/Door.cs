@@ -11,6 +11,7 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     [Header("Door Settings")]
     [SerializeField] private Transform _roomSpawnPoint;
     [SerializeField] private bool _isEntry;
+    [SerializeField] private bool _CloseInTrigger;
     [SerializeField] private bool _requiresInput =false;
     [SerializeField] private Direction _faceDirection;
     [SerializeField] private float _width, _length, _height;
@@ -46,7 +47,7 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     private bool _isInRange;
     private bool _canOpen;
     private bool _isOpen=false;
-
+    
     //Object References
     [SerializeField] private Room _linkedRoom;
     private EntryTrigger _entryTrigger;
@@ -200,6 +201,11 @@ public class Door : MonoBehaviour, Controls.IInteractActions
 
     private void OnTriggerExit(Collider other)
     {
+        if (_CloseInTrigger)
+        {
+            _canOpen = false;
+            CloseDoor();
+        }
         if (!_canOpen) return;
         if (other.CompareTag("Player"))
         {

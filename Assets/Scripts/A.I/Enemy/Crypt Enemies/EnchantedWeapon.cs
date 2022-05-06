@@ -233,6 +233,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
 
     protected override void KillEnemy()
     {
+        base.KillEnemy();
         PlaySFX(KilledSFX, true);
         if (_cryptCharacter)
         {
@@ -275,6 +276,10 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         {
          
             return;
+        }
+        if (transform.position.y < -16f)
+        {
+            KillEnemy();
         }
         if (TicketManager)
         {

@@ -14,7 +14,7 @@ public class LivingEmber : BaseEnemy
     [SerializeField] private float MinimumSplitSize;
     [SerializeField] private int MaxSplitCount;
     [SerializeField] private GameObject LivingEmberPrefab;
-
+ private EnemySettings _defaultSettings;
     private SquashAndStretch _squashAndStretch;
     private JumpMovement _jumpMovement;
   
@@ -27,6 +27,7 @@ public class LivingEmber : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
+        _defaultSettings = CharacterSettings;
         if (!_cryptCharacter)
         {
             _cryptCharacter = GetComponent<CryptCharacterManager>();
@@ -151,9 +152,14 @@ public class LivingEmber : BaseEnemy
 
     private void Update()
     {
+
         if (!IsActive)
         {
             return;
+        }
+        if(transform.position.y <- 16f)
+        {
+            KillEnemy();
         }
         switch (CurrentState)
         {
@@ -306,6 +312,7 @@ public class LivingEmber : BaseEnemy
     }
     protected override void KillEnemy()
     {
+        base.KillEnemy();
         PlaySFX(KilledSFX, true);
         if (DeathVFX)
         {
@@ -478,12 +485,12 @@ public class LivingEmber : BaseEnemy
 
 
         //Boost Attack range
-        CharacterSettings.AttackRange+= transform.localScale.x / 2f;
-        CharacterSettings.MaxDamage += CharacterSettings.MaxDamage * transform.localScale.x/2;
-        CharacterSettings.MinDamage += CharacterSettings.MinDamage * transform.localScale.x / 2;
+        CharacterSettings.AttackRange= transform.localScale.x / 2f;
+        CharacterSettings.MaxDamage = _defaultSettings.MaxDamage * transform.localScale.x/2;
+        CharacterSettings.MinDamage = _defaultSettings.MinDamage * transform.localScale.x / 2;
 
-        CharacterSettings.MaxKnockBack += CharacterSettings.MaxKnockBack * transform.localScale.x / 4;
-        CharacterSettings.MinKnockBack += CharacterSettings.MinKnockBack * transform.localScale.x / 4;
+        CharacterSettings.MaxKnockBack = _defaultSettings.MaxKnockBack * transform.localScale.x / 4;
+        CharacterSettings.MinKnockBack = _defaultSettings.MinKnockBack * transform.localScale.x / 4;
         if (_jumpMovement)
         {
             //Movement

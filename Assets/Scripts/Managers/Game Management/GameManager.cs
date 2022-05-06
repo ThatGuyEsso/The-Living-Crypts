@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
 
     [Header("Music")]
     [SerializeField] private string DungeonAmbience;
-
+    [SerializeField] private string CombatSong;
+    [SerializeField] private string BossSong;
     //Manager References
     private MusicManager _musicManager;
     private AudioManager _audioManager;
@@ -134,6 +135,10 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                 {
                     _sceneManager.BeginLoadMenuScreen(SceneIndex.TitleScreen);
                 }
+                if (_generationManager)
+                {
+                    _generationManager.StopBuilding();
+                }
                 break;
 
             case GameplayEvents.OnBossFightEnd:
@@ -146,6 +151,15 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                 {
                     _sceneManager.BeginLoadMenuScreen(SceneIndex.TitleScreen);
                 }
+                break;
+            case GameplayEvents.OnOBossSequenceBegun:
+                if (_musicManager)
+                {
+                    _musicManager.StopMusic();
+                }
+                break;
+            case GameplayEvents.OnBossFightBegun:
+                PlaySong(BossSong);
                 break;
             case GameplayEvents.Quit:
 
@@ -161,6 +175,17 @@ public class GameManager : MonoBehaviour, IManager, IInitialisable
                 }
                 GameStateManager.instance.LoadingScreenManager.OnFadeComplete += OnQuitGame;
                 GameStateManager.instance.LoadingScreenManager.BeginFadeIn();
+                if (_generationManager)
+                {
+                    _generationManager.StopBuilding();
+                }
+                break;
+            case GameplayEvents.EnteredCombat:
+                PlaySong(CombatSong);
+                break;
+
+            case GameplayEvents.LeftCombat:
+                PlaySong(DungeonAmbience);
                 break;
         }
     }

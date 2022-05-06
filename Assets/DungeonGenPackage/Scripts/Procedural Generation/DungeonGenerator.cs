@@ -562,4 +562,67 @@ public class DungeonGenerator : MonoBehaviour
         }
         SpawnObstacles();
     }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        if (_builders.Count > 0)
+        {
+            foreach(DungeonBuilder builder in _builders)
+            {
+                Destroy(builder);
+            }
+        }
+        if (_roomManager)
+        {
+            _roomManager.OnRoomLoadComplete -= BeginBuildDungeon;
+            _roomManager.OnRoomUnloadComplete -= OnRoomWaitComplete;
+
+
+        }
+        if (_obstacleGenerator)
+        {
+            _obstacleGenerator.OnObstaclesSpawned -= OnObstacleSpawnComplete;
+
+        }
+
+        if (_litterGenerator)
+        {
+            _litterGenerator.OnObstaclesSpawned -= OnLitterSpawnComplete;
+        }
+    }
+    public void StopBuilding()
+    {
+        StopAllCoroutines();
+        if (_builders.Count > 0)
+        {
+            foreach (DungeonBuilder builder in _builders)
+            {
+                Destroy(builder.gameObject);
+            }
+            _builders.Clear();
+        }
+        if (_roomManager)
+        {
+            _roomManager.OnRoomLoadComplete -= BeginBuildDungeon;
+            _roomManager.OnRoomUnloadComplete -= OnRoomWaitComplete;
+
+
+        }
+        if (_obstacleGenerator)
+        {
+            _obstacleGenerator.OnObstaclesSpawned -= OnObstacleSpawnComplete;
+
+        }
+
+        if (_litterGenerator)
+        {
+            _litterGenerator.OnObstaclesSpawned -= OnLitterSpawnComplete;
+        }
+    }
+
+    private void OnDisable()
+    {
+        StopBuilding();
+    }
 }

@@ -44,6 +44,7 @@ public class Room : MonoBehaviour
     private CryptEnemyManager enemyManager;
     protected AudioManager AM;
     public System.Action OnBossRoomTriggered;
+    public GameManager GM;
 
     private void OnDrawGizmos()
     {
@@ -87,6 +88,8 @@ public class Room : MonoBehaviour
                 break;
             case RoomType.BossCrypt:
                 BeginBossEnounter();
+
+
                 break;
         }
     }
@@ -114,6 +117,10 @@ public class Room : MonoBehaviour
                 enemyManager.OnEnemiesCleared += OnRoomCleared;
             }
         }
+        if (GM)
+        {
+            GM.BeginNewGameplayEvent(GameplayEvents.EnteredCombat);
+        }
     }
 
     public void BeginBossEnounter()
@@ -131,6 +138,11 @@ public class Room : MonoBehaviour
             UnlockDoors();
             PlaySFX(RoomClearedSFX, false);
         }
+        if (GM)
+        {
+            GM.BeginNewGameplayEvent(GameplayEvents.LeftCombat);
+        }
+
     }
     public void BeginLootEcounter()
     {
@@ -237,7 +249,13 @@ public class Room : MonoBehaviour
         if (!GameStateManager.instance.GameManager) return;
         if (!GameStateManager.instance.GameManager.GetRoomManager()) return;
         GameStateManager.instance.GameManager.GetRoomManager().OnNewRoomLoaded(this);
-
+        if (!GM)
+        {
+            if (GameStateManager.instance && GameStateManager.instance.GameManager)
+            {
+                GM = GameStateManager.instance.GameManager;
+            }
+        }
     }
 
     public bool IsOverlapping(LayerMask overLapLayers)

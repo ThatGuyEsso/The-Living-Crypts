@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class TitlescreenMenu : MonoBehaviour
 {
     GraphicRaycaster graphicRaycaster;
-
+    [SerializeField] private GameObject MainMenu;
+    [SerializeField] private GameObject Credits;
     [SerializeField] private string[] TitleAmbienceSFX;
     [SerializeField] private string TransitionSFXName;
     private AudioManager _audioManager;
@@ -17,6 +18,10 @@ public class TitlescreenMenu : MonoBehaviour
         PlayAmbience();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        if (Credits)
+        {
+            Credits.SetActive(false);
+        }
     }
 
 
@@ -70,5 +75,37 @@ public class TitlescreenMenu : MonoBehaviour
         }
     }
 
+    public void OnCredits()
+    {
+        if (Credits)
+        {
+            Credits.SetActive(true);
+        }
+        else
+        {
+            return;
+        }
+
+        if (MainMenu)
+        {
+            MainMenu.SetActive(false);
+        }
+    }
+    public void OnBackFromCredits()
+    {
+        if (Credits)
+        {
+            Credits.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
+
+        if (MainMenu)
+        {
+            MainMenu.SetActive(true);
+        }
+    }
 
 }

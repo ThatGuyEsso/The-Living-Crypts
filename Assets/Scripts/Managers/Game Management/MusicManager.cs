@@ -14,13 +14,12 @@ public class MusicManager : MonoBehaviour,IInitialisable
     [SerializeField] private float crossFadeRate;
     [SerializeField] private float fadeInRate;
     [SerializeField] private float fadeOutRate;
-
-
+ 
     [SerializeField] private AudioMixerGroup musicAudioGroup;
     public Sound[] music;
 
     private GameManager GM;
-
+    private Sound nextSong;
     private Sound currentSongPlaying;
     private float currentTimeToNextSong;
 
@@ -103,6 +102,11 @@ public class MusicManager : MonoBehaviour,IInitialisable
             if (primarySource.isPlaying)
             {
                 StopCoroutine(WaitToPrimarySongFinish(newSong));
+                BeginSongFadeOut(fadeOutRate);
+                nextSong = newSong;
+                OnFadeComplete += FadeInNewSong;
+
+
                 WaitToPrimarySongFinish(newSong);
             }
             else
@@ -124,14 +128,20 @@ public class MusicManager : MonoBehaviour,IInitialisable
             if (primarySource.isPlaying)
             {
                 StopCoroutine(WaitToPrimarySongFinish(newSong));
-                BeginSongFadeOut(0.5f);
-               StartCoroutine( WaitToPrimarySongFinish(newSong));
+                BeginSongFadeOut(fadeOutRate);
+                nextSong = newSong;
             }
             else
             {
                 StartCoroutine(FadeInWithDelay(newSong, delay));
+
             }
         }
+    }
+    public void FadeInNewSong()
+    {
+        OnFadeComplete -= FadeInNewSong;
+        DoSongFadeIn(nextSong);
     }
 
     public IEnumerator FadeInWithDelay(Sound song, float delay)

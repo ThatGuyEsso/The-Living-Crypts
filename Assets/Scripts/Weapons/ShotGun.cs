@@ -222,7 +222,7 @@ public class ShotGun : BaseWeapon
                     float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                     float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
 
-                    targetsHit.Add(new HitScanTarget(hitInfo.collider.transform.root.gameObject, dmg, kBack, targetDir, hitInfo.point));
+                    targetsHit.Add(new HitScanTarget(hitInfo.collider.gameObject, dmg, kBack, targetDir, hitInfo.point));
                 }
                 else
                 {
@@ -230,7 +230,7 @@ public class ShotGun : BaseWeapon
                     bool valueFound = false;
                     for (int j = 0; j < targetsHit.Count; j++)
                     {
-                        if (targetsHit[j].Target == hitInfo.collider.transform.root.gameObject)
+                        if (targetsHit[j].Target == hitInfo.collider.gameObject)
                         {
                             valueFound = true;
                             indexToUpdate = j;
@@ -244,7 +244,7 @@ public class ShotGun : BaseWeapon
                         float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                         float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
 
-                        HitScanTarget newTargetValue = new HitScanTarget(hitInfo.collider.transform.root.gameObject, targetsHit[indexToUpdate].CurrentDamage + dmg,
+                        HitScanTarget newTargetValue = new HitScanTarget(hitInfo.collider.gameObject, targetsHit[indexToUpdate].CurrentDamage + dmg,
                             targetsHit[indexToUpdate].CurrentKnockBack + kBack, (targetDir + targetsHit[indexToUpdate].Direction).normalized, hitInfo.point);
 
                         targetsHit[indexToUpdate] = newTargetValue;
@@ -254,7 +254,7 @@ public class ShotGun : BaseWeapon
                         float dmg = Random.Range(_primaryMinDamage, _primaryMaxDamage);
                         float kBack = Random.Range(_primaryMinKnockback, _primaryMaxKnockback);
 
-                        targetsHit.Add(new HitScanTarget(hitInfo.collider.transform.root.gameObject, dmg, kBack, targetDir, hitInfo.point));
+                        targetsHit.Add(new HitScanTarget(hitInfo.collider.gameObject, dmg, kBack, targetDir, hitInfo.point));
                     }
                 }
             }
@@ -288,26 +288,48 @@ public class ShotGun : BaseWeapon
 
                     if (otherTeam == null)
                     {
-                        return;
+                        otherTeam = target.Target.GetComponentInParent<Iteam>();
+                       
                     }
 
 
-                    if (!otherTeam.IsOnTeam(Team.Player))
+                    if (otherTeam != null)
                     {
+                        if (!otherTeam.IsOnTeam(Team.Player))
+                        {
 
-      
-                     
+
+
+                            IDamage damage = target.Target.GetComponent<IDamage>();
+                            if (damage == null)
+                            {
+                                damage = target.Target.GetComponentInParent<IDamage>();
+                            }
+                            if (damage != null)
+                            {
+                                damage.OnDamage(target.CurrentDamage, target.Direction, target.CurrentKnockBack, WeaponManager._instance.Getowner(),
+                                    target.HitPoint);
+                            }
+
+
+
+                        }
+                    }
+                    else
+                    {
                         IDamage damage = target.Target.GetComponent<IDamage>();
-
+                        if (damage == null)
+                        {
+                            damage = target.Target.GetComponentInParent<IDamage>();
+                        }
                         if (damage != null)
                         {
-                            damage.OnDamage(target.CurrentDamage, target.Direction,target.CurrentKnockBack,WeaponManager._instance.Getowner(),
+                            damage.OnDamage(target.CurrentDamage, target.Direction, target.CurrentKnockBack, WeaponManager._instance.Getowner(),
                                 target.HitPoint);
                         }
 
-                         
-                      
                     }
+
                 }
             }
         }

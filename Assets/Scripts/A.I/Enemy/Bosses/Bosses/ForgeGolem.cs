@@ -359,11 +359,12 @@ public class ForgeGolem : BaseBoss
                 }
                 AnimManager.PlayWalkAnimation();
                 break;
+              
+            case EnemyState.Idle:
                 if (!AnimManager)
                 {
                     return;
                 }
-            case EnemyState.Idle:
                 AnimManager.PlayIdleAnimation();
 
                 break;

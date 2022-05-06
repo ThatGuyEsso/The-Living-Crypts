@@ -185,10 +185,13 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     }
     protected abstract void DoAttack(GameObject target, Vector3 point);
 
-    protected abstract void KillEnemy();
+    protected virtual void KillEnemy()
+    {
+        IsActive = false;
+    }
     protected virtual void DestroyEnemy()
     {
-
+        IsActive = false;
         SpawnDeathVFX();
     }
     protected virtual void SpawnDeathVFX()
@@ -217,6 +220,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     }
     virtual protected void OnDisable()
     {
+        StopAllCoroutines();
         if(_gameManager)
         {
             _gameManager.OnNewGamplayEvent -= EvaluateNewGameplayEvent;
@@ -224,6 +228,7 @@ public abstract class BaseEnemy : MonoBehaviour ,Iteam ,IInitialisable, IEnemy
     }
     virtual protected void OnDestroy()
     {
+        StopAllCoroutines();
         if (_gameManager)
         {
             _gameManager.OnNewGamplayEvent -= EvaluateNewGameplayEvent;

@@ -30,7 +30,7 @@ public class GenerationCounterManager : MonoBehaviour
                 if (GameStateManager.instance.GameManager)
                 {
                     GM = GameStateManager.instance.GameManager;
-                    GameStateManager.instance.GameManager.OnNewGamplayEvent += EvaluateGameplayEvent;
+                    GM.OnNewGamplayEvent += EvaluateGameplayEvent;
                 }
             }
         }
@@ -193,6 +193,40 @@ public class GenerationCounterManager : MonoBehaviour
             light.enabled = true;
             light.intensity = LightIntensity;
             light.color = PendingColour;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (GM)
+        {
+
+            GM.OnNewGamplayEvent-= EvaluateGameplayEvent;
+         
+        }
+        if (_dungeonGenerator)
+        {
+            _dungeonGenerator.OnFirstBuilderDone -= OnNewProgress;
+            _dungeonGenerator.OnDungeonGenerationComplete -= OnNewProgress;
+            _dungeonGenerator.OnDungeonComplete -= OnNewProgress;
+            _dungeonGenerator.OnDungeonComplete -= OnGenerationComplete;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (GM)
+        {
+
+            GM.OnNewGamplayEvent -= EvaluateGameplayEvent;
+
+        }
+        if (_dungeonGenerator)
+        {
+            _dungeonGenerator.OnFirstBuilderDone -= OnNewProgress;
+            _dungeonGenerator.OnDungeonGenerationComplete -= OnNewProgress;
+            _dungeonGenerator.OnDungeonComplete -= OnNewProgress;
+            _dungeonGenerator.OnDungeonComplete -= OnGenerationComplete;
         }
     }
 

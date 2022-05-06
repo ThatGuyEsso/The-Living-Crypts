@@ -192,6 +192,16 @@ public class DisplayRoomManager : MonoBehaviour, Controls.IInteractActions
         {
             _input.Disable();
         }
+        if (GameManager)
+        {
+            GameManager.OnNewGamplayEvent -= EvaluateGameplayEvent;
+
+        }
+
+        if (WeaponManager._instance)
+        {
+            WeaponManager._instance.OnWeaponEquipped -= EvalauteWeaponSelected;
+        }
     }
 
     private void OnDestroy()
@@ -200,12 +210,10 @@ public class DisplayRoomManager : MonoBehaviour, Controls.IInteractActions
         {
             _input.Disable();
         }
-        if (GameStateManager.instance)
+        if (GameManager)
         {
-            if (GameStateManager.instance.GameManager)
-            {
-                GameStateManager.instance.GameManager.OnNewGamplayEvent -= EvaluateGameplayEvent;
-            }
+            GameManager.OnNewGamplayEvent -= EvaluateGameplayEvent;
+            
         }
 
         if (WeaponManager._instance)
