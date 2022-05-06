@@ -277,10 +277,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
          
             return;
         }
-        if (transform.position.y < -16f)
-        {
-            KillEnemy();
-        }
+  
         if (TicketManager)
         {
             if (!HasTicket)
@@ -334,8 +331,12 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
         {
             return;
         }
+        if (transform.position.y < -16f&&!InDebug)
+        {
+            KillEnemy();
+        }
         //if weapon doesn't have ticket don't run
-        if(TicketManager && !HasTicket)
+        if (TicketManager && !HasTicket)
         {
             return;
         }
@@ -394,6 +395,13 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
                 }
                 else
                 {
+                    if (_currentMoveTime <= 1.5f)
+                    {
+                        if (_trailRenderer)
+                        {
+                            _trailRenderer.material = AttackMaterial;
+                        }
+                    }
                     _currentMoveTime -= Time.deltaTime;
                 }
                 break;

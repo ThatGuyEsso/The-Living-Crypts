@@ -14,7 +14,10 @@ public class ScalingProgressBar : MonoBehaviour
     protected float targetPercent;
     public Action ScalingBegun;
 
-
+    public void SetFillColour(Color colour)
+    {
+        fill.color = colour;
+    }
     public void SetMaxValue(float maxVal) { maxValue = maxVal; }
     public void SetValue(float newVal) { value = newVal; }
 

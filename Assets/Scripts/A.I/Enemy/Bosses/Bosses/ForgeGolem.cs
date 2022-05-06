@@ -167,24 +167,28 @@ public class ForgeGolem : BaseBoss
         switch (newStage)
         {
             case BossStage.First:
+             
                 _hManager.IsAlive = true;
                 OnEnemyStateChange(EnemyState.Chase);
                 SetUpNewAbilities();
                 Debug.Log("First Stage");
                 break;
             case BossStage.Second:
+            
                 _hManager.IsAlive = true;
                 OnEnemyStateChange(EnemyState.Chase);
                 SetUpNewAbilities();
                 Debug.Log("Second Stage");
                 break;
             case BossStage.Final:
+             
                 _hManager.IsAlive = true;
                 OnEnemyStateChange(EnemyState.Chase);
                 SetUpNewAbilities();
                 Debug.Log("Final Stage");
                 break;
             case BossStage.Transition:
+                
                 AnimManager.PlayIdleAnimation();
                 _walkMovement.BeginStop();
                 _hManager.IsAlive = false;

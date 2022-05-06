@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17573563c9fc114b99e53e5a090817a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultColour: {r: 1, g: 1, b: 1, a: 0}
   flashTime: 0.25
 --- !u!1 &3768981126912450485
 GameObject:
@@ -267,7 +268,10 @@ MonoBehaviour:
   uiShaker: {fileID: 7776833321509106899}
   displayRefit: {fileID: 6444048152724166813}
   AM: {fileID: 0}
+  flashVFX: {fileID: 8535936597271296442}
   HealthSpawnSFX: RoomLoadCompleteSFX
+  DefaultColour: {r: 1, g: 0, b: 0, a: 1}
+  InvulnerableColour: {r: 1, g: 0.9420621, b: 0, a: 1}
 --- !u!95 &3768981126912450480
 Animator:
   serializedVersion: 3

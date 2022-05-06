@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 3982368686327892857}
   - component: {fileID: 4643414923761552731}
   - component: {fileID: 273581729731280348}
+  - component: {fileID: 6789578625471331133}
   m_Layer: 10
   m_Name: LivingEmber
   m_TagString: Enemy
@@ -116,6 +117,13 @@ MonoBehaviour:
   MinimumSplitSize: 0.5
   MaxSplitCount: 4
   LivingEmberPrefab: {fileID: 951077903895921039}
+  _defaultSettings:
+    AttackRange: 2
+    AttackRate: 3
+    MaxDamage: 10
+    MinDamage: 5
+    MaxKnockBack: 5
+    MinKnockBack: 2
 --- !u!114 &951077903895921035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,8 +159,8 @@ Rigidbody:
   m_GameObject: {fileID: 951077903895921039}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 0.8
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -312,6 +320,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnableonAwake: 1
+--- !u!114 &6789578625471331133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951077903895921039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5725e625105a3c84093e5ccdb6af8965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootTable: {fileID: 11400000, guid: 48024cbf2dd02974391c4cbaabc0e906, type: 2}
+  MinDropForce: 4
+  MaxDropForce: 7
+  ActivateOnDestroy: 0
 --- !u!114 &5830728186482552110
 MonoBehaviour:
   m_ObjectHideFlags: 0

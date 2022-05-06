@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScalingSliderFlash : MonoBehaviour
 {
     private ScalingProgressBar scalingSider;
-    private Color defaultColour;
+    public Color defaultColour;
     private Color flashColour = Color.white;
     [SerializeField] private float flashTime;
     private void Awake()

@@ -14,10 +14,10 @@ public class LivingEmber : BaseEnemy
     [SerializeField] private float MinimumSplitSize;
     [SerializeField] private int MaxSplitCount;
     [SerializeField] private GameObject LivingEmberPrefab;
- private EnemySettings _defaultSettings;
+    [SerializeField] private EnemySettings _defaultSettings;
     private SquashAndStretch _squashAndStretch;
     private JumpMovement _jumpMovement;
-  
+    private LootDropper _lootDropper;
     private RandomSizeInRange _randomSize;
 
     private CryptCharacterManager _cryptCharacter;
@@ -27,7 +27,7 @@ public class LivingEmber : BaseEnemy
     protected override void Awake()
     {
         base.Awake();
-        _defaultSettings = CharacterSettings;
+       
         if (!_cryptCharacter)
         {
             _cryptCharacter = GetComponent<CryptCharacterManager>();
@@ -51,7 +51,10 @@ public class LivingEmber : BaseEnemy
             _squashAndStretch = GetComponent<SquashAndStretch>();
           
         }
-   
+        if (!_lootDropper)
+        {
+            _lootDropper = GetComponent<LootDropper>();
+        }
         ResetEnemy();
     }
 
@@ -313,6 +316,7 @@ public class LivingEmber : BaseEnemy
     protected override void KillEnemy()
     {
         base.KillEnemy();
+        CharacterSettings = _defaultSettings;
         PlaySFX(KilledSFX, true);
         if (DeathVFX)
         {
@@ -332,6 +336,7 @@ public class LivingEmber : BaseEnemy
         }
         else
         {
+            _lootDropper.SpawnLoot();
             _cryptCharacter.RemoveSelf();
             if (ObjectPoolManager.instance)
             {
@@ -478,9 +483,8 @@ public class LivingEmber : BaseEnemy
         //Boost health
         if (_hManager)
         {
-            HealthData hData = _hManager.HealthData;
-            hData._maxDefaultHealth = _hManager.HealthData._maxDefaultHealth * transform.localScale.x;
-            _hManager.HealthData = hData;
+            
+            _hManager.CurrentHealth = _hManager.HealthData._maxDefaultHealth * transform.localScale.x; ;
         }
 
 

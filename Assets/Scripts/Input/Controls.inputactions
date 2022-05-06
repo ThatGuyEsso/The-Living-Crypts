@@ -687,6 +687,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ConsumableSlots",
+            "id": "ec7f1bd4-7073-455c-a93b-e9acb6f56fa0",
+            "actions": [
+                {
+                    "name": "TrySlotOne",
+                    "type": "Button",
+                    "id": "4c70c066-2f7f-4596-95cd-0df05ddc2bc4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TrySlotTwo",
+                    "type": "Button",
+                    "id": "737512a4-69c7-4b75-9d37-b8abde9da92d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1155103c-cbb9-4007-94f1-3bcd7585ba50",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TrySlotOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "819ff29f-e0bf-4fd5-bbb5-dc44a99b5005",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TrySlotTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

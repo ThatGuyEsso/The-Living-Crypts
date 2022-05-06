@@ -131,9 +131,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 836753347387585163, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: ManagerToInit.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 836753347387585163, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
       propertyPath: ManagerToInit.Array.data[1]
       value: 
       objectReference: {fileID: 1327657722}
+    - target: {fileID: 836753347387585163, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+      propertyPath: ManagerToInit.Array.data[2]
+      value: 
+      objectReference: {fileID: 197090927}
     - target: {fileID: 2691887569142288993, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
       propertyPath: _targetCamera
       value: 
@@ -211,6 +219,11 @@ Transform:
 --- !u!4 &197090926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2691887569142289007, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
+  m_PrefabInstance: {fileID: 197090923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &197090927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2632331480922322793, guid: 35e80fa055541d0459a017ef858de09e, type: 3}
   m_PrefabInstance: {fileID: 197090923}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &221518185

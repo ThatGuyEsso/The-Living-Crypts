@@ -176,6 +176,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         BeginNewStage(BossStage.First);
 
 
+
     }
 
     virtual public void EndBossFight()
@@ -188,6 +189,10 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
 
     public virtual void EvaluateStageTrigger()
     {
+        if (_currentStage == BossStage.Transition)
+        {
+            return;
+        }
         float healthPercentage = _hManager.CurrentHealth/_hManager.GetMaxHealth();
         switch (_currentStage)
         {
@@ -198,6 +203,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
                     _bossUI.DoHurtUpdate(_hManager.CurrentHealth);
                     Debug.Log("First Stage Complete");
                     BeginNewStage(BossStage.Transition);
+                    _bossUI.OnInvulnerable();
                 }
                 break;
             case BossStage.Second:
@@ -207,6 +213,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
                     _bossUI.DoHurtUpdate(_hManager.CurrentHealth);
                     Debug.Log("Second Stage Complete");
                     BeginNewStage(BossStage.Transition);
+                    _bossUI.OnInvulnerable();
                 }
                 break;
        
@@ -313,6 +320,7 @@ public abstract class BaseBoss : BaseEnemy, IAttacker
         {
             _previousStage++;
             BeginNewStage(_previousStage);
+            _bossUI.OnCanBeHurt();
         }
     }
 

@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 3463250654546931367}
   - component: {fileID: 5962609288607120330}
   - component: {fileID: 3837891800510844458}
+  - component: {fileID: 2780969091434878889}
   m_Layer: 10
   m_Name: SupportGolem
   m_TagString: Enemy
@@ -74,8 +75,8 @@ Rigidbody:
   m_GameObject: {fileID: 1423341725425897567}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 0.8
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5192c030837c11a4e95a8fbd7d432804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InDebug: 1
+  InDebug: 0
   TickRate: 0.25
   MaxTickOffset: 0.3
   CurrentTarget: {fileID: 0}
@@ -318,6 +319,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackAnim: Attack
   _walkAnim: WalkCycle
+--- !u!114 &2780969091434878889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423341725425897567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5725e625105a3c84093e5ccdb6af8965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootTable: {fileID: 11400000, guid: 48024cbf2dd02974391c4cbaabc0e906, type: 2}
+  MinDropForce: 4
+  MaxDropForce: 7
+  ActivateOnDestroy: 1
 --- !u!64 &1032404449
 MeshCollider:
   m_ObjectHideFlags: 0

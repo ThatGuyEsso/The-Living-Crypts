@@ -172,6 +172,7 @@ public class HUDManager : MonoBehaviour
             case GameplayEvents.OnBossFightBegun:
                 PlayerHealthBar.gameObject.SetActive(true);
                 _weaponDisplayManager.gameObject.SetActive(true);
+                ItemDisplayManager.gameObject.SetActive(true);
                 break;
         }
     }

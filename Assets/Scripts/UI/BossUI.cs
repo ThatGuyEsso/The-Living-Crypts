@@ -12,10 +12,22 @@ public class BossUI : MonoBehaviour
     [SerializeField] private UIElementShake uiShaker;
     [SerializeField] private ResizeToFitText displayRefit;
     [SerializeField] private AudioManager AM;
-
+    [SerializeField] private ScalingSliderFlash flashVFX;
     [SerializeField] private string HealthSpawnSFX;
-
+    [SerializeField] private Color DefaultColour;
+    [SerializeField] private Color InvulnerableColour;
     public Action OnUISpawned;
+
+    public void OnInvulnerable()
+    {
+        progressBar.SetFillColour(InvulnerableColour);
+        flashVFX.defaultColour = InvulnerableColour;
+    }
+    public void OnCanBeHurt()
+    {
+        progressBar.SetFillColour(DefaultColour);
+        flashVFX.defaultColour = DefaultColour;
+    }
     public void InitialiseUI(string bossName,float maxHealth)
     {
         progressBar.SetMaxValue(maxHealth);

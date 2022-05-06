@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "ObjectSpawnData", menuName = "New Object Spawn Data")]
-public class ObjectSpawnPattern : ScriptableObject
+public class ObjectSpawnPattern: ScriptableObject
 {
     [Tooltip("Chance of using this spawn data pattern")]
     [Range(1, 10)]

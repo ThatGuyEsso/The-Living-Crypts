@@ -700,6 +700,52 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ConsumableSlots"",
+            ""id"": ""ec7f1bd4-7073-455c-a93b-e9acb6f56fa0"",
+            ""actions"": [
+                {
+                    ""name"": ""TrySlotOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c70c066-2f7f-4596-95cd-0df05ddc2bc4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TrySlotTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""737512a4-69c7-4b75-9d37-b8abde9da92d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1155103c-cbb9-4007-94f1-3bcd7585ba50"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TrySlotOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""819ff29f-e0bf-4fd5-bbb5-dc44a99b5005"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TrySlotTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -765,6 +811,10 @@ public class @Controls : IInputActionCollection, IDisposable
         // Interact
         m_Interact = asset.FindActionMap("Interact", throwIfNotFound: true);
         m_Interact_TryToInteract = m_Interact.FindAction("TryToInteract", throwIfNotFound: true);
+        // ConsumableSlots
+        m_ConsumableSlots = asset.FindActionMap("ConsumableSlots", throwIfNotFound: true);
+        m_ConsumableSlots_TrySlotOne = m_ConsumableSlots.FindAction("TrySlotOne", throwIfNotFound: true);
+        m_ConsumableSlots_TrySlotTwo = m_ConsumableSlots.FindAction("TrySlotTwo", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1155,6 +1205,47 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public InteractActions @Interact => new InteractActions(this);
+
+    // ConsumableSlots
+    private readonly InputActionMap m_ConsumableSlots;
+    private IConsumableSlotsActions m_ConsumableSlotsActionsCallbackInterface;
+    private readonly InputAction m_ConsumableSlots_TrySlotOne;
+    private readonly InputAction m_ConsumableSlots_TrySlotTwo;
+    public struct ConsumableSlotsActions
+    {
+        private @Controls m_Wrapper;
+        public ConsumableSlotsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TrySlotOne => m_Wrapper.m_ConsumableSlots_TrySlotOne;
+        public InputAction @TrySlotTwo => m_Wrapper.m_ConsumableSlots_TrySlotTwo;
+        public InputActionMap Get() { return m_Wrapper.m_ConsumableSlots; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ConsumableSlotsActions set) { return set.Get(); }
+        public void SetCallbacks(IConsumableSlotsActions instance)
+        {
+            if (m_Wrapper.m_ConsumableSlotsActionsCallbackInterface != null)
+            {
+                @TrySlotOne.started -= m_Wrapper.m_ConsumableSlotsActionsCallbackInterface.OnTrySlotOne;
+                @TrySlotOne.performed -= m_Wrapper.m_ConsumableSlotsActionsCallbackInterface.OnTrySlotOne;
+                @TrySlotOne.canceled -= m_Wrapper.m_ConsumableSlotsActionsCallbackInterface.OnTrySlotOne;
+                @TrySlotTwo.started -= m_Wrapper.m_ConsumableSlotsActionsCallbackInterface.OnTrySlotTwo;
+                @TrySlotTwo.performed -= m_Wrapper.m_ConsumableSlotsActionsCallbackInterface.OnTrySlotTwo;
+                @TrySlotTwo.canceled -= m_Wrapper.m_ConsumableSlotsActionsCallbackInterface.OnTrySlotTwo;
+            }
+            m_Wrapper.m_ConsumableSlotsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @TrySlotOne.started += instance.OnTrySlotOne;
+                @TrySlotOne.performed += instance.OnTrySlotOne;
+                @TrySlotOne.canceled += instance.OnTrySlotOne;
+                @TrySlotTwo.started += instance.OnTrySlotTwo;
+                @TrySlotTwo.performed += instance.OnTrySlotTwo;
+                @TrySlotTwo.canceled += instance.OnTrySlotTwo;
+            }
+        }
+    }
+    public ConsumableSlotsActions @ConsumableSlots => new ConsumableSlotsActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -1214,5 +1305,10 @@ public class @Controls : IInputActionCollection, IDisposable
     public interface IInteractActions
     {
         void OnTryToInteract(InputAction.CallbackContext context);
+    }
+    public interface IConsumableSlotsActions
+    {
+        void OnTrySlotOne(InputAction.CallbackContext context);
+        void OnTrySlotTwo(InputAction.CallbackContext context);
     }
 }

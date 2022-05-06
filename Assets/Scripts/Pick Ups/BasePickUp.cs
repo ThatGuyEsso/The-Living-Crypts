@@ -8,4 +8,20 @@ public abstract class BasePickUp : MonoBehaviour
     protected abstract void DoPickUp();
     protected abstract void DisablePickUp();
     public abstract void EnablePickUp();
+
+    public AudioManager AudioManager
+    {
+        get
+        {
+                if (!GameStateManager.instance || !GameStateManager.instance.AudioManager)
+                {
+                    return null;
+                }
+                else
+                {
+                    return GameStateManager.instance.AudioManager;
+                }
+           
+        }
+    }
 }

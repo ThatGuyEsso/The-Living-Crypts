@@ -20,6 +20,8 @@ public class ExplosionArea : MonoBehaviour, IExplosion
     private float _timeLeft;
     private ExplosionData _explosionData;
     [SerializeField] private LayerMask _damageLayers;
+
+
     public GameObject GetOwner()
     {
         return _explosionData._owner;
