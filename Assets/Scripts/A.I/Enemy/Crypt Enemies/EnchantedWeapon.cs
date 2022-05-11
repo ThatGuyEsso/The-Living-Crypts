@@ -255,6 +255,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
             if (_weaponGO)
             {
                 ObjectPoolManager.Recycle(_weaponGO);
+                _weaponGO = null;
             }
             ObjectPoolManager.Recycle(gameObject);
         }
@@ -263,6 +264,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
             if (_weaponGO)
             {
                 Destroy(_weaponGO);
+                _weaponGO = null;
             }
             Destroy(gameObject);
         }
@@ -685,7 +687,7 @@ public class EnchantedWeapon : BaseEnemy, IAttacker
 
         if (!_hManager)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         _hManager.Init();

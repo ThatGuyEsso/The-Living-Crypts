@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class PathFinder : MonoBehaviour, IInitialisable
+public class PathFinder : MonoBehaviour
 {
     [SerializeField] private bool InDebug;
     private NavMeshPath _path;

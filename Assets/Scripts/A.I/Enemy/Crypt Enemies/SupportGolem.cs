@@ -65,7 +65,11 @@ public class SupportGolem : BaseEnemy , IAttacker
     protected override void KillEnemy()
     {
         base.KillEnemy();
-        _cryptCharacter.RemoveSelf();
+        if (_cryptCharacter)
+        {
+            _cryptCharacter.RemoveSelf();
+        }
+    
         PlaySFX(KilledSFX, true);
         if (DeathVFX)
         {

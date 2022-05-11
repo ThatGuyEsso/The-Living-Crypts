@@ -14,6 +14,10 @@ public class CryptCharacterManager : MonoBehaviour
         OnCharacterRemoved?.Invoke(this);
     }
 
+    public void OnCharacterSpawned(CryptEnemyManager Manager)
+    {
+        Manager.OnEnemySpawned(gameObject);
+    }
 
     public void AddNewCharacter(CryptCharacterManager character)
     {

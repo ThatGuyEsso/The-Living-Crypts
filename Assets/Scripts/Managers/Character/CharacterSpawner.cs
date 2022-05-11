@@ -15,9 +15,10 @@ public class CharacterSpawner : MonoBehaviour
     private GameObject enemyToSpawn;
     private Vector3 spawnPoint;
     protected AudioManager AM;
+    protected CryptEnemyManager _enemyManager;
     public System.Action<CharacterSpawner, GameObject> OnEnemySpawned;
 
-    public void BeginEnemySpawn(Vector3 spawnPoint, GameObject enemy )
+    public void BeginEnemySpawn(Vector3 spawnPoint, GameObject enemy, CryptEnemyManager manager )
     {
         if (ObjectPoolManager.instance)
         {
@@ -27,7 +28,7 @@ public class CharacterSpawner : MonoBehaviour
         {
             spawnPrepareVFX = Instantiate(SpawnPrepareVFXPrefab, spawnPoint, Quaternion.identity);
         }
- 
+        _enemyManager = manager;
         this.spawnPoint = spawnPoint;
         enemyToSpawn = enemy;
         Invoke("SpawnEnemy", SpawnTime);
@@ -54,6 +55,7 @@ public class CharacterSpawner : MonoBehaviour
     {
         if (!enemyToSpawn)
         {
+            _enemyManager.OnEnemySpawnFailed();
             return;
         }
 
@@ -83,12 +85,26 @@ public class CharacterSpawner : MonoBehaviour
 
         IInitialisable enemyInit = enemyObject.GetComponent<IInitialisable>();
 
-        if(enemyInit!= null)
+        if(enemyInit== null)
         {
-            enemyInit.Init();
-        }
+            _enemyManager.OnEnemySpawnFailed();
+            if (ObjectPoolManager.instance)
+            {
+                ObjectPoolManager.Recycle(enemyObject);
+            }
+            else
+            {
+                Destroy(enemyObject);
+            }
+            return;
 
+        }
+        enemyInit.Init();
         ObjectBounds bounds = enemyObject.GetComponent<ObjectBounds>();
+        if (!bounds)
+        {
+            bounds = enemyObject.GetComponentInChildren<ObjectBounds>();
+        }
 
         if (bounds)
         {
@@ -138,14 +154,49 @@ public class CharacterSpawner : MonoBehaviour
         {
             if(!GameStateManager.instance || !GameStateManager.instance.GameManager || !GameStateManager.instance.GameManager.Player)
             {
+                _enemyManager.OnEnemySpawnFailed();
+                if (ObjectPoolManager.instance)
+                {
+                    ObjectPoolManager.Recycle(enemyObject);
+                }
+                else
+                {
+                    Destroy(enemyObject);
+                }
                 return;
             }
+
+
+            CryptCharacterManager CharacterManager = enemyObject.GetComponent<CryptCharacterManager>();
+
+            if (!CharacterManager)
+            {
+                _enemyManager.OnEnemySpawnFailed();
+                if (ObjectPoolManager.instance)
+                {
+                    ObjectPoolManager.Recycle(enemyObject);
+                }
+                else
+                {
+                    Destroy(enemyObject);
+                }
+            }
+            CharacterManager.OnCharacterSpawned(_enemyManager);
             enemy.SetTarget(GameStateManager.instance.GameManager.Player.transform);
             OnEnemySpawned?.Invoke(this, enemyObject);
             PlaySFX(SpawnSFX, true);
+
+
         }
 
-      
+        if (ObjectPoolManager.instance)
+        {
+            ObjectPoolManager.Recycle(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

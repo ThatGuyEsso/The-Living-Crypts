@@ -28,10 +28,7 @@ public class LivingEmber : BaseEnemy
     {
         base.Awake();
        
-        if (!_cryptCharacter)
-        {
-            _cryptCharacter = GetComponent<CryptCharacterManager>();
-        }
+   
       
     }
     public override void Init()
@@ -50,7 +47,11 @@ public class LivingEmber : BaseEnemy
         {
             _squashAndStretch = GetComponent<SquashAndStretch>();
           
+        }     if (!_cryptCharacter)
+        {
+            _cryptCharacter = GetComponent<CryptCharacterManager>();
         }
+
         if (!_lootDropper)
         {
             _lootDropper = GetComponent<LootDropper>();
@@ -337,7 +338,11 @@ public class LivingEmber : BaseEnemy
         else
         {
             _lootDropper.SpawnLoot();
-            _cryptCharacter.RemoveSelf();
+            if (_cryptCharacter)
+            {
+                _cryptCharacter.RemoveSelf();
+            }
+        
             if (ObjectPoolManager.instance)
             {
                 ObjectPoolManager.Recycle(gameObject);
@@ -352,7 +357,11 @@ public class LivingEmber : BaseEnemy
     protected override void DestroyEnemy()
     {
         base.DestroyEnemy();
-        _cryptCharacter.RemoveSelf();
+        if (_cryptCharacter)
+        {
+            _cryptCharacter.RemoveSelf();
+        }
+
         if (DeathVFX)
         {
             if (ObjectPoolManager.instance)

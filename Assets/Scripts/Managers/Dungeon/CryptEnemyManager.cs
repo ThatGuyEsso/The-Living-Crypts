@@ -17,7 +17,6 @@ public class CryptEnemyManager : MonoBehaviour
     private Room _owner;
 
     private List<CharacterSpawner> _enemySpawners = new List<CharacterSpawner>();
-    private List<GameObject> enemies = new List<GameObject>();
     private EnemySpawnPattern _currentSpawnPattern;
 
     [SerializeField] private int _currentWaveEnemyCount;
@@ -61,9 +60,31 @@ public class CryptEnemyManager : MonoBehaviour
 
     }
 
+    public void OnEnemySpawned(GameObject enemy)
+    {
+
+        if (enemy)
+        {
+            CryptCharacterManager manager = enemy.GetComponent<CryptCharacterManager>();
+
+            if (manager)
+            {
+
+                OnAddCharacter(manager);
+                _enemiesToSpawnLeft--;
+
+            }
+        }
+    }
+    public void OnEnemySpawnFailed( )
+    {
+        _enemiesToSpawnLeft--;
+
+    }
+
     public void OnEnemySpawned(CharacterSpawner spawner, GameObject enemy)
     {
-        enemies.Add(enemy);
+       
         if (_enemySpawners.Count > 0)
         {
             CharacterSpawner spawnerToRemove=_enemySpawners.Find(  item => item.gameObject == spawner.gameObject);
@@ -151,7 +172,7 @@ public class CryptEnemyManager : MonoBehaviour
         
         if(_currentWaveEnemyCount <= 0)
         {
-            enemies.Clear();
+        
             Debug.Log("Wave complete");
             if (_enemiesToSpawnLeft>0)
             {
@@ -233,44 +254,79 @@ public class CryptEnemyManager : MonoBehaviour
     
   
     }
-
-    
-
     public bool SpawnEnemy(GameObject EnemyPrefab)
     {
-        int randomX = Random.Range(-_owner.GetRoomHalfExtents().x+2, _owner.GetRoomHalfExtents().x-2);
-        int randomZ = Random.Range(-_owner.GetRoomHalfExtents().y+2, _owner.GetRoomHalfExtents().y-2);
-        Vector3 pointInSpace = _owner.transform.position + new Vector3(randomX, 0f , randomZ);
+        int randomX = Random.Range(-_owner.GetRoomHalfExtents().x + 2, _owner.GetRoomHalfExtents().x - 2);
+        int randomZ = Random.Range(-_owner.GetRoomHalfExtents().y + 2, _owner.GetRoomHalfExtents().y - 2);
+        Vector3 pointInSpace = _owner.transform.position + new Vector3(randomX, 0f, randomZ);
 
         RaycastHit hit;
         CharacterSpawner spawner;
-        if (Physics.Raycast(pointInSpace,Vector3.down, out hit, Mathf.Infinity, GroundLayers)){
-       
+        if (Physics.Raycast(pointInSpace, Vector3.down, out hit, Mathf.Infinity, GroundLayers))
+        {
+
             if (ObjectPoolManager.instance)
             {
                 spawner = ObjectPoolManager.Spawn(CharacterSpawnerPrefab, hit.point, Quaternion.identity).GetComponent<CharacterSpawner>();
                 if (spawner)
                 {
-                    _enemySpawners.Add(spawner);
-                    spawner.OnEnemySpawned += OnEnemySpawned;
-                    spawner.BeginEnemySpawn(hit.point, EnemyPrefab);
+              
+                    spawner.BeginEnemySpawn(hit.point, EnemyPrefab,this);
                 }
                 return true;
             }
             else
             {
-                spawner =  Instantiate(CharacterSpawnerPrefab, hit.point, Quaternion.identity).GetComponent<CharacterSpawner>();
+                spawner = Instantiate(CharacterSpawnerPrefab, hit.point, Quaternion.identity).GetComponent<CharacterSpawner>();
                 if (spawner)
                 {
-                    _enemySpawners.Add(spawner);
-                    spawner.OnEnemySpawned += OnEnemySpawned;
-                    spawner.BeginEnemySpawn(hit.point, EnemyPrefab);
+                 
+                    spawner.BeginEnemySpawn(hit.point, EnemyPrefab,this);
                 }
                 return true;
             }
-            
+
         }
 
         return false;
     }
+
+
+    //public bool SpawnEnemy(GameObject EnemyPrefab)
+    //{
+    //    int randomX = Random.Range(-_owner.GetRoomHalfExtents().x+2, _owner.GetRoomHalfExtents().x-2);
+    //    int randomZ = Random.Range(-_owner.GetRoomHalfExtents().y+2, _owner.GetRoomHalfExtents().y-2);
+    //    Vector3 pointInSpace = _owner.transform.position + new Vector3(randomX, 0f , randomZ);
+
+    //    RaycastHit hit;
+    //    CharacterSpawner spawner;
+    //    if (Physics.Raycast(pointInSpace,Vector3.down, out hit, Mathf.Infinity, GroundLayers)){
+
+    //        if (ObjectPoolManager.instance)
+    //        {
+    //            spawner = ObjectPoolManager.Spawn(CharacterSpawnerPrefab, hit.point, Quaternion.identity).GetComponent<CharacterSpawner>();
+    //            if (spawner)
+    //            {
+    //                _enemySpawners.Add(spawner);
+    //                spawner.OnEnemySpawned += OnEnemySpawned;
+    //                spawner.BeginEnemySpawn(hit.point, EnemyPrefab);
+    //            }
+    //            return true;
+    //        }
+    //        else
+    //        {
+    //            spawner =  Instantiate(CharacterSpawnerPrefab, hit.point, Quaternion.identity).GetComponent<CharacterSpawner>();
+    //            if (spawner)
+    //            {
+    //                _enemySpawners.Add(spawner);
+    //                spawner.OnEnemySpawned += OnEnemySpawned;
+    //                spawner.BeginEnemySpawn(hit.point, EnemyPrefab);
+    //            }
+    //            return true;
+    //        }
+
+    //    }
+
+    //    return false;
+    //}
 }

@@ -169,7 +169,7 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
 
     private void OnDisable()
     {
-        if (_isInitialised)
+        if (_isInitialised&&_input != null)
         {
             _input.Disable();
             _input.Movement.Move.canceled -= _ => BeginStop();
@@ -178,7 +178,7 @@ public class FPSMovement : MonoBehaviour, Controls.IMovementActions, IInitialisa
 
     private void OnDestroy()
     {
-        if (_isInitialised)
+        if (_isInitialised&&_input != null)
         {
             _input.Disable();
             _input.Movement.Move.canceled -= _ => BeginStop();
