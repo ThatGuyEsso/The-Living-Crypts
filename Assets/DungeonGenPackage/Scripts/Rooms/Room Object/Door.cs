@@ -17,7 +17,7 @@ public class Door : MonoBehaviour, Controls.IInteractActions
     [SerializeField] private float _width, _length, _height;
 
     [Header("Door GFX")]
-    [SerializeField] private GameObject NothInUseMesh;
+    [SerializeField] private GameObject[] NotInUseMeshes;
     [SerializeField] private GameObject[] InUseMeshes;
     [Header("Debug Settings")]
     [SerializeField] private bool _inDebug;
@@ -349,9 +349,13 @@ public class Door : MonoBehaviour, Controls.IInteractActions
 
     public void DisableDoor()
     {
-        if (NothInUseMesh)
+        if (NotInUseMeshes.Length>0)
         {
-            NothInUseMesh.SetActive(true);
+            foreach (GameObject NotInUse in NotInUseMeshes)
+            {
+                NotInUse.SetActive(true);
+            }
+
         }
         foreach (GameObject inUse in InUseMeshes)
         {
