@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour, Controls.IUIActions
 {
     [SerializeField] private GameObject PauseScreen;
+    [SerializeField] private GameObject Settings;
     private GameManager GM;
     private Controls _input;
     private void Awake()
@@ -13,6 +14,10 @@ public class PauseMenu : MonoBehaviour, Controls.IUIActions
         if (PauseScreen && PauseScreen.activeInHierarchy)
         {
             PauseScreen.SetActive(false);
+        }
+        if (Settings)
+        {
+            Settings.SetActive(false);
         }
         _input = new Controls();
         _input.UI.SetCallbacks(this);
@@ -127,7 +132,40 @@ public class PauseMenu : MonoBehaviour, Controls.IUIActions
             return GameStateManager.instance.GameManager;
         }
     }
+    public void OnSettings()
+    {
+        if (Settings)
+        {
+            Settings.SetActive(true);
+        }
+        else
+        {
+            return;
+        }
 
+        if (PauseScreen)
+        {
+            PauseScreen.SetActive(false);
+        }
+    }
+
+
+    public void OnBackFromSettings()
+    {
+        if (Settings)
+        {
+            Settings.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
+
+        if (PauseScreen)
+        {
+            PauseScreen.SetActive(true);
+        }
+    }
     private void OnDisable()
     {
         if (_input != null)

@@ -7,9 +7,11 @@ public class TitlescreenMenu : MonoBehaviour
     GraphicRaycaster graphicRaycaster;
     [SerializeField] private GameObject MainMenu;
     [SerializeField] private GameObject Credits;
+    [SerializeField] private GameObject Settings;
     [SerializeField] private string[] TitleAmbienceSFX;
     [SerializeField] private string TransitionSFXName;
     private AudioManager _audioManager;
+    private GameManager GM;
     private List<AudioPlayer> sceneAudioPlayers = new List<AudioPlayer>();
 
     private void Awake()
@@ -21,6 +23,10 @@ public class TitlescreenMenu : MonoBehaviour
         if (Credits)
         {
             Credits.SetActive(false);
+        }
+        if (Settings)
+        {
+            Settings.SetActive(false);
         }
     }
 
@@ -107,5 +113,64 @@ public class TitlescreenMenu : MonoBehaviour
             MainMenu.SetActive(true);
         }
     }
+    public void OnSettings()
+    {
+        if (Settings)
+        {
+            Settings.SetActive(true);
+        }
+        else
+        {
+            return;
+        }
 
+        if (MainMenu)
+        {
+            MainMenu.SetActive(false);
+        }
+    }
+
+
+    public void OnBackFromSettings()
+    {
+        if (Settings)
+        {
+            Settings.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
+
+        if (MainMenu)
+        {
+            MainMenu.SetActive(true);
+        }
+    }
+    public GameManager GetGameManager()
+    {
+        if (!GameStateManager.instance)
+        {
+            return null;
+        }
+        if (!GameStateManager.instance.GameManager)
+        {
+            return null;
+        }
+        else
+        {
+            return GameStateManager.instance.GameManager;
+        }
+    }
+    public void QuitGame()
+    {
+        if (!GM)
+        {
+            GM = GetGameManager();
+        }
+        if (GM)
+        {
+            GM.BeginNewGameplayEvent(GameplayEvents.Quit);
+        }
+    }
 }

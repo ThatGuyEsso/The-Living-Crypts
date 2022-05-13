@@ -77,6 +77,7 @@ public class GameStateManager : MonoBehaviour
             case GameState.GoToTitle:
                 break;
             case GameState.TitleScreen:
+
                 LoadingScreenManager.BeginFadeOut();
                 break;
             case GameState.BeginLevelLoad:

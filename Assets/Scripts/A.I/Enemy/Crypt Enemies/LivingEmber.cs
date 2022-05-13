@@ -15,6 +15,7 @@ public class LivingEmber : BaseEnemy
     [SerializeField] private int MaxSplitCount;
     [SerializeField] private GameObject LivingEmberPrefab;
     [SerializeField] private EnemySettings _defaultSettings;
+    [SerializeField] private JumpData DefaultJumpData;
     private SquashAndStretch _squashAndStretch;
     private JumpMovement _jumpMovement;
     private LootDropper _lootDropper;
@@ -42,6 +43,7 @@ public class LivingEmber : BaseEnemy
         if (!_jumpMovement)
         {
             _jumpMovement = GetComponent<JumpMovement>();
+            DefaultJumpData = _jumpMovement.JumpData;
         }
         if(!_squashAndStretch)
         {
@@ -523,6 +525,11 @@ public class LivingEmber : BaseEnemy
 
     public override void ResetEnemy()
     {
+        if (_jumpMovement)
+        {
+            _jumpMovement.JumpData = DefaultJumpData;
+            _jumpMovement.Init();
+        }
         BoostStatsWithSize();
         if (_randomSize)
         {
@@ -539,10 +546,7 @@ public class LivingEmber : BaseEnemy
             _hManager.OnDie += KillEnemy;
         }
         IsChargingJump = false;
-        if (_jumpMovement)
-        {
-            _jumpMovement.Init();
-        }
+     
 
         if (_squashAndStretch)
         {
