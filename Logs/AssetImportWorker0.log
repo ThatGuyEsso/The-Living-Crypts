@@ -15,11 +15,11 @@ C:/Users/esewi/Documents/Unity Projects/The Living Crypts
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-57927
+55772
 Successfully changed project path to: C:/Users/esewi/Documents/Unity Projects/The Living Crypts
 C:/Users/esewi/Documents/Unity Projects/The Living Crypts
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 80.49 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 85.07 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.17f1 (03b40fe07a36)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/Resources/UnitySubsystems
@@ -35,89 +35,89 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56124
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56324
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001386 seconds.
+Registered in 0.001325 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 79.24 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 105.09 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.442 seconds
+- Completed reload, in  1.730 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1442ms)
-		BeginReloadAssembly (63ms)
+	ReloadAssembly (1730ms)
+		BeginReloadAssembly (55ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (419ms)
-			LoadAssemblies (60ms)
+		EndReloadAssembly (550ms)
+			LoadAssemblies (53ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (152ms)
+			SetupTypeCache (196ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (27ms)
-			SetupLoadedEditorAssemblies (200ms)
+			RebuildScriptCaches (33ms)
+			SetupLoadedEditorAssemblies (267ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
+				InitializePlatformSupportModulesInManaged (7ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (79ms)
-				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (89ms)
-				ProcessInitializeOnLoadMethodAttributes (26ms)
+				RefreshPlugins (105ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (112ms)
+				ProcessInitializeOnLoadMethodAttributes (41ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.005076 seconds.
+Registered in 0.007731 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 86.48 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 112.54 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.901 seconds
+- Completed reload, in  2.489 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1902ms)
-		BeginReloadAssembly (143ms)
+	ReloadAssembly (2490ms)
+		BeginReloadAssembly (179ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
+			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (18ms)
-		EndReloadAssembly (1707ms)
-			LoadAssemblies (99ms)
+			CreateAndSetChildDomain (24ms)
+		EndReloadAssembly (2246ms)
+			LoadAssemblies (121ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (335ms)
+			SetupTypeCache (463ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (62ms)
-			SetupLoadedEditorAssemblies (1116ms)
+			RebuildScriptCaches (91ms)
+			SetupLoadedEditorAssemblies (1443ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (4ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (87ms)
-				BeforeProcessingInitializeOnLoad (85ms)
-				ProcessInitializeOnLoadAttributes (932ms)
-				ProcessInitializeOnLoadMethodAttributes (4ms)
-				AfterProcessingInitializeOnLoad (4ms)
+				RefreshPlugins (113ms)
+				BeforeProcessingInitializeOnLoad (107ms)
+				ProcessInitializeOnLoadAttributes (1207ms)
+				ProcessInitializeOnLoadMethodAttributes (6ms)
+				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.89 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.04 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4176 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 186.2 MB.
-System memory in use after: 186.4 MB.
+System memory in use before: 186.5 MB.
+System memory in use after: 186.7 MB.
 
 Unloading 173 unused Assets to reduce memory usage. Loaded Objects now: 4620.
-Total: 5.148300 ms (FindLiveObjects: 0.315000 ms CreateObjectMapping: 0.309900 ms MarkObjects: 4.201500 ms  DeleteObjects: 0.321000 ms)
+Total: 5.528300 ms (FindLiveObjects: 0.413000 ms CreateObjectMapping: 0.299000 ms MarkObjects: 4.568200 ms  DeleteObjects: 0.246700 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -131,24 +131,805 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Scenes/Demo scenes/Boss ForgeGolem Demo/NavMesh-NavMesh 2.asset
-  artifactKey: Guid(0aa2f067e6b53cb4e8837a025f83ad3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/Boss ForgeGolem Demo/NavMesh-NavMesh 2.asset using Guid(0aa2f067e6b53cb4e8837a025f83ad3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2a9d36761a8fa04e74345757b24fb0e') in 0.022904 seconds 
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'e96ffcdcde01e092ccac44d51cfde914') in 0.084241 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000234 seconds.
-  path: Assets/Scenes/Demo scenes/Boss ForgeGolem Demo/NavMesh-NavMesh 1.asset
-  artifactKey: Guid(f93661b8a3f53c447872c7bc33bb5ac5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/Boss ForgeGolem Demo/NavMesh-NavMesh 1.asset using Guid(f93661b8a3f53c447872c7bc33bb5ac5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a3b8be2026ceda7d4fdef89379b1642') in 0.003302 seconds 
+  Time since last request: 10.686334 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'ee27cab23a576f3df380237055b13905') in 0.004803 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000232 seconds.
-  path: Assets/Material/ForgeGolem/M_Body.mat
-  artifactKey: Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Material/ForgeGolem/M_Body.mat using Guid(a1052b858df5c7e4ab4da0c5fde72a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea110cd96a9e22aa6be195a43f0d1292') in 0.194624 seconds 
+  Time since last request: 10.105869 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '1fa506cc8f1be4ca46f6fa9daf061234') in 0.006489 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000172 seconds.
-  path: Assets/Scenes/Demo scenes/Boss ForgeGolem Demo/NavMesh-NavMesh 3.asset
-  artifactKey: Guid(aafb943f17de2274bb548eef348f7914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Demo scenes/Boss ForgeGolem Demo/NavMesh-NavMesh 3.asset using Guid(aafb943f17de2274bb548eef348f7914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80bef1c15bd9fa39b15aa73c2da15496') in 0.002695 seconds 
+  Time since last request: 15.104328 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'b839306b0310649bd00a33bcc90afffb') in 0.004293 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.871976 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '75e72fd94f2a413355129e4bc7990cc8') in 0.006595 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.230514 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '7f7802495d5f4fac43d4b0fa9a126470') in 0.005204 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.416821 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '1aa390a98a194e5c2279cba448c7ad87') in 0.004862 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 32.762278 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31b254d72f83d66f4c7c6756ee00c4ab') in 0.368481 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000222 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4f758b5d6010461664e300f46db72ba') in 0.065288 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000280 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59f3a5109b3f6791afe3a84cb0dff774') in 0.077340 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000223 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '138a83390a6ce78c28c90c1768f5b50b') in 0.075666 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.336433 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'a1ba7d5c833a8be626099de556ecd8ea') in 0.010282 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.152676 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c6f23f142ec24908fb60cd9d51ab5b0') in 0.066264 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000218 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4fe539f2c8f14fda8dfba50512e4287') in 0.060649 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6643307cbc4f2a186f8e3accb2e67d19') in 0.063492 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000212 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6be5b3f6ae76c5db2a87c3445d646088') in 0.065423 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.673124 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'd6f0460f223d9cf3b401c4aba6c25361') in 0.004171 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.636205 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f704e2d2f95656b003d90d92adbf88a0') in 0.067416 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000239 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'c0f13963825c3d40966bdf037e62fe25') in 0.004396 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000238 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05875284201b011013f5742e24dd2d29') in 0.063108 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000250 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c707c0dc3adabb7776512d88d4c60260') in 0.073440 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000296 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1faf0e64873ee8d92fa84fbb3304e65') in 0.068631 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.086936 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6195128312089d9961c9f81042dd24be') in 0.067068 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000250 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6802e3fc35118e7ea61cfe9d7590ef8b') in 0.060256 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000255 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'd3223a85acf67923c399d1686e69c294') in 0.006215 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000314 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c0d10a585e105f6716ef9e444c5e34f') in 0.068174 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000293 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e95f089df9aa79d8251f4dd5103be3b') in 0.068070 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.682491 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10e0e86815498ed136adfe1ce0d3f072') in 0.065308 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000243 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e93575190f6be526ba18c9d59af09296') in 0.059955 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000264 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5173cbd8d58d8ecfd0b58b6e5f5e2f96') in 0.065863 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000287 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae922183cde30bd0ffb5a6a780ae82ee') in 0.065638 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.667842 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '32be2c2d03d3648a2924297baf61a35e') in 0.004322 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.844198 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa070e0cceaad73247f670ff56f1b43c') in 0.064587 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000252 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afc7465c2a61ec35339019ac9edca344') in 0.059591 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000255 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5fe6efb03946048be70b43b62385155') in 0.070580 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000247 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5d4360fae41a6a5694c4df6e23f7fe2') in 0.067516 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.667194 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'd5094c50130055471aea6d671a0e87a1') in 0.004121 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.250065 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fdf2a8270ca6aa66d4408bab9f759a1') in 0.066164 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.127180 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '768f4e3c3356246fd1393ffd5bafc6f3') in 0.070974 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000205 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b65a1f9d0eca86f2e93aaa478ddf4eb') in 0.065482 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000270 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8b9a9f59dbe373fbf13e20dc0dda54c') in 0.073511 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000246 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd81d99a82b89c73c9b344075ad9f7b1a') in 0.073044 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.633920 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '05237128e9544fb3261519616184a4f3') in 0.005696 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.036177 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbfdd54b57351ab2e2c77a2d6722ce18') in 0.067829 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000260 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c82fd36bc83edae1921b7ebdd83d063') in 0.058017 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000269 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '424c8a5f03d6b112f70d5ecc4ae8bcfa') in 0.065248 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000302 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f91f6379da9af66b64545f29155fbbdf') in 0.063652 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.670293 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'ea975c8813caf3813060fa084943335c') in 0.004449 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.842379 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '112d488b3165d19db52032a236384680') in 0.077728 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000201 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc6a93985f9736a2b0d8fa2ec4c7aa22') in 0.074483 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000263 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a529ad6cce84ef3b88dfef0580dbc0a2') in 0.078131 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000229 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd4f7adb29c76680b44ad4230a3fe0e5') in 0.075596 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.617388 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '7f206653f3bbc3d552b9933b4b29cbba') in 0.005522 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.720344 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38e865619d88f5200ffa50ebc459b156') in 0.083326 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000233 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b58c018f8aaff20f09d14dabaf481fb5') in 0.078673 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000219 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3b0ca5b78640b3d839a02fce0b52da6') in 0.078727 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000194 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '985ffab440cfb73daf79609fd1f58422') in 0.077625 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.599622 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'db5431e9397b39f5bad8d5c490bd93e7') in 0.006350 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 24.128866 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '740bf5fb6cd53c7218a9b35a7284661e') in 0.077435 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000356 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6885e4c6505aa9010771df3b2142dce8') in 0.069922 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000199 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '23ded5d1b60a7246e5c35994d51bcd9d') in 0.081079 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d09684f2be8036125d9aa07ecf6477e') in 0.074118 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.600749 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '50cca677b95c80fe93e828d2ea159f0f') in 0.007846 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.803205 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe627182bc7c1dad5a5d3ea4a37d60a1') in 0.074339 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000245 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09b94fef0f80b07df00b7a4570521caa') in 0.073141 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000231 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef4d7398e9f53408a87027af6f8d6e4b') in 0.077547 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000211 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e72db8cf85f52efc76bc34351e79f47') in 0.076401 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.594815 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '0dd333540d74294b1ce3c15d66d4a8a7') in 0.005186 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.227423 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3103bb21ebeb65403c5d6402f973e9f6') in 0.064452 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000293 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '965a46de7157f9cd5069c91e34105c23') in 0.058585 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000313 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e35e0bd9396b651130f2cafdd48f3e99') in 0.073800 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000262 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae6e66dae2f6cf8a36aaf966fbfb8e6c') in 0.066039 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.672024 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '9420fe437608147f93e2e283b1822b52') in 0.007016 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.929819 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fdc3acec5c0e4d590f21523935bb6f60') in 0.063398 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.096227 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '579628ac53f18e7ff68677f33caffcdb') in 0.070776 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000182 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb49cd8c90753e3968c1be9df7f0d0ca') in 0.062126 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000233 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dff0063306c2015c47371faabd035f16') in 0.070383 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000257 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81fc791bbc04a6ade07e19938b8228ad') in 0.072726 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.648093 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'def640d12ec1020239b90323e080f786') in 0.006038 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000253 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '74e08256f56c37555b3cbe0b0137cce9') in 0.003731 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.831990 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd77031fa1a7eaf2b0ec84662bf1b7adf') in 0.065944 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000282 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e5d9cdc89cbaaaea30ab64cbbc4ed8d') in 0.067863 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000337 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8173a77cb5861f6277532fe6154925cf') in 0.073464 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000375 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0dbeec8bd8cf057309d6a99976f9ff80') in 0.069421 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.630119 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '94e3e3d39a913e07c104bfa66afc60cb') in 0.004580 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.921549 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9339ff759e1f6114cefc1bca997883fd') in 0.066158 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.111737 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '884fdd15993d60c5137329844a22758c') in 0.067987 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000230 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d098adf7e0dcf82f964317bbd835dd1') in 0.061451 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000235 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c4204ec58f32537444ffc8946148535') in 0.064836 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000238 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd526187d14a65870247ef4dbd684035f') in 0.065778 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.656992 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'f978718b842b2d6ad5897a2c05071620') in 0.004765 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000181 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '1de97074489865b786b1106da36f67d6') in 0.007036 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 19.260910 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/E_LootRoomOrigin.prefab
+  artifactKey: Guid(29b61f01f35bcff42a0f6f6763998ec9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/E_LootRoomOrigin.prefab using Guid(29b61f01f35bcff42a0f6f6763998ec9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7179f797f9000a59185d636349aa3dd0') in 0.036051 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000203 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/N_LootRoomOrigin.prefab
+  artifactKey: Guid(8bbad2ad981a6af4c90ba254bad819ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/N_LootRoomOrigin.prefab using Guid(8bbad2ad981a6af4c90ba254bad819ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae6abb462eb29920ef01297fb4f3ef52') in 0.028202 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000216 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/W_LootRoomOrigin Variant.prefab
+  artifactKey: Guid(4bd75acd3cf2bc14882d105f5c62d3a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/W_LootRoomOrigin Variant.prefab using Guid(4bd75acd3cf2bc14882d105f5c62d3a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcd39cd3f3c7fb254331fb96de611062') in 0.043516 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000259 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/S_LootRoomOrigin Variant.prefab
+  artifactKey: Guid(e6378ef70b93101488765a0b0cc3ec03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/S_LootRoomOrigin Variant.prefab using Guid(e6378ef70b93101488765a0b0cc3ec03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5db276c3ff54d9188f5c2f6e75901d57') in 0.034301 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.788220 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/N_LootRoomOrigin.prefab
+  artifactKey: Guid(8bbad2ad981a6af4c90ba254bad819ef) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LootCrypts/N_LootRoomOrigin.prefab using Guid(8bbad2ad981a6af4c90ba254bad819ef) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '411def609d8eb13502bff3848543e5e8') in 0.007095 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.544712 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab
+  artifactKey: Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab using Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9289b0e0074afb53d6ae7b5852ff582') in 0.063235 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000258 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8db68e2c92ddc08e4fdc41f75f013881') in 0.056182 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000356 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab
+  artifactKey: Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab using Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5171b3964b708ff01662c49f3ad5150d') in 0.066307 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000438 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab
+  artifactKey: Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab using Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db3e68126b63404052dc2c48d000272e') in 0.066590 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.884260 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab
+  artifactKey: Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab using Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c49fc3f87af3622c495eece4afe83a85') in 0.078504 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000237 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65a17a97c784769a6c1c7cd10c39bb77') in 0.064858 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000226 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab
+  artifactKey: Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab using Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4c618eff2d3b8bcf01d08f9b220e8cb') in 0.073690 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000287 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab
+  artifactKey: Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab using Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ed68b43ff2de98d4d93a4fff3c6190b') in 0.078738 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.628942 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'fcd53ba37efc9e609fd53be2f580182e') in 0.006455 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.723506 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab
+  artifactKey: Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab using Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b4afdedf9eb909bdf62754c8f7dd399') in 0.080383 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000284 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50448d2a77cade3c6a76c7de8363d145') in 0.063774 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000255 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab
+  artifactKey: Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab using Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e344ce13037852667ecb909d574194e') in 0.064514 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000228 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab
+  artifactKey: Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab using Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7175f1ecaf02829b35ebba9eaea51ef') in 0.065589 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.655520 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'f464dc05aac29f58c656d16a987f4e1c') in 0.005768 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.676188 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab
+  artifactKey: Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab using Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43848df62d0d110b54f943245d8238be') in 0.085839 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000212 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36fb681ccf4e3f7546d37a78cc4cb085') in 0.071731 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000257 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab
+  artifactKey: Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab using Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80a56411b29768a96158c9c918c732e9') in 0.074280 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000257 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab
+  artifactKey: Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab using Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d40d978fe232941fb67ea045630c1fa') in 0.083961 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.592937 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '6a04931ca5c9248815b98dd22fc9c2ec') in 0.005421 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 18.720726 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab
+  artifactKey: Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab using Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '206b1786db4828ab76736ea651c8ea08') in 0.074153 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000296 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a1c2052a56a50cdba03c04221178d3d') in 0.061258 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab
+  artifactKey: Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab using Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9708d1278b8cfbbdcb347350ac5ea845') in 0.065172 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000213 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab
+  artifactKey: Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab using Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8a2d09ce9984a1c7a4880c9e9fc0035') in 0.073824 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.639580 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'd74e358c1903c9a44b2473e8adce0e22') in 0.004452 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.473584 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab
+  artifactKey: Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/E_LongCrypt Variant Variant.prefab using Guid(ff74254dfe2c30e4da1d936de64f3cb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '547536462cc06940e5c7481f4498dc60') in 0.075173 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000215 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98d1b7cfe15ed4c94554890dacf48b37') in 0.063801 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000187 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab
+  artifactKey: Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/S_LongCrypt Variant.prefab using Guid(3ffb66b8607d7844e9dda1722d5f9939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60116c5abf98ca03a67a8ed4624c873a') in 0.068452 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000260 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab
+  artifactKey: Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/W_LongCrypt Variant.prefab using Guid(0a95dc6b9aa868c4b8aab7d67b0946f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9c1b7b31b11079978fb943a1c2d967a') in 0.073828 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.629505 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab
+  artifactKey: Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/LongCrypts/N_LongCrypt.prefab using Guid(021e8acabfff0394daf2013b341da00c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: '3d1723290a3dfed1ad5d4c080a1cdbb4') in 0.005552 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.641927 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab
+  artifactKey: Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/E_WideCrypt Variant.prefab using Guid(c22333a81660ef3428d3d32917277f43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35c496c4fa10982d0c986cc81e2e3137') in 0.067151 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000314 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab
+  artifactKey: Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/N_WideCrypt Variant.prefab using Guid(10e354256b9ddaa4b8f1c55df7183979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '726000966af8969e60b5f3fde6f4dea8') in 0.066891 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000199 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab
+  artifactKey: Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/W_WideCrypt Variant.prefab using Guid(6af556e2187de5d43816c39a98345c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68a493769e271cf46dd1131d28ff0faf') in 0.075244 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000273 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab
+  artifactKey: Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/WideCrypts/S_WideCrypt Variant.prefab using Guid(67dcdcf56fb392042990258dc534e548) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb1a59588812e322fa22f4b5633618fb') in 0.081047 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.472551 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/E_SquareRoomRoot Variant.prefab
+  artifactKey: Guid(ca7397f86889c004cb72ece6d6ba65b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/E_SquareRoomRoot Variant.prefab using Guid(ca7397f86889c004cb72ece6d6ba65b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cdb7c239edb1dfc655b292ee34c69ba') in 0.077662 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000309 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/S_SquareRoomRoot Variant.prefab
+  artifactKey: Guid(e95c0bb72a2f74349a0146fc59946670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/S_SquareRoomRoot Variant.prefab using Guid(e95c0bb72a2f74349a0146fc59946670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8267382c99e53f4e119f9a3bb44c7a77') in 0.072110 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000263 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab
+  artifactKey: Guid(259f48fca316a0e48a0d0105c71908ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/N_SquareRoomRoot.prefab using Guid(259f48fca316a0e48a0d0105c71908ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44b6f7789da844865894695b3a1cc630') in 0.066072 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000422 seconds.
+  path: Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/W_SquareRoomRoot.prefab
+  artifactKey: Guid(babe35017cdf26d42935f05cdd982d76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Rooms/Dungeon Rooms/SquareCrypt/W_SquareRoomRoot.prefab using Guid(babe35017cdf26d42935f05cdd982d76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ae92ea5fff08d134c53dcf9be9cb55f') in 0.078261 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
