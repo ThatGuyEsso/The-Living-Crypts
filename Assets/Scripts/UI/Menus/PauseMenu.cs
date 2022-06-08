@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour, Controls.IUIActions
 {
     [SerializeField] private GameObject PauseScreen;
     [SerializeField] private GameObject Settings;
+    [SerializeField] private GameObject TutorialScreen;
     private GameManager GM;
     private Controls _input;
     private void Awake()
@@ -18,6 +19,10 @@ public class PauseMenu : MonoBehaviour, Controls.IUIActions
         if (Settings)
         {
             Settings.SetActive(false);
+        }
+        if (TutorialScreen)
+        {
+            TutorialScreen.SetActive(false);
         }
         _input = new Controls();
         _input.UI.SetCallbacks(this);
@@ -155,6 +160,41 @@ public class PauseMenu : MonoBehaviour, Controls.IUIActions
         if (Settings)
         {
             Settings.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
+
+        if (PauseScreen)
+        {
+            PauseScreen.SetActive(true);
+        }
+    }
+
+    public void OnTutorial()
+    {
+        if (TutorialScreen)
+        {
+            TutorialScreen.SetActive(true);
+        }
+        else
+        {
+            return;
+        }
+
+        if (PauseScreen)
+        {
+            PauseScreen.SetActive(false);
+        }
+    }
+
+
+    public void OnBackFromTutorial()
+    {
+        if (TutorialScreen)
+        {
+            TutorialScreen.SetActive(false);
         }
         else
         {

@@ -8,6 +8,7 @@ public class TitlescreenMenu : MonoBehaviour
     [SerializeField] private GameObject MainMenu;
     [SerializeField] private GameObject Credits;
     [SerializeField] private GameObject Settings;
+    [SerializeField] private GameObject TutorialScreen;
     [SerializeField] private string[] TitleAmbienceSFX;
     [SerializeField] private string TransitionSFXName;
     private AudioManager _audioManager;
@@ -27,6 +28,10 @@ public class TitlescreenMenu : MonoBehaviour
         if (Settings)
         {
             Settings.SetActive(false);
+        }
+        if (TutorialScreen)
+        {
+            TutorialScreen.SetActive(false);
         }
     }
 
@@ -136,6 +141,41 @@ public class TitlescreenMenu : MonoBehaviour
         if (Settings)
         {
             Settings.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
+
+        if (MainMenu)
+        {
+            MainMenu.SetActive(true);
+        }
+    }
+
+    public void OnTutorial()
+    {
+        if (TutorialScreen)
+        {
+            TutorialScreen.SetActive(true);
+        }
+        else
+        {
+            return;
+        }
+
+        if (MainMenu)
+        {
+            MainMenu.SetActive(false);
+        }
+    }
+
+
+    public void OnBackFromTutorial()
+    {
+        if (TutorialScreen)
+        {
+            TutorialScreen.SetActive(false);
         }
         else
         {
